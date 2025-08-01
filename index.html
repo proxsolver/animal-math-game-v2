@@ -241,12 +241,13 @@
             gap: 20px;
             max-height: 450px;
             overflow-y: auto;
+            padding: 5px;
         }
 
         .animal-card {
             background: linear-gradient(45deg, #FFE4E1, #F0E68C);
             border-radius: 20px;
-            padding: 20px;
+            padding: 15px;
             text-align: center;
             box-shadow: 0 6px 20px rgba(0,0,0,0.15);
             transition: all 0.3s ease;
@@ -262,25 +263,27 @@
         .animal-emoji {
             font-size: 3.5rem;
             display: block;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
         }
 
         .animal-name {
             font-weight: bold;
             color: #2C5530;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
             font-size: 1rem;
+            word-break: keep-all;
+        }
+        
+        .animal-level {
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #8A2BE2;
+            margin-bottom: 8px;
         }
 
         .special-name {
             color: #8B4513;
             font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .animal-count {
-            color: #666;
             font-size: 0.9rem;
             margin-bottom: 8px;
         }
@@ -293,6 +296,78 @@
             padding: 4px 10px;
             border-radius: 12px;
             display: inline-block;
+        }
+
+        /* 퀴즈 모달 스타일 */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 1001; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.6);
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #E0F7FA, #FFFFFF, #FFF9C4);
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+        }
+        
+        #quiz-question {
+            font-size: 1.5rem;
+            color: #2C5530;
+            margin-bottom: 25px;
+        }
+
+        .quiz-options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .quiz-option-btn {
+            background: linear-gradient(45deg, #89CFF0, #4682B4);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quiz-option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         /* 사용자 관리 페이지 */
@@ -431,29 +506,7 @@
             margin-left: 25px;
             margin-bottom: 18px;
         }
-
-        .rarity-examples {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .rarity-example {
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-weight: bold;
-            border: 2px solid;
-        }
-
-        .rarity-1 { background: #E6F3FF; color: #4169E1; border-color: #87CEEB; }
-        .rarity-2 { background: #E6F7E6; color: #228B22; border-color: #32CD32; }
-        .rarity-3 { background: #F0E6FF; color: #8A2BE2; border-color: #9370DB; }
-        .rarity-4 { background: #FFF0E6; color: #FF8C00; border-color: #FFD700; }
-        .rarity-5 { background: #FFE6E6; color: #DC143C; border-color: #FF69B4; }
-        .rarity-6 { background: #FFFACD; color: #B8860B; border-color: #FFD700; }
-
+        
         /* 특수 효과 */
         .new-animal-alert {
             position: fixed;
@@ -468,166 +521,27 @@
             z-index: 1000;
             animation: popIn 0.6s ease;
         }
-
-        .new-animal-alert .new-animal-emoji {
-            font-size: 6rem;
-            display: block;
-            margin-bottom: 20px;
-        }
-
-        .new-animal-alert h3 {
-            color: #8B4513;
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-        }
-
-        .new-animal-alert p {
-            color: #8B4513;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
+        .new-animal-alert .new-animal-emoji { font-size: 6rem; display: block; margin-bottom: 20px; }
+        .new-animal-alert h3 { color: #8B4513; margin-bottom: 15px; font-size: 1.5rem; }
+        .new-animal-alert p { color: #8B4513; font-weight: bold; margin-bottom: 10px; }
         @keyframes popIn {
             0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
             50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
             100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
         }
-
-        .growth-effect {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 2000;
-            pointer-events: none;
-        }
-
-        .growth-particles {
-            width: 400px;
-            height: 400px;
-            position: relative;
-        }
-
-        .particle {
-            position: absolute;
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            animation: sparkle 2s ease-out forwards;
-        }
-
-        @keyframes sparkle {
-            0% {
-                opacity: 1;
-                transform: scale(0) rotate(0deg);
-            }
-            50% {
-                opacity: 0.9;
-                transform: scale(2) rotate(180deg);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.3) rotate(360deg);
-            }
-        }
-
-        .growth-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #8B4513;
-            padding: 25px 35px;
-            border-radius: 25px;
-            font-size: 1.8rem;
-            font-weight: bold;
-            text-align: center;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-            animation: growthPop 2.5s ease-out forwards;
-        }
-
-        @keyframes growthPop {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-                opacity: 0;
-            }
-            20% {
-                transform: translate(-50%, -50%) scale(1.3);
-                opacity: 1;
-            }
-            80% {
-                transform: translate(-50%, -50%) scale(1);
-                opacity: 1;
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(0.8);
-                opacity: 0;
-            }
-        }
-
-        /* 상태 표시 */
-        .status-indicator {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background: #90EE90;
-            color: #006400;
-            padding: 8px 15px;
-            border-radius: 15px;
-            font-size: 0.9rem;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
+        
         /* 반응형 디자인 */
         @media (max-width: 768px) {
-            .game-container {
-                padding: 15px;
-            }
-
-            .header h1 {
-                font-size: 2.2rem;
-            }
-
-            .game-content {
-                grid-template-columns: 1fr;
-            }
-
-            .game-stats {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .nav-buttons {
-                flex-direction: column;
-                align-items: center;
-                gap: 10px;
-            }
-
-            .question {
-                font-size: 2rem;
-            }
-
-            .answer-input {
-                width: 200px;
-                font-size: 1.5rem;
-            }
-
-            .animal-grid {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 15px;
-            }
-
-            .user-list {
-                grid-template-columns: 1fr;
-            }
-
-            .rarity-examples {
-                flex-direction: column;
-                align-items: center;
-            }
+            .game-container { padding: 15px; }
+            .header h1 { font-size: 2.2rem; }
+            .game-content { grid-template-columns: 1fr; }
+            .game-stats { flex-direction: column; align-items: center; gap: 10px; }
+            .nav-buttons { flex-direction: column; align-items: center; gap: 10px; }
+            .question { font-size: 2rem; }
+            .answer-input { width: 200px; font-size: 1.5rem; }
+            .animal-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+            .user-list { grid-template-columns: 1fr; }
+            .quiz-options-grid { grid-template-columns: 1fr; } /* 모바일 퀴즈 버튼 1열로 */
         }
     </style>
 </head>
@@ -638,9 +552,9 @@
             <h1>🐾 동물 수집 수학 게임 🐾</h1>
             
             <div class="nav-buttons">
-                <button class="nav-btn active" onclick="showPage('game')">게임하기 🎮</button>
-                <button class="nav-btn" onclick="showPage('instructions')">사용설명서 📖</button>
-                <button class="nav-btn" onclick="showPage('users')">사용자 관리 👥</button>
+                <button class="nav-btn active" onclick="showPage('game', this)">게임하기 🎮</button>
+                <button class="nav-btn" onclick="showPage('instructions', this)">사용설명서 📖</button>
+                <button class="nav-btn" onclick="showPage('users', this)">사용자 관리 👥</button>
             </div>
 
             <div class="user-info" id="user-info">
@@ -649,7 +563,7 @@
 
             <div class="game-stats" id="game-stats">
                 <div class="stat-item">레벨 <span id="level">1</span></div>
-                <div class="stat-item">점수: <span id="score">0</span>점</div>
+                <div class="stat-item">점수: <span id="score">0</span></div>
                 <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
                 <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
             </div>
@@ -670,7 +584,7 @@
 
                 <div class="collection-section">
                     <h2>🏠 내 동물 컬렉션</h2>
-                    <p class="collection-hint">💡 같은 동물 2마리를 클릭하면 성장시킬 수 있어요!</p>
+                    <p class="collection-hint">💡 동물을 클릭해서 영어 퀴즈로 레벨업 시켜요!</p>
                     <div class="animal-grid" id="animal-collection"></div>
                 </div>
             </div>
@@ -682,77 +596,32 @@
                 <h2>📖 게임 사용설명서</h2>
                 
                 <h3>🎯 게임 목표</h3>
-                <p>수학 문제를 풀어서 다양한 동물들을 수집하고, 같은 종의 동물들을 성장시켜 나만의 동물원을 만들어보세요!</p>
+                <p>수학 문제를 풀어서 다양한 동물들을 수집하고, 영어 단어 퀴즈를 통해 동물을 레벨업 시켜 나만의 동물원을 만들어보세요!</p>
                 
                 <h3>🧮 수학 문제 시스템</h3>
                 <ul>
                     <li><strong>레벨 1-2:</strong> 한 자리 덧셈과 뺄셈 (예: 5 + 3, 8 - 2)</li>
                     <li><strong>레벨 3-5:</strong> 두 자리 덧셈과 뺄셈 (예: 25 + 17, 43 - 18)</li>
                     <li><strong>레벨 6-8:</strong> 구구단 곱셈 (예: 7 × 4, 9 × 6)</li>
-                    <li><strong>레벨 9+:</strong> 나눗셈 (예: 56 ÷ 8, 72 ÷ 9)</li>
+                    <li><strong>레벨 9 이상:</strong> 세 자리 덧셈과 뺄셈 (예: 123 + 456)</li>
                 </ul>
                 
                 <h3>🐾 동물 수집 시스템</h3>
                 <p><strong>문제를 맞힐 때마다</strong> 랜덤한 동물을 1마리씩 획득할 수 있어요!</p>
                 
-                <h3>✨ 희귀도 시스템</h3>
-                <p>동물들은 희귀도에 따라 6개 등급으로 나뉘어져 있어요:</p>
-                <div class="rarity-examples">
-                    <span class="rarity-example rarity-1">★1 일반</span>
-                    <span class="rarity-example rarity-2">★2 보통</span>
-                    <span class="rarity-example rarity-3">★3 고급</span>
-                    <span class="rarity-example rarity-4">★4 희귀</span>
-                    <span class="rarity-example rarity-5">★5 전설</span>
-                    <span class="rarity-example rarity-6">★6 신화</span>
-                </div>
-                <p>레벨이 높아질수록 더 희귀한 동물들을 만날 수 있어요!</p>
-                
-                <h3>🌟 동물 성장 시스템</h3>
+                <h3>🌟 동물 성장 시스템 (신규)</h3>
                 <ul>
-                    <li><strong>같은 종류의 동물 카드를 클릭</strong>하면 성장시킬 수 있어요</li>
-                    <li><strong>2마리가 있어야</strong> 1마리로 성장 가능해요</li>
-                    <li>성장한 동물은 <strong>더 강해지고 특별한 효과</strong>가 나타나요</li>
-                    <li>성장할 때마다 멋진 <strong>파티클 효과</strong>를 볼 수 있어요! ✨</li>
+                    <li>수집한 동물 카드를 클릭하면 **'먹이주기' 영어 단어 퀴즈**가 시작됩니다.</li>
+                    <li>4개의 보기 중 올바른 영어 단어를 맞히면 동물의 <strong>레벨이 1 오릅니다!</strong></li>
+                    <li>동물의 레벨이 오르면 더 강해지는 모습을 상상해보세요! (추후 기능 확장 가능)</li>
                 </ul>
                 
                 <h3>👥 사용자 관리 시스템</h3>
                 <ul>
-                    <li><strong>여러 사용자</strong>가 각자의 진행상황을 따로 저장할 수 있어요</li>
-                    <li><strong>파일 저장</strong>으로 게임 데이터를 백업하고 복원 가능!</li>
-                    <li><strong>순위표</strong>에서 친구들과 점수 비교하기</li>
-                    <li><strong>사용자 전환</strong>으로 쉽게 다른 플레이어로 변경</li>
+                    <li><strong>여러 사용자</strong>가 각자의 진행상황을 따로 저장할 수 있어요.</li>
+                    <li><strong>데이터 내보내기/가져오기</strong>로 게임 데이터를 백업하고 복원할 수 있습니다.</li>
+                    <li>이제 데이터는 **브라우저에 자동 저장**되어 편리합니다.</li>
                 </ul>
-                
-                <h3>🏆 레벨업 시스템</h3>
-                <p>점수가 <strong>(현재 레벨 × 50점)</strong>에 도달하면 레벨업!</p>
-                <ul>
-                    <li>레벨업 시 더 어려운 문제 출제</li>
-                    <li>더 희귀한 동물 획득 기회 증가</li>
-                    <li>한 문제당 더 많은 점수 획득</li>
-                </ul>
-                
-                <h3>🎮 조작법</h3>
-                <ul>
-                    <li><strong>숫자 입력:</strong> 키보드나 화면의 입력창 사용</li>
-                    <li><strong>답 제출:</strong> "답 확인하기" 버튼 클릭 또는 Enter 키</li>
-                    <li><strong>동물 성장:</strong> 동물 카드를 클릭 (2마리 이상 보유 시)</li>
-                    <li><strong>사용자 전환:</strong> 사용자 관리 페이지에서 사용자 카드 클릭</li>
-                </ul>
-                
-                <h3>🎨 특별한 동물들</h3>
-                <p>각 동물마다 특별한 이름이 있어요:</p>
-                <ul>
-                    <li>🐶 <strong>멍멍왕자</strong> - 충성스러운 강아지</li>
-                    <li>🐱 <strong>야옹공주</strong> - 우아한 고양이</li>
-                    <li>🐰 <strong>깡총대장</strong> - 빠른 토끼</li>
-                    <li>🦉 <strong>지혜로운자</strong> - 똑똑한 올빼미</li>
-                    <li>🐲 <strong>전설의드래곤</strong> - 최고 희귀 동물!</li>
-                    <li>그리고 더 많은 동물들이 여러분을 기다리고 있어요!</li>
-                </ul>
-                
-                <p style="text-align: center; margin-top: 40px; font-size: 1.3rem; color: #2C5530;">
-                    <strong>🌟 즐겁게 수학을 공부하면서 동물 친구들을 모아보세요! 🌟</strong>
-                </p>
             </div>
         </div>
 
@@ -780,14 +649,22 @@
             </div>
         </div>
     </div>
+    
+    <!-- 퀴즈 모달 HTML -->
+    <div id="quiz-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeQuizModal()">&times;</span>
+            <h3 id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</h3>
+            <div id="quiz-options" class="quiz-options-grid">
+                <!-- 선택지 버튼들이 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
 
-    <!-- 상태 표시 -->
-    <div class="status-indicator">로컬 저장소 ✅</div>
 
     <script>
         // ==================== 게임 데이터 ====================
         
-        // 게임 상태
         let gameState = {
             score: 0,
             level: 1,
@@ -797,33 +674,346 @@
             speciesCount: 0
         };
 
-        // 사용자 관리
         let currentUser = '게스트';
         let allUsers = {};
 
-        // 동물 타입 정의
-        const animalTypes = [
+                const animalTypes = [
+            // ★1 일반 (Common) - 25종
             {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
             {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
             {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+            {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1},
+            {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1},
+            {emoji: '🐔', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1},
             {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1},
-            {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 2},
-            {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 2},
-            {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 2},
+            {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1},
+            {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1},
+            {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1},
+            {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1},
+            {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1},
+            {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 1},
+            {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1},
+            {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1},
+            {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1},
+            {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1},
+            {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1},
+            {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1},
+            {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1},
+            {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1},
+            {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1},
+            {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1},
+            {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1},
+            {emoji: '🐠', name: '열대어', specialName: '산호초의 보석', rarity: 1},
+
+            // ★2 보통 (Uncommon) - 25종
+            {emoji: '🦊', name: '여우', specialName: '숲속의 신사', rarity: 2},
+            {emoji: '🐻', name: '곰', specialName: '꿀단지 파수꾼', rarity: 2},
+            {emoji: '🦝', name: '너구리', specialName: '솜사탕 사냥꾼', rarity: 2},
+            {emoji: '🦌', name: '사슴', specialName: '숲의 왕자', rarity: 2},
+            {emoji: '🦉', name: '올빼미', specialName: '지혜로운 자', rarity: 2},
+            {emoji: '🐺', name: '늑대', specialName: '달빛사냥꾼', rarity: 2},
+            {emoji: '🦇', name: '박쥐', specialName: '밤의 비행사', rarity: 2},
+            {emoji: '🐍', name: '뱀', specialName: '비밀의 수호자', rarity: 2},
+            {emoji: '🦅', name: '독수리', specialName: '하늘의 제왕', rarity: 2},
+            {emoji: '🐧', name: '펭귄', specialName: '얼음 신사', rarity: 2},
+            {emoji: '🐨', name: '코알라', specialName: '유칼립투스 요정', rarity: 2},
+            {emoji: '🐒', name: '원숭이', specialName: '장난꾸러기 대장', rarity: 2},
+            {emoji: '🐗', name: '멧돼지', specialName: '돌격대장', rarity: 2},
+            {emoji: '🦦', name: '수달', specialName: '조약돌 아티스트', rarity: 2},
+            {emoji: '🦢', name: '백조', specialName: '호수의 여왕', rarity: 2},
+            {emoji: '🦔', name: '고슴도치', specialName: '밤송이 기사', rarity: 2},
+            {emoji: '🦎', name: '도마뱀', specialName: '햇살 사냥꾼', rarity: 2},
             {emoji: '🐙', name: '문어', specialName: '촉수마법사', rarity: 2},
-            {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 3},
-            {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 3},
-            {emoji: '🦉', name: '올빼미', specialName: '지혜로운자', rarity: 3},
-            {emoji: '🐺', name: '늑대', specialName: '달빛사냥꾼', rarity: 4},
-            {emoji: '🦅', name: '독수리', specialName: '하늘제왕', rarity: 4},
-            {emoji: '🐯', name: '호랑이', specialName: '호랑용사', rarity: 5},
-            {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 5},
-            {emoji: '🐲', name: '용', specialName: '전설의드래곤', rarity: 6}
+            {emoji: '🦐', name: '새우', specialName: '바다의 댄서', rarity: 2},
+            {emoji: '🦑', name: '오징어', specialName: '먹물 예술가', rarity: 2},
+            {emoji: '🦘', name: '캥거루', specialName: '스텝의 챔피언', rarity: 2},
+            {emoji: '🕊️', name: '비둘기', specialName: '평화의 사도', rarity: 2},
+            {emoji: '🦜', name: '앵무새', specialName: '말하는 보석', rarity: 2},
+            {emoji: '🐫', name: '낙타', specialName: '사막의 상인', rarity: 2},
+            {emoji: '🦙', name: '라마', specialName: '안데스의 신사', rarity: 2},
+
+            // ★3 고급 (Rare) - 20종
+            {emoji: '🐘', name: '코끼리', specialName: '기억의 현자', rarity: 3},
+            {emoji: '🦒', name: '기린', specialName: '구름 산책가', rarity: 3},
+            {emoji: '🦓', name: '얼룩말', specialName: '초원의 수수께끼', rarity: 3},
+            {emoji: '🐼', name: '판다', specialName: '대나무 미식가', rarity: 3},
+            {emoji: '🦛', name: '하마', specialName: '강의 군주', rarity: 3},
+            {emoji: '🦏', name: '코뿔소', specialName: '강철의 돌격수', rarity: 3},
+            {emoji: '🐊', name: '악어', specialName: '늪의 포식자', rarity: 3},
+            {emoji: '🐅', name: '호랑이', specialName: '밀림의 군주', rarity: 3},
+            {emoji: '🐆', name: '표범', specialName: '그림자 암살자', rarity: 3},
+            {emoji: '🦍', name: '고릴라', specialName: '숲의 수호신', rarity: 3},
+            {emoji: '🐬', name: '돌고래', specialName: '파도의 친구', rarity: 3},
+            {emoji: '🐋', name: '고래', specialName: '심해의 노래', rarity: 3},
+            {emoji: '🦈', name: '상어', specialName: '바다의 추격자', rarity: 3},
+            {emoji: '🦚', name: '공작', specialName: '별빛 깃털', rarity: 3},
+            {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3},
+            {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3},
+            {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3},
+            {emoji: '🦀', name: '바닷가재', specialName: '심해의 기사', rarity: 3},
+            {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3},
+            {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
+
+            // ★4 희귀 (Epic) - 15종
+            {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+            {emoji: '🐻‍❄️', name: '북극곰', specialName: '설원의 지배자', rarity: 4},
+            {emoji: '🦣', name: '매머드', specialName: '빙하기의 거인', rarity: 4},
+            {emoji: '🦖', name: '티라노사우루스', specialName: '폭군 도마뱀', rarity: 4},
+            {emoji: '🐉', name: '용', specialName: '전설의 드래곤', rarity: 4},
+            {emoji: '🐳', name: '대왕고래', specialName: '대양의 심장', rarity: 4},
+            {emoji: '🐙', name: '대왕문어', specialName: '크라켄의 후예', rarity: 4},
+            {emoji: '🦅', name: '대머리독수리', specialName: '창공의 지배자', rarity: 4},
+            {emoji: '🦧', name: '오랑우탄', specialName: '숲의 현자', rarity: 4},
+            {emoji: '🐅', name: '백호', specialName: '달의 정기', rarity: 4},
+            {emoji: '🐈‍⬛', name: '흑표범', specialName: '밤의 그림자', rarity: 4},
+            {emoji: '🦕', name: '브라키오사우루스', specialName: '움직이는 숲', rarity: 4},
+            {emoji: '🦗', name: '사마귀', specialName: '당랑권의 고수', rarity: 4},
+            {emoji: '🕷️', name: '거미', specialName: '거미줄의 설계자', rarity: 4},
+            {emoji: '🦊', name: '북극여우', specialName: '설원의 유령', rarity: 4},
+
+            // ★5 전설 (Legendary) - 10종
+            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5},
+            {emoji: '🐲', name: '동양용', specialName: '여의주의 주인', rarity: 5},
+            {emoji: '🔥', name: '불사조', specialName: '불멸의 화신', rarity: 5},
+            {emoji: '🦅', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5},
+            {emoji: '🐎', name: '페가수스', specialName: '날개 달린 천마', rarity: 5},
+            {emoji: '🐺', name: '펜리르', specialName: '신화 속 늑대', rarity: 5},
+            {emoji: '🐍', name: '히드라', specialName: '불멸의 머리', rarity: 5},
+            {emoji: '🦁', name: '키메라', specialName: '환상의 조합', rarity: 5},
+            {emoji: '🧜‍♀️', name: '인어', specialName: '바다의 노래', rarity: 5},
+            {emoji: '👾', name: '외계인', specialName: '미지의 방문자', rarity: 5},
+
+            // ★6 신화 (Mythical) - 10종
+            {emoji: '🌟', name: '별의 정령', specialName: '우주의 속삭임', rarity: 6},
+            {emoji: '☀️', name: '태양의 화신', specialName: '모든 빛의 근원', rarity: 6},
+            {emoji: '🌙', name: '달의 수호자', specialName: '밤하늘의 눈', rarity: 6},
+            {emoji: '🌳', name: '세계수', specialName: '살아있는 대지', rarity: 6},
+            {emoji: '🌊', name: '대양의 혼', specialName: '모든 물의 시작', rarity: 6},
+            {emoji: '🌪️', name: '폭풍의 눈', specialName: '하늘의 분노', rarity: 6},
+            {emoji: '💎', name: '보석 골렘', specialName: '영원의 결정체', rarity: 6},
+            {emoji: '🌌', name: '은하룡', specialName: '별을 삼키는 자', rarity: 6},
+            {emoji: '⏳', name: '시간의 모래시계', specialName: '과거와 미래의 주인', rarity: 6},
+            {emoji: '🤖', name: '궁극의 로봇', specialName: '미래의 지배자', rarity: 6}
         ];
+
+        
+     const quizWords = [
+            // 명사 (Nouns) - 100개
+            { question: '사과', answer: 'apple', options: ['banana', 'orange', 'grape', 'water'] },
+            { question: '가방', answer: 'bag', options: ['book', 'pen', 'desk', 'chair'] },
+            { question: '공', answer: 'ball', options: ['doll', 'car', 'toy', 'game'] },
+            { question: '침대', answer: 'bed', options: ['desk', 'chair', 'table', 'sofa'] },
+            { question: '자전거', answer: 'bike', options: ['car', 'bus', 'train', 'boat'] },
+            { question: '새', answer: 'bird', options: ['dog', 'cat', 'fish', 'lion'] },
+            { question: '보트', answer: 'boat', options: ['car', 'bus', 'train', 'plane'] },
+            { question: '책', answer: 'book', options: ['pen', 'note', 'desk', 'paper'] },
+            { question: '상자', answer: 'box', options: ['bag', 'desk', 'chair', 'bed'] },
+            { question: '소년', answer: 'boy', options: ['girl', 'man', 'woman', 'baby'] },
+            { question: '빵', answer: 'bread', options: ['milk', 'cheese', 'rice', 'water'] },
+            { question: '버스', answer: 'bus', options: ['car', 'train', 'bike', 'taxi'] },
+            { question: '자동차', answer: 'car', options: ['bus', 'train', 'bike', 'plane'] },
+            { question: '고양이', answer: 'cat', options: ['dog', 'bird', 'fish', 'hamster'] },
+            { question: '의자', answer: 'chair', options: ['desk', 'table', 'bed', 'sofa'] },
+            { question: '도시', answer: 'city', options: ['town', 'country', 'village', 'island'] },
+            { question: '시계', answer: 'clock', options: ['watch', 'timer', 'calendar', 'time'] },
+            { question: '구름', answer: 'cloud', options: ['sun', 'moon', 'star', 'sky'] },
+            { question: '컴퓨터', answer: 'computer', options: ['tv', 'phone', 'radio', 'camera'] },
+            { question: '소', answer: 'cow', options: ['pig', 'sheep', 'horse', 'goat'] },
+            { question: '컵', answer: 'cup', options: ['glass', 'bowl', 'plate', 'bottle'] },
+            { question: '낮', answer: 'day', options: ['night', 'morning', 'evening', 'time'] },
+            { question: '책상', answer: 'desk', options: ['chair', 'table', 'bed', 'sofa'] },
+            { question: '개', answer: 'dog', options: ['cat', 'bird', 'fish', 'rabbit'] },
+            { question: '인형', answer: 'doll', options: ['ball', 'toy', 'game', 'robot'] },
+            { question: '문', answer: 'door', options: ['window', 'wall', 'floor', 'roof'] },
+            { question: '오리', answer: 'duck', options: ['chicken', 'bird', 'goose', 'swan'] },
+            { question: '계란', answer: 'egg', options: ['milk', 'bread', 'cheese', 'meat'] },
+            { question: '눈', answer: 'eye', options: ['nose', 'mouth', 'ear', 'face'] },
+            { question: '얼굴', answer: 'face', options: ['head', 'hair', 'eye', 'nose'] },
+            { question: '농장', answer: 'farm', options: ['field', 'garden', 'forest', 'house'] },
+            { question: '아빠', answer: 'father', options: ['mother', 'son', 'daughter', 'family'] },
+            { question: '물고기', answer: 'fish', options: ['bird', 'dog', 'cat', 'frog'] },
+            { question: '꽃', answer: 'flower', options: ['tree', 'leaf', 'grass', 'plant'] },
+            { question: '음식', answer: 'food', options: ['water', 'drink', 'snack', 'meal'] },
+            { question: '발', answer: 'foot', options: ['hand', 'leg', 'arm', 'head'] },
+            { question: '친구', answer: 'friend', options: ['family', 'teacher', 'student', 'neighbor'] },
+            { question: '개구리', answer: 'frog', options: ['snake', 'lizard', 'turtle', 'fish'] },
+            { question: '게임', answer: 'game', options: ['sport', 'play', 'toy', 'hobby'] },
+            { question: '정원', answer: 'garden', options: ['park', 'forest', 'field', 'yard'] },
+            { question: '소녀', answer: 'girl', options: ['boy', 'woman', 'man', 'baby'] },
+            { question: '유리', answer: 'glass', options: ['cup', 'bottle', 'bowl', 'plate'] },
+            { question: '손', answer: 'hand', options: ['foot', 'arm', 'leg', 'finger'] },
+            { question: '모자', answer: 'hat', options: ['cap', 'helmet', 'scarf', 'glove'] },
+            { question: '머리', answer: 'head', options: ['face', 'hair', 'eye', 'ear'] },
+            { question: '집', answer: 'house', options: ['home', 'school', 'store', 'office'] },
+            { question: '얼음', answer: 'ice', options: ['water', 'snow', 'fire', 'hot'] },
+            { question: '섬', answer: 'island', options: ['beach', 'sea', 'ocean', 'land'] },
+            { question: '주스', answer: 'juice', options: ['water', 'milk', 'soda', 'tea'] },
+            { question: '열쇠', answer: 'key', options: ['lock', 'door', 'box', 'safe'] },
+            { question: '왕', answer: 'king', options: ['queen', 'prince', 'princess', 'castle'] },
+            { question: '다리', answer: 'leg', options: ['arm', 'foot', 'hand', 'body'] },
+            { question: '편지', answer: 'letter', options: ['mail', 'card', 'email', 'word'] },
+            { question: '사자', answer: 'lion', options: ['tiger', 'bear', 'wolf', 'fox'] },
+            { question: '남자', answer: 'man', options: ['woman', 'boy', 'girl', 'person'] },
+            { question: '지도', answer: 'map', options: ['road', 'city', 'country', 'world'] },
+            { question: '고기', answer: 'meat', options: ['fish', 'chicken', 'pork', 'beef'] },
+            { question: '우유', answer: 'milk', options: ['water', 'juice', 'cheese', 'yogurt'] },
+            { question: '돈', answer: 'money', options: ['coin', 'bill', 'cash', 'price'] },
+            { question: '원숭이', answer: 'monkey', options: ['gorilla', 'chimp', 'banana', 'jungle'] },
+            { question: '달', answer: 'moon', options: ['sun', 'star', 'sky', 'night'] },
+            { question: '아침', answer: 'morning', options: ['evening', 'afternoon', 'night', 'day'] },
+            { question: '엄마', answer: 'mother', options: ['father', 'son', 'daughter', 'parent'] },
+            { question: '이름', answer: 'name', options: ['age', 'address', 'phone', 'word'] },
+            { question: '밤', answer: 'night', options: ['day', 'morning', 'evening', 'dark'] },
+            { question: '코', answer: 'nose', options: ['eye', 'mouth', 'ear', 'smell'] },
+            { question: '공책', answer: 'note', options: ['book', 'paper', 'pen', 'pencil'] },
+            { question: '오렌지', answer: 'orange', options: ['apple', 'banana', 'grape', 'lemon'] },
+            { question: '공원', answer: 'park', options: ['garden', 'playground', 'field', 'forest'] },
+            { question: '펜', answer: 'pen', options: ['pencil', 'marker', 'crayon', 'write'] },
+            { question: '연필', answer: 'pencil', options: ['pen', 'eraser', 'ruler', 'draw'] },
+            { question: '돼지', answer: 'pig', options: ['cow', 'sheep', 'horse', 'farm'] },
+            { question: '비행기', answer: 'plane', options: ['car', 'bus', 'train', 'sky'] },
+            { question: '식물', answer: 'plant', options: ['tree', 'flower', 'leaf', 'root'] },
+            { question: '여왕', answer: 'queen', options: ['king', 'princess', 'prince', 'crown'] },
+            { question: '토끼', answer: 'rabbit', options: ['hare', 'carrot', 'jump', 'pet'] },
+            { question: '비', answer: 'rain', options: ['snow', 'sun', 'cloud', 'weather'] },
+            { question: '쥐', answer: 'rat', options: ['mouse', 'cheese', 'hole', 'trap'] },
+            { question: '반지', answer: 'ring', options: ['necklace', 'bracelet', 'earring', 'gold'] },
+            { question: '강', answer: 'river', options: ['sea', 'lake', 'ocean', 'water'] },
+            { question: '길', answer: 'road', options: ['street', 'way', 'path', 'drive'] },
+            { question: '로봇', answer: 'robot', options: ['machine', 'computer', 'toy', 'future'] },
+            { question: '학교', answer: 'school', options: ['class', 'student', 'teacher', 'study'] },
+            { question: '바다', answer: 'sea', options: ['ocean', 'river', 'lake', 'beach'] },
+            { question: '양', answer: 'sheep', options: ['goat', 'cow', 'farm', 'wool'] },
+            { question: '배', answer: 'ship', options: ['boat', 'sea', 'port', 'sail'] },
+            { question: '신발', answer: 'shoe', options: ['boot', 'sandal', 'sock', 'foot'] },
+            { question: '하늘', answer: 'sky', options: ['sun', 'moon', 'cloud', 'blue'] },
+            { question: '눈', answer: 'snow', options: ['rain', 'ice', 'winter', 'white'] },
+            { question: '노래', answer: 'song', options: ['music', 'sing', 'dance', 'voice'] },
+            { question: '별', answer: 'star', options: ['sun', 'moon', 'sky', 'night'] },
+            { question: '돌', answer: 'stone', options: ['rock', 'sand', 'hard', 'build'] },
+            { question: '가게', answer: 'store', options: ['shop', 'market', 'buy', 'sell'] },
+            { question: '해', answer: 'sun', options: ['moon', 'star', 'sky', 'day'] },
+            { question: '식탁', answer: 'table', options: ['desk', 'chair', 'eat', 'food'] },
+            { question: '호랑이', answer: 'tiger', options: ['lion', 'cat', 'zoo', 'stripe'] },
+            { question: '장난감', answer: 'toy', options: ['doll', 'ball', 'game', 'play'] },
+            { question: '기차', answer: 'train', options: ['bus', 'car', 'station', 'track'] },
+            { question: '나무', answer: 'tree', options: ['plant', 'flower', 'leaf', 'forest'] },
+            { question: '물', answer: 'water', options: ['drink', 'sea', 'river', 'rain'] },
+            { question: '창문', answer: 'window', options: ['door', 'wall', 'glass', 'open'] },
+            { question: '여자', answer: 'woman', options: ['man', 'girl', 'boy', 'person'] },
+            { question: '세상', answer: 'world', options: ['earth', 'country', 'people', 'map'] },
+            { question: '동물원', answer: 'zoo', options: ['animal', 'park', 'cage', 'lion'] },
+            
+            // 동사 (Verbs) - 50개
+            { question: '묻다', answer: 'ask', options: ['answer', 'tell', 'say', 'speak'] },
+            { question: '오다', answer: 'come', options: ['go', 'walk', 'run', 'arrive'] },
+            { question: '자르다', answer: 'cut', options: ['break', 'tear', 'slice', 'chop'] },
+            { question: '춤추다', answer: 'dance', options: ['sing', 'jump', 'move', 'music'] },
+            { question: '하다', answer: 'do', options: ['make', 'work', 'play', 'act'] },
+            { question: '그리다', answer: 'draw', options: ['paint', 'write', 'color', 'picture'] },
+            { question: '마시다', answer: 'drink', options: ['eat', 'swallow', 'sip', 'water'] },
+            { question: '운전하다', answer: 'drive', options: ['ride', 'walk', 'fly', 'car'] },
+            { question: '먹다', answer: 'eat', options: ['drink', 'bite', 'chew', 'food'] },
+            { question: '찾다', answer: 'find', options: ['lose', 'search', 'look', 'get'] },
+            { question: '날다', answer: 'fly', options: ['jump', 'run', 'swim', 'plane'] },
+            { question: '얻다', answer: 'get', options: ['give', 'take', 'receive', 'have'] },
+            { question: '주다', answer: 'give', options: ['get', 'take', 'send', 'offer'] },
+            { question: '가다', answer: 'go', options: ['come', 'walk', 'run', 'leave'] },
+            { question: '가지다', answer: 'have', options: ['get', 'own', 'hold', 'possess'] },
+            { question: '듣다', answer: 'hear', options: ['listen', 'sound', 'voice', 'ear'] },
+            { question: '돕다', answer: 'help', options: ['assist', 'support', 'work', 'aid'] },
+            { question: '치다', answer: 'hit', options: ['strike', 'beat', 'punch', 'touch'] },
+            { question: '점프하다', answer: 'jump', options: ['hop', 'leap', 'fly', 'run'] },
+            { question: '알다', answer: 'know', options: ['think', 'learn', 'see', 'understand'] },
+            { question: '배우다', answer: 'learn', options: ['study', 'teach', 'know', 'read'] },
+            { question: '좋아하다', answer: 'like', options: ['love', 'hate', 'enjoy', 'prefer'] },
+            { question: '듣다(주의깊게)', answer: 'listen', options: ['hear', 'sound', 'music', 'ear'] },
+            { question: '살다', answer: 'live', options: ['stay', 'be', 'exist', 'house'] },
+            { question: '보다', answer: 'look', options: ['see', 'watch', 'view', 'eye'] },
+            { question: '사랑하다', answer: 'love', options: ['like', 'hate', 'adore', 'care'] },
+            { question: '만들다', answer: 'make', options: ['do', 'create', 'build', 'form'] },
+            { question: '만나다', answer: 'meet', options: ['see', 'greet', 'find', 'friend'] },
+            { question: '열다', answer: 'open', options: ['close', 'shut', 'start', 'door'] },
+            { question: '놀다', answer: 'play', options: ['work', 'study', 'game', 'toy'] },
+            { question: '놓다', answer: 'put', options: ['place', 'set', 'move', 'lay'] },
+            { question: '읽다', answer: 'read', options: ['write', 'study', 'book', 'letter'] },
+            { question: '타다', answer: 'ride', options: ['drive', 'walk', 'bike', 'horse'] },
+            { question: '달리다', answer: 'run', options: ['walk', 'jog', 'race', 'fast'] },
+            { question: '말하다', answer: 'say', options: ['tell', 'speak', 'talk', 'ask'] },
+            { question: '보다', answer: 'see', options: ['look', 'watch', 'view', 'eye'] },
+            { question: '노래하다', answer: 'sing', options: ['dance', 'shout', 'music', 'song'] },
+            { question: '앉다', answer: 'sit', options: ['stand', 'lie', 'chair', 'down'] },
+            { question: '자다', answer: 'sleep', options: ['wake', 'rest', 'dream', 'bed'] },
+            { question: '말하다', answer: 'speak', options: ['talk', 'say', 'tell', 'language'] },
+            { question: '서다', answer: 'stand', options: ['sit', 'lie', 'up', 'walk'] },
+            { question: '멈추다', answer: 'stop', options: ['start', 'go', 'finish', 'end'] },
+            { question: '공부하다', answer: 'study', options: ['learn', 'read', 'write', 'school'] },
+            { question: '수영하다', answer: 'swim', options: ['dive', 'float', 'water', 'pool'] },
+            { question: '가져가다', answer: 'take', options: ['get', 'give', 'bring', 'hold'] },
+            { question: '말하다', answer: 'talk', options: ['speak', 'say', 'chat', 'discuss'] },
+            { question: '생각하다', answer: 'think', options: ['know', 'believe', 'guess', 'idea'] },
+            { question: '걷다', answer: 'walk', options: ['run', 'go', 'step', 'foot'] },
+            { question: '원하다', answer: 'want', options: ['need', 'wish', 'like', 'desire'] },
+            { question: '쓰다', answer: 'write', options: ['read', 'draw', 'pen', 'letter'] },
+
+            // 형용사 (Adjectives) & 기타 - 50개
+            { question: '화난', answer: 'angry', options: ['happy', 'sad', 'mad', 'upset'] },
+            { question: '나쁜', answer: 'bad', options: ['good', 'wrong', 'evil', 'poor'] },
+            { question: '큰', answer: 'big', options: ['small', 'large', 'huge', 'great'] },
+            { question: '검은색', answer: 'black', options: ['white', 'red', 'blue', 'dark'] },
+            { question: '파란색', answer: 'blue', options: ['red', 'yellow', 'green', 'sky'] },
+            { question: '갈색', answer: 'brown', options: ['black', 'white', 'tan', 'wood'] },
+            { question: '깨끗한', answer: 'clean', options: ['dirty', 'wash', 'clear', 'neat'] },
+            { question: '추운', answer: 'cold', options: ['hot', 'cool', 'warm', 'ice'] },
+            { question: '어두운', answer: 'dark', options: ['light', 'bright', 'black', 'night'] },
+            { question: '더러운', answer: 'dirty', options: ['clean', 'messy', 'mud', 'dust'] },
+            { question: '마른', answer: 'dry', options: ['wet', 'water', 'towel', 'sand'] },
+            { question: '쉬운', answer: 'easy', options: ['hard', 'simple', 'difficult', 'soft'] },
+            { question: '빠른', answer: 'fast', options: ['slow', 'quick', 'run', 'speed'] },
+            { question: '뚱뚱한', answer: 'fat', options: ['thin', 'big', 'heavy', 'plump'] },
+            { question: '좋은', answer: 'good', options: ['bad', 'great', 'nice', 'fine'] },
+            { question: '초록색', answer: 'green', options: ['red', 'blue', 'yellow', 'grass'] },
+            { question: '행복한', answer: 'happy', options: ['sad', 'glad', 'joy', 'smile'] },
+            { question: '어려운', answer: 'hard', options: ['easy', 'soft', 'difficult', 'tough'] },
+            { question: '무거운', answer: 'heavy', options: ['light', 'big', 'stone', 'lift'] },
+            { question: '뜨거운', answer: 'hot', options: ['cold', 'warm', 'fire', 'sun'] },
+            { question: '큰', answer: 'large', options: ['small', 'big', 'huge', 'wide'] },
+            { question: '가벼운', answer: 'light', options: ['heavy', 'dark', 'bright', 'easy'] },
+            { question: '긴', answer: 'long', options: ['short', 'tall', 'big', 'line'] },
+            { question: '새로운', answer: 'new', options: ['old', 'young', 'fresh', 'modern'] },
+            { question: '오래된', answer: 'old', options: ['new', 'young', 'ancient', 'age'] },
+            { question: '하나', answer: 'one', options: ['two', 'three', 'four', 'first'] },
+            { question: '주황색', answer: 'orange', options: ['yellow', 'red', 'fruit', 'color'] },
+            { question: '가난한', answer: 'poor', options: ['rich', 'needy', 'money', 'bad'] },
+            { question: '예쁜', answer: 'pretty', options: ['beautiful', 'cute', 'ugly', 'nice'] },
+            { question: '자주색', answer: 'purple', options: ['violet', 'grape', 'flower', 'color'] },
+            { question: '빠른', answer: 'quick', options: ['fast', 'slow', 'rapid', 'swift'] },
+            { question: '조용한', answer: 'quiet', options: ['loud', 'silent', 'calm', 'soft'] },
+            { question: '빨간색', answer: 'red', options: ['blue', 'yellow', 'green', 'apple'] },
+            { question: '부유한', answer: 'rich', options: ['poor', 'wealthy', 'money', 'gold'] },
+            { question: '슬픈', answer: 'sad', options: ['happy', 'unhappy', 'cry', 'tear'] },
+            { question: '짧은', answer: 'short', options: ['long', 'tall', 'small', 'brief'] },
+            { question: '아픈', answer: 'sick', options: ['ill', 'well', 'healthy', 'pain'] },
+            { question: '느린', answer: 'slow', options: ['fast', 'quick', 'late', 'walk'] },
+            { question: '작은', answer: 'small', options: ['big', 'little', 'tiny', 'short'] },
+            { question: '부드러운', answer: 'soft', options: ['hard', 'gentle', 'smooth', 'fluffy'] },
+            { question: '강한', answer: 'strong', options: ['weak', 'powerful', 'tough', 'hard'] },
+            { question: '키가 큰', answer: 'tall', options: ['short', 'long', 'high', 'big'] },
+            { question: '마른', answer: 'thin', options: ['fat', 'slim', 'narrow', 'light'] },
+
+            { question: '못생긴', answer: 'ugly', options: ['pretty', 'beautiful', 'bad', 'horrible'] },
+            { question: '따뜻한', answer: 'warm', options: ['hot', 'cold', 'cool', 'sun'] },
+            { question: '약한', answer: 'weak', options: ['strong', 'feeble', 'frail', 'sick'] },
+            { question: '젖은', answer: 'wet', options: ['dry', 'damp', 'water', 'rain'] },
+            { question: '흰색', answer: 'white', options: ['black', 'red', 'snow', 'light'] },
+            { question: '어린', answer: 'young', options: ['old', 'new', 'child', 'baby'] },
+            { question: '노란색', answer: 'yellow', options: ['red', 'blue', 'sun', 'lemon'] }
+        ];
+
+
 
         // ==================== 핵심 게임 함수 ====================
 
-        // 수학 문제 생성
         function generateQuestion() {
             const difficulty = Math.min(Math.floor(gameState.level / 3) + 1, 4);
             let question = {};
@@ -842,26 +1032,33 @@
                     break;
                     
                 case 2: // 두 자리 덧셈/뺄셈
-                    const a2 = Math.floor(Math.random() * 50) + 10;
-                    const b2 = Math.floor(Math.random() * 30) + 5;
+                    const a2 = Math.floor(Math.random() * 90) + 10;
+                    const b2 = Math.floor(Math.random() * 90) + 10;
                     if (Math.random() > 0.5) {
                         question = {text: `${a2} + ${b2}`, answer: a2 + b2};
                     } else {
-                        question = {text: `${a2} - ${b2}`, answer: a2 - b2};
+                        const larger = Math.max(a2, b2);
+                        const smaller = Math.min(a2, b2);
+                        question = {text: `${larger} - ${smaller}`, answer: larger - smaller};
                     }
                     break;
                     
                 case 3: // 곱셈
-                    const a3 = Math.floor(Math.random() * 9) + 2;
-                    const b3 = Math.floor(Math.random() * 9) + 2;
+                    const a3 = Math.floor(Math.random() * 8) + 2;
+                    const b3 = Math.floor(Math.random() * 8) + 2;
                     question = {text: `${a3} × ${b3}`, answer: a3 * b3};
                     break;
                     
-                case 4: // 나눗셈
-                    const result = Math.floor(Math.random() * 8) + 2;
-                    const divisor = Math.floor(Math.random() * 8) + 2;
-                    const dividend = result * divisor;
-                    question = {text: `${dividend} ÷ ${divisor}`, answer: result};
+                case 4: // 세 자리 덧셈/뺄셈
+                    const a4 = Math.floor(Math.random() * 900) + 100;
+                    const b4 = Math.floor(Math.random() * 900) + 100;
+                    if (Math.random() > 0.5) {
+                        question = {text: `${a4} + ${b4}`, answer: a4 + b4};
+                    } else {
+                        const larger = Math.max(a4, b4);
+                        const smaller = Math.min(a4, b4);
+                        question = {text: `${larger} - ${smaller}`, answer: larger - smaller};
+                    }
                     break;
             }
             
@@ -871,12 +1068,10 @@
             document.getElementById('feedback').textContent = '';
             document.getElementById('feedback').className = 'feedback';
             
-            // 난이도 표시 업데이트
             const difficultyNames = ['쉬움', '보통', '어려움', '매우 어려움'];
             document.getElementById('difficulty').textContent = difficultyNames[difficulty - 1];
         }
 
-        // 답안 확인
         function checkAnswer() {
             const userAnswer = parseInt(document.getElementById('answer').value);
             const feedback = document.getElementById('feedback');
@@ -888,50 +1083,41 @@
             }
             
             if (userAnswer === gameState.currentQuestion.answer) {
-                // 정답 처리
                 gameState.score += 10 * gameState.level;
                 feedback.textContent = '정답입니다! 훌륭해요! 🎉';
                 feedback.className = 'feedback correct';
                 
-                // 동물 획득
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-                // 레벨업 체크
                 if (gameState.score >= gameState.level * 50) {
                     gameState.level++;
                     showLevelUp();
                 }
                 
-                // 사용자 데이터 자동 저장
                 saveCurrentUserData();
                 
                 setTimeout(() => {
                     generateQuestion();
-                }, 2500);
+                }, 1500);
                 
             } else {
-                // 오답 처리
                 feedback.textContent = `틀렸어요! 정답은 ${gameState.currentQuestion.answer}입니다. 다시 도전해보세요! 💪`;
                 feedback.className = 'feedback incorrect';
                 
                 setTimeout(() => {
                     generateQuestion();
-                }, 3500);
+                }, 2500);
             }
             
             updateUI();
         }
 
-        // 랜덤 동물 획득
         function getRandomAnimal() {
             const maxRarity = Math.min(Math.floor(gameState.level / 2) + 1, 6);
             const availableAnimals = animalTypes.filter(animal => animal.rarity <= maxRarity);
-            
-            // 희귀도에 따른 가중치
             const weights = availableAnimals.map(animal => Math.pow(0.7, animal.rarity - 1));
             const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
-            
             let random = Math.random() * totalWeight;
             for (let i = 0; i < availableAnimals.length; i++) {
                 random -= weights[i];
@@ -939,17 +1125,16 @@
                     return availableAnimals[i];
                 }
             }
-            
             return availableAnimals[0];
         }
 
-        // 동물 추가
         function addAnimal(animal) {
             const key = animal.name;
             if (!gameState.animals[key]) {
                 gameState.animals[key] = {
                     ...animal,
-                    count: 0
+                    count: 0,
+                    animalLevel: 1 
                 };
                 gameState.speciesCount++;
                 showNewAnimalAlert(animal);
@@ -960,47 +1145,49 @@
             
             updateAnimalCollection();
         }
-
-        // 동물 성장
-        function growAnimal(animalName) {
+        
+        function startFeedingQuiz(animalName) {
             const animal = gameState.animals[animalName];
+            const quizData = { ...quizWords[Math.floor(Math.random() * quizWords.length)] };
             
-            if (animal.count >= 2) {
-                animal.count -= 2;
-                animal.count += 1; // 2마리가 1마리로 성장
-                gameState.totalAnimals -= 1;
-                
-                // 성장 효과 실행
-                createGrowthEffect();
-                
-                const feedback = document.getElementById('feedback');
-                feedback.textContent = `${animal.specialName}이(가) 성장했습니다! 🌟`;
-                feedback.className = 'feedback correct';
-                
+            document.getElementById('quiz-question').innerText = `'${animal.name}'에게 먹이로 줄 '${quizData.question}'의 영어 단어는?`;
+            
+            const wrongOptions = quizData.options.filter(opt => opt !== quizData.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
+            const finalOptions = [quizData.answer, ...wrongOptions].sort(() => Math.random() - 0.5);
+            
+            const optionsContainer = document.getElementById('quiz-options');
+            optionsContainer.innerHTML = '';
+            finalOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'quiz-option-btn';
+                button.innerText = option;
+                button.onclick = () => checkQuizAnswer(option, quizData.answer, animalName);
+                optionsContainer.appendChild(button);
+            });
+
+            document.getElementById('quiz-modal').style.display = 'flex';
+        }
+
+        function checkQuizAnswer(selectedOption, correctAnswer, animalName) {
+            if (selectedOption === correctAnswer) {
+                gameState.animals[animalName].animalLevel++;
+                alert('정답! 동물의 레벨이 올랐어요! 쑥쑥! 🌟');
+                closeQuizModal();
                 updateAnimalCollection();
-                updateUI();
                 saveCurrentUserData();
-                
-                setTimeout(() => {
-                    feedback.textContent = '';
-                    feedback.className = 'feedback';
-                }, 3000);
-                
             } else {
-                const feedback = document.getElementById('feedback');
-                feedback.textContent = `${animal.specialName}를 성장시키려면 2마리가 필요해요! 🐾`;
-                feedback.className = 'feedback incorrect';
-                
-                setTimeout(() => {
-                    feedback.textContent = '';
-                    feedback.className = 'feedback';
-                }, 2500);
+                alert('이런, 다른 먹이인가 봐요. 다시 시도해 보세요! 🤔');
+                closeQuizModal();
             }
         }
 
+        function closeQuizModal() {
+            document.getElementById('quiz-modal').style.display = 'none';
+        }
+
+
         // ==================== UI 업데이트 함수 ====================
 
-        // 게임 UI 업데이트
         function updateUI() {
             document.getElementById('score').textContent = gameState.score;
             document.getElementById('level').textContent = gameState.level;
@@ -1008,70 +1195,52 @@
             document.getElementById('total-animals').textContent = gameState.totalAnimals;
         }
 
-        // 동물 컬렉션 업데이트
         function updateAnimalCollection() {
             const collection = document.getElementById('animal-collection');
             collection.innerHTML = '';
             
-            // 희귀도 순으로 정렬
-            const sortedAnimals = Object.values(gameState.animals)
-                .sort((a, b) => b.rarity - a.rarity);
+            const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
             
             sortedAnimals.forEach(animal => {
+                if (animal.count === 0) return;
+
                 const card = document.createElement('div');
                 card.className = 'animal-card';
                 
-                // 희귀도에 따른 테두리 색상
                 let borderColor = '#87CEEB';
-                if (animal.rarity >= 5) borderColor = '#FFD700'; // 전설
-                else if (animal.rarity >= 4) borderColor = '#9370DB'; // 희귀
-                else if (animal.rarity >= 3) borderColor = '#32CD32'; // 고급
+                if (animal.rarity >= 5) borderColor = '#FFD700';
+                else if (animal.rarity >= 4) borderColor = '#9370DB';
+                else if (animal.rarity >= 3) borderColor = '#32CD32';
                 
                 card.style.borderColor = borderColor;
                 card.style.boxShadow = `0 6px 20px ${borderColor}40`;
                 
                 card.innerHTML = `
                     <span class="animal-emoji">${animal.emoji}</span>
-                    <div class="animal-name">${animal.name}</div>
+                    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+                    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
                     <div class="special-name">"${animal.specialName}"</div>
-                    <div class="animal-count">${animal.count}마리</div>
                     <div class="rarity-badge">★${animal.rarity}</div>
                 `;
                 
-                card.onclick = () => growAnimal(animal.name);
+                card.onclick = () => startFeedingQuiz(animal.name);
                 collection.appendChild(card);
             });
         }
 
         // ==================== 특수 효과 함수 ====================
-
-        // 새 동물 발견 알림
         function showNewAnimalAlert(animal) {
             const alert = document.createElement('div');
             alert.className = 'new-animal-alert';
-            
-            let rarityText = '';
-            if (animal.rarity >= 5) rarityText = '✨ 전설급 ✨';
-            else if (animal.rarity >= 4) rarityText = '💜 희귀 💜';
-            else if (animal.rarity >= 3) rarityText = '💚 고급 💚';
-            else rarityText = '💙 일반 💙';
-            
             alert.innerHTML = `
                 <span class="new-animal-emoji">${animal.emoji}</span>
                 <h3>새로운 동물 발견! 🎉</h3>
-                <p><strong>${animal.specialName}</strong></p>
-                <p>(${animal.name})을(를) 획득했습니다!</p>
-                <p>${rarityText}</p>
+                <p><strong>${animal.specialName}</strong> (${animal.name})을(를) 획득했습니다!</p>
             `;
-            
             document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 4500);
+            setTimeout(() => { alert.remove(); }, 3000);
         }
 
-        // 레벨업 알림
         function showLevelUp() {
             const alert = document.createElement('div');
             alert.className = 'new-animal-alert';
@@ -1079,105 +1248,39 @@
                 <span class="new-animal-emoji">⭐</span>
                 <h3>레벨 업! 🎉</h3>
                 <p>레벨 ${gameState.level}이 되었습니다!</p>
-                <p>더 어려운 문제와 희귀한 동물들을 만날 수 있어요!</p>
+                <p>더 어려운 문제에 도전할 수 있어요!</p>
             `;
-            
             document.body.appendChild(alert);
-            
-            setTimeout(() => {
-                alert.remove();
-            }, 4500);
+            setTimeout(() => { alert.remove(); }, 3000);
         }
 
-        // 성장 효과
-        function createGrowthEffect() {
-            const effect = document.createElement('div');
-            effect.className = 'growth-effect';
-            
-            // 파티클 컨테이너
-            const particles = document.createElement('div');
-            particles.className = 'growth-particles';
-            
-            // 40개의 파티클 생성
-            const colors = ['#FFD700', '#FFA500', '#FF69B4', '#32CD32', '#87CEEB', '#9370DB', '#FF4500', '#00CED1'];
-            for (let i = 0; i < 40; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                
-                // 원형으로 배치
-                const angle = (i * 9) + Math.random() * 9;
-                const distance = 60 + Math.random() * 120;
-                const x = Math.cos(angle * Math.PI / 180) * distance;
-                const y = Math.sin(angle * Math.PI / 180) * distance;
-                
-                particle.style.left = `${200 + x}px`;
-                particle.style.top = `${200 + y}px`;
-                particle.style.animationDelay = `${Math.random() * 0.8}s`;
-                
-                particles.appendChild(particle);
-            }
-            
-            // 성장 메시지
-            const message = document.createElement('div');
-            message.className = 'growth-message';
-            message.innerHTML = '🌟 성장 성공! 🌟<br>동물이 더 강해졌어요!';
-            
-            effect.appendChild(particles);
-            effect.appendChild(message);
-            document.body.appendChild(effect);
-            
-            // 2.5초 후 제거
-            setTimeout(() => {
-                effect.remove();
-            }, 2500);
-        }
 
-        // ==================== 사용자 관리 함수 ====================
+        // ==================== 사용자 관리 및 데이터 함수 ====================
 
-        // 사용자 생성
         function createUser() {
             const userName = document.getElementById('new-user-name').value.trim();
+            if (!userName) return alert('사용자 이름을 입력해주세요!');
+            if (allUsers[userName]) return alert('이미 존재하는 사용자입니다!');
             
-            if (!userName) {
-                alert('사용자 이름을 입력해주세요!');
-                return;
-            }
-            
-            if (allUsers[userName]) {
-                alert('이미 존재하는 사용자입니다!');
-                return;
-            }
-            
-            const newUserData = {
-                name: userName,
-                score: 0,
-                level: 1,
-                animals: {},
-                totalAnimals: 0,
-                speciesCount: 0,
-                createdAt: new Date().toISOString(),
-                lastPlayed: new Date().toISOString()
+            allUsers[userName] = {
+                name: userName, score: 0, level: 1, animals: {},
+                totalAnimals: 0, speciesCount: 0,
+                createdAt: new Date().toISOString(), lastPlayed: new Date().toISOString()
             };
-            
-            allUsers[userName] = newUserData;
             document.getElementById('new-user-name').value = '';
-            
             alert(`🎉 ${userName} 사용자가 생성되었습니다!`);
             updateUserList();
+            saveAllUsersToStorage();
         }
 
-        // 사용자 전환
         function switchUser(userName) {
             if (!allUsers[userName]) {
-                alert('존재하지 않는 사용자입니다!');
+                console.error("Switching to a non-existent user:", userName);
                 return;
             }
             
-            // 현재 사용자 데이터 저장
             saveCurrentUserData();
             
-            // 새 사용자로 전환
             currentUser = userName;
             const userData = allUsers[userName];
             
@@ -1190,7 +1293,6 @@
                 currentQuestion: {}
             };
             
-            // 마지막 플레이 시간 업데이트
             allUsers[userName].lastPlayed = new Date().toISOString();
             
             document.getElementById('current-user-name').textContent = userName;
@@ -1198,16 +1300,13 @@
             updateAnimalCollection();
             updateUserList();
             generateQuestion();
-            
-            alert(`🎮 ${userName}님으로 전환되었습니다!`);
         }
 
-        // 현재 사용자 데이터 저장
         function saveCurrentUserData() {
             if (!currentUser || !allUsers[currentUser]) return;
             
-            const userData = {
-                name: currentUser,
+            allUsers[currentUser] = {
+                ...allUsers[currentUser],
                 score: gameState.score,
                 level: gameState.level,
                 animals: gameState.animals,
@@ -1215,67 +1314,47 @@
                 speciesCount: gameState.speciesCount,
                 lastPlayed: new Date().toISOString()
             };
-            
-            allUsers[currentUser] = { ...allUsers[currentUser], ...userData };
+            saveAllUsersToStorage();
         }
-
-        // 사용자 목록 업데이트
+        
         function updateUserList() {
             const userList = document.getElementById('user-list');
             userList.innerHTML = '';
-            
-            // 점수 순으로 정렬
-            const sortedUsers = Object.values(allUsers).sort((a, b) => b.score - a.score);
+            const sortedUsers = Object.values(allUsers).sort((a, b) => (b.score || 0) - (a.score || 0));
             
             sortedUsers.forEach((user, index) => {
                 const userCard = document.createElement('div');
                 userCard.className = 'user-card';
-                
                 if (user.name === currentUser) {
                     userCard.classList.add('active');
                 }
-                
                 const rankIcon = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}위`;
-                
                 userCard.innerHTML = `
                     <h4>${rankIcon} ${user.name}</h4>
                     <div class="user-stats">
-                        레벨: ${user.level} | 점수: ${user.score}점<br>
-                        동물: ${user.totalAnimals}마리 (${user.speciesCount}종)<br>
+                        레벨: ${user.level || 1} | 점수: ${user.score || 0}점<br>
+                        동물: ${user.totalAnimals || 0}마리 (${user.speciesCount || 0}종)<br>
                         마지막 플레이: ${formatDate(user.lastPlayed)}
                     </div>
                 `;
-                
                 userCard.onclick = () => switchUser(user.name);
                 userList.appendChild(userCard);
             });
         }
 
-        // 날짜 포맷팅
         function formatDate(dateString) {
-            if (!dateString) return '알 수 없음';
+            if (!dateString) return '기록 없음';
             const date = new Date(dateString);
-            return date.toLocaleString('ko-KR', {
-                month: 'short',
-                day: 'numeric',
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            return date.toLocaleString('ko-KR', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' });
         }
 
-        // ==================== 데이터 관리 함수 ====================
-
-        // 게임 데이터 내보내기
         function exportGameData() {
             saveCurrentUserData();
-            
             const gameData = {
                 users: allUsers,
                 currentUser: currentUser,
-                exportDate: new Date().toISOString(),
-                version: '2.0'
+                version: '2.1'
             };
-            
             const dataStr = JSON.stringify(gameData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
@@ -1284,20 +1363,16 @@
             link.download = `동물수집게임-백업-${new Date().toISOString().split('T')[0]}.json`;
             link.click();
             URL.revokeObjectURL(url);
-            
             alert('📁 게임 데이터가 파일로 다운로드되었습니다!');
         }
 
-        // 게임 데이터 가져오기
         function importGameData(event) {
             const file = event.target.files[0];
             if (!file) return;
-            
             const reader = new FileReader();
             reader.onload = function(e) {
                 try {
                     const data = JSON.parse(e.target.result);
-                    
                     if (data.users && typeof data.users === 'object') {
                         if (!confirm('⚠️ 기존 데이터를 덮어쓰시겠습니까?\n현재 데이터는 모두 삭제됩니다!')) {
                             return;
@@ -1306,103 +1381,49 @@
                         allUsers = data.users;
                         currentUser = data.currentUser || Object.keys(allUsers)[0] || '게스트';
                         
-                        // 현재 사용자 데이터 로드
-                        if (currentUser && allUsers[currentUser]) {
-                            const userData = allUsers[currentUser];
-                            gameState = {
-                                score: userData.score || 0,
-                                level: userData.level || 1,
-                                animals: userData.animals || {},
-                                totalAnimals: userData.totalAnimals || 0,
-                                speciesCount: userData.speciesCount || 0,
-                                currentQuestion: {}
-                            };
-                            
-                            document.getElementById('current-user-name').textContent = currentUser;
-                        }
-                        
-                        updateUI();
-                        updateAnimalCollection();
-                        updateUserList();
-                        generateQuestion();
+                        saveAllUsersToStorage();
+                        localStorage.setItem('mathGameCurrentUser', currentUser);
+                        initializeGame();
                         
                         alert('✅ 게임 데이터를 성공적으로 불러왔습니다!');
-                        
                     } else {
                         throw new Error('올바른 게임 데이터 파일이 아닙니다.');
                     }
-                    
                 } catch (error) {
                     console.error('데이터 가져오기 실패:', error);
                     alert(`❌ 파일을 읽는데 실패했습니다.\n오류: ${error.message}`);
                 }
             };
             reader.readAsText(file);
-            
-            // 파일 입력 초기화
             event.target.value = '';
         }
 
-        // 모든 데이터 초기화
         function resetAllData() {
             if (!confirm('⚠️ 정말로 모든 사용자 데이터를 삭제하시겠습니까?\n이 작업은 되돌릴 수 없습니다!')) {
                 return;
             }
+            localStorage.removeItem('mathGameAllUsers');
+            localStorage.removeItem('mathGameCurrentUser');
             
-            // 기본 게스트 사용자로 초기화
-            allUsers = {
-                '게스트': {
-                    name: '게스트',
-                    score: 0,
-                    level: 1,
-                    animals: {},
-                    totalAnimals: 0,
-                    speciesCount: 0,
-                    createdAt: new Date().toISOString(),
-                    lastPlayed: new Date().toISOString()
-                }
-            };
-            
+            allUsers = {};
             currentUser = '게스트';
-            gameState = {
-                score: 0,
-                level: 1,
-                currentQuestion: {},
-                animals: {},
-                totalAnimals: 0,
-                speciesCount: 0
-            };
-            
-            document.getElementById('current-user-name').textContent = '게스트';
-            updateUI();
-            updateAnimalCollection();
-            updateUserList();
-            generateQuestion();
-            
+
+            initializeGame();
             alert('🗑️ 모든 데이터가 초기화되었습니다.');
         }
 
-        // ==================== 페이지 관리 함수 ====================
 
-        // 페이지 전환
-        function showPage(pageName) {
-            // 모든 페이지 숨기기
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
+        // ==================== 페이지 관리 및 초기화 ====================
+
+        function showPage(pageName, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             
-            // 모든 버튼 비활성화
-            document.querySelectorAll('.nav-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            // 선택된 페이지 보이기
             document.getElementById(pageName + '-page').classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
             
-            // 선택된 버튼 활성화
-            event.target.classList.add('active');
-            
-            // 페이지별 UI 조절
             const gameStats = document.getElementById('game-stats');
             const userInfo = document.getElementById('user-info');
             
@@ -1412,80 +1433,68 @@
             } else if (pageName === 'users') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
-                updateUserList(); // 사용자 페이지 열 때마다 목록 새로고침
+                updateUserList();
             } else {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'none';
             }
         }
+        
+        function saveAllUsersToStorage() {
+            try {
+                localStorage.setItem('mathGameAllUsers', JSON.stringify(allUsers));
+            } catch (e) {
+                console.error("Error saving to localStorage", e);
+            }
+        }
 
-        // ==================== 게임 초기화 ====================
+        function loadUsersFromStorage() {
+            const storedData = localStorage.getItem('mathGameAllUsers');
+            if (storedData) {
+                try {
+                    allUsers = JSON.parse(storedData);
+                    currentUser = localStorage.getItem('mathGameCurrentUser') || Object.keys(allUsers)[0] || '게스트';
+                } catch (e) {
+                    console.error("Error parsing data from localStorage", e);
+                    allUsers = {};
+                    currentUser = '게스트';
+                }
+            }
+        }
 
-        // 게임 초기화
         function initializeGame() {
-            console.log('🎮 동물 수집 수학 게임 시작!');
-            
-            // 기본 게스트 사용자 생성
-            if (Object.keys(allUsers).length === 0) {
-                allUsers['게스트'] = {
-                    name: '게스트',
-                    score: 0,
-                    level: 1,
-                    animals: {},
-                    totalAnimals: 0,
-                    speciesCount: 0,
-                    createdAt: new Date().toISOString(),
-                    lastPlayed: new Date().toISOString()
+            loadUsersFromStorage();
+
+            if (Object.keys(allUsers).length === 0 || !allUsers[currentUser]) {
+                allUsers = {
+                    '게스트': { name: '게스트', score: 0, level: 1, animals: {}, totalAnimals: 0, speciesCount: 0, createdAt: new Date().toISOString(), lastPlayed: new Date().toISOString() }
                 };
                 currentUser = '게스트';
+                saveAllUsersToStorage();
+                localStorage.setItem('mathGameCurrentUser', currentUser);
             }
             
-            // UI 초기화
-            document.getElementById('current-user-name').textContent = currentUser;
-            updateUI();
-            updateAnimalCollection();
-            updateUserList();
-            generateQuestion();
-            
-            console.log('✅ 게임 초기화 완료!');
+            switchUser(currentUser);
+            showPage('game', document.querySelector('.nav-btn'));
         }
 
         // ==================== 이벤트 리스너 ====================
 
-        // 페이지 로드 시 게임 초기화
-        window.addEventListener('load', function() {
-            initializeGame();
+        window.addEventListener('load', initializeGame);
+        
+        document.getElementById('answer').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') checkAnswer();
+        });
+        document.getElementById('new-user-name').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') createUser();
         });
 
-        // 키보드 이벤트 처리
-        document.addEventListener('DOMContentLoaded', function() {
-            // Enter 키로 답안 제출
-            const answerInput = document.getElementById('answer');
-            if (answerInput) {
-                answerInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        checkAnswer();
-                    }
-                });
-            }
-            
-            // Enter 키로 사용자 생성
-            const userNameInput = document.getElementById('new-user-name');
-            if (userNameInput) {
-                userNameInput.addEventListener('keypress', function(e) {
-                    if (e.key === 'Enter') {
-                        createUser();
-                    }
-                });
-            }
-        });
-
-        // 페이지 종료 시 데이터 자동 저장
         window.addEventListener('beforeunload', function() {
             saveCurrentUserData();
+            localStorage.setItem('mathGameCurrentUser', currentUser);
         });
 
-        console.log('🎮 동물 수집 수학 게임이 로드되었습니다!');
+        console.log('🐾 동물 수집 수학 게임이 로드되었습니다! (v2.1)');
     </script>
 </body>
 </html>
