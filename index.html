@@ -507,6 +507,67 @@
             margin-bottom: 18px;
         }
         
+        /* [NEW] 동물 도감 스타일 */
+        .encyclopedia-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .encyclopedia-container h2 {
+            color: #2C5530;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 20px;
+        }
+        .encyclopedia-progress {
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4169E1;
+            margin-bottom: 20px;
+        }
+        .progress-bar-container {
+            width: 80%;
+            max-width: 500px;
+            height: 25px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            margin: 10px auto;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #98FB98, #32CD32);
+            border-radius: 15px;
+            transition: width 0.5s ease-in-out;
+        }
+        .encyclopedia-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 20px;
+            max-height: 60vh;
+            overflow-y: auto;
+            padding: 10px;
+        }
+        .encyclopedia-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        .encyclopedia-card.uncollected {
+            filter: grayscale(100%);
+            opacity: 0.6;
+        }
+        .encyclopedia-card .animal-emoji { font-size: 3rem; }
+        .encyclopedia-card .animal-name { font-size: 1rem; }
+        .encyclopedia-card .animal-count { font-size: 0.9rem; color: #666; }
+
+
         /* 특수 효과 */
         .new-animal-alert {
             position: fixed;
@@ -541,7 +602,8 @@
             .answer-input { width: 200px; font-size: 1.5rem; }
             .animal-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
             .user-list { grid-template-columns: 1fr; }
-            .quiz-options-grid { grid-template-columns: 1fr; } /* 모바일 퀴즈 버튼 1열로 */
+            .quiz-options-grid { grid-template-columns: 1fr; }
+            .encyclopedia-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
         }
     </style>
 </head>
@@ -553,6 +615,7 @@
             
             <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showPage('game', this)">게임하기 🎮</button>
+                <button class="nav-btn" onclick="showPage('encyclopedia', this)">동물 도감 📚</button>
                 <button class="nav-btn" onclick="showPage('instructions', this)">사용설명서 📖</button>
                 <button class="nav-btn" onclick="showPage('users', this)">사용자 관리 👥</button>
             </div>
@@ -589,6 +652,22 @@
                 </div>
             </div>
         </div>
+        
+        <!-- [NEW] 동물 도감 페이지 -->
+        <div id="encyclopedia-page" class="page">
+            <div class="encyclopedia-container">
+                <h2>📚 동물 도감</h2>
+                <div class="encyclopedia-progress">
+                    수집률: <span id="collection-progress">0 / 105</span> 종
+                    <div class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="encyclopedia-grid" id="encyclopedia-grid">
+                    <!-- 도감 카드가 여기에 동적으로 추가됩니다 -->
+                </div>
+            </div>
+        </div>
 
         <!-- 사용설명서 페이지 -->
         <div id="instructions-page" class="page">
@@ -598,29 +677,21 @@
                 <h3>🎯 게임 목표</h3>
                 <p>수학 문제를 풀어서 다양한 동물들을 수집하고, 영어 단어 퀴즈를 통해 동물을 레벨업 시켜 나만의 동물원을 만들어보세요!</p>
                 
+                <h3>📚 동물 도감 시스템 (신규)</h3>
+                <p>새롭게 추가된 '동물 도감' 페이지에서 전체 동물 목록과 나의 수집 현황을 확인할 수 있습니다. 아직 잡지 못한 동물은 실루엣으로 표시됩니다. 모두 모아보세요!</p>
+
                 <h3>🧮 수학 문제 시스템</h3>
                 <ul>
-                    <li><strong>레벨 1-2:</strong> 한 자리 덧셈과 뺄셈 (예: 5 + 3, 8 - 2)</li>
-                    <li><strong>레벨 3-5:</strong> 두 자리 덧셈과 뺄셈 (예: 25 + 17, 43 - 18)</li>
-                    <li><strong>레벨 6-8:</strong> 구구단 곱셈 (예: 7 × 4, 9 × 6)</li>
-                    <li><strong>레벨 9 이상:</strong> 세 자리 덧셈과 뺄셈 (예: 123 + 456)</li>
+                    <li><strong>레벨 1-2:</strong> 한 자리 덧셈과 뺄셈</li>
+                    <li><strong>레벨 3-5:</strong> 두 자리 덧셈과 뺄셈</li>
+                    <li><strong>레벨 6-8:</strong> 구구단 곱셈</li>
+                    <li><strong>레벨 9 이상:</strong> 세 자리 덧셈과 뺄셈</li>
                 </ul>
                 
-                <h3>🐾 동물 수집 시스템</h3>
-                <p><strong>문제를 맞힐 때마다</strong> 랜덤한 동물을 1마리씩 획득할 수 있어요!</p>
-                
-                <h3>🌟 동물 성장 시스템 (신규)</h3>
+                <h3>🌟 동물 성장 시스템</h3>
                 <ul>
                     <li>수집한 동물 카드를 클릭하면 **'먹이주기' 영어 단어 퀴즈**가 시작됩니다.</li>
                     <li>4개의 보기 중 올바른 영어 단어를 맞히면 동물의 <strong>레벨이 1 오릅니다!</strong></li>
-                    <li>동물의 레벨이 오르면 더 강해지는 모습을 상상해보세요! (추후 기능 확장 가능)</li>
-                </ul>
-                
-                <h3>👥 사용자 관리 시스템</h3>
-                <ul>
-                    <li><strong>여러 사용자</strong>가 각자의 진행상황을 따로 저장할 수 있어요.</li>
-                    <li><strong>데이터 내보내기/가져오기</strong>로 게임 데이터를 백업하고 복원할 수 있습니다.</li>
-                    <li>이제 데이터는 **브라우저에 자동 저장**되어 편리합니다.</li>
                 </ul>
             </div>
         </div>
@@ -677,7 +748,7 @@
         let currentUser = '게스트';
         let allUsers = {};
 
-                const animalTypes = [
+        const animalTypes = [
             // ★1 일반 (Common) - 25종
             {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
             {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
@@ -750,7 +821,7 @@
             {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3},
             {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3},
             {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3},
-            {emoji: '🦀', name: '바닷가재', specialName: '심해의 기사', rarity: 3},
+            {emoji: '🦞', name: '바닷가재', specialName: '심해의 기사', rarity: 3},
             {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3},
             {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
 
@@ -761,8 +832,8 @@
             {emoji: '🦖', name: '티라노사우루스', specialName: '폭군 도마뱀', rarity: 4},
             {emoji: '🐉', name: '용', specialName: '전설의 드래곤', rarity: 4},
             {emoji: '🐳', name: '대왕고래', specialName: '대양의 심장', rarity: 4},
-            {emoji: '🐙', name: '대왕문어', specialName: '크라켄의 후예', rarity: 4},
-            {emoji: '🦅', name: '대머리독수리', specialName: '창공의 지배자', rarity: 4},
+            {emoji: '🦑', name: '대왕오징어', specialName: '크라켄의 후예', rarity: 4},
+            {emoji: '🦅', name: '하피', specialName: '창공의 지배자', rarity: 4},
             {emoji: '🦧', name: '오랑우탄', specialName: '숲의 현자', rarity: 4},
             {emoji: '🐅', name: '백호', specialName: '달의 정기', rarity: 4},
             {emoji: '🐈‍⬛', name: '흑표범', specialName: '밤의 그림자', rarity: 4},
@@ -775,11 +846,11 @@
             {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5},
             {emoji: '🐲', name: '동양용', specialName: '여의주의 주인', rarity: 5},
             {emoji: '🔥', name: '불사조', specialName: '불멸의 화신', rarity: 5},
-            {emoji: '🦅', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5},
+            {emoji: '🦁', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5},
             {emoji: '🐎', name: '페가수스', specialName: '날개 달린 천마', rarity: 5},
             {emoji: '🐺', name: '펜리르', specialName: '신화 속 늑대', rarity: 5},
             {emoji: '🐍', name: '히드라', specialName: '불멸의 머리', rarity: 5},
-            {emoji: '🦁', name: '키메라', specialName: '환상의 조합', rarity: 5},
+            {emoji: '🐐', name: '키메라', specialName: '환상의 조합', rarity: 5},
             {emoji: '🧜‍♀️', name: '인어', specialName: '바다의 노래', rarity: 5},
             {emoji: '👾', name: '외계인', specialName: '미지의 방문자', rarity: 5},
 
@@ -795,7 +866,6 @@
             {emoji: '⏳', name: '시간의 모래시계', specialName: '과거와 미래의 주인', rarity: 6},
             {emoji: '🤖', name: '궁극의 로봇', specialName: '미래의 지배자', rarity: 6}
         ];
-
         
      const quizWords = [
             // 명사 (Nouns) - 100개
@@ -1227,6 +1297,44 @@
                 collection.appendChild(card);
             });
         }
+        
+        // [NEW] 동물 도감 업데이트 함수
+        function updateEncyclopedia() {
+            const grid = document.getElementById('encyclopedia-grid');
+            grid.innerHTML = '';
+
+            // 수집률 계산 및 표시
+            const collectedCount = gameState.speciesCount;
+            const totalCount = animalTypes.length;
+            document.getElementById('collection-progress').textContent = `${collectedCount} / ${totalCount}`;
+            
+            const progressPercent = totalCount > 0 ? (collectedCount / totalCount) * 100 : 0;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            animalTypes.forEach(animal => {
+                const collectedAnimal = gameState.animals[animal.name];
+                const card = document.createElement('div');
+                card.className = 'encyclopedia-card';
+                
+                if (collectedAnimal) {
+                    card.innerHTML = `
+                        <span class="animal-emoji">${animal.emoji}</span>
+                        <div class="animal-name">${animal.name}</div>
+                        <div class="animal-count">${collectedAnimal.count}마리 보유</div>
+                        <div class="rarity-badge">★${animal.rarity}</div>
+                    `;
+                } else {
+                    card.classList.add('uncollected');
+                    card.innerHTML = `
+                        <span class="animal-emoji">❓</span>
+                        <div class="animal-name">???</div>
+                        <div class="animal-count">미발견</div>
+                        <div class="rarity-badge">★${animal.rarity}</div>
+                    `;
+                }
+                grid.appendChild(card);
+            });
+        }
 
         // ==================== 특수 효과 함수 ====================
         function showNewAnimalAlert(animal) {
@@ -1353,7 +1461,7 @@
             const gameData = {
                 users: allUsers,
                 currentUser: currentUser,
-                version: '2.1'
+                version: '2.2'
             };
             const dataStr = JSON.stringify(gameData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
@@ -1434,6 +1542,10 @@
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
                 updateUserList();
+            } else if (pageName === 'encyclopedia') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateEncyclopedia(); // [NEW] 도감 페이지를 열 때 업데이트 함수 호출
             } else {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'none';
@@ -1494,7 +1606,7 @@
             localStorage.setItem('mathGameCurrentUser', currentUser);
         });
 
-        console.log('🐾 동물 수집 수학 게임이 로드되었습니다! (v2.1)');
+        console.log('🐾 동물 수집 수학 게임이 로드되었습니다! (v2.2)');
     </script>
 </body>
 </html>
