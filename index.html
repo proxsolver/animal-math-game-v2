@@ -146,6 +146,52 @@
             .encyclopedia-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
             .synthesis-card { flex-direction: column; gap: 10px; }
         }
+
+        /* [NEW] AI 이야기 모달 스타일 */
+        #story-modal .modal-content {
+            background: linear-gradient(135deg, #fffde7, #fff);
+            text-align: left;
+        }
+        #story-content-area {
+            max-height: 60vh;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding-right: 15px; /* for scrollbar */
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+        #story-text {
+            white-space: pre-wrap; /* AI가 만든 줄바꿈을 존중 */
+        }
+        .story-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            transition: background 0.3s;
+        }
+        .story-btn:hover {
+            background: linear-gradient(45deg, #ff8e8e, #ff6b6b);
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #8A2BE2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        
     </style>
 </head>
 <body>
@@ -331,6 +377,22 @@
             <div id="math-feedback"></div>
         </div>
     </div>
+    
+    <!-- [NEW] AI 이야기 모달 HTML -->
+    <div id="story-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeStoryModal()">&times;</span>
+            <h3 id="story-modal-title">동물 이야기</h3>
+            <div id="story-content-area">
+                <div id="story-loading" style="display: none;">
+                    <p>이야기를 만들고 있어요... 잠시만 기다려주세요! 📖</p>
+                    <div class="spinner"></div>
+                </div>
+                <p id="story-text"></p>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Firebase SDK and Game Logic -->
     <script type="module">
@@ -643,13 +705,14 @@
             return availableAnimals[0];
         }
 
-        function addAnimal(animal) {
+           function addAnimal(animal) {
             const key = animal.name;
             if (!gameState.animals[key]) {
                 gameState.animals[key] = {
                     ...animal,
                     count: 0,
-                    animalLevel: 1 
+                    animalLevel: 1,
+                    story: "" // [추가] AI 이야기를 저장할 공간
                 };
                 gameState.speciesCount++;
                 showNewAnimalAlert(animal);
@@ -660,7 +723,6 @@
             
             updateAnimalCollection();
         }
-
         // ==================== UI 업데이트 함수 ====================
 
         function updateUI() {
