@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🐾 동물 수집 수학 게임 🐾</title>
+    <title>🐾 동물 수집 학습 게임 🐾</title>
     <style>
         * {
             margin: 0;
@@ -121,7 +121,7 @@
             margin-bottom: 30px;
         }
 
-        .math-section {
+        .english-quiz-section {
             background: rgba(255, 255, 255, 0.95);
             padding: 30px;
             border-radius: 25px;
@@ -129,23 +129,13 @@
             text-align: center;
         }
 
-        .math-section h2 {
+        .english-quiz-section h2 {
             color: #2C5530;
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
 
-        .difficulty-badge {
-            background: linear-gradient(45deg, #9370DB, #8A2BE2);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 15px;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-        }
-
-        .question {
+        .english-question {
             font-size: 2.5rem;
             color: #4169E1;
             margin: 25px 0;
@@ -153,40 +143,28 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
         }
 
-        .answer-input {
-            font-size: 1.8rem;
-            padding: 15px 20px;
-            border: 3px solid #87CEEB;
-            border-radius: 20px;
-            width: 250px;
-            margin: 15px;
-            text-align: center;
-            transition: all 0.3s ease;
+        .english-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .answer-input:focus {
-            outline: none;
-            border-color: #4169E1;
-            box-shadow: 0 0 20px rgba(65, 105, 225, 0.4);
-        }
-
-        .submit-btn {
-            background: linear-gradient(45deg, #32CD32, #228B22);
+        .english-option-btn {
+            background: linear-gradient(45deg, #89CFF0, #4682B4);
             color: white;
             border: none;
-            padding: 18px 35px;
-            font-size: 1.3rem;
-            border-radius: 20px;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.5rem;
+            font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 15px;
-            font-weight: bold;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
         }
-
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        
+        .english-option-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
         .feedback {
@@ -260,115 +238,32 @@
             box-shadow: 0 12px 35px rgba(0,0,0,0.25);
         }
 
-        .animal-emoji {
-            font-size: 3.5rem;
-            display: block;
-            margin-bottom: 10px;
-        }
+        .animal-emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; }
+        .animal-name { font-weight: bold; color: #2C5530; margin-bottom: 5px; font-size: 1rem; word-break: keep-all; }
+        .animal-level { font-weight: bold; font-size: 1.1rem; color: #8A2BE2; margin-bottom: 8px; }
+        .special-name { color: #8B4513; font-style: italic; font-size: 0.9rem; margin-bottom: 8px; }
+        .rarity-badge { background: linear-gradient(45deg, #FFD700, #FFA500); color: #8B4513; font-size: 0.8rem; font-weight: bold; padding: 4px 10px; border-radius: 12px; display: inline-block; }
 
-        .animal-name {
-            font-weight: bold;
-            color: #2C5530;
-            margin-bottom: 5px;
-            font-size: 1rem;
-            word-break: keep-all;
-        }
-        
-        .animal-level {
-            font-weight: bold;
-            font-size: 1.1rem;
-            color: #8A2BE2;
-            margin-bottom: 8px;
-        }
-
-        .special-name {
-            color: #8B4513;
-            font-style: italic;
-            font-size: 0.9rem;
-            margin-bottom: 8px;
-        }
-
-        .rarity-badge {
-            background: linear-gradient(45deg, #FFD700, #FFA500);
-            color: #8B4513;
-            font-size: 0.8rem;
-            font-weight: bold;
-            padding: 4px 10px;
-            border-radius: 12px;
-            display: inline-block;
-        }
-
-        /* 퀴즈 모달 스타일 */
+        /* 모달 공통 스타일 */
         .modal {
-            display: none; 
-            position: fixed; 
-            z-index: 1001; 
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.6);
-            align-items: center;
-            justify-content: center;
+            display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%;
+            overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center;
         }
-
         .modal-content {
-            background: linear-gradient(135deg, #E0F7FA, #FFFFFF, #FFF9C4);
-            margin: auto;
-            padding: 30px;
-            border: 1px solid #888;
-            width: 90%;
-            max-width: 500px;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            text-align: center;
-            position: relative;
+            margin: auto; padding: 30px; border: 1px solid #888; width: 90%; max-width: 500px;
+            border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); text-align: center; position: relative;
         }
-
         .close-btn {
-            color: #aaa;
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 28px;
-            font-weight: bold;
-            cursor: pointer;
+            color: #aaa; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer;
         }
-
-        .close-btn:hover,
-        .close-btn:focus {
-            color: black;
-        }
+        .close-btn:hover, .close-btn:focus { color: black; }
         
-        #quiz-question {
-            font-size: 1.5rem;
-            color: #2C5530;
-            margin-bottom: 25px;
-        }
-
-        .quiz-options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .quiz-option-btn {
-            background: linear-gradient(45deg, #89CFF0, #4682B4);
-            color: white;
-            border: none;
-            padding: 15px;
-            border-radius: 15px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .quiz-option-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
+        /* 수학 문제 모달 스타일 */
+        #math-modal .modal-content { background: linear-gradient(135deg, #e0f7fa, #ffffff, #fffde7); }
+        #math-question { font-size: 2.5rem; color: #4169E1; margin: 25px 0; font-weight: bold; }
+        #math-answer-input { font-size: 1.8rem; padding: 15px 20px; border: 3px solid #87CEEB; border-radius: 20px; width: 250px; margin: 15px; text-align: center; }
+        #math-submit-btn { background: linear-gradient(45deg, #32CD32, #228B22); color: white; border: none; padding: 18px 35px; font-size: 1.3rem; border-radius: 20px; cursor: pointer; margin: 15px; font-weight: bold; }
+        #math-feedback { min-height: 40px; margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
 
         /* 사용자 관리 페이지 */
         .user-management { background: rgba(255, 255, 255, 0.95); padding: 35px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-width: 900px; margin: 0 auto; }
@@ -441,11 +336,10 @@
             .header h1 { font-size: 2.2rem; }
             .game-stats { flex-direction: column; align-items: center; gap: 10px; }
             .nav-buttons { flex-direction: column; align-items: center; gap: 10px; }
-            .question { font-size: 2rem; }
-            .answer-input { width: 200px; font-size: 1.5rem; }
+            .english-question { font-size: 2rem; }
+            .english-option-btn { font-size: 1.2rem; padding: 15px; }
             .animal-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
             .user-list { grid-template-columns: 1fr; }
-            .quiz-options-grid { grid-template-columns: 1fr; }
             .encyclopedia-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
         }
     </style>
@@ -454,10 +348,10 @@
     <div class="game-container">
         <!-- 헤더 -->
         <div class="header">
-            <h1>🐾 동물 수집 수학 게임 🐾</h1>
+            <h1>🐾 동물 수집 학습 게임 🐾</h1>
             
             <div class="nav-buttons">
-                <button class="nav-btn active" onclick="showPage('game', this)">게임하기 🎮</button>
+                <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기 🇬🇧</button>
                 <button class="nav-btn" onclick="showPage('farm', this)">농장 꾸미기 🏡</button>
                 <button class="nav-btn" onclick="showPage('encyclopedia', this)">동물 도감 📚</button>
                 <button class="nav-btn" onclick="showPage('instructions', this)">사용설명서 📖</button>
@@ -479,19 +373,16 @@
         <!-- 게임 페이지 -->
         <div id="game-page" class="page active">
             <div class="game-content">
-                <div class="math-section">
-                    <h2>🧮 수학 문제</h2>
-                    <div class="difficulty-badge">현재 난이도: <span id="difficulty">쉬움</span></div>
-                    <div class="question" id="question">5 + 3 = ?</div>
-                    <input type="number" class="answer-input" id="answer" placeholder="답을 입력하세요">
-                    <br>
-                    <button class="submit-btn" onclick="checkAnswer()">답 확인하기! 🎯</button>
+                <div class="english-quiz-section">
+                    <h2>🇬🇧 영어 퀴즈: 동물 잡기!</h2>
+                    <div class="english-question" id="english-question">질문</div>
+                    <div class="english-options" id="english-options"></div>
                     <div class="feedback" id="feedback"></div>
                 </div>
 
                 <div class="collection-section">
-                    <h2>🏠 내 동물 컬렉션</h2>
-                    <p class="collection-hint">💡 동물을 클릭해서 영어 퀴즈로 레벨업 시켜요!</p>
+                    <h2>🐾 내 동물 컬렉션</h2>
+                    <p class="collection-hint">💡 동물을 클릭해서 수학 문제로 레벨업 시켜요!</p>
                     <div class="animal-grid" id="animal-collection"></div>
                 </div>
             </div>
@@ -532,11 +423,17 @@
             <div class="instructions">
                 <h2>📖 게임 사용설명서</h2>
                 
-                <h3>🏡 농장 꾸미기 시스템 (신규)</h3>
-                <p>수학 문제를 풀어 얻은 점수로 상점에서 나무, 꽃 등 다양한 아이템을 구매하세요. 구매한 아이템은 보관함에 저장되며, 보관함에서 아이템을 선택한 후 농장의 원하는 위치를 클릭하여 배치할 수 있습니다. 나만의 멋진 동물 농장을 만들어보세요!</p>
+                <h3>🎯 게임 목표</h3>
+                <p>영어 단어 퀴즈를 풀어서 동물을 수집하고, 수학 문제를 풀어 동물을 레벨업 시키세요! 점수를 모아 나만의 농장도 꾸밀 수 있습니다.</p>
+                
+                <h3>🇬🇧 동물 잡기 (영어 퀴즈)</h3>
+                <p>제시된 한글 뜻에 맞는 영어 단어를 4개의 보기 중에서 고르세요. 정답을 맞히면 점수를 얻고 새로운 동물을 잡을 수 있습니다!</p>
 
-                <h3>📚 동물 도감 시스템</h3>
-                <p>'동물 도감' 페이지에서 전체 동물 목록과 나의 수집 현황을 확인할 수 있습니다. 아직 잡지 못한 동물은 실루엣으로 표시됩니다.</p>
+                <h3>🧮 동물 레벨업 (수학 문제)</h3>
+                <p>수집한 동물을 클릭하면 레벨업을 위한 수학 문제가 나타납니다. 문제를 풀면 점수를 얻고 동물의 레벨이 오릅니다. 동물의 레벨이 높을수록 더 어려운 문제가 나옵니다!</p>
+
+                <h3>🏡 농장 꾸미기 시스템</h3>
+                <p>열심히 모은 점수로 상점에서 나무, 꽃 등 다양한 아이템을 구매하여 나만의 농장을 꾸밀 수 있습니다.</p>
             </div>
         </div>
 
@@ -562,12 +459,16 @@
         </div>
     </div>
     
-    <!-- 퀴즈 모달 HTML -->
-    <div id="quiz-modal" class="modal">
+    <!-- 수학 문제 모달 HTML -->
+    <div id="math-modal" class="modal">
         <div class="modal-content">
-            <span class="close-btn" onclick="closeQuizModal()">&times;</span>
-            <h3 id="quiz-question">퀴즈 질문이 여기에 표시됩니다.</h3>
-            <div id="quiz-options" class="quiz-options-grid"></div>
+            <span class="close-btn" onclick="closeMathModal()">&times;</span>
+            <h3>🧮 동물 레벨업!</h3>
+            <div id="math-question">5 + 3 = ?</div>
+            <input type="number" id="math-answer-input" placeholder="정답은?">
+            <br>
+            <button id="math-submit-btn">확인</button>
+            <div id="math-feedback"></div>
         </div>
     </div>
 
@@ -591,11 +492,12 @@
         let currentUser = '게스트';
         let allUsers = {};
         let selectedItemToPlace = null;
+        let currentEnglishQuiz = {};
 
         const animalTypes = [
-            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1}, {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1}, {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1}, {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1}, {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1}, {emoji: '🐔', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1}, {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1}, {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1}, {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1}, {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1}, {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1}, {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1}, {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 1}, {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1}, {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1}, {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1}, {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1}, {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1}, {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1}, {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1}, {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1}, {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1}, {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1}, {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1}, {emoji: '🐠', name: '열대어', specialName: '산호초의 보석', rarity: 1},
+            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1}, {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1}, {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1}, {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1}, {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1}, {emoji: '�', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1}, {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1}, {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1}, {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1}, {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1}, {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1}, {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1}, {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 1}, {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1}, {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1}, {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1}, {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1}, {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1}, {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1}, {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1}, {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1}, {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1}, {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1}, {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1}, {emoji: '🐠', name: '열대어', specialName: '산호초의 보석', rarity: 1},
             {emoji: '🦊', name: '여우', specialName: '숲속의 신사', rarity: 2}, {emoji: '🐻', name: '곰', specialName: '꿀단지 파수꾼', rarity: 2}, {emoji: '🦝', name: '너구리', specialName: '솜사탕 사냥꾼', rarity: 2}, {emoji: '🦌', name: '사슴', specialName: '숲의 왕자', rarity: 2}, {emoji: '🦉', name: '올빼미', specialName: '지혜로운 자', rarity: 2}, {emoji: '🐺', name: '늑대', specialName: '달빛사냥꾼', rarity: 2}, {emoji: '🦇', name: '박쥐', specialName: '밤의 비행사', rarity: 2}, {emoji: '🐍', name: '뱀', specialName: '비밀의 수호자', rarity: 2}, {emoji: '🦅', name: '독수리', specialName: '하늘의 제왕', rarity: 2}, {emoji: '🐧', name: '펭귄', specialName: '얼음 신사', rarity: 2}, {emoji: '🐨', name: '코알라', specialName: '유칼립투스 요정', rarity: 2}, {emoji: '🐒', name: '원숭이', specialName: '장난꾸러기 대장', rarity: 2}, {emoji: '🐗', name: '멧돼지', specialName: '돌격대장', rarity: 2}, {emoji: '🦦', name: '수달', specialName: '조약돌 아티스트', rarity: 2}, {emoji: '🦢', name: '백조', specialName: '호수의 여왕', rarity: 2}, {emoji: '🦔', name: '고슴도치', specialName: '밤송이 기사', rarity: 2}, {emoji: '🦎', name: '도마뱀', specialName: '햇살 사냥꾼', rarity: 2}, {emoji: '🐙', name: '문어', specialName: '촉수마법사', rarity: 2}, {emoji: '🦐', name: '새우', specialName: '바다의 댄서', rarity: 2}, {emoji: '🦑', name: '오징어', specialName: '먹물 예술가', rarity: 2}, {emoji: '🦘', name: '캥거루', specialName: '스텝의 챔피언', rarity: 2}, {emoji: '🕊️', name: '비둘기', specialName: '평화의 사도', rarity: 2}, {emoji: '🦜', name: '앵무새', specialName: '말하는 보석', rarity: 2}, {emoji: '🐫', name: '낙타', specialName: '사막의 상인', rarity: 2}, {emoji: '🦙', name: '라마', specialName: '안데스의 신사', rarity: 2},
-            {emoji: '🐘', name: '코끼리', specialName: '기억의 현자', rarity: 3}, {emoji: '🦒', name: '기린', specialName: '구름 산책가', rarity: 3}, {emoji: '🦓', name: '얼룩말', specialName: '초원의 수수께끼', rarity: 3}, {emoji: '🐼', name: '판다', specialName: '대나무 미식가', rarity: 3}, {emoji: '🦛', name: '하마', specialName: '강의 군주', rarity: 3}, {emoji: '🦏', name: '코뿔소', specialName: '강철의 돌격수', rarity: 3}, {emoji: '🐊', name: '악어', specialName: '늪의 포식자', rarity: 3}, {emoji: '🐅', name: '호랑이', specialName: '밀림의 군주', rarity: 3}, {emoji: '🐆', name: '표범', specialName: '그림자 암살자', rarity: 3}, {emoji: '🦍', name: '고릴라', specialName: '숲의 수호신', rarity: 3}, {emoji: '🐬', name: '돌고래', specialName: '파도의 친구', rarity: 3}, {emoji: '�', name: '고래', specialName: '심해의 노래', rarity: 3}, {emoji: '🦈', name: '상어', specialName: '바다의 추격자', rarity: 3}, {emoji: '🦚', name: '공작', specialName: '별빛 깃털', rarity: 3}, {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3}, {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3}, {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3}, {emoji: '🦞', name: '바닷가재', specialName: '심해의 기사', rarity: 3}, {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3}, {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
+            {emoji: '🐘', name: '코끼리', specialName: '기억의 현자', rarity: 3}, {emoji: '🦒', name: '기린', specialName: '구름 산책가', rarity: 3}, {emoji: '🦓', name: '얼룩말', specialName: '초원의 수수께끼', rarity: 3}, {emoji: '🐼', name: '판다', specialName: '대나무 미식가', rarity: 3}, {emoji: '🦛', name: '하마', specialName: '강의 군주', rarity: 3}, {emoji: '🦏', name: '코뿔소', specialName: '강철의 돌격수', rarity: 3}, {emoji: '🐊', name: '악어', specialName: '늪의 포식자', rarity: 3}, {emoji: '🐅', name: '호랑이', specialName: '밀림의 군주', rarity: 3}, {emoji: '🐆', name: '표범', specialName: '그림자 암살자', rarity: 3}, {emoji: '🦍', name: '고릴라', specialName: '숲의 수호신', rarity: 3}, {emoji: '🐬', name: '돌고래', specialName: '파도의 친구', rarity: 3}, {emoji: '🐋', name: '고래', specialName: '심해의 노래', rarity: 3}, {emoji: '🦈', name: '상어', specialName: '바다의 추격자', rarity: 3}, {emoji: '🦚', name: '공작', specialName: '별빛 깃털', rarity: 3}, {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3}, {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3}, {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3}, {emoji: '🦞', name: '바닷가재', specialName: '심해의 기사', rarity: 3}, {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3}, {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
             {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4}, {emoji: '🐻‍❄️', name: '북극곰', specialName: '설원의 지배자', rarity: 4}, {emoji: '🦣', name: '매머드', specialName: '빙하기의 거인', rarity: 4}, {emoji: '🦖', name: '티라노사우루스', specialName: '폭군 도마뱀', rarity: 4}, {emoji: '🐉', name: '용', specialName: '전설의 드래곤', rarity: 4}, {emoji: '🐳', name: '대왕고래', specialName: '대양의 심장', rarity: 4}, {emoji: '🦑', name: '대왕오징어', specialName: '크라켄의 후예', rarity: 4}, {emoji: '🦅', name: '하피', specialName: '창공의 지배자', rarity: 4}, {emoji: '🦧', name: '오랑우탄', specialName: '숲의 현자', rarity: 4}, {emoji: '🐅', name: '백호', specialName: '달의 정기', rarity: 4}, {emoji: '🐈‍⬛', name: '흑표범', specialName: '밤의 그림자', rarity: 4}, {emoji: '🦕', name: '브라키오사우루스', specialName: '움직이는 숲', rarity: 4}, {emoji: '🦗', name: '사마귀', specialName: '당랑권의 고수', rarity: 4}, {emoji: '🕷️', name: '거미', specialName: '거미줄의 설계자', rarity: 4}, {emoji: '🦊', name: '북극여우', specialName: '설원의 유령', rarity: 4},
             {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}, {emoji: '🐲', name: '동양용', specialName: '여의주의 주인', rarity: 5}, {emoji: '🔥', name: '불사조', specialName: '불멸의 화신', rarity: 5}, {emoji: '🦁', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5}, {emoji: '🐎', name: '페가수스', specialName: '날개 달린 천마', rarity: 5}, {emoji: '🐺', name: '펜리르', specialName: '신화 속 늑대', rarity: 5}, {emoji: '🐍', name: '히드라', specialName: '불멸의 머리', rarity: 5}, {emoji: '🐐', name: '키메라', specialName: '환상의 조합', rarity: 5}, {emoji: '🧜‍♀️', name: '인어', specialName: '바다의 노래', rarity: 5}, {emoji: '👾', name: '외계인', specialName: '미지의 방문자', rarity: 5},
             {emoji: '🌟', name: '별의 정령', specialName: '우주의 속삭임', rarity: 6}, {emoji: '☀️', name: '태양의 화신', specialName: '모든 빛의 근원', rarity: 6}, {emoji: '🌙', name: '달의 수호자', specialName: '밤하늘의 눈', rarity: 6}, {emoji: '🌳', name: '세계수', specialName: '살아있는 대지', rarity: 6}, {emoji: '🌊', name: '대양의 혼', specialName: '모든 물의 시작', rarity: 6}, {emoji: '🌪️', name: '폭풍의 눈', specialName: '하늘의 분노', rarity: 6}, {emoji: '💎', name: '보석 골렘', specialName: '영원의 결정체', rarity: 6}, {emoji: '🌌', name: '은하룡', specialName: '별을 삼키는 자', rarity: 6}, {emoji: '⏳', name: '시간의 모래시계', specialName: '과거와 미래의 주인', rarity: 6}, {emoji: '🤖', name: '궁극의 로봇', specialName: '미래의 지배자', rarity: 6}
@@ -607,132 +509,47 @@
             { question: '화난', answer: 'angry', options: ['happy', 'sad', 'mad', 'upset'] }, { question: '나쁜', answer: 'bad', options: ['good', 'wrong', 'evil', 'poor'] }, { question: '큰', answer: 'big', options: ['small', 'large', 'huge', 'great'] }, { question: '검은색', answer: 'black', options: ['white', 'red', 'blue', 'dark'] }, { question: '파란색', answer: 'blue', options: ['red', 'yellow', 'green', 'sky'] }, { question: '갈색', answer: 'brown', options: ['black', 'white', 'tan', 'wood'] }, { question: '깨끗한', answer: 'clean', options: ['dirty', 'wash', 'clear', 'neat'] }, { question: '추운', answer: 'cold', options: ['hot', 'cool', 'warm', 'ice'] }, { question: '어두운', answer: 'dark', options: ['light', 'bright', 'black', 'night'] }, { question: '더러운', answer: 'dirty', options: ['clean', 'messy', 'mud', 'dust'] }, { question: '마른', answer: 'dry', options: ['wet', 'water', 'towel', 'sand'] }, { question: '쉬운', answer: 'easy', options: ['hard', 'simple', 'difficult', 'soft'] }, { question: '빠른', answer: 'fast', options: ['slow', 'quick', 'run', 'speed'] }, { question: '뚱뚱한', answer: 'fat', options: ['thin', 'big', 'heavy', 'plump'] }, { question: '좋은', answer: 'good', options: ['bad', 'great', 'nice', 'fine'] }, { question: '초록색', answer: 'green', options: ['red', 'blue', 'yellow', 'grass'] }, { question: '행복한', answer: 'happy', options: ['sad', 'glad', 'joy', 'smile'] }, { question: '어려운', answer: 'hard', options: ['easy', 'soft', 'difficult', 'tough'] }, { question: '무거운', answer: 'heavy', options: ['light', 'big', 'stone', 'lift'] }, { question: '뜨거운', answer: 'hot', options: ['cold', 'warm', 'fire', 'sun'] }, { question: '큰', answer: 'large', options: ['small', 'big', 'huge', 'wide'] }, { question: '가벼운', answer: 'light', options: ['heavy', 'dark', 'bright', 'easy'] }, { question: '긴', answer: 'long', options: ['short', 'tall', 'big', 'line'] }, { question: '새로운', answer: 'new', options: ['old', 'young', 'fresh', 'modern'] }, { question: '오래된', answer: 'old', options: ['new', 'young', 'ancient', 'age'] }, { question: '하나', answer: 'one', options: ['two', 'three', 'four', 'first'] }, { question: '주황색', answer: 'orange', options: ['yellow', 'red', 'fruit', 'color'] }, { question: '가난한', answer: 'poor', options: ['rich', 'needy', 'money', 'bad'] }, { question: '예쁜', answer: 'pretty', options: ['beautiful', 'cute', 'ugly', 'nice'] }, { question: '자주색', answer: 'purple', options: ['violet', 'grape', 'flower', 'color'] }, { question: '빠른', answer: 'quick', options: ['fast', 'slow', 'rapid', 'swift'] }, { question: '조용한', answer: 'quiet', options: ['loud', 'silent', 'calm', 'soft'] }, { question: '빨간색', answer: 'red', options: ['blue', 'yellow', 'green', 'apple'] }, { question: '부유한', answer: 'rich', options: ['poor', 'wealthy', 'money', 'gold'] }, { question: '슬픈', answer: 'sad', options: ['happy', 'unhappy', 'cry', 'tear'] }, { question: '짧은', answer: 'short', options: ['long', 'tall', 'small', 'brief'] }, { question: '아픈', answer: 'sick', options: ['ill', 'well', 'healthy', 'pain'] }, { question: '느린', answer: 'slow', options: ['fast', 'quick', 'late', 'walk'] }, { question: '작은', answer: 'small', options: ['big', 'little', 'tiny', 'short'] }, { question: '부드러운', answer: 'soft', options: ['hard', 'gentle', 'smooth', 'fluffy'] }, { question: '강한', answer: 'strong', options: ['weak', 'powerful', 'tough', 'hard'] }, { question: '키가 큰', answer: 'tall', options: ['short', 'long', 'high', 'big'] }, { question: '마른', answer: 'thin', options: ['fat', 'slim', 'narrow', 'light'] }, { question: '못생긴', answer: 'ugly', options: ['pretty', 'beautiful', 'bad', 'horrible'] }, { question: '따뜻한', answer: 'warm', options: ['hot', 'cold', 'cool', 'sun'] }, { question: '약한', answer: 'weak', options: ['strong', 'feeble', 'frail', 'sick'] }, { question: '젖은', answer: 'wet', options: ['dry', 'damp', 'water', 'rain'] }, { question: '흰색', answer: 'white', options: ['black', 'red', 'snow', 'light'] }, { question: '어린', answer: 'young', options: ['old', 'new', 'child', 'baby'] }, { question: '노란색', answer: 'yellow', options: ['red', 'blue', 'sun', 'lemon'] }
         ];
 
-const shopItems = [
-            // 저렴한 벽돌/바닥 블록
-            { name: '빨간 벽', emoji: '🟥', price: 15 },
-            { name: '파란 벽', emoji: '🟦', price: 15 },
-            { name: '초록 벽', emoji: '🟩', price: 15 },
-            { name: '노란 벽', emoji: '🟨', price: 15 },
-            { name: '하얀 벽', emoji: '⬜', price: 15 },
-            { name: '검은 벽', emoji: '⬛', price: 15 },
-            { name: '주황 벽', emoji: '🟧', price: 15 },
-            { name: '보라 벽', emoji: '🟪', price: 15 },
-            { name: '갈색 벽', emoji: '🟫', price: 15 },
-            
-            // 씨앗 및 저렴한 식물
-            { name: '새싹', emoji: '🌱', price: 25 },
-            { name: '자갈길', emoji: '🪨', price: 35 },
-            { name: '해바라기', emoji: '🌻', price: 40 },
-            { name: '튤립', emoji: '🌷', price: 45 },
-            { name: '꽃', emoji: '🌸', price: 50 },
-            { name: '덤불', emoji: '🌿', price: 55 },
-            { name: '버섯', emoji: '🍄', price: 60 },
-            { name: '밀', emoji: '🌾', price: 65 },
-            { name: '네잎클로버', emoji: '🍀', price: 75 },
-            { name: '선인장', emoji: '🌵', price: 80 },
-
-            // 중간 가격 장식
-            { name: '길', emoji: '🛤️', price: 80 },
-            { name: '꽃밭', emoji: '💐', price: 90 },
-            { name: '나무', emoji: '🌳', price: 100 },
-            { name: '우체통', emoji: '📮', price: 110 },
-            { name: '채소밭', emoji: '🥕', price: 120 },
-            { name: '허수아비', emoji: '🧍', price: 130 },
-            { name: '상록수', emoji: '🌲', price: 150 },
-            { name: '울타리', emoji: '🚧', price: 150 },
-            { name: '벌집', emoji: '🐝', price: 160 },
-            { name: '벚나무', emoji: '🌸', price: 180 },
-            { name: '캠프파이어', emoji: '🔥', price: 180 },
-            { name: '단풍나무', emoji: '🍁', price: 190 },
-            { name: '야자수', emoji: '🌴', price: 200 },
-            { name: '가로등', emoji: '💡', price: 220 },
-            { name: '벤치', emoji: '🪑', price: 250 },
-            { name: '우물', emoji: '🕳️', price: 280 },
-            { name: '연못', emoji: '💧', price: 300 },
-
-            // 비싸고 예쁜 장식
-            { name: '보물상자', emoji: '🎁', price: 350 },
-            { name: '분수', emoji: '⛲', price: 400 },
-            { name: '천막', emoji: '⛺', price: 450 },
-            { name: '집', emoji: '🏠', price: 500 },
-            { name: '온실', emoji: '🏡', price: 600 },
-            { name: '다리', emoji: '🌉', price: 800 },
-            { name: '성', emoji: '🏰', price: 1000 },
-            { name: '회전목마', emoji: '🎠', price: 1200 },
-            { name: '무지개', emoji: '🌈', price: 1500 },
-            { name: '별똥별', emoji: '🌠', price: 2000 }
+        const shopItems = [
+            { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
+            { name: '새싹', emoji: '🌱', price: 25 }, { name: '자갈길', emoji: '🪨', price: 35 }, { name: '해바라기', emoji: '🌻', price: 40 }, { name: '튤립', emoji: '🌷', price: 45 }, { name: '꽃', emoji: '🌸', price: 50 }, { name: '덤불', emoji: '🌿', price: 55 }, { name: '버섯', emoji: '🍄', price: 60 }, { name: '밀', emoji: '🌾', price: 65 }, { name: '네잎클로버', emoji: '🍀', price: 75 }, { name: '선인장', emoji: '🌵', price: 80 },
+            { name: '길', emoji: '🛤️', price: 80 }, { name: '꽃밭', emoji: '💐', price: 90 }, { name: '나무', emoji: '🌳', price: 100 }, { name: '우체통', emoji: '📮', price: 110 }, { name: '채소밭', emoji: '🥕', price: 120 }, { name: '허수아비', emoji: '🧍', price: 130 }, { name: '상록수', emoji: '🌲', price: 150 }, { name: '울타리', emoji: '🚧', price: 150 }, { name: '벌집', emoji: '🐝', price: 160 }, { name: '벚나무', emoji: '🌸', price: 180 }, { name: '캠프파이어', emoji: '🔥', price: 180 }, { name: '단풍나무', emoji: '🍁', price: 190 }, { name: '야자수', emoji: '🌴', price: 200 }, { name: '가로등', emoji: '💡', price: 220 }, { name: '벤치', emoji: '🪑', price: 250 }, { name: '우물', emoji: '🕳️', price: 280 }, { name: '연못', emoji: '💧', price: 300 },
+            { name: '보물상자', emoji: '🎁', price: 350 }, { name: '분수', emoji: '⛲', price: 400 }, { name: '천막', emoji: '⛺', price: 450 }, { name: '집', emoji: '🏠', price: 500 }, { name: '온실', emoji: '🏡', price: 600 }, { name: '다리', emoji: '🌉', price: 800 }, { name: '성', emoji: '🏰', price: 1000 }, { name: '회전목마', emoji: '🎠', price: 1200 }, { name: '무지개', emoji: '🌈', price: 1500 }, { name: '별똥별', emoji: '🌠', price: 2000 }
         ];
+
 
         // ==================== 핵심 게임 함수 ====================
         
-        function generateQuestion() {
-            const difficulty = Math.min(Math.floor(gameState.level / 3) + 1, 4);
-            let question = {};
+        // [NEW] 영어 퀴즈 생성 (동물 잡기)
+        function generateEnglishQuiz() {
+            const quizData = { ...quizWords[Math.floor(Math.random() * quizWords.length)] };
+            currentEnglishQuiz = { answer: quizData.answer };
+
+            document.getElementById('english-question').textContent = `"${quizData.question}"`;
             
-            switch(difficulty) {
-                case 1:
-                    const a1 = Math.floor(Math.random() * 10) + 1;
-                    const b1 = Math.floor(Math.random() * 10) + 1;
-                    if (Math.random() > 0.5) {
-                        question = {text: `${a1} + ${b1}`, answer: a1 + b1};
-                    } else {
-                        const larger = Math.max(a1, b1);
-                        const smaller = Math.min(a1, b1);
-                        question = {text: `${larger} - ${smaller}`, answer: larger - smaller};
-                    }
-                    break;
-                case 2:
-                    const a2 = Math.floor(Math.random() * 90) + 10;
-                    const b2 = Math.floor(Math.random() * 90) + 10;
-                    if (Math.random() > 0.5) {
-                        question = {text: `${a2} + ${b2}`, answer: a2 + b2};
-                    } else {
-                        const larger = Math.max(a2, b2);
-                        const smaller = Math.min(a2, b2);
-                        question = {text: `${larger} - ${smaller}`, answer: larger - smaller};
-                    }
-                    break;
-                case 3:
-                    const a3 = Math.floor(Math.random() * 8) + 2;
-                    const b3 = Math.floor(Math.random() * 8) + 2;
-                    question = {text: `${a3} × ${b3}`, answer: a3 * b3};
-                    break;
-                case 4:
-                    const a4 = Math.floor(Math.random() * 900) + 100;
-                    const b4 = Math.floor(Math.random() * 900) + 100;
-                    if (Math.random() > 0.5) {
-                        question = {text: `${a4} + ${b4}`, answer: a4 + b4};
-                    } else {
-                        const larger = Math.max(a4, b4);
-                        const smaller = Math.min(a4, b4);
-                        question = {text: `${larger} - ${smaller}`, answer: larger - smaller};
-                    }
-                    break;
-            }
+            const wrongOptions = quizData.options.filter(opt => opt !== quizData.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
+            const finalOptions = [quizData.answer, ...wrongOptions].sort(() => Math.random() - 0.5);
             
-            gameState.currentQuestion = question;
-            document.getElementById('question').textContent = `${question.text} = ?`;
-            document.getElementById('answer').value = '';
-            document.getElementById('feedback').textContent = '';
-            document.getElementById('feedback').className = 'feedback';
+            const optionsContainer = document.getElementById('english-options');
+            optionsContainer.innerHTML = '';
+            finalOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'english-option-btn';
+                button.innerText = option;
+                button.onclick = () => checkEnglishQuizAnswer(option);
+                optionsContainer.appendChild(button);
+            });
             
-            const difficultyNames = ['쉬움', '보통', '어려움', '매우 어려움'];
-            document.getElementById('difficulty').textContent = difficultyNames[difficulty - 1];
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '';
+            feedback.className = 'feedback';
         }
 
-        function checkAnswer() {
-            const userAnswer = parseInt(document.getElementById('answer').value);
+        // [NEW] 영어 퀴즈 정답 확인
+        function checkEnglishQuizAnswer(selectedOption) {
             const feedback = document.getElementById('feedback');
-            
-            if (isNaN(userAnswer)) {
-                feedback.textContent = '숫자를 입력해주세요! 🔢';
-                feedback.className = 'feedback incorrect';
-                return;
-            }
-            
-            if (userAnswer === gameState.currentQuestion.answer) {
+            if (selectedOption === currentEnglishQuiz.answer) {
                 gameState.score += 10 * gameState.level;
-                feedback.textContent = '정답입니다! 훌륭해요! 🎉';
+                feedback.textContent = '정답! 동물을 잡았어요! 🎉';
                 feedback.className = 'feedback correct';
                 
                 const newAnimal = getRandomAnimal();
@@ -744,21 +561,91 @@ const shopItems = [
                 }
                 
                 saveCurrentUserData();
-                
-                setTimeout(() => {
-                    generateQuestion();
-                }, 1500);
-                
+                setTimeout(generateEnglishQuiz, 1500);
             } else {
-                feedback.textContent = `틀렸어요! 정답은 ${gameState.currentQuestion.answer}입니다. 다시 도전해보세요! 💪`;
+                feedback.textContent = `아惜! 정답은 "${currentEnglishQuiz.answer}"였어요.`;
                 feedback.className = 'feedback incorrect';
-                
-                setTimeout(() => {
-                    generateQuestion();
-                }, 2500);
+                setTimeout(generateEnglishQuiz, 2500);
+            }
+            updateUI();
+        }
+
+        // [NEW] 동물 레벨업을 위한 수학 문제 생성
+        function generateMathProblemForLevelUp(animalLevel) {
+            const difficulty = Math.min(Math.floor(animalLevel / 5) + 1, 4);
+            let question = {};
+            
+            switch(difficulty) {
+                case 1:
+                    const a1 = Math.floor(Math.random() * 10) + 1;
+                    const b1 = Math.floor(Math.random() * 10) + 1;
+                    if (Math.random() > 0.5) { question = {text: `${a1} + ${b1}`, answer: a1 + b1}; } 
+                    else { const l = Math.max(a1, b1), s = Math.min(a1, b1); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+                case 2:
+                    const a2 = Math.floor(Math.random() * 90) + 10;
+                    const b2 = Math.floor(Math.random() * 90) + 10;
+                    if (Math.random() > 0.5) { question = {text: `${a2} + ${b2}`, answer: a2 + b2}; }
+                    else { const l = Math.max(a2, b2), s = Math.min(a2, b2); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+                case 3:
+                    const a3 = Math.floor(Math.random() * 8) + 2;
+                    const b3 = Math.floor(Math.random() * 8) + 2;
+                    question = {text: `${a3} × ${b3}`, answer: a3 * b3};
+                    break;
+                case 4:
+                    const a4 = Math.floor(Math.random() * 900) + 100;
+                    const b4 = Math.floor(Math.random() * 900) + 100;
+                    if (Math.random() > 0.5) { question = {text: `${a4} + ${b4}`, answer: a4 + b4}; }
+                    else { const l = Math.max(a4, b4), s = Math.min(a4, b4); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+            }
+            gameState.currentQuestion = question;
+            document.getElementById('math-question').textContent = `${question.text} = ?`;
+        }
+
+        // [NEW] 수학 문제 모달 열기
+        function startMathProblem(animalName) {
+            const animal = gameState.animals[animalName];
+            generateMathProblemForLevelUp(animal.animalLevel);
+            document.getElementById('math-answer-input').value = '';
+            document.getElementById('math-feedback').textContent = '';
+            document.getElementById('math-submit-btn').onclick = () => checkMathAnswer(animalName);
+            document.getElementById('math-modal').style.display = 'flex';
+            document.getElementById('math-answer-input').focus();
+        }
+
+        // [NEW] 수학 문제 정답 확인
+        function checkMathAnswer(animalName) {
+            const userAnswer = parseInt(document.getElementById('math-answer-input').value);
+            const feedback = document.getElementById('math-feedback');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = '숫자를 입력해주세요!';
+                feedback.style.color = 'red';
+                return;
             }
             
-            updateUI();
+            if (userAnswer === gameState.currentQuestion.answer) {
+                const animal = gameState.animals[animalName];
+                gameState.score += 15 * animal.animalLevel; // 레벨업 보상 점수
+                animal.animalLevel++;
+                
+                feedback.textContent = `정답! ${animal.name}의 레벨이 ${animal.animalLevel}이 되었어요!`;
+                feedback.style.color = 'green';
+
+                updateUI();
+                updateAnimalCollection();
+                saveCurrentUserData();
+                setTimeout(closeMathModal, 1500);
+            } else {
+                feedback.textContent = `땡! 다시 생각해보세요.`;
+                feedback.style.color = 'red';
+            }
+        }
+
+        function closeMathModal() {
+            document.getElementById('math-modal').style.display = 'none';
         }
 
         function getRandomAnimal() {
@@ -793,46 +680,6 @@ const shopItems = [
             
             updateAnimalCollection();
         }
-        
-        function startFeedingQuiz(animalName) {
-            const animal = gameState.animals[animalName];
-            const quizData = { ...quizWords[Math.floor(Math.random() * quizWords.length)] };
-            
-            document.getElementById('quiz-question').innerText = `'${animal.name}'에게 먹이로 줄 '${quizData.question}'의 영어 단어는?`;
-            
-            const wrongOptions = quizData.options.filter(opt => opt !== quizData.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
-            const finalOptions = [quizData.answer, ...wrongOptions].sort(() => Math.random() - 0.5);
-            
-            const optionsContainer = document.getElementById('quiz-options');
-            optionsContainer.innerHTML = '';
-            finalOptions.forEach(option => {
-                const button = document.createElement('button');
-                button.className = 'quiz-option-btn';
-                button.innerText = option;
-                button.onclick = () => checkQuizAnswer(option, quizData.answer, animalName);
-                optionsContainer.appendChild(button);
-            });
-
-            document.getElementById('quiz-modal').style.display = 'flex';
-        }
-
-        function checkQuizAnswer(selectedOption, correctAnswer, animalName) {
-            if (selectedOption === correctAnswer) {
-                gameState.animals[animalName].animalLevel++;
-                alert('정답! 동물의 레벨이 올랐어요! 쑥쑥! 🌟');
-                closeQuizModal();
-                updateAnimalCollection();
-                saveCurrentUserData();
-            } else {
-                alert('이런, 다른 먹이인가 봐요. 다시 시도해 보세요! 🤔');
-                closeQuizModal();
-            }
-        }
-
-        function closeQuizModal() {
-            document.getElementById('quiz-modal').style.display = 'none';
-        }
-
 
         // ==================== UI 업데이트 함수 ====================
 
@@ -871,7 +718,7 @@ const shopItems = [
                     <div class="rarity-badge">★${animal.rarity}</div>
                 `;
                 
-                card.onclick = () => startFeedingQuiz(animal.name);
+                card.onclick = () => startMathProblem(animal.name);
                 collection.appendChild(card);
             });
         }
@@ -979,7 +826,6 @@ const shopItems = [
                     inventoryGrid.appendChild(invItemDiv);
                 }
             });
-            // 동물도 인벤토리에 추가
             Object.values(gameState.animals).forEach(animal => {
                  if (animal.count > 0) {
                     const invItemDiv = document.createElement('div');
@@ -1003,20 +849,12 @@ const shopItems = [
         }
 
         function placeItemOnFarm(index) {
-            if (!selectedItemToPlace) return;
-
-            const { name, isAnimal } = selectedItemToPlace;
-            const currentCellContent = gameState.farm.layout[index];
-
-            // 셀 비우기 (오른쪽 클릭)
-            if (event.button === 2 || event.ctrlKey) { // Ctrl+Click for context menu prevention
+            if (event.button === 2 || event.ctrlKey) {
                 event.preventDefault();
+                const currentCellContent = gameState.farm.layout[index];
                 if (currentCellContent) {
-                    if (currentCellContent.isAnimal) {
-                        gameState.animals[currentCellContent.name].count++;
-                    } else {
-                        gameState.farm.items[currentCellContent.name].count++;
-                    }
+                    if (currentCellContent.isAnimal) { gameState.animals[currentCellContent.name].count++; } 
+                    else { gameState.farm.items[currentCellContent.name].count++; }
                     gameState.farm.layout[index] = null;
                     renderFarm();
                     updateInventory();
@@ -1025,10 +863,14 @@ const shopItems = [
                 return;
             }
 
-            // 아이템 배치
+            if (!selectedItemToPlace) return;
+
+            const { name, isAnimal } = selectedItemToPlace;
+            const currentCellContent = gameState.farm.layout[index];
+
             if (isAnimal) {
                 if (gameState.animals[name].count > 0) {
-                    if (currentCellContent) { // 이미 아이템이 있다면 되돌리기
+                    if (currentCellContent) {
                          if (currentCellContent.isAnimal) gameState.animals[currentCellContent.name].count++;
                          else gameState.farm.items[currentCellContent.name].count++;
                     }
@@ -1085,7 +927,7 @@ const shopItems = [
                 <span class="new-animal-emoji">⭐</span>
                 <h3>레벨 업! 🎉</h3>
                 <p>레벨 ${gameState.level}이 되었습니다!</p>
-                <p>더 어려운 문제에 도전할 수 있어요!</p>
+                <p>더 희귀한 동물을 만날 수 있어요!</p>
             `;
             document.body.appendChild(alert);
             setTimeout(() => { alert.remove(); }, 3000);
@@ -1138,7 +980,7 @@ const shopItems = [
             updateUI();
             updateAnimalCollection();
             updateUserList();
-            generateQuestion();
+            generateEnglishQuiz();
             initializeFarm();
         }
 
@@ -1194,14 +1036,14 @@ const shopItems = [
             const gameData = {
                 users: allUsers,
                 currentUser: currentUser,
-                version: '2.3'
+                version: '3.0'
             };
             const dataStr = JSON.stringify(gameData, null, 2);
             const dataBlob = new Blob([dataStr], { type: 'application/json' });
             const url = URL.createObjectURL(dataBlob);
             const link = document.createElement('a');
             link.href = url;
-            link.download = `동물수집게임-백업-${new Date().toISOString().split('T')[0]}.json`;
+            link.download = `동물학습게임-백업-${new Date().toISOString().split('T')[0]}.json`;
             link.click();
             URL.revokeObjectURL(url);
             alert('📁 게임 데이터가 파일로 다운로드되었습니다!');
@@ -1280,7 +1122,7 @@ const shopItems = [
                 userInfo.style.display = 'block';
                 updateEncyclopedia();
             } else if (pageName === 'farm') {
-                gameStats.style.display = 'flex'; // 농장에서도 점수 확인
+                gameStats.style.display = 'flex';
                 userInfo.style.display = 'block';
                 initializeFarm();
             } else {
@@ -1331,8 +1173,10 @@ const shopItems = [
 
         window.addEventListener('load', initializeGame);
         
-        document.getElementById('answer').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') checkAnswer();
+        document.getElementById('math-answer-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.getElementById('math-submit-btn').click();
+            }
         });
         document.getElementById('new-user-name').addEventListener('keypress', function(e) {
             if (e.key === 'Enter') createUser();
@@ -1343,10 +1187,10 @@ const shopItems = [
             localStorage.setItem('mathGameCurrentUser', currentUser);
         });
         
-        // 농장 셀 오른쪽 클릭 이벤트 (컨텍스트 메뉴 방지)
         document.getElementById('farm-grid').addEventListener('contextmenu', e => e.preventDefault());
 
-        console.log('🐾 동물 수집 수학 게임이 로드되었습니다! (v2.3)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v3.0)');
     </script>
 </body>
 </html>
+�
