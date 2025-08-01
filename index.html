@@ -563,7 +563,7 @@
                 saveCurrentUserData();
                 setTimeout(generateEnglishQuiz, 1500);
             } else {
-                feedback.textContent = `아惜! 정답은 "${currentEnglishQuiz.answer}"였어요.`;
+                feedback.textContent = `아! 정답은 "${currentEnglishQuiz.answer}"였어요.`;
                 feedback.className = 'feedback incorrect';
                 setTimeout(generateEnglishQuiz, 2500);
             }
