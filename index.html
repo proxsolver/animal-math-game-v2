@@ -11,7 +11,7 @@
         .header { text-align: center; margin-bottom: 30px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
         .header h1 { color: #2C5530; font-size: 2.8rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
         .nav-buttons { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
-        .nav-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; border: none; padding: 12px 20px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.9rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .nav-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; border: none; padding: 12px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.8rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .nav-btn.active { background: linear-gradient(45deg, #32CD32, #228B22); }
         .user-info { margin: 15px 0; }
@@ -113,21 +113,23 @@
         #signup-btn { background: linear-gradient(45deg, #32CD32, #228B22); }
         #login-feedback { margin-top: 15px; color: red; font-weight: bold; min-height: 20px; }
         
-        /* [NEW] 명예의 전당 스타일 */
         #hall-of-fame { border-top: 2px dashed #ccc; margin-top: 25px; padding-top: 20px; }
         #hall-of-fame h3 { color: #8B4513; margin-bottom: 15px; }
         .fame-entry { margin-bottom: 10px; font-size: 1.1rem; }
         .fame-entry .trophy { margin-right: 8px; }
         .fame-entry .player-name { font-weight: bold; color: #4169E1; }
 
-        /* [NEW] 랭킹 페이지 스타일 */
-        .ranking-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
-        .ranking-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 20px; }
-        .ranking-table { width: 100%; border-collapse: collapse; }
-        .ranking-table th, .ranking-table td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
-        .ranking-table th { background-color: #e0f0ff; color: #4169E1; }
-        .ranking-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .ranking-container, .market-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .ranking-container h2, .market-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .ranking-table, .market-table { width: 100%; border-collapse: collapse; }
+        .ranking-table th, .ranking-table td, .market-table th, .market-table td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
+        .ranking-table th, .market-table th { background-color: #e0f0ff; color: #4169E1; }
+        .ranking-table tr:nth-child(even), .market-table tr:nth-child(even) { background-color: #f9f9f9; }
         .ranking-table .my-rank { background-color: #fffde7; font-weight: bold; }
+        .market-sell-section { background: #e6f3ff; padding: 20px; border-radius: 20px; margin-bottom: 30px; }
+        .market-sell-section h3 { color: #4169E1; margin-bottom: 15px; }
+        .market-sell-section select, .market-sell-section input { padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin: 0 5px; }
+        .market-table-container { max-height: 40vh; overflow-y: auto; }
 
         @media (max-width: 900px) {
             .game-content, .farm-page-container { grid-template-columns: 1fr; }
@@ -177,6 +179,7 @@
             <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기 🇬🇧</button>
                 <button class="nav-btn" onclick="showPage('synthesis', this)">동물 합성 🧬</button>
+                <button class="nav-btn" onclick="showPage('market', this)">동물 시장 🏪</button>
                 <button class="nav-btn" onclick="showPage('farm', this)">농장 꾸미기 🏡</button>
                 <button class="nav-btn" onclick="showPage('encyclopedia', this)">동물 도감 📚</button>
                 <button class="nav-btn" onclick="showPage('ranking', this)">랭킹 🏆</button>
@@ -224,6 +227,35 @@
             </div>
         </div>
         
+        <!-- [NEW] 시장 페이지 -->
+        <div id="market-page" class="page">
+            <div class="market-container">
+                <h2>🏪 동물 시장</h2>
+                <div class="market-sell-section">
+                    <h3>내 동물 판매하기</h3>
+                    <select id="sell-animal-select"></select>
+                    <input type="number" id="sell-price-input" placeholder="판매 가격 (점수)">
+                    <button class="nav-btn" onclick="sellAnimal()">판매 등록</button>
+                </div>
+                <h3>판매 중인 동물 목록</h3>
+                <div class="market-table-container">
+                    <table class="market-table">
+                        <thead>
+                            <tr>
+                                <th>동물</th>
+                                <th>이름</th>
+                                <th>레벨</th>
+                                <th>판매자</th>
+                                <th>가격</th>
+                                <th>구매</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
         <!-- 농장 꾸미기 페이지 -->
         <div id="farm-page" class="page">
             <div class="farm-page-container">
@@ -268,9 +300,7 @@
                             <th>동물 종류</th>
                         </tr>
                     </thead>
-                    <tbody id="ranking-body">
-                        <!-- 랭킹 데이터가 여기에 동적으로 추가됩니다 -->
-                    </tbody>
+                    <tbody id="ranking-body"></tbody>
                 </table>
             </div>
         </div>
@@ -279,16 +309,12 @@
         <div id="instructions-page" class="page">
             <div class="instructions">
                 <h2>📖 게임 사용설명서</h2>
+                <h3>🏪 동물 시장 (신규)</h3>
+                <p>'시장' 탭에서 다른 플레이어와 동물을 거래할 수 있습니다. 2마리 이상 보유한 동물을 원하는 가격에 판매 등록하거나, 다른 사람이 올린 동물을 점수를 사용해 구매할 수 있습니다.</p>
                 <h3>🔑 로그인과 저장</h3>
-                <p>이 게임은 모든 데이터가 클라우드에 자동으로 저장됩니다. 처음 접속 시 플레이어 이름과 4자리 숫자 PIN으로 계정을 만드세요. 다음부터는 같은 정보로 로그인하면 어디서든 이어서 할 수 있습니다.</p>
+                <p>이 게임은 모든 데이터가 클라우드에 자동으로 저장됩니다. 처음 접속 시 플레이어 이름과 4자리 숫자 PIN으로 계정을 만드세요.</p>
                 <h3>🏆 랭킹 시스템</h3>
                 <p>'랭킹' 탭에서 다른 플레이어들과 점수를 비교해볼 수 있습니다.</p>
-                <h3>🧬 동물 합성 시스템</h3>
-                <p>특정 동물 두 마리를 조합하여 새로운 전설 동물을 만들 수 있습니다. 합성에 사용된 동물은 사라지니 신중하게 결정하세요!</p>
-                <h3>🇬🇧 동물 잡기 (영어 퀴즈)</h3>
-                <p>정답을 맞히면 점수를 얻고 새로운 동물을 잡을 수 있습니다!</p>
-                <h3>🧮 동물 레벨업 (수학 문제)</h3>
-                <p>수집한 동물을 클릭하면 레벨업을 위한 수학 문제가 나타납니다. 문제를 풀면 점수를 얻고 동물의 레벨이 오릅니다.</p>
             </div>
         </div>
     </div>
@@ -310,7 +336,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
         let auth, db;
         
@@ -329,7 +355,7 @@
             db = getFirestore(app);
 
             window.firebase = {
-                auth, db, doc, getDoc, setDoc, collection, getDocs, writeBatch
+                auth, db, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot
             };
 
             onAuthStateChanged(auth, async (user) => {
@@ -375,9 +401,10 @@
         let currentUserProfile = {};
         let selectedItemToPlace = null;
         let currentEnglishQuiz = {};
+        let marketListener = null; // 실시간 시장 리스너
 
         const animalTypes = [
-            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1}, {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1}, {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1}, {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1}, {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1}, {emoji: '🐔', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1}, {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1}, {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1}, {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1}, {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1}, {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1}, {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1}, {emoji: '�', name: '벌', specialName: '꿀벌기사', rarity: 1}, {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1}, {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1}, {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1}, {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1}, {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1}, {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1}, {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1}, {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1}, {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1}, {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1}, {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1}, {emoji: '🐠', name: '열대어', specialName: '산호초의 보석', rarity: 1},
+            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1}, {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1}, {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1}, {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1}, {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1}, {emoji: '🐔', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1}, {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1}, {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1}, {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1}, {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1}, {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1}, {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1}, {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 1}, {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1}, {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1}, {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1}, {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1}, {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1}, {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1}, {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1}, {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1}, {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1}, {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1}, {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1}, {emoji: '�', name: '열대어', specialName: '산호초의 보석', rarity: 1},
             {emoji: '🦊', name: '여우', specialName: '숲속의 신사', rarity: 2}, {emoji: '🐻', name: '곰', specialName: '꿀단지 파수꾼', rarity: 2}, {emoji: '🦝', name: '너구리', specialName: '솜사탕 사냥꾼', rarity: 2}, {emoji: '🦌', name: '사슴', specialName: '숲의 왕자', rarity: 2}, {emoji: '🦉', name: '올빼미', specialName: '지혜로운 자', rarity: 2}, {emoji: '🐺', name: '늑대', specialName: '달빛사냥꾼', rarity: 2}, {emoji: '🦇', name: '박쥐', specialName: '밤의 비행사', rarity: 2}, {emoji: '🐍', name: '뱀', specialName: '비밀의 수호자', rarity: 2}, {emoji: '🦅', name: '독수리', specialName: '하늘의 제왕', rarity: 2}, {emoji: '🐧', name: '펭귄', specialName: '얼음 신사', rarity: 2}, {emoji: '🐨', name: '코알라', specialName: '유칼립투스 요정', rarity: 2}, {emoji: '🐒', name: '원숭이', specialName: '장난꾸러기 대장', rarity: 2}, {emoji: '🐗', name: '멧돼지', specialName: '돌격대장', rarity: 2}, {emoji: '🦦', name: '수달', specialName: '조약돌 아티스트', rarity: 2}, {emoji: '🦢', name: '백조', specialName: '호수의 여왕', rarity: 2}, {emoji: '🦔', name: '고슴도치', specialName: '밤송이 기사', rarity: 2}, {emoji: '🦎', name: '도마뱀', specialName: '햇살 사냥꾼', rarity: 2}, {emoji: '🐙', name: '문어', specialName: '촉수마법사', rarity: 2}, {emoji: '🦐', name: '새우', specialName: '바다의 댄서', rarity: 2}, {emoji: '🦑', name: '오징어', specialName: '먹물 예술가', rarity: 2}, {emoji: '🦘', name: '캥거루', specialName: '스텝의 챔피언', rarity: 2}, {emoji: '🕊️', name: '비둘기', specialName: '평화의 사도', rarity: 2}, {emoji: '🦜', name: '앵무새', specialName: '말하는 보석', rarity: 2}, {emoji: '🐫', name: '낙타', specialName: '사막의 상인', rarity: 2}, {emoji: '🦙', name: '라마', specialName: '안데스의 신사', rarity: 2},
             {emoji: '🐘', name: '코끼리', specialName: '기억의 현자', rarity: 3}, {emoji: '🦒', name: '기린', specialName: '구름 산책가', rarity: 3}, {emoji: '🦓', name: '얼룩말', specialName: '초원의 수수께끼', rarity: 3}, {emoji: '🐼', name: '판다', specialName: '대나무 미식가', rarity: 3}, {emoji: '🦛', name: '하마', specialName: '강의 군주', rarity: 3}, {emoji: '🦏', name: '코뿔소', specialName: '강철의 돌격수', rarity: 3}, {emoji: '🐊', name: '악어', specialName: '늪의 포식자', rarity: 3}, {emoji: '🐅', name: '호랑이', specialName: '밀림의 군주', rarity: 3}, {emoji: '🐆', name: '표범', specialName: '그림자 암살자', rarity: 3}, {emoji: '🦍', name: '고릴라', specialName: '숲의 수호신', rarity: 3}, {emoji: '🐬', name: '돌고래', specialName: '파도의 친구', rarity: 3}, {emoji: '🐋', name: '고래', specialName: '심해의 노래', rarity: 3}, {emoji: '🦈', name: '상어', specialName: '바다의 추격자', rarity: 3}, {emoji: '🦚', name: '공작', specialName: '별빛 깃털', rarity: 3}, {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3}, {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3}, {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3}, {emoji: '🦞', name: '바닷가재', specialName: '심해의 기사', rarity: 3}, {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3}, {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
             {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4}, {emoji: '🐻‍❄️', name: '북극곰', specialName: '설원의 지배자', rarity: 4}, {emoji: '🦣', name: '매머드', specialName: '빙하기의 거인', rarity: 4}, {emoji: '🦖', name: '티라노사우루스', specialName: '폭군 도마뱀', rarity: 4}, {emoji: '🐉', name: '용', specialName: '전설의 드래곤', rarity: 4}, {emoji: '🐳', name: '대왕고래', specialName: '대양의 심장', rarity: 4}, {emoji: '🦑', name: '대왕오징어', specialName: '크라켄의 후예', rarity: 4}, {emoji: '🦅', name: '하피', specialName: '창공의 지배자', rarity: 4}, {emoji: '🦧', name: '오랑우탄', specialName: '숲의 현자', rarity: 4}, {emoji: '🐅', name: '백호', specialName: '달의 정기', rarity: 4}, {emoji: '🐈‍⬛', name: '흑표범', specialName: '밤의 그림자', rarity: 4}, {emoji: '🦕', name: '브라키오사우루스', specialName: '움직이는 숲', rarity: 4}, {emoji: '🦗', name: '사마귀', specialName: '당랑권의 고수', rarity: 4}, {emoji: '🕷️', name: '거미', specialName: '거미줄의 설계자', rarity: 4}, {emoji: '🦊', name: '북극여우', specialName: '설원의 유령', rarity: 4},
@@ -959,13 +986,13 @@
         // ==================== 사용자 관리 및 데이터 함수 (Firebase) ====================
 
         async function saveCurrentUserData() {
-            if (!currentUserId || !currentUserProfile.name) return;
+            if (!currentUserProfile.name) return;
             
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", currentUserId, "profiles", currentUserProfile.name);
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
             
             const dataToSave = {
-                ...currentUserProfile, // pinHash 등 기존 정보 유지
+                ...currentUserProfile,
                 score: gameState.score,
                 level: gameState.level,
                 animals: gameState.animals,
@@ -985,7 +1012,7 @@
 
         async function loadUserData(userName) {
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", currentUserId, "profiles", userName);
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", userName);
             const docSnap = await window.firebase.getDoc(userDocRef);
 
             if (docSnap.exists()) {
@@ -1040,7 +1067,6 @@
             }
         }
         
-        // 게임 초기화 함수 (Firebase 사용자로 호출됨)
         window.onFirebaseReady = async (user) => {
             if (!user) {
                 document.getElementById('login-feedback').textContent = "클라우드 연결 실패! 오프라인 모드로 실행합니다.";
@@ -1099,7 +1125,7 @@
             };
 
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", currentUserId, "profiles", name);
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", name);
             await window.firebase.setDoc(userDocRef, newProfile);
 
             alert(`🎉 ${name} 플레이어 생성 완료!`);
@@ -1161,19 +1187,17 @@
             saveCurrentUserData();
             currentUserProfile = {};
             gameState = {};
-            currentUserId = window.firebase.auth.currentUser.uid;
             document.getElementById('login-overlay').style.display = 'flex';
             document.querySelector('.game-container').style.display = 'none';
             document.getElementById('player-name-input').value = '';
             document.getElementById('player-pin-input').value = '';
             document.getElementById('login-feedback').textContent = '';
-            updateHallOfFame(); // 로그아웃 시 명예의 전당 갱신
+            updateHallOfFame();
         }
 
         async function getAllProfiles() {
-            if (!currentUserId) return [];
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "users", currentUserId, "profiles");
+            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
             const querySnapshot = await window.firebase.getDocs(profilesColRef);
             const profiles = [];
             querySnapshot.forEach((doc) => {
@@ -1184,7 +1208,11 @@
 
         async function updateHallOfFame() {
             const profiles = await getAllProfiles();
-            if (profiles.length === 0) return;
+            if (profiles.length === 0) {
+                 document.querySelector('#fame-species .player-name').textContent = `아직 플레이어가 없습니다.`;
+                 document.querySelector('#fame-level .player-name').textContent = `새로운 플레이어가 되어보세요!`;
+                return;
+            }
 
             let mostSpecies = { name: '-', count: -1 };
             let highestLevel = { name: '-', animal: '-', level: 0 };
@@ -1248,8 +1276,7 @@
         
         document.getElementById('farm-grid').addEventListener('contextmenu', e => e.preventDefault());
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v5.2 - Ranking)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v5.3 - Shared Ranking)');
     </script>
 </body>
 </html>
-�
