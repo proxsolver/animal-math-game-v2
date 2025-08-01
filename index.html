@@ -569,6 +569,7 @@
         // 수학 문제 모달 열기
         function startMathProblem(animalName) {
             const animal = gameState.animals[animalName];
+            gameState.score += 15 * animal.animalLevel; 
             generateMathProblemForLevelUp(animal.animalLevel);
             
             const answerInput = document.getElementById('math-answer-input');
