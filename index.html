@@ -134,13 +134,29 @@
             margin-bottom: 20px;
             font-size: 1.8rem;
         }
+        
+        .english-question-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
 
         .english-question {
             font-size: 2.5rem;
             color: #4169E1;
-            margin: 25px 0;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .speak-btn {
+            font-size: 2.5rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .speak-btn:hover {
+            transform: scale(1.2);
         }
 
         .english-options {
@@ -396,7 +412,10 @@
             <div class="game-content">
                 <div class="english-quiz-section">
                     <h2>🇬🇧 영어 퀴즈: 동물 잡기!</h2>
-                    <div class="english-question" id="english-question">질문</div>
+                    <div class="english-question-container">
+                        <div class="english-question" id="english-question">질문</div>
+                        <span id="speak-button" class="speak-btn" title="단어 발음 듣기">🔊</span>
+                    </div>
                     <div class="english-options" id="english-options"></div>
                     <div class="feedback" id="feedback"></div>
                 </div>
@@ -527,7 +546,7 @@
             {emoji: '🦊', name: '여우', specialName: '숲속의 신사', rarity: 2}, {emoji: '🐻', name: '곰', specialName: '꿀단지 파수꾼', rarity: 2}, {emoji: '🦝', name: '너구리', specialName: '솜사탕 사냥꾼', rarity: 2}, {emoji: '🦌', name: '사슴', specialName: '숲의 왕자', rarity: 2}, {emoji: '🦉', name: '올빼미', specialName: '지혜로운 자', rarity: 2}, {emoji: '🐺', name: '늑대', specialName: '달빛사냥꾼', rarity: 2}, {emoji: '🦇', name: '박쥐', specialName: '밤의 비행사', rarity: 2}, {emoji: '🐍', name: '뱀', specialName: '비밀의 수호자', rarity: 2}, {emoji: '🦅', name: '독수리', specialName: '하늘의 제왕', rarity: 2}, {emoji: '🐧', name: '펭귄', specialName: '얼음 신사', rarity: 2}, {emoji: '🐨', name: '코알라', specialName: '유칼립투스 요정', rarity: 2}, {emoji: '🐒', name: '원숭이', specialName: '장난꾸러기 대장', rarity: 2}, {emoji: '🐗', name: '멧돼지', specialName: '돌격대장', rarity: 2}, {emoji: '🦦', name: '수달', specialName: '조약돌 아티스트', rarity: 2}, {emoji: '🦢', name: '백조', specialName: '호수의 여왕', rarity: 2}, {emoji: '🦔', name: '고슴도치', specialName: '밤송이 기사', rarity: 2}, {emoji: '🦎', name: '도마뱀', specialName: '햇살 사냥꾼', rarity: 2}, {emoji: '🐙', name: '문어', specialName: '촉수마법사', rarity: 2}, {emoji: '🦐', name: '새우', specialName: '바다의 댄서', rarity: 2}, {emoji: '🦑', name: '오징어', specialName: '먹물 예술가', rarity: 2}, {emoji: '🦘', name: '캥거루', specialName: '스텝의 챔피언', rarity: 2}, {emoji: '🕊️', name: '비둘기', specialName: '평화의 사도', rarity: 2}, {emoji: '🦜', name: '앵무새', specialName: '말하는 보석', rarity: 2}, {emoji: '🐫', name: '낙타', specialName: '사막의 상인', rarity: 2}, {emoji: '🦙', name: '라마', specialName: '안데스의 신사', rarity: 2},
             {emoji: '🐘', name: '코끼리', specialName: '기억의 현자', rarity: 3}, {emoji: '🦒', name: '기린', specialName: '구름 산책가', rarity: 3}, {emoji: '🦓', name: '얼룩말', specialName: '초원의 수수께끼', rarity: 3}, {emoji: '🐼', name: '판다', specialName: '대나무 미식가', rarity: 3}, {emoji: '🦛', name: '하마', specialName: '강의 군주', rarity: 3}, {emoji: '🦏', name: '코뿔소', specialName: '강철의 돌격수', rarity: 3}, {emoji: '🐊', name: '악어', specialName: '늪의 포식자', rarity: 3}, {emoji: '🐅', name: '호랑이', specialName: '밀림의 군주', rarity: 3}, {emoji: '🐆', name: '표범', specialName: '그림자 암살자', rarity: 3}, {emoji: '🦍', name: '고릴라', specialName: '숲의 수호신', rarity: 3}, {emoji: '🐬', name: '돌고래', specialName: '파도의 친구', rarity: 3}, {emoji: '🐋', name: '고래', specialName: '심해의 노래', rarity: 3}, {emoji: '🦈', name: '상어', specialName: '바다의 추격자', rarity: 3}, {emoji: '🦚', name: '공작', specialName: '별빛 깃털', rarity: 3}, {emoji: '🦂', name: '전갈', specialName: '사막의 독침', rarity: 3}, {emoji: '🦥', name: '나무늘보', specialName: '느긋한 철학자', rarity: 3}, {emoji: '🐃', name: '물소', specialName: '진흙의 왕', rarity: 3}, {emoji: '🦞', name: '바닷가재', specialName: '심해의 기사', rarity: 3}, {emoji: '🐡', name: '복어', specialName: '가시 방패', rarity: 3}, {emoji: '🦡', name: '오소리', specialName: '땅굴의 제왕', rarity: 3},
             {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4}, {emoji: '🐻‍❄️', name: '북극곰', specialName: '설원의 지배자', rarity: 4}, {emoji: '🦣', name: '매머드', specialName: '빙하기의 거인', rarity: 4}, {emoji: '🦖', name: '티라노사우루스', specialName: '폭군 도마뱀', rarity: 4}, {emoji: '🐉', name: '용', specialName: '전설의 드래곤', rarity: 4}, {emoji: '🐳', name: '대왕고래', specialName: '대양의 심장', rarity: 4}, {emoji: '🦑', name: '대왕오징어', specialName: '크라켄의 후예', rarity: 4}, {emoji: '🦅', name: '하피', specialName: '창공의 지배자', rarity: 4}, {emoji: '🦧', name: '오랑우탄', specialName: '숲의 현자', rarity: 4}, {emoji: '🐅', name: '백호', specialName: '달의 정기', rarity: 4}, {emoji: '🐈‍⬛', name: '흑표범', specialName: '밤의 그림자', rarity: 4}, {emoji: '🦕', name: '브라키오사우루스', specialName: '움직이는 숲', rarity: 4}, {emoji: '🦗', name: '사마귀', specialName: '당랑권의 고수', rarity: 4}, {emoji: '🕷️', name: '거미', specialName: '거미줄의 설계자', rarity: 4}, {emoji: '🦊', name: '북극여우', specialName: '설원의 유령', rarity: 4},
-            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}, {emoji: '🐲', name: '동양용', specialName: '여의주의 주인', rarity: 5}, {emoji: '🔥', name: '불사조', specialName: '불멸의 화신', rarity: 5}, {emoji: '🦁', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5}, {emoji: '🐎', name: '페가수스', specialName: '날개 달린 천마', rarity: 5}, {emoji: '🐺', name: '펜리르', specialName: '신화 속 늑대', rarity: 5}, {emoji: '🐍', name: '히드라', specialName: '불멸의 머리', rarity: 5}, {emoji: '🐐', name: '키메라', specialName: '환상의 조합', rarity: 5}, {emoji: '🧜‍♀️', name: '인어', specialName: '바다의 노래', rarity: 5}, {emoji: '👾', name: '외계인', specialName: '미지의 방문자', rarity: 5},
+            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}, {emoji: '🐲', name: '동양용', specialName: '여의주의 주인', rarity: 5}, {emoji: '🔥', name: '불사조', specialName: '불멸의 화신', rarity: 5}, {emoji: '🦁', name: '그리핀', specialName: '사자와 독수리의 왕', rarity: 5}, {emoji: '🐎', name: '페가수스', specialName: '날개 달린 천마', rarity: 5}, {emoji: '�', name: '펜리르', specialName: '신화 속 늑대', rarity: 5}, {emoji: '🐍', name: '히드라', specialName: '불멸의 머리', rarity: 5}, {emoji: '🐐', name: '키메라', specialName: '환상의 조합', rarity: 5}, {emoji: '🧜‍♀️', name: '인어', specialName: '바다의 노래', rarity: 5}, {emoji: '👾', name: '외계인', specialName: '미지의 방문자', rarity: 5},
             {emoji: '🌟', name: '별의 정령', specialName: '우주의 속삭임', rarity: 6}, {emoji: '☀️', name: '태양의 화신', specialName: '모든 빛의 근원', rarity: 6}, {emoji: '🌙', name: '달의 수호자', specialName: '밤하늘의 눈', rarity: 6}, {emoji: '🌳', name: '세계수', specialName: '살아있는 대지', rarity: 6}, {emoji: '🌊', name: '대양의 혼', specialName: '모든 물의 시작', rarity: 6}, {emoji: '🌪️', name: '폭풍의 눈', specialName: '하늘의 분노', rarity: 6}, {emoji: '💎', name: '보석 골렘', specialName: '영원의 결정체', rarity: 6}, {emoji: '🌌', name: '은하룡', specialName: '별을 삼키는 자', rarity: 6}, {emoji: '⏳', name: '시간의 모래시계', specialName: '과거와 미래의 주인', rarity: 6}, {emoji: '🤖', name: '궁극의 로봇', specialName: '미래의 지배자', rarity: 6}
         ];
         
@@ -544,8 +563,7 @@
             { name: '보물상자', emoji: '🎁', price: 350 }, { name: '분수', emoji: '⛲', price: 400 }, { name: '천막', emoji: '⛺', price: 450 }, { name: '집', emoji: '🏠', price: 500 }, { name: '온실', emoji: '🏡', price: 600 }, { name: '다리', emoji: '🌉', price: 800 }, { name: '성', emoji: '🏰', price: 1000 }, { name: '회전목마', emoji: '🎠', price: 1200 }, { name: '무지개', emoji: '🌈', price: 1500 }, { name: '별똥별', emoji: '🌠', price: 2000 }
         ];
 
- const synthesisRecipes = [
-            // --- 기존 레시피 ---
+        const synthesisRecipes = [
             { result: '그리핀', ingredients: ['사자', '독수리'] },
             { result: '페가수스', ingredients: ['말', '백조'] },
             { result: '키메라', ingredients: ['염소', '사자'] },
@@ -571,12 +589,36 @@
 
         // ==================== 핵심 게임 함수 ====================
         
+        // [NEW] 단어 발음 재생 함수
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(word);
+                const voices = window.speechSynthesis.getVoices();
+                let englishVoice = voices.find(voice => voice.lang.startsWith('en-US')) || voices.find(voice => voice.lang.startsWith('en'));
+                if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+                utterance.pitch = 1;
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("죄송합니다. 사용 중인 브라우저에서는 음성 재생을 지원하지 않습니다.");
+            }
+        }
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+
         // 영어 퀴즈 생성 (동물 잡기)
         function generateEnglishQuiz() {
             const quizData = { ...quizWords[Math.floor(Math.random() * quizWords.length)] };
             currentEnglishQuiz = { answer: quizData.answer };
 
             document.getElementById('english-question').textContent = `"${quizData.question}"`;
+            
+            const speakBtn = document.getElementById('speak-button');
+            speakBtn.onclick = () => speakWord(currentEnglishQuiz.answer);
             
             const wrongOptions = quizData.options.filter(opt => opt !== quizData.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
             const finalOptions = [quizData.answer, ...wrongOptions].sort(() => Math.random() - 0.5);
@@ -598,7 +640,6 @@
 
         // 영어 퀴즈 정답 확인
         function checkEnglishQuizAnswer(selectedOption) {
-            // [FIX] 모든 옵션 버튼 비활성화
             const optionsContainer = document.getElementById('english-options');
             optionsContainer.querySelectorAll('.english-option-btn').forEach(btn => {
                 btn.disabled = true;
@@ -606,6 +647,7 @@
 
             const feedback = document.getElementById('feedback');
             if (selectedOption === currentEnglishQuiz.answer) {
+                speakWord(currentEnglishQuiz.answer);
                 gameState.score += 10 * gameState.level;
                 feedback.textContent = '정답! 동물을 잡았어요! 🎉';
                 feedback.className = 'feedback correct';
@@ -673,7 +715,6 @@
             answerInput.value = '';
             document.getElementById('math-feedback').textContent = '';
             
-            // [FIX] 버튼과 입력창 활성화
             answerInput.disabled = false;
             submitBtn.disabled = false;
 
@@ -695,7 +736,6 @@
                 return;
             }
             
-            // [FIX] 정답 확인 시 버튼과 입력창 비활성화
             answerInput.disabled = true;
             submitBtn.disabled = true;
 
@@ -714,7 +754,6 @@
             } else {
                 feedback.textContent = `땡! 다시 생각해보세요.`;
                 feedback.style.color = 'red';
-                // [FIX] 오답 시 다시 시도할 수 있도록 버튼 활성화
                 setTimeout(() => {
                     answerInput.disabled = false;
                     submitBtn.disabled = false;
@@ -1341,7 +1380,8 @@
         
         document.getElementById('farm-grid').addEventListener('contextmenu', e => e.preventDefault());
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v3.1)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v3.2)');
     </script>
 </body>
 </html>
+�
