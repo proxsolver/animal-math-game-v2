@@ -1843,6 +1843,39 @@ if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
                     listingData.animalLevel
                 );
                 gameState.totalAnimals++;
+
+
+                // 판매자에게 알람 전송
+try {
+    const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
+    const notification = {
+        type: 'sale_completed',
+        message: `${animalName}이(가) ${price}🪙에 판매되었습니다!`,
+        buyer: currentUserProfile.name,
+        animalName: animalName,
+        price: price,
+        timestamp: new Date().toISOString(),
+        read: false
+    };
+
+    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
+    if (sellerDoc.exists()) {
+        const sellerData = sellerDoc.data();
+        const notifications = sellerData.notifications || [];
+        notifications.unshift(notification); // 최신 알람을 맨 앞에
+        
+        // 알람은 최대 10개까지만 보관
+        if (notifications.length > 10) {
+            notifications.splice(10);
+        }
+        
+        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
+        console.log(`${listingData.seller}에게 판매 완료 알람 전송됨`);
+    }
+} catch (error) {
+    console.error('알람 전송 실패:', error);
+}
+
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
@@ -1918,9 +1951,51 @@ try {
     console.error('알람 전송 실패:', error);
 }
         // 알람 확인 함수 (임시)
+// 알람 확인 및 표시
 async function checkAndShowNotifications() {
-    console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
-    // 나중에 알람 시스템 구현 예정
+    if (!currentUserProfile.name || !window.firebase) return;
+    
+    try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
+        const docSnap = await window.firebase.getDoc(userDocRef);
+        
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const notifications = userData.notifications || [];
+            const unreadNotifications = notifications.filter(n => !n.read);
+            
+            if (unreadNotifications.length > 0) {
+                // 가장 최신 알람들을 하나씩 표시
+                for (let i = 0; i < Math.min(unreadNotifications.length, 3); i++) {
+                    const notification = unreadNotifications[i];
+                    
+                    // 알람 표시
+                    setTimeout(() => {
+                        const alertDiv = document.createElement('div');
+                        alertDiv.className = 'new-animal-alert';
+                        alertDiv.style.background = 'linear-gradient(45deg, #4169E1, #87CEEB)';
+                        alertDiv.innerHTML = `
+                            <span class="new-animal-emoji">🔔</span>
+                            <h3>판매 완료 알림! 📢</h3>
+                            <p>${notification.message}</p>
+                            <p><small>구매자: ${notification.buyer}</small></p>
+                        `;
+                        document.body.appendChild(alertDiv);
+                        setTimeout(() => { alertDiv.remove(); }, 4000);
+                    }, i * 1500); // 1.5초 간격으로 표시
+                }
+                
+                // 모든 알람을 읽음 처리
+                notifications.forEach(n => { if (!n.read) n.read = true; });
+                await window.firebase.setDoc(userDocRef, { notifications }, { merge: true });
+                
+                console.log(`${unreadNotifications.length}개의 알람을 확인했습니다.`);
+            }
+        }
+    } catch (error) {
+        console.error('알람 확인 실패:', error);
+    }
 }
                 
                 // 판매 정보 삭제
@@ -2194,6 +2269,10 @@ const dataToSave = {
 
             alert(`🎉 ${name} 플레이어 생성 완료!`);
             await startGameWithProfile(newProfile);
+            // 알람 확인 (로그인 후 3초 뒤)
+setTimeout(() => {
+    checkAndShowNotifications();
+}, 3000);
         }
 
         async function handleLogin() {
@@ -2364,11 +2443,15 @@ setTimeout(() => {
         gameStats.style.display = 'none';
         userInfo.style.display = 'block';
         updateLearningStats();
-    } else if (pageName === 'market') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateMarketPage();
-    } else if (pageName === 'encyclopedia') {
+    }  else if (pageName === 'market') {
+    gameStats.style.display = 'none';
+    userInfo.style.display = 'block';
+    updateMarketPage();
+    // 시장 방문시 알람 확인
+    setTimeout(() => {
+        checkAndShowNotifications();
+    }, 1000);
+} else if (pageName === 'encyclopedia') {
         gameStats.style.display = 'none';
         userInfo.style.display = 'block';
         updateEncyclopedia();
