@@ -378,6 +378,41 @@
             grid-column: 1 / -1;
             padding: 40px;
         }
+
+        /* 단어 출처 표시 스타일 */
+        .word-source {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .source-badge {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: 2px solid;
+        }
+        .source-badge.ai-generated {
+            background: linear-gradient(45deg, #4CAF50, #81C784);
+            color: white;
+            border-color: #4CAF50;
+            animation: aiGlow 2s ease-in-out infinite alternate;
+        }
+        .source-badge.hardcoded {
+            background: linear-gradient(45deg, #FF9800, #FFB74D);
+            color: white;
+            border-color: #FF9800;
+        }
+        .source-badge.fallback {
+            background: linear-gradient(45deg, #9E9E9E, #BDBDBD);
+            color: white;
+            border-color: #9E9E9E;
+        }
+        
+        @keyframes aiGlow {
+            0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); }
+            100% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.6); }
+        }
     </style>
 </head>
 <body>
@@ -460,6 +495,12 @@
                         <div class="english-question" id="english-question">난이도를 선택하고 시작하세요!</div>
                         <span id="speak-button" class="speak-btn" title="단어 발음 듣기" style="display: none;">🔊</span>
                     </div>
+                    
+                    <!-- 단어 출처 표시 -->
+                    <div class="word-source" id="word-source" style="display: none;">
+                        <span class="source-badge ai-generated" id="source-badge">🤖 AI 생성</span>
+                    </div>
+                    
                     <div class="english-options" id="english-options"></div>
                     <div class="feedback" id="feedback"></div>
                     
@@ -947,10 +988,29 @@
             const questionElement = document.getElementById('english-question');
             const optionsContainer = document.getElementById('english-options');
             const speakButton = document.getElementById('speak-button');
+            const wordSourceElement = document.getElementById('word-source');
+            const sourceBadge = document.getElementById('source-badge');
             
             questionElement.textContent = `"${currentWordData.korean}"`;
             speakButton.style.display = 'inline';
             speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            
+            // 단어 출처 표시
+            wordSourceElement.style.display = 'block';
+            
+            if (currentWordData.source === 'ai') {
+                sourceBadge.className = 'source-badge ai-generated';
+                sourceBadge.innerHTML = '🤖 AI 생성';
+                sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
+            } else if (currentWordData.source === 'fallback') {
+                sourceBadge.className = 'source-badge fallback';
+                sourceBadge.innerHTML = '🔄 대체 단어';
+                sourceBadge.title = 'AI 생성 실패로 대체된 단어입니다';
+            } else {
+                sourceBadge.className = 'source-badge hardcoded';
+                sourceBadge.innerHTML = '📝 기본 단어';
+                sourceBadge.title = '미리 준비된 단어입니다';
+            }
             
             // 옵션 생성 (정답 + 오답 3개)
             const wrongOptions = currentWordData.options.filter(opt => opt !== currentWordData.english);
@@ -1026,7 +1086,7 @@
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-                if (gameState.score >= gameState.level * 2500) {
+                if (gameState.score >= gameState.level * 100) {
                     gameState.level++;
                     showLevelUp();
                 }
@@ -1692,46 +1752,46 @@
             document.getElementById('story-modal').style.display = 'none';
         }
 
-async function generateAnimalStory(animal) {
-    openStoryModal(animal.specialName);
-    const storyTextElement = document.getElementById('story-text');
-    const loadingElement = document.getElementById('story-loading');
+        async function generateAnimalStory(animal) {
+            openStoryModal(animal.specialName);
+            const storyTextElement = document.getElementById('story-text');
+            const loadingElement = document.getElementById('story-loading');
 
-    // 이미 저장된 이야기가 있는지 확인
-    if (animal.story) {
-        storyTextElement.textContent = animal.story;
-        loadingElement.style.display = 'none';
-        console.log("저장된 이야기 불러오기 완료!");
-        return;
-    }
-
-    try {
-        // Firebase Cloud Function 호출 (수정된 방식)
-        const generateStoryFunction = window.firebase.httpsCallable('generateStory');
-        const result = await generateStoryFunction({ 
-            animal: {
-                name: animal.name,
-                specialName: animal.specialName,
-                emoji: animal.emoji,
-                rarity: animal.rarity
+            // 이미 저장된 이야기가 있는지 확인
+            if (animal.story) {
+                storyTextElement.textContent = animal.story;
+                loadingElement.style.display = 'none';
+                console.log("저장된 이야기 불러오기 완료!");
+                return;
             }
-        });
-        
-        const text = result.data.story;
-        storyTextElement.textContent = text;
-        
-        // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
-        gameState.animals[animal.name].story = text;
-        await saveCurrentUserData();
-        console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
 
-    } catch (error) {
-        console.error("Error generating story via Cloud Function:", error);
-        storyTextElement.textContent = "이야기를 불러오는 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.";
-    } finally {
-        loadingElement.style.display = 'none';
-    }
-}
+            try {
+                // Firebase Cloud Function 호출
+                const generateStoryFunction = window.firebase.httpsCallable(window.firebase.functions, 'generateStory');
+                const result = await generateStoryFunction({ 
+                    animal: {
+                        name: animal.name,
+                        specialName: animal.specialName,
+                        emoji: animal.emoji,
+                        rarity: animal.rarity
+                    }
+                });
+                
+                const text = result.data.story;
+                storyTextElement.textContent = text;
+                
+                // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
+                gameState.animals[animal.name].story = text;
+                await saveCurrentUserData();
+                console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
+
+            } catch (error) {
+                console.error("Error generating story via Cloud Function:", error);
+                storyTextElement.textContent = "이야기를 불러오는 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.";
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
 
         // ==================== 특수 효과 함수 ====================
         function showNewAnimalAlert(animal) {
