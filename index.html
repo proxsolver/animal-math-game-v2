@@ -1692,46 +1692,46 @@
             document.getElementById('story-modal').style.display = 'none';
         }
 
-        async function generateAnimalStory(animal) {
-            openStoryModal(animal.specialName);
-            const storyTextElement = document.getElementById('story-text');
-            const loadingElement = document.getElementById('story-loading');
+async function generateAnimalStory(animal) {
+    openStoryModal(animal.specialName);
+    const storyTextElement = document.getElementById('story-text');
+    const loadingElement = document.getElementById('story-loading');
 
-            // 이미 저장된 이야기가 있는지 확인
-            if (animal.story) {
-                storyTextElement.textContent = animal.story;
-                loadingElement.style.display = 'none';
-                console.log("저장된 이야기 불러오기 완료!");
-                return;
+    // 이미 저장된 이야기가 있는지 확인
+    if (animal.story) {
+        storyTextElement.textContent = animal.story;
+        loadingElement.style.display = 'none';
+        console.log("저장된 이야기 불러오기 완료!");
+        return;
+    }
+
+    try {
+        // Firebase Cloud Function 호출 (수정된 방식)
+        const generateStoryFunction = window.firebase.httpsCallable('generateStory');
+        const result = await generateStoryFunction({ 
+            animal: {
+                name: animal.name,
+                specialName: animal.specialName,
+                emoji: animal.emoji,
+                rarity: animal.rarity
             }
+        });
+        
+        const text = result.data.story;
+        storyTextElement.textContent = text;
+        
+        // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
+        gameState.animals[animal.name].story = text;
+        await saveCurrentUserData();
+        console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
 
-            try {
-                // Firebase Cloud Function 호출
-                const generateStoryFunction = window.firebase.httpsCallable(window.firebase.functions, 'generateStory');
-                const result = await generateStoryFunction({ 
-                    animal: {
-                        name: animal.name,
-                        specialName: animal.specialName,
-                        emoji: animal.emoji,
-                        rarity: animal.rarity
-                    }
-                });
-                
-                const text = result.data.story;
-                storyTextElement.textContent = text;
-                
-                // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
-                gameState.animals[animal.name].story = text;
-                await saveCurrentUserData();
-                console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
-
-            } catch (error) {
-                console.error("Error generating story via Cloud Function:", error);
-                storyTextElement.textContent = "이야기를 불러오는 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.";
-            } finally {
-                loadingElement.style.display = 'none';
-            }
-        }
+    } catch (error) {
+        console.error("Error generating story via Cloud Function:", error);
+        storyTextElement.textContent = "이야기를 불러오는 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.";
+    } finally {
+        loadingElement.style.display = 'none';
+    }
+}
 
         // ==================== 특수 효과 함수 ====================
         function showNewAnimalAlert(animal) {
