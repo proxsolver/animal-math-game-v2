@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -1917,6 +1918,8 @@ try {
 }
                 // 알람 확인 및 표시
 async function checkAndShowNotifications() {
+        console.log('알람 확인 함수 호출됨');
+
     if (!currentUserProfile.name) return;
     
     try {
@@ -1970,16 +1973,28 @@ async function checkAndShowNotifications() {
             
             grid.innerHTML = '';
 
-            synthesisRecipes.forEach(recipe => {
-                const [ing1, ing2] = recipe.ingredients;
-                const result = animalTypes.find(a => a.name === recipe.result);
+  synthesisRecipes.forEach(recipe => {
+    const [ing1, ing2] = recipe.ingredients;
+    const result = animalTypes.find(a => a.name === recipe.result);
+    
+    // 동물 데이터가 없으면 건너뛰기
+    if (!result) {
+        console.log(`결과 동물 '${recipe.result}' 데이터가 없습니다.`);
+        return;
+    }
 
-                const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
-                const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
-                const canSynthesize = hasIng1 && hasIng2;
+    const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
+    const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
+    const canSynthesize = hasIng1 && hasIng2;
 
-                const ing1Data = animalTypes.find(a => a.name === ing1);
-                const ing2Data = animalTypes.find(a => a.name === ing2);
+    const ing1Data = animalTypes.find(a => a.name === ing1);
+    const ing2Data = animalTypes.find(a => a.name === ing2);
+    
+    // 재료 동물 데이터가 없으면 건너뛰기
+    if (!ing1Data || !ing2Data) {
+        console.log(`재료 동물 '${ing1}' 또는 '${ing2}' 데이터가 없습니다.`);
+        return;
+    }
 
                 const card = document.createElement('div');
                 card.className = 'synthesis-card';
@@ -2373,11 +2388,12 @@ setTimeout(() => {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
                 updateLearningStats();
-            } if (pageName === 'market') {
+            } else if (pageName === 'market') {
     gameStats.style.display = 'none';
     userInfo.style.display = 'block';
     updateMarketPage();
-    checkAndShowNotifications(); // 이 줄 추가
+    // checkAndShowNotifications(); // 임시로 주석 처리
+}
 } else if (pageName === 'encyclopedia') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
