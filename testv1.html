@@ -1799,222 +1799,156 @@ if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
             });
         }
 
+// 여기부터
         window.buyAnimal = async function(listingId, price, animalName) {
-            if (gameState.coins < price) {
-                alert('코인이 부족합니다!');
-                return;
-            }
-
-            if (!confirm(`${animalName}을(를) ${price}코인에 구매하시겠습니까?`)) {
-                return;
-            }
-            
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
-                
-                // 판매 정보 가져오기
-                const listingDoc = await window.firebase.getDoc(listingRef);
-                if (!listingDoc.exists()) {
-                    alert('이미 판매된 상품입니다.');
-                    loadMarketListings();
-                    return;
-                }
-                
-                const listingData = listingDoc.data();
-                
-                // 점수 차감
-            gameState.coins -= price;  // score 대신 coins
-                
-                // 동물 추가
-                const animalType = animalTypes.find(a => a.name === animalName);
-                if (!gameState.animals[animalName]) {
-                    gameState.animals[animalName] = {
-                        ...animalType,
-                        count: 0,
-                        animalLevel: listingData.animalLevel,
-                        story: ""
-                    };
-                    gameState.speciesCount++;
-                }
-                gameState.animals[animalName].count++;
-                gameState.animals[animalName].animalLevel = Math.max(
-                    gameState.animals[animalName].animalLevel, 
-                    listingData.animalLevel
-                );
-                gameState.totalAnimals++;
-
-
-                // 판매자에게 알람 전송
-try {
-    const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
-    const notification = {
-        type: 'sale_completed',
-        message: `${animalName}이(가) ${price}🪙에 판매되었습니다!`,
-        buyer: currentUserProfile.name,
-        animalName: animalName,
-        price: price,
-        timestamp: new Date().toISOString(),
-        read: false
-    };
-
-    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
-    if (sellerDoc.exists()) {
-        const sellerData = sellerDoc.data();
-        const notifications = sellerData.notifications || [];
-        notifications.unshift(notification); // 최신 알람을 맨 앞에
-        
-        // 알람은 최대 10개까지만 보관
-        if (notifications.length > 10) {
-            notifications.splice(10);
-        }
-        
-        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
-        console.log(`${listingData.seller}에게 판매 완료 알람 전송됨`);
+    if (gameState.coins < price) {
+        alert('코인이 부족합니다!');
+        return;
     }
-} catch (error) {
-    console.error('알람 전송 실패:', error);
-}
-
-                
-                // 판매 정보 삭제
-                await window.firebase.deleteDoc(listingRef);
-                
-                alert(`${animalName}을(를) 성공적으로 구매했습니다!`);
-                
-                // UI 업데이트
-                updateUI();
-                updateAnimalCollection();
-                loadMarketListings();
-                saveCurrentUserData();
-                
-            } catch (error) {
-                console.error('Error buying animal:', error);
-                alert('구매 중 오류가 발생했습니다.');
-            }
-        }
-
-        window.cancelListing = async function(listingId) {
-            if (!confirm('판매를 취소하시겠습니까?')) {
-                return;
-            }
-            
-            try {
-                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
-                
-                // 판매 정보 가져오기
-                const listingDoc = await window.firebase.getDoc(listingRef);
-                if (!listingDoc.exists()) {
-                    alert('이미 처리된 상품입니다.');
-                    loadMarketListings();
-                    return;
-                }
-                
-                const listingData = listingDoc.data();
-                
-                // 동물 다시 인벤토리에 추가
-                const animalType = animalTypes.find(a => a.name === listingData.animalName);
-                if (!gameState.animals[listingData.animalName]) {
-                    gameState.animals[listingData.animalName] = {
-                        ...animalType,
-                        count: 0,
-                        animalLevel: listingData.animalLevel,
-                        story: ""
-                    };
-                    gameState.speciesCount++;
-                }
-                gameState.animals[listingData.animalName].count++;
-                gameState.totalAnimals++;
-
-// 판매자에게 알람 전송
-const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
-const notification = {
-    type: 'sale_completed',
-    message: `${animalName}이(가) ${price}점에 판매되었습니다!`,
-    buyer: currentUserProfile.name,
-    animalName: animalName,
-    price: price,
-    timestamp: new Date().toISOString(),
-    read: false
-};
-
-try {
-    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
-    if (sellerDoc.exists()) {
-        const sellerData = sellerDoc.data();
-        const notifications = sellerData.notifications || [];
-        notifications.unshift(notification); // 최신 알람을 맨 앞에
-        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
+    
+    if (!confirm(`${animalName}을(를) ${price}🪙에 구매하시겠습니까?`)) {
+        return;
     }
-} catch (error) {
-    console.error('알람 전송 실패:', error);
-}
-        // 알람 확인 함수 (임시)
-// 알람 확인 및 표시
-async function checkAndShowNotifications() {
-    if (!currentUserProfile.name || !window.firebase) return;
     
     try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
-        const docSnap = await window.firebase.getDoc(userDocRef);
+        const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
         
-        if (docSnap.exists()) {
-            const userData = docSnap.data();
-            const notifications = userData.notifications || [];
-            const unreadNotifications = notifications.filter(n => !n.read);
-            
-            if (unreadNotifications.length > 0) {
-                // 가장 최신 알람들을 하나씩 표시
-                for (let i = 0; i < Math.min(unreadNotifications.length, 3); i++) {
-                    const notification = unreadNotifications[i];
-                    
-                    // 알람 표시
-                    setTimeout(() => {
-                        const alertDiv = document.createElement('div');
-                        alertDiv.className = 'new-animal-alert';
-                        alertDiv.style.background = 'linear-gradient(45deg, #4169E1, #87CEEB)';
-                        alertDiv.innerHTML = `
-                            <span class="new-animal-emoji">🔔</span>
-                            <h3>판매 완료 알림! 📢</h3>
-                            <p>${notification.message}</p>
-                            <p><small>구매자: ${notification.buyer}</small></p>
-                        `;
-                        document.body.appendChild(alertDiv);
-                        setTimeout(() => { alertDiv.remove(); }, 4000);
-                    }, i * 1500); // 1.5초 간격으로 표시
+        // 판매 정보 가져오기
+        const listingDoc = await window.firebase.getDoc(listingRef);
+        if (!listingDoc.exists()) {
+            alert('이미 판매된 상품입니다.');
+            loadMarketListings();
+            return;
+        }
+        
+        const listingData = listingDoc.data();
+        
+        // 코인 차감
+        gameState.coins -= price;
+        
+        // 동물 추가
+        const animalType = animalTypes.find(a => a.name === animalName);
+        if (!gameState.animals[animalName]) {
+            gameState.animals[animalName] = {
+                ...animalType,
+                count: 0,
+                animalLevel: listingData.animalLevel,
+                story: ""
+            };
+            gameState.speciesCount++;
+        }
+        gameState.animals[animalName].count++;
+        gameState.animals[animalName].animalLevel = Math.max(
+            gameState.animals[animalName].animalLevel, 
+            listingData.animalLevel
+        );
+        gameState.totalAnimals++;
+        
+        // 📱 판매자에게 알람 전송
+        try {
+            const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
+            const notification = {
+                type: 'sale_completed',
+                message: `${animalName}이(가) ${price}🪙에 판매되었습니다!`,
+                buyer: currentUserProfile.name,
+                animalName: animalName,
+                price: price,
+                timestamp: new Date().toISOString(),
+                read: false
+            };
+
+            const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
+            if (sellerDoc.exists()) {
+                const sellerData = sellerDoc.data();
+                const notifications = sellerData.notifications || [];
+                notifications.unshift(notification);
+                
+                // 알람은 최대 10개까지만 보관
+                if (notifications.length > 10) {
+                    notifications.splice(10);
                 }
                 
-                // 모든 알람을 읽음 처리
-                notifications.forEach(n => { if (!n.read) n.read = true; });
-                await window.firebase.setDoc(userDocRef, { notifications }, { merge: true });
-                
-                console.log(`${unreadNotifications.length}개의 알람을 확인했습니다.`);
+                await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
+                console.log(`${listingData.seller}에게 판매 완료 알람 전송됨`);
             }
+        } catch (error) {
+            console.error('알람 전송 실패:', error);
         }
+        
+        // 판매 정보 삭제
+        await window.firebase.deleteDoc(listingRef);
+        
+        alert(`${animalName}을(를) 성공적으로 구매했습니다!`);
+        
+        // UI 업데이트
+        updateUI();
+        updateAnimalCollection();
+        loadMarketListings();
+        saveCurrentUserData();
+        
     } catch (error) {
-        console.error('알람 확인 실패:', error);
+        console.error('Error buying animal:', error);
+        alert('구매 중 오류가 발생했습니다.');
     }
 }
-                
-                // 판매 정보 삭제
-                await window.firebase.deleteDoc(listingRef);
-                
-                alert('판매가 취소되었습니다. 동물이 인벤토리로 돌아왔습니다.');
-                
-                // UI 업데이트
-                updateUI();
-                updateAnimalCollection();
-                updateSellAnimalSelect();
-                loadMarketListings();
-                saveCurrentUserData();
-                
-            } catch (error) {
-                console.error('Error canceling listing:', error);
-                alert('판매 취소 중 오류가 발생했습니다.');
-            }
+        
+
+
+
+// 여기까지
+
+        
+    window.cancelListing = async function(listingId) {
+    if (!confirm('판매를 취소하시겠습니까?')) {
+        return;
+    }
+    
+    try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
+        
+        // 판매 정보 가져오기
+        const listingDoc = await window.firebase.getDoc(listingRef);
+        if (!listingDoc.exists()) {
+            alert('이미 처리된 상품입니다.');
+            loadMarketListings();
+            return;
         }
+        
+        const listingData = listingDoc.data();
+        
+        // 동물 다시 인벤토리에 추가
+        const animalType = animalTypes.find(a => a.name === listingData.animalName);
+        if (!gameState.animals[listingData.animalName]) {
+            gameState.animals[listingData.animalName] = {
+                ...animalType,
+                count: 0,
+                animalLevel: listingData.animalLevel,
+                story: ""
+            };
+            gameState.speciesCount++;
+        }
+        gameState.animals[listingData.animalName].count++;
+        gameState.totalAnimals++;
+        
+        // 판매 정보 삭제
+        await window.firebase.deleteDoc(listingRef);
+        
+        alert('판매가 취소되었습니다. 동물이 인벤토리로 돌아왔습니다.');
+        
+        // UI 업데이트
+        updateUI();
+        updateAnimalCollection();
+        updateSellAnimalSelect();
+        loadMarketListings();
+        saveCurrentUserData();
+        
+    } catch (error) {
+        console.error('Error canceling listing:', error);
+        alert('판매 취소 중 오류가 발생했습니다.');
+    }
+}
 
         // ==================== 동물 합성 함수 ====================
         
