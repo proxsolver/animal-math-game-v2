@@ -147,7 +147,7 @@
             .synthesis-card { flex-direction: column; gap: 10px; }
         }
 
-        /* [NEW] AI 이야기 모달 스타일 */
+        /* AI 이야기 모달 스타일 */
         #story-modal .modal-content {
             background: linear-gradient(135deg, #fffde7, #fff);
             text-align: left;
@@ -156,12 +156,12 @@
             max-height: 60vh;
             overflow-y: auto;
             margin-top: 20px;
-            padding-right: 15px; /* for scrollbar */
+            padding-right: 15px;
             line-height: 1.8;
             font-size: 1.1rem;
         }
         #story-text {
-            white-space: pre-wrap; /* AI가 만든 줄바꿈을 존중 */
+            white-space: pre-wrap;
         }
         .story-btn {
             background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
@@ -190,8 +190,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        
     </style>
 </head>
 <body>
@@ -217,7 +215,7 @@
         </div>
     </div>
 
-    <div class="game-container" style="display: none;"> <!-- 게임 컨텐츠는 로그인 후 표시 -->
+    <div class="game-container" style="display: none;">
         <!-- 헤더 -->
         <div class="header">
             <h1>🐾 동물 수집 학습 게임 🐾</h1>
@@ -365,7 +363,7 @@
         </div>
     </div>
     
-    <!-- 수학 문제 모달 HTML -->
+    <!-- 수학 문제 모달 -->
     <div id="math-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeMathModal()">&times;</span>
@@ -378,7 +376,7 @@
         </div>
     </div>
     
-    <!-- [NEW] AI 이야기 모달 HTML -->
+    <!-- AI 이야기 모달 -->
     <div id="story-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" onclick="closeStoryModal()">&times;</span>
@@ -393,14 +391,14 @@
         </div>
     </div>
 
-
     <!-- Firebase SDK and Game Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
         import { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
 
-        let auth, db;
+        let auth, db, functions;
         
         try {
             const firebaseConfig = {
@@ -415,9 +413,10 @@
             const app = initializeApp(firebaseConfig);
             auth = getAuth(app);
             db = getFirestore(app);
+            functions = getFunctions(app);
 
             window.firebase = {
-                auth, db, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot
+                auth, db, functions, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot, httpsCallable
             };
 
             onAuthStateChanged(auth, async (user) => {
@@ -510,7 +509,6 @@
             { result: '궁극의 로봇', ingredients: ['거미', '전갈'] }
         ];
 
-
         // ==================== 핵심 게임 함수 ====================
         
         // 단어 발음 재생 함수
@@ -534,34 +532,6 @@
             window.speechSynthesis.getVoices();
         };
 
-        // 영어 퀴즈 생성 (동물 잡기)
-        function generateEnglishQuiz() {
-            const quizData = { ...quizWords[Math.floor(Math.random() * quizWords.length)] };
-            currentEnglishQuiz = { answer: quizData.answer };
-
-            document.getElementById('english-question').textContent = `"${quizData.question}"`;
-            
-            const speakBtn = document.getElementById('speak-button');
-            speakBtn.onclick = () => speakWord(currentEnglishQuiz.answer);
-            
-            const wrongOptions = quizData.options.filter(opt => opt !== quizData.answer).sort(() => 0.5 - Math.random()).slice(0, 3);
-            const finalOptions = [quizData.answer, ...wrongOptions].sort(() => Math.random() - 0.5);
-            
-            const optionsContainer = document.getElementById('english-options');
-            optionsContainer.innerHTML = '';
-            finalOptions.forEach(option => {
-                const button = document.createElement('button');
-                button.className = 'english-option-btn';
-                button.innerText = option;
-                button.onclick = () => checkEnglishQuizAnswer(option);
-                optionsContainer.appendChild(button);
-            });
-            
-            const feedback = document.getElementById('feedback');
-            feedback.textContent = '';
-            feedback.className = 'feedback';
-        }
-
         // 영어 퀴즈 정답 확인
         function checkEnglishQuizAnswer(selectedOption) {
             const optionsContainer = document.getElementById('english-options');
@@ -579,7 +549,7 @@
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-                if (gameState.score >= gameState.level * 2000) {
+                if (gameState.score >= gameState.level * 2500) {
                     gameState.level++;
                     showLevelUp();
                 }
@@ -705,14 +675,14 @@
             return availableAnimals[0];
         }
 
-           function addAnimal(animal) {
+        function addAnimal(animal) {
             const key = animal.name;
             if (!gameState.animals[key]) {
                 gameState.animals[key] = {
                     ...animal,
                     count: 0,
                     animalLevel: 1,
-                    story: "" // [추가] AI 이야기를 저장할 공간
+                    story: ""
                 };
                 gameState.speciesCount++;
                 showNewAnimalAlert(animal);
@@ -723,6 +693,7 @@
             
             updateAnimalCollection();
         }
+
         // ==================== UI 업데이트 함수 ====================
 
         function updateUI() {
@@ -766,7 +737,6 @@
             });
         }
         
-     // 2. 기존의 updateEncyclopedia 함수를 아래 코드로 덮어쓰세요.
         function updateEncyclopedia() {
             const grid = document.getElementById('encyclopedia-grid');
             grid.innerHTML = '';
@@ -783,7 +753,7 @@
                 const card = document.createElement('div');
                 card.className = 'encyclopedia-card';
                 
-                if (collectedAnimal) {
+                if (collectedAnimal && collectedAnimal.count > 0) {
                     card.innerHTML = `
                         <span class="animal-emoji">${animal.emoji}</span>
                         <div class="animal-name">${animal.name}</div>
@@ -791,9 +761,8 @@
                         <div class="rarity-badge">★${animal.rarity}</div>
                         <button class="story-btn">이야기 듣기 📖</button>
                     `;
-                    // 버튼에 클릭 이벤트 연결
                     card.querySelector('.story-btn').onclick = (event) => {
-                        event.stopPropagation(); // 카드 클릭 이벤트 방지
+                        event.stopPropagation();
                         generateAnimalStory(collectedAnimal);
                     };
                 } else {
@@ -813,12 +782,19 @@
         
         function initializeFarm() {
             const farmGrid = document.getElementById('farm-grid');
+            if (!farmGrid) return;
+            
             farmGrid.innerHTML = '';
             for (let i = 0; i < 48; i++) {
                 const cell = document.createElement('div');
                 cell.className = 'farm-cell';
                 cell.dataset.index = i;
-                cell.onclick = () => placeItemOnFarm(i);
+                cell.onclick = (event) => placeItemOnFarm(i, event);
+                cell.oncontextmenu = (event) => {
+                    event.preventDefault();
+                    removeItemFromFarm(i);
+                    return false;
+                };
                 farmGrid.appendChild(cell);
             }
             updateShop();
@@ -828,6 +804,8 @@
 
         function updateShop() {
             const shopGrid = document.getElementById('shop-grid');
+            if (!shopGrid) return;
+            
             shopGrid.innerHTML = '';
             shopItems.forEach(item => {
                 const shopItemDiv = document.createElement('div');
@@ -861,7 +839,11 @@
 
         function updateInventory() {
             const inventoryGrid = document.getElementById('inventory-grid');
+            if (!inventoryGrid) return;
+            
             inventoryGrid.innerHTML = '';
+            
+            // 농장 아이템 표시
             Object.values(gameState.farm.items).forEach(item => {
                 if (item.count > 0) {
                     const invItemDiv = document.createElement('div');
@@ -872,10 +854,12 @@
                         <div class="item-name">${item.name}</div>
                         <div class="item-count">x ${item.count}</div>
                     `;
-                    invItemDiv.onclick = () => selectItemToPlace(item.name);
+                    invItemDiv.onclick = () => selectItemToPlace(item.name, false);
                     inventoryGrid.appendChild(invItemDiv);
                 }
             });
+            
+            // 동물 표시
             Object.values(gameState.animals).forEach(animal => {
                  if (animal.count > 0) {
                     const invItemDiv = document.createElement('div');
@@ -892,66 +876,93 @@
             });
         }
 
-        function selectItemToPlace(itemName, isAnimal = false) {
+        function selectItemToPlace(itemName, isAnimal) {
             selectedItemToPlace = { name: itemName, isAnimal };
             document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
-            document.querySelector(`.inventory-item[data-item-name="${itemName}"]`).classList.add('selected');
+            const targetElement = document.querySelector(`.inventory-item[data-item-name="${itemName}"]`);
+            if (targetElement) {
+                targetElement.classList.add('selected');
+            }
         }
 
-        function placeItemOnFarm(index) {
-            if (event.button === 2 || event.ctrlKey) {
-                event.preventDefault();
-                const currentCellContent = gameState.farm.layout[index];
-                if (currentCellContent) {
-                    if (currentCellContent.isAnimal) { gameState.animals[currentCellContent.name].count++; } 
-                    else { gameState.farm.items[currentCellContent.name].count++; }
-                    gameState.farm.layout[index] = null;
-                    renderFarm();
-                    updateInventory();
-                    saveCurrentUserData();
-                }
-                return;
-            }
-
+        function placeItemOnFarm(index, event) {
             if (!selectedItemToPlace) return;
 
             const { name, isAnimal } = selectedItemToPlace;
             const currentCellContent = gameState.farm.layout[index];
 
-            if (isAnimal) {
-                if (gameState.animals[name].count > 0) {
-                    if (currentCellContent) {
-                         if (currentCellContent.isAnimal) gameState.animals[currentCellContent.name].count++;
-                         else gameState.farm.items[currentCellContent.name].count++;
+            // 기존 아이템이 있다면 인벤토리로 돌려보내기
+            if (currentCellContent) {
+                if (currentCellContent.isAnimal) {
+                    if (gameState.animals[currentCellContent.name]) {
+                        gameState.animals[currentCellContent.name].count++;
                     }
-                    gameState.farm.layout[index] = { name, isAnimal: true, emoji: gameState.animals[name].emoji };
+                } else {
+                    if (gameState.farm.items[currentCellContent.name]) {
+                        gameState.farm.items[currentCellContent.name].count++;
+                    }
+                }
+            }
+
+            // 새 아이템 배치
+            if (isAnimal) {
+                if (gameState.animals[name] && gameState.animals[name].count > 0) {
+                    gameState.farm.layout[index] = { 
+                        name, 
+                        isAnimal: true, 
+                        emoji: gameState.animals[name].emoji 
+                    };
                     gameState.animals[name].count--;
                 }
             } else {
-                if (gameState.farm.items[name].count > 0) {
-                    if (currentCellContent) {
-                         if (currentCellContent.isAnimal) gameState.animals[currentCellContent.name].count++;
-                         else gameState.farm.items[currentCellContent.name].count++;
-                    }
-                    gameState.farm.layout[index] = { name, isAnimal: false, emoji: gameState.farm.items[name].emoji };
+                if (gameState.farm.items[name] && gameState.farm.items[name].count > 0) {
+                    gameState.farm.layout[index] = { 
+                        name, 
+                        isAnimal: false, 
+                        emoji: gameState.farm.items[name].emoji 
+                    };
                     gameState.farm.items[name].count--;
                 }
             }
             
             selectedItemToPlace = null;
+            document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
             renderFarm();
             updateInventory();
             saveCurrentUserData();
         }
 
+        function removeItemFromFarm(index) {
+            const currentCellContent = gameState.farm.layout[index];
+            if (currentCellContent) {
+                if (currentCellContent.isAnimal) {
+                    if (gameState.animals[currentCellContent.name]) {
+                        gameState.animals[currentCellContent.name].count++;
+                    }
+                } else {
+                    if (gameState.farm.items[currentCellContent.name]) {
+                        gameState.farm.items[currentCellContent.name].count++;
+                    }
+                }
+                gameState.farm.layout[index] = null;
+                renderFarm();
+                updateInventory();
+                saveCurrentUserData();
+            }
+        }
+
         function renderFarm() {
             const farmGrid = document.getElementById('farm-grid');
+            if (!farmGrid) return;
+            
             gameState.farm.layout.forEach((item, index) => {
                 const cell = farmGrid.children[index];
-                if (item) {
-                    cell.innerHTML = `<span class="${item.isAnimal ? 'placed-animal' : ''}">${item.emoji}</span>`;
-                } else {
-                    cell.innerHTML = '';
+                if (cell) {
+                    if (item) {
+                        cell.innerHTML = `<span class="${item.isAnimal ? 'placed-animal' : ''}">${item.emoji}</span>`;
+                    } else {
+                        cell.innerHTML = '';
+                    }
                 }
             });
         }
@@ -960,6 +971,8 @@
         
         function updateSynthesisPage() {
             const grid = document.getElementById('synthesis-grid');
+            if (!grid) return;
+            
             grid.innerHTML = '';
 
             synthesisRecipes.forEach(recipe => {
@@ -996,7 +1009,7 @@
             });
         }
 
-        function performSynthesis(resultName) {
+        window.performSynthesis = function(resultName) {
             const recipe = synthesisRecipes.find(r => r.result === resultName);
             if (!recipe) return;
 
@@ -1024,12 +1037,8 @@
             }
         }
 
- // 3. 아래의 AI 스토리텔러 함수 섹션 전체를 복사해서
-        //    '// ==================== 특수 효과 함수 ====================' 주석 바로 위에 붙여넣어 주세요.
-        
-        // ==================== [NEW] AI 스토리텔러 함수 ====================
+        // ==================== AI 스토리텔러 함수 ====================
 
-        // 이야기 모달 열기/닫기
         function openStoryModal(title) {
             document.getElementById('story-modal-title').textContent = `"${title}" 이야기`;
             document.getElementById('story-text').textContent = '';
@@ -1041,13 +1050,12 @@
             document.getElementById('story-modal').style.display = 'none';
         }
 
-        // Firebase Cloud Function을 호출하여 동물 이야기 생성
         async function generateAnimalStory(animal) {
             openStoryModal(animal.specialName);
             const storyTextElement = document.getElementById('story-text');
             const loadingElement = document.getElementById('story-loading');
 
-            // 1. 이미 저장된 이야기가 있는지 확인
+            // 이미 저장된 이야기가 있는지 확인
             if (animal.story) {
                 storyTextElement.textContent = animal.story;
                 loadingElement.style.display = 'none';
@@ -1056,14 +1064,21 @@
             }
 
             try {
-                // 2. 저장된 이야기가 없으면 우리가 만든 Cloud Function을 호출
-                const generateStoryFunction = window.firebase.httpsCallable('generateStory');
-                const result = await generateStoryFunction({ animal: animal });
+                // Firebase Cloud Function 호출
+                const generateStoryFunction = window.firebase.httpsCallable(window.firebase.functions, 'generateStory');
+                const result = await generateStoryFunction({ 
+                    animal: {
+                        name: animal.name,
+                        specialName: animal.specialName,
+                        emoji: animal.emoji,
+                        rarity: animal.rarity
+                    }
+                });
                 
                 const text = result.data.story;
                 storyTextElement.textContent = text;
                 
-                // 3. 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
+                // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
                 gameState.animals[animal.name].story = text;
                 await saveCurrentUserData();
                 console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
@@ -1075,6 +1090,7 @@
                 loadingElement.style.display = 'none';
             }
         }
+
         // ==================== 특수 효과 함수 ====================
         function showNewAnimalAlert(animal) {
             const alert = document.createElement('div');
@@ -1100,7 +1116,6 @@
             document.body.appendChild(alert);
             setTimeout(() => { alert.remove(); }, 3000);
         }
-
 
         // ==================== 사용자 관리 및 데이터 함수 (Firebase) ====================
 
@@ -1392,10 +1407,8 @@
         window.addEventListener('beforeunload', function() {
             saveCurrentUserData();
         });
-        
-        document.getElementById('farm-grid').addEventListener('contextmenu', e => e.preventDefault());
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v5.3 - Shared Ranking)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v5.4 - Fixed Farm & Story)');
     </script>
 </body>
-</html>
+</html> 
