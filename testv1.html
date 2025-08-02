@@ -610,37 +610,37 @@ let gameState = {
         let animalTypes = [];
 
         // JSON 파일에서 동물 데이터 로드
-        window.loadAnimalsFromJSON = async function() {
-            try {
-                console.log('동물 JSON 파일 로딩 시작...');
-                
-                const response = await fetch('./animals.json');
-                
-                if (!response.ok) {
-                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                animalTypes = data.animals;
-                
-                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
-                return true;
-                
-            } catch (error) {
-                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
-                
-                // 폴백: 기본 동물 몇 마리
-                animalTypes = [
-                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
-                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
-                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
-                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
-                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
-                ];
-                
-                return false;
-            }
+      window.loadAnimalsFromJSON = async function() {
+    try {
+        console.log('동물 JSON 파일 로딩 시작...');
+        
+        const response = await fetch('./animals.json');
+        
+        if (!response.ok) {
+            throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
         }
+        
+        const data = await response.json();
+        animalTypes = data.animals;
+        
+        console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
+        return true;
+        
+    } catch (error) {
+        console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+        
+        // 폴백: 기본 동물 몇 마리
+        animalTypes = [
+            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+            {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+            {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+            {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+        ];
+        
+        return false;
+    }
+}
 
         const shopItems = [
             { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
@@ -1916,35 +1916,10 @@ try {
 } catch (error) {
     console.error('알람 전송 실패:', error);
 }
-                // 알람 확인 및 표시
+        // 알람 확인 함수 (임시)
 async function checkAndShowNotifications() {
-        console.log('알람 확인 함수 호출됨');
-
-    if (!currentUserProfile.name) return;
-    
-    try {
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
-        const docSnap = await window.firebase.getDoc(userDocRef);
-        
-        if (docSnap.exists()) {
-            const userData = docSnap.data();
-            const notifications = userData.notifications || [];
-            const unreadNotifications = notifications.filter(n => !n.read);
-            
-            if (unreadNotifications.length > 0) {
-                // 가장 최신 알람 하나만 표시
-                const latestNotification = unreadNotifications[0];
-                alert(`🔔 ${latestNotification.message}`);
-                
-                // 읽음 처리
-                notifications.forEach(n => { if (!n.read) n.read = true; });
-                await window.firebase.setDoc(userDocRef, { notifications }, { merge: true });
-            }
-        }
-    } catch (error) {
-        console.error('알람 확인 실패:', error);
-    }
+    console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
+    // 나중에 알람 시스템 구현 예정
 }
                 
                 // 판매 정보 삭제
@@ -2369,53 +2344,50 @@ setTimeout(() => {
 
         // ==================== 페이지 관리 및 초기화 ====================
 
-        window.showPage = function(pageName, element) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(pageName + '-page').classList.add('active');
-            if (element) {
-                element.classList.add('active');
-            }
-            
-            const gameStats = document.getElementById('game-stats');
-            const userInfo = document.getElementById('user-info');
-            
-            if (pageName === 'game') {
-                gameStats.style.display = 'flex';
-                userInfo.style.display = 'block';
-            } else if (pageName === 'learning') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateLearningStats();
-            } else if (pageName === 'market') {
-    gameStats.style.display = 'none';
-    userInfo.style.display = 'block';
-    updateMarketPage();
-    // checkAndShowNotifications(); // 임시로 주석 처리
+ window.showPage = function(pageName, element) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(pageName + '-page').classList.add('active');
+    if (element) {
+        element.classList.add('active');
+    }
+    
+    const gameStats = document.getElementById('game-stats');
+    const userInfo = document.getElementById('user-info');
+    
+    if (pageName === 'game') {
+        gameStats.style.display = 'flex';
+        userInfo.style.display = 'block';
+    } else if (pageName === 'learning') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateLearningStats();
+    } else if (pageName === 'market') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateMarketPage();
+    } else if (pageName === 'encyclopedia') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateEncyclopedia();
+    } else if (pageName === 'farm') {
+        gameStats.style.display = 'flex';
+        userInfo.style.display = 'block';
+        initializeFarm();
+    } else if (pageName === 'synthesis') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateSynthesisPage();
+    } else if (pageName === 'ranking') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateRankingPage();
+    } else {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'none';
+    }
 }
-} else if (pageName === 'encyclopedia') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateEncyclopedia();
-            } else if (pageName === 'farm') {
-                gameStats.style.display = 'flex';
-                userInfo.style.display = 'block';
-                initializeFarm();
-            } else if (pageName === 'synthesis') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateSynthesisPage();
-            } else if (pageName === 'ranking') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateRankingPage();
-            } else {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'none';
-            }
-        }
-
         // ==================== 이벤트 리스너 ====================
         
         document.getElementById('login-btn').addEventListener('click', async () => {
