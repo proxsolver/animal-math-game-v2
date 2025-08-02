@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -259,12 +260,13 @@
                 <div class="current-user">현재 플레이어: <span id="current-user-name"></span></div>
             </div>
 
-            <div class="game-stats" id="game-stats">
-                <div class="stat-item">레벨 <span id="level">1</span></div>
-                <div class="stat-item">점수: <span id="score">0</span></div>
-                <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
-                <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
-            </div>
+<div class="game-stats" id="game-stats">
+    <div class="stat-item">레벨 <span id="level">1</span></div>
+    <div class="stat-item">점수: <span id="score">0</span></div>
+    <div class="stat-item">💰 코인: <span id="coins">0</span></div>  <!-- 🆕 새로 추가! -->
+    <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
+    <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
+</div>
         </div>
 
         <!-- 게임 페이지 -->
@@ -385,7 +387,7 @@
                 <div class="market-sell-section">
                     <h3>내 동물 판매하기</h3>
                     <select id="sell-animal-select"></select>
-                    <input type="number" id="sell-price-input" placeholder="판매 가격 (점수)">
+<input type="number" id="sell-price-input" placeholder="판매 가격 (코인)">
                     <button class="nav-btn" onclick="sellAnimal()">판매 등록</button>
                 </div>
                 <h3>판매 중인 동물 목록</h3>
@@ -397,7 +399,7 @@
                                 <th>이름</th>
                                 <th>레벨</th>
                                 <th>판매자</th>
-                                <th>가격</th>
+                                <th>가격(🪙)</th>
                                 <th>구매</th>
                             </tr>
                         </thead>
@@ -578,18 +580,19 @@
     <script>
         // ==================== 게임 데이터 ====================
         
-        let gameState = {
-            score: 0,
-            level: 1,
-            currentQuestion: {},
-            animals: {},
-            totalAnimals: 0,
-            speciesCount: 0,
-            farm: {
-                layout: Array(48).fill(null),
-                items: {}
-            }
-        };
+let gameState = {
+    score: 0,
+    coins: 0,      // 🆕 새로 추가!
+    level: 1,
+    currentQuestion: {},
+    animals: {},
+    totalAnimals: 0,
+    speciesCount: 0,
+    farm: {
+        layout: Array(48).fill(null),
+        items: {}
+    }
+};
 
         let currentUserId = null;
         let currentUserProfile = {};
@@ -607,37 +610,37 @@
         let animalTypes = [];
 
         // JSON 파일에서 동물 데이터 로드
-        window.loadAnimalsFromJSON = async function() {
-            try {
-                console.log('동물 JSON 파일 로딩 시작...');
-                
-                const response = await fetch('./animals.json');
-                
-                if (!response.ok) {
-                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                animalTypes = data.animals;
-                
-                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
-                return true;
-                
-            } catch (error) {
-                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
-                
-                // 폴백: 기본 동물 몇 마리
-                animalTypes = [
-                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
-                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
-                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
-                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
-                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
-                ];
-                
-                return false;
-            }
+      window.loadAnimalsFromJSON = async function() {
+    try {
+        console.log('동물 JSON 파일 로딩 시작...');
+        
+        const response = await fetch('./animals.json');
+        
+        if (!response.ok) {
+            throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
         }
+        
+        const data = await response.json();
+        animalTypes = data.animals;
+        
+        console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
+        return true;
+        
+    } catch (error) {
+        console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+        
+        // 폴백: 기본 동물 몇 마리
+        animalTypes = [
+            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+            {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+            {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+            {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+        ];
+        
+        return false;
+    }
+}
 
         const shopItems = [
             { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
@@ -1304,46 +1307,111 @@
 
         // ==================== UI 업데이트 함수 ====================
 
-        function updateUI() {
-            document.getElementById('score').textContent = gameState.score;
-            document.getElementById('level').textContent = gameState.level;
-            document.getElementById('species-count').textContent = gameState.speciesCount;
-            document.getElementById('total-animals').textContent = gameState.totalAnimals;
-        }
+function updateUI() {
+    document.getElementById('score').textContent = gameState.score;
+    document.getElementById('coins').textContent = gameState.coins;  // 🆕 새로 추가!
+    document.getElementById('level').textContent = gameState.level;
+    document.getElementById('species-count').textContent = gameState.speciesCount;
+    document.getElementById('total-animals').textContent = gameState.totalAnimals;
+}
 
-        function updateAnimalCollection() {
-            const collection = document.getElementById('animal-collection');
-            if (!collection) return;
-            collection.innerHTML = '';
-            
-            const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
-            
-            sortedAnimals.forEach(animal => {
-                if (animal.count === 0) return;
+    function updateAnimalCollection() {
+    const collection = document.getElementById('animal-collection');
+    if (!collection) return;
+    collection.innerHTML = '';
+    
+    const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
+    
+    sortedAnimals.forEach(animal => {
+        if (animal.count === 0) return;
 
-                const card = document.createElement('div');
-                card.className = 'animal-card';
-                
-                let borderColor = '#87CEEB';
-                if (animal.rarity >= 5) borderColor = '#FFD700';
-                else if (animal.rarity >= 4) borderColor = '#9370DB';
-                else if (animal.rarity >= 3) borderColor = '#32CD32';
-                
-                card.style.borderColor = borderColor;
-                card.style.boxShadow = `0 6px 20px ${borderColor}40`;
-                
-                card.innerHTML = `
-                    <span class="animal-emoji">${animal.emoji}</span>
-                    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
-                    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
-                    <div class="special-name">"${animal.specialName}"</div>
-                    <div class="rarity-badge">★${animal.rarity}</div>
-                `;
-                
-                card.onclick = () => startMathProblem(animal.name);
-                collection.appendChild(card);
-            });
+        const card = document.createElement('div');
+        card.className = 'animal-card';
+        
+        let borderColor = '#87CEEB';
+        if (animal.rarity >= 5) borderColor = '#FFD700';
+        else if (animal.rarity >= 4) borderColor = '#9370DB';
+        else if (animal.rarity >= 3) borderColor = '#32CD32';
+        
+        card.style.borderColor = borderColor;
+        card.style.boxShadow = `0 6px 20px ${borderColor}40`;
+        
+        // 판매가 계산
+        const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
+        
+card.innerHTML = `
+    <span class="animal-emoji">${animal.emoji}</span>
+    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+    <div class="special-name">"${animal.specialName}"</div>
+    <div class="rarity-badge">★${animal.rarity}</div>
+    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
+    <div style="font-size: 0.7rem; color: #999; text-align: center; margin-top: 3px;">📖 클릭하면 이야기를 들을 수 있어요</div>
+    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+        <button onclick="event.stopPropagation(); startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+        <button onclick="event.stopPropagation(); quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+    </div>
+`;
+
+// 카드 클릭시 스토리 표시
+card.onclick = () => {
+    generateAnimalStory(animal);
+};
+        
+        collection.appendChild(card);
+    });
+}
+
+// 바로 판매 시스템
+window.quickSellAnimal = function(animalName) {
+    const animal = gameState.animals[animalName];
+    if (!animal || animal.count <= 0) {
+        alert('판매할 동물이 없습니다.');
+        return;
+    }
+    
+    // 레벨별 판매가 계산
+    const basePrice = animal.animalLevel * 10;
+    const rarityBonus = animal.rarity * 5;
+    const finalPrice = basePrice + rarityBonus;
+    
+    const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}🪙에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}🪙`;
+    
+    if (confirm(confirmMessage)) {
+        // 동물 제거
+        animal.count--;
+        gameState.totalAnimals--;
+        
+        // 동물이 0마리가 되면 종류에서도 제거
+        if (animal.count <= 0) {
+            gameState.speciesCount--;
+            delete gameState.animals[animalName];
         }
+        
+        // 코인 추가
+        gameState.coins += finalPrice;
+        
+        // 판매 완료 알림
+        const sellAlert = document.createElement('div');
+        sellAlert.className = 'new-animal-alert';
+        sellAlert.style.background = 'linear-gradient(45deg, #32CD32, #90EE90)';
+        sellAlert.innerHTML = `
+            <span class="new-animal-emoji">💰</span>
+            <h3>판매 완료! 🎉</h3>
+            <p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}🪙</strong>에 판매했습니다!</p>
+        `;
+        document.body.appendChild(sellAlert);
+        setTimeout(() => { sellAlert.remove(); }, 3000);
+        
+        // UI 업데이트
+        updateUI();
+        updateAnimalCollection();
+        saveCurrentUserData();
+        
+        console.log(`${animalName} 판매 완료: +${finalPrice}🪙`);
+    }
+}
+
         
         function updateEncyclopedia() {
             const grid = document.getElementById('encyclopedia-grid');
@@ -1421,7 +1489,7 @@
                 shopItemDiv.innerHTML = `
                     <div class="item-emoji">${item.emoji}</div>
                     <div class="item-name">${item.name}</div>
-                    <div class="item-price">💰 ${item.price}</div>
+<div class="item-price">🪙 ${item.price}</div>
                 `;
                 shopItemDiv.onclick = () => buyItem(item.name);
                 shopGrid.appendChild(shopItemDiv);
@@ -1430,8 +1498,8 @@
 
         function buyItem(itemName) {
             const item = shopItems.find(i => i.name === itemName);
-            if (gameState.score >= item.price) {
-                gameState.score -= item.price;
+            if (gameState.coins >= item.price) {
+                gameState.coins -= item.price;
                 if (!gameState.farm.items[itemName]) {
                     gameState.farm.items[itemName] = { ...item, count: 0 };
                 }
@@ -1441,7 +1509,7 @@
                 updateInventory();
                 saveCurrentUserData();
             } else {
-                alert('점수가 부족합니다!');
+                alert('코인이 부족합니다!');
             }
         }
 
@@ -1615,10 +1683,10 @@
                 return;
             }
             
-            if (price > gameState.score * 10) { // 너무 비싼 가격 방지
-                alert('가격이 너무 높습니다. 현재 점수의 10배 이하로 설정해주세요.');
-                return;
-            }
+if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
+    alert('가격이 너무 높습니다. 좀 더 합리적인 가격으로 설정해주세요.');
+    return;
+}
             
             const animal = gameState.animals[animalName];
             if (animal.count < 2) {
@@ -1718,7 +1786,7 @@
                     <td>${listing.animalName}<br><small>"${listing.specialName}"</small></td>
                     <td>Lv. ${listing.animalLevel}<br><small>★${listing.rarity}</small></td>
                     <td>${listing.seller}</td>
-                    <td><strong>${listing.price}</strong>점</td>
+                    <td><strong>${listing.price}</strong>🪙</td>
                     <td>
                         ${listing.seller === currentUserProfile.name 
                             ? `<button class="nav-btn" onclick="cancelListing('${listing.id}')" style="background: #ff6b6b;">취소</button>`
@@ -1732,12 +1800,12 @@
         }
 
         window.buyAnimal = async function(listingId, price, animalName) {
-            if (gameState.score < price) {
-                alert('점수가 부족합니다!');
+            if (gameState.coins < price) {
+                alert('코인이 부족합니다!');
                 return;
             }
-            
-            if (!confirm(`${animalName}을(를) ${price}점에 구매하시겠습니까?`)) {
+
+            if (!confirm(`${animalName}을(를) ${price}코인에 구매하시겠습니까?`)) {
                 return;
             }
             
@@ -1756,7 +1824,7 @@
                 const listingData = listingDoc.data();
                 
                 // 점수 차감
-                gameState.score -= price;
+            gameState.coins -= price;  // score 대신 coins
                 
                 // 동물 추가
                 const animalType = animalTypes.find(a => a.name === animalName);
@@ -1825,6 +1893,35 @@
                 }
                 gameState.animals[listingData.animalName].count++;
                 gameState.totalAnimals++;
+
+// 판매자에게 알람 전송
+const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
+const notification = {
+    type: 'sale_completed',
+    message: `${animalName}이(가) ${price}점에 판매되었습니다!`,
+    buyer: currentUserProfile.name,
+    animalName: animalName,
+    price: price,
+    timestamp: new Date().toISOString(),
+    read: false
+};
+
+try {
+    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
+    if (sellerDoc.exists()) {
+        const sellerData = sellerDoc.data();
+        const notifications = sellerData.notifications || [];
+        notifications.unshift(notification); // 최신 알람을 맨 앞에
+        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
+    }
+} catch (error) {
+    console.error('알람 전송 실패:', error);
+}
+        // 알람 확인 함수 (임시)
+async function checkAndShowNotifications() {
+    console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
+    // 나중에 알람 시스템 구현 예정
+}
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
@@ -1852,16 +1949,28 @@
             
             grid.innerHTML = '';
 
-            synthesisRecipes.forEach(recipe => {
-                const [ing1, ing2] = recipe.ingredients;
-                const result = animalTypes.find(a => a.name === recipe.result);
+  synthesisRecipes.forEach(recipe => {
+    const [ing1, ing2] = recipe.ingredients;
+    const result = animalTypes.find(a => a.name === recipe.result);
+    
+    // 동물 데이터가 없으면 건너뛰기
+    if (!result) {
+        console.log(`결과 동물 '${recipe.result}' 데이터가 없습니다.`);
+        return;
+    }
 
-                const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
-                const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
-                const canSynthesize = hasIng1 && hasIng2;
+    const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
+    const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
+    const canSynthesize = hasIng1 && hasIng2;
 
-                const ing1Data = animalTypes.find(a => a.name === ing1);
-                const ing2Data = animalTypes.find(a => a.name === ing2);
+    const ing1Data = animalTypes.find(a => a.name === ing1);
+    const ing2Data = animalTypes.find(a => a.name === ing2);
+    
+    // 재료 동물 데이터가 없으면 건너뛰기
+    if (!ing1Data || !ing2Data) {
+        console.log(`재료 동물 '${ing1}' 또는 '${ing2}' 데이터가 없습니다.`);
+        return;
+    }
 
                 const card = document.createElement('div');
                 card.className = 'synthesis-card';
@@ -2002,16 +2111,17 @@
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
             const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
             
-            const dataToSave = {
-                ...currentUserProfile,
-                score: gameState.score,
-                level: gameState.level,
-                animals: gameState.animals,
-                totalAnimals: gameState.totalAnimals,
-                speciesCount: gameState.speciesCount,
-                farm: gameState.farm,
-                lastPlayed: new Date().toISOString()
-            };
+const dataToSave = {
+    ...currentUserProfile,
+    score: gameState.score,
+    coins: gameState.coins,  // 🆕 새로 추가!
+    level: gameState.level,
+    animals: gameState.animals,
+    totalAnimals: gameState.totalAnimals,
+    speciesCount: gameState.speciesCount,
+    farm: gameState.farm,
+    lastPlayed: new Date().toISOString()
+};
 
             try {
                 await window.firebase.setDoc(userDocRef, dataToSave, { merge: true });
@@ -2116,15 +2226,16 @@
 
         async function startGameWithProfile(profileData) {
             currentUserProfile = profileData;
-            gameState = {
-                score: profileData.score || 0,
-                level: profileData.level || 1,
-                animals: profileData.animals || {},
-                totalAnimals: profileData.totalAnimals || 0,
-                speciesCount: profileData.speciesCount || 0,
-                farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
-                currentQuestion: {}
-            };
+gameState = {
+    score: profileData.score || 0,
+    coins: profileData.coins || 0,  // 🆕 새로 추가! (기존 사용자는 0으로 시작)
+    level: profileData.level || 1,
+    animals: profileData.animals || {},
+    totalAnimals: profileData.totalAnimals || 0,
+    speciesCount: profileData.speciesCount || 0,
+    farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
+    currentQuestion: {}
+};
 
             document.getElementById('login-overlay').style.display = 'none';
             document.querySelector('.game-container').style.display = 'block';
@@ -2149,6 +2260,10 @@
             }
             
             showPage('game', document.querySelector('.nav-btn'));
+            // 알람 확인 (3초 후)
+setTimeout(() => {
+    checkAndShowNotifications();
+}, 3000);
         }
 
         window.logout = function() {
@@ -2230,51 +2345,50 @@
 
         // ==================== 페이지 관리 및 초기화 ====================
 
-        window.showPage = function(pageName, element) {
-            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(pageName + '-page').classList.add('active');
-            if (element) {
-                element.classList.add('active');
-            }
-            
-            const gameStats = document.getElementById('game-stats');
-            const userInfo = document.getElementById('user-info');
-            
-            if (pageName === 'game') {
-                gameStats.style.display = 'flex';
-                userInfo.style.display = 'block';
-            } else if (pageName === 'learning') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateLearningStats();
-            } else if (pageName === 'market') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateMarketPage();
-            } else if (pageName === 'encyclopedia') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateEncyclopedia();
-            } else if (pageName === 'farm') {
-                gameStats.style.display = 'flex';
-                userInfo.style.display = 'block';
-                initializeFarm();
-            } else if (pageName === 'synthesis') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateSynthesisPage();
-            } else if (pageName === 'ranking') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateRankingPage();
-            } else {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'none';
-            }
-        }
-
+ window.showPage = function(pageName, element) {
+    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+    
+    document.getElementById(pageName + '-page').classList.add('active');
+    if (element) {
+        element.classList.add('active');
+    }
+    
+    const gameStats = document.getElementById('game-stats');
+    const userInfo = document.getElementById('user-info');
+    
+    if (pageName === 'game') {
+        gameStats.style.display = 'flex';
+        userInfo.style.display = 'block';
+    } else if (pageName === 'learning') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateLearningStats();
+    } else if (pageName === 'market') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateMarketPage();
+    } else if (pageName === 'encyclopedia') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateEncyclopedia();
+    } else if (pageName === 'farm') {
+        gameStats.style.display = 'flex';
+        userInfo.style.display = 'block';
+        initializeFarm();
+    } else if (pageName === 'synthesis') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateSynthesisPage();
+    } else if (pageName === 'ranking') {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'block';
+        updateRankingPage();
+    } else {
+        gameStats.style.display = 'none';
+        userInfo.style.display = 'none';
+    }
+}
         // ==================== 이벤트 리스너 ====================
         
         document.getElementById('login-btn').addEventListener('click', async () => {
