@@ -1,0 +1,55 @@
+{
+  "rarity": 1,
+  "animals": [
+    {
+      "emoji": "🐶",
+      "name": "강아지",
+      "specialName": "멍멍왕자",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐱",
+      "name": "고양이",
+      "specialName": "야옹공주",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐰",
+      "name": "토끼",
+      "specialName": "깡총대장",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐷",
+      "name": "돼지",
+      "specialName": "꿀꿀대마왕",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐮",
+      "name": "소",
+      "specialName": "음메요정",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐔",
+      "name": "닭",
+      "specialName": "꼬꼬댁 사령관",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐸",
+      "name": "개구리",
+      "specialName": "개골박사",
+      "rarity": 1
+    },
+    {
+      "emoji": "🦆",
+      "name": "오리",
+      "specialName": "꽥꽥선장",
+      "rarity": 1
+    },
+    {
+      "emoji": "🐭",
+      "name": "쥐",
+      "specialName": "치즈 탐험
