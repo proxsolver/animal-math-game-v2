@@ -1,0 +1,30 @@
+{
+  "difficulty": 2,
+  "words": [
+    {
+      "korean": "도서관",
+      "english": "library",
+      "options": ["library", "museum", "hospital", "station"]
+    },
+    {
+      "korean": "운동장",
+      "english": "playground",
+      "options": ["playground", "classroom", "cafeteria", "office"]
+    },
+    {
+      "korean": "요리하다",
+      "english": "cook",
+      "options": ["cook", "clean", "study", "sleep"]
+    },
+    {
+      "korean": "친구",
+      "english": "friend",
+      "options": ["friend", "teacher", "parent", "student"]
+    },
+    {
+      "korean": "여행",
+      "english": "travel",
+      "options": ["travel", "work", "study", "play"]
+    }
+  ]
+}
