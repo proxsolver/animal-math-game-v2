@@ -1339,18 +1339,24 @@ function updateUI() {
         // 판매가 계산
         const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
         
-        card.innerHTML = `
-            <span class="animal-emoji">${animal.emoji}</span>
-            <div class="animal-name">${animal.name} (${animal.count}마리)</div>
-            <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
-            <div class="special-name">"${animal.specialName}"</div>
-            <div class="rarity-badge">★${animal.rarity}</div>
-            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
-            <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
-                <button onclick="startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
-                <button onclick="quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
-            </div>
-        `;
+card.innerHTML = `
+    <span class="animal-emoji">${animal.emoji}</span>
+    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+    <div class="special-name">"${animal.specialName}"</div>
+    <div class="rarity-badge">★${animal.rarity}</div>
+    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
+    <div style="font-size: 0.7rem; color: #999; text-align: center; margin-top: 3px;">📖 클릭하면 이야기를 들을 수 있어요</div>
+    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+        <button onclick="event.stopPropagation(); startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+        <button onclick="event.stopPropagation(); quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+    </div>
+`;
+
+// 카드 클릭시 스토리 표시
+card.onclick = () => {
+    generateAnimalStory(animal);
+};
         
         collection.appendChild(card);
     });
