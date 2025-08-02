@@ -894,171 +894,226 @@
         };
 
         // 영어 퀴즈 생성 (새로운 시스템)
-        async function generateEnglishQuiz() {
-            if (isLoadingWord) return;
-            
-            isLoadingWord = true;
-            
-            // UI 초기화
-            const questionElement = document.getElementById('english-question');
-            const optionsContainer = document.getElementById('english-options');
-            const speakButton = document.getElementById('speak-button');
-            const feedbackElement = document.getElementById('feedback');
-            
-            questionElement.textContent = '단어를 불러오는 중...';
-            optionsContainer.innerHTML = '';
-            speakButton.style.display = 'none';
-            feedbackElement.textContent = '';
-            feedbackElement.className = 'feedback';
-            
-            try {
-                if (currentDifficulty === 'review') {
-                    // 복습 모드: 틀린 단어들 중에서 선택
-                    await loadReviewWord();
-                } else {
-                    // 일반 모드: 새로운 단어 또는 기존 단어 로드
-                    await loadWordForDifficulty(currentDifficulty);
-                }
-                
-                displayCurrentWord();
-                updateWordStats();
-                
-            } catch (error) {
-                console.error('Error generating quiz:', error);
-                questionElement.textContent = '단어를 불러오는 중 오류가 발생했습니다.';
-            } finally {
-                isLoadingWord = false;
-            }
+// 영어 퀴즈 생성 (새로운 시스템)
+async function generateEnglishQuiz() {
+    if (isLoadingWord) return;
+    
+    isLoadingWord = true;
+    
+    // UI 초기화
+    const questionElement = document.getElementById('english-question');
+    const optionsContainer = document.getElementById('english-options');
+    const speakButton = document.getElementById('speak-button');
+    const feedbackElement = document.getElementById('feedback');
+    
+    questionElement.textContent = '단어를 불러오는 중...';
+    optionsContainer.innerHTML = '';
+    speakButton.style.display = 'none';
+    feedbackElement.textContent = '';
+    feedbackElement.className = 'feedback';
+    
+    try {
+        if (currentDifficulty === 'review') {
+            // 복습 모드: 틀린 단어들 중에서 선택
+            await loadReviewWord();
+        } else {
+            // 일반 모드: 새로운 단어 또는 기존 단어 로드
+            await loadWordForDifficulty(currentDifficulty);
         }
+        
+        console.log('단어 로드 완료:', currentWordData);
+        displayCurrentWord();
+        updateWordStats();
+        
+    } catch (error) {
+        console.error('Error generating quiz:', error);
+        questionElement.textContent = '단어를 불러오는 중 오류가 발생했습니다.';
+        
+        // 최종 폴백: 하드코딩된 단어 사용
+        const fallbackQuiz = quizWords[0]; // 첫 번째 단어 사용
+        const allOptions = [fallbackQuiz.answer, ...fallbackQuiz.options];
+        
+        currentWordData = {
+            id: 'emergency_fallback',
+            korean: fallbackQuiz.question,
+            english: fallbackQuiz.answer,
+            options: allOptions,
+            difficulty: currentDifficulty,
+            source: 'fallback'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        
+        console.log('긴급 폴백 단어 사용:', currentWordData);
+        displayCurrentWord();
+    } finally {
+        isLoadingWord = false;
+    }
+}
 
   // 난이도별 단어 로드
-        async function loadWordForDifficulty(difficulty) {
-            try {
-                // Firebase Cloud Function 호출하여 단어 생성/로드
-                const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getEnglishWord');
-                const result = await getWordFunction({ 
-                    difficulty: difficulty,
-                    userId: currentUserId 
-                });
-                
-                currentWordData = result.data.word;
-                currentEnglishQuiz = {
-                    answer: currentWordData.english,
-                    wordId: currentWordData.id
-                };
-                
-                console.log('AI 단어 로드 성공:', currentWordData);
-                
-            } catch (error) {
-                console.error('AI 단어 로드 실패, 폴백 사용:', error);
-                // 폴백: 기존 단어 사용
-                const fallbackQuiz = quizWords[Math.floor(Math.random() * quizWords.length)];
-                
-                // 올바른 옵션 배열 생성 (정답 + 오답들)
-                const allOptions = [fallbackQuiz.answer, ...fallbackQuiz.options];
-                
-                currentWordData = {
-                    id: 'fallback_' + Date.now(),
-                    korean: fallbackQuiz.question,
-                    english: fallbackQuiz.answer,
-                    options: allOptions, // 정답도 포함된 전체 옵션
-                    difficulty: difficulty,
-                    source: 'fallback'
-                };
-                currentEnglishQuiz = {
-                    answer: currentWordData.english,
-                    wordId: currentWordData.id
-                };
-                
-                console.log('폴백 단어 사용:', currentWordData);
-            }
-        }
+        // 난이도별 단어 로드
+async function loadWordForDifficulty(difficulty) {
+    try {
+        // Firebase Cloud Function 호출하여 단어 생성/로드
+        const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getEnglishWord');
+        const result = await getWordFunction({ 
+            difficulty: difficulty,
+            userId: currentUserId 
+        });
+        
+        currentWordData = result.data.word;
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        
+        console.log('AI 단어 로드 성공:', currentWordData);
+        
+    } catch (error) {
+        console.error('AI 단어 로드 실패, 폴백 사용:', error);
+        // 폴백: 기존 단어 사용
+        const fallbackQuiz = quizWords[Math.floor(Math.random() * quizWords.length)];
+        
+        // 올바른 옵션 배열 생성 (정답 + 오답들)
+        const allOptions = [fallbackQuiz.answer, ...fallbackQuiz.options];
+        
+        currentWordData = {
+            id: 'fallback_' + Date.now(),
+            korean: fallbackQuiz.question,
+            english: fallbackQuiz.answer,
+            options: allOptions, // 정답도 포함된 전체 옵션
+            difficulty: difficulty,
+            source: 'fallback'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        
+        console.log('폴백 단어 사용:', currentWordData);
+    }
+}
 
         // 복습용 단어 로드
-        async function loadReviewWord() {
-            // 로컬 진행도에서 틀린 단어들 찾기
-            const strugglingWords = [];
-            
-            for (const [wordId, progress] of Object.entries(userProgress)) {
-                const total = progress.correct + progress.incorrect;
-                if (total >= 3 && progress.incorrect > progress.correct) {
-                    strugglingWords.push(wordId);
-                }
-            }
-            
-            if (strugglingWords.length === 0) {
-                // 복습할 단어가 없으면 일반 단어로 대체
-                alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
-                await loadWordForDifficulty(1);
-                return;
-            }
-            
-            // 랜덤하게 하나 선택
-            const randomWordId = strugglingWords[Math.floor(Math.random() * strugglingWords.length)];
-            
-            try {
-                // Firebase에서 해당 단어 데이터 로드
-                const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getWordById');
-                const result = await getWordFunction({ wordId: randomWordId });
-                
-                currentWordData = result.data.word;
-                currentEnglishQuiz = {
-                    answer: currentWordData.english,
-                    wordId: currentWordData.id
-                };
-                
-            } catch (error) {
-                console.error('Error loading review word:', error);
-                // 폴백
-                await loadWordForDifficulty(1);
-            }
+// 복습용 단어 로드
+async function loadReviewWord() {
+    // 로컬 진행도에서 틀린 단어들 찾기
+    const strugglingWords = [];
+    
+    for (const [wordId, progress] of Object.entries(userProgress)) {
+        const total = progress.correct + progress.incorrect;
+        if (total >= 3 && progress.incorrect > progress.correct) {
+            strugglingWords.push(wordId);
         }
+    }
+    
+    if (strugglingWords.length === 0) {
+        // 복습할 단어가 없으면 일반 단어로 대체
+        alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
+        await loadWordForDifficulty(1);
+        return;
+    }
+    
+    // 랜덤하게 하나 선택
+    const randomWordId = strugglingWords[Math.floor(Math.random() * strugglingWords.length)];
+    
+    try {
+        // Firebase에서 해당 단어 데이터 로드 시도
+        const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getWordById');
+        const result = await getWordFunction({ wordId: randomWordId });
+        
+        currentWordData = result.data.word;
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        
+        console.log('복습 단어 로드 성공:', currentWordData);
+        
+    } catch (error) {
+        console.error('복습 단어 로드 실패, 일반 단어 사용:', error);
+        
+        // 폴백: 기존 단어 중에서 복습용으로 사용
+        const fallbackQuiz = quizWords[Math.floor(Math.random() * Math.min(10, quizWords.length))]; // 쉬운 단어들만
+        const allOptions = [fallbackQuiz.answer, ...fallbackQuiz.options];
+        
+        currentWordData = {
+            id: randomWordId, // 원래 wordId 유지하여 진행도 연결
+            korean: fallbackQuiz.question,
+            english: fallbackQuiz.answer,
+            options: allOptions,
+            difficulty: 'review',
+            source: 'fallback'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        
+        console.log('복습 폴백 단어 사용:', currentWordData);
+    }
+}
 
         // 현재 단어 표시
-        function displayCurrentWord() {
-            if (!currentWordData) return;
-            
-            const questionElement = document.getElementById('english-question');
-            const optionsContainer = document.getElementById('english-options');
-            const speakButton = document.getElementById('speak-button');
-            const wordSourceElement = document.getElementById('word-source');
-            const sourceBadge = document.getElementById('source-badge');
-            
-            questionElement.textContent = `"${currentWordData.korean}"`;
-            speakButton.style.display = 'inline';
-            speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
-            
-            // 단어 출처 표시
-            wordSourceElement.style.display = 'block';
-            
-            if (currentWordData.source === 'ai') {
-                sourceBadge.className = 'source-badge ai-generated';
-                sourceBadge.innerHTML = '🤖 AI 생성';
-                sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
-            } else if (currentWordData.source === 'fallback') {
-                sourceBadge.className = 'source-badge fallback';
-                sourceBadge.innerHTML = '🔄 대체 단어';
-                sourceBadge.title = 'AI 생성 실패로 대체된 단어입니다';
-            } else {
-                sourceBadge.className = 'source-badge hardcoded';
-                sourceBadge.innerHTML = '📝 기본 단어';
-                sourceBadge.title = '미리 준비된 단어입니다';
-            }
-            
-            // 옵션 생성 (정답 + 오답 3개)
-            const wrongOptions = currentWordData.options.filter(opt => opt !== currentWordData.english);
-            const shuffledWrong = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
-            const finalOptions = [currentWordData.english, ...shuffledWrong].sort(() => Math.random() - 0.5);
-            
-            optionsContainer.innerHTML = '';
-            finalOptions.forEach(option => {
-                const button = document.createElement('button');
-                button.className = 'english-option-btn';
-                button.innerText = option;
-                button.onclick = () => checkEnglishQuizAnswer(option);
-                optionsContainer.appendChild(button);
-            });
-        }
+        // 현재 단어 표시
+function displayCurrentWord() {
+    if (!currentWordData) return;
+    
+    const questionElement = document.getElementById('english-question');
+    const optionsContainer = document.getElementById('english-options');
+    const speakButton = document.getElementById('speak-button');
+    const wordSourceElement = document.getElementById('word-source');
+    const sourceBadge = document.getElementById('source-badge');
+    
+    questionElement.textContent = `"${currentWordData.korean}"`;
+    speakButton.style.display = 'inline';
+    speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+    
+    // 단어 출처 표시
+    wordSourceElement.style.display = 'block';
+    
+    if (currentWordData.source === 'ai') {
+        sourceBadge.className = 'source-badge ai-generated';
+        sourceBadge.innerHTML = '🤖 AI 생성';
+        sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
+    } else if (currentWordData.source === 'fallback') {
+        sourceBadge.className = 'source-badge fallback';
+        sourceBadge.innerHTML = '🔄 대체 단어';
+        sourceBadge.title = 'AI 생성 실패로 대체된 단어입니다';
+    } else {
+        sourceBadge.className = 'source-badge hardcoded';
+        sourceBadge.innerHTML = '📝 기본 단어';
+        sourceBadge.title = '미리 준비된 단어입니다';
+    }
+    
+    // 옵션 생성
+    let finalOptions = [];
+    
+    if (currentWordData.options && currentWordData.options.length >= 4) {
+        // AI에서 받은 단어의 경우: 이미 정답+오답이 모두 포함됨
+        const correctAnswer = currentWordData.english;
+        const wrongOptions = currentWordData.options.filter(opt => opt !== correctAnswer);
+        const shuffledWrong = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
+        finalOptions = [correctAnswer, ...shuffledWrong].sort(() => Math.random() - 0.5);
+    } else {
+        // 폴백 단어의 경우: options 배열을 직접 사용
+        finalOptions = [...currentWordData.options].sort(() => Math.random() - 0.5);
+    }
+    
+    console.log('표시할 옵션들:', finalOptions);
+    
+    optionsContainer.innerHTML = '';
+    finalOptions.forEach(option => {
+        const button = document.createElement('button');
+        button.className = 'english-option-btn';
+        button.innerText = option;
+        button.onclick = () => checkEnglishQuizAnswer(option);
+        optionsContainer.appendChild(button);
+    });
+}
 
         // 단어 통계 업데이트
         function updateWordStats() {
