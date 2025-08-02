@@ -2,29 +2,954 @@
   "difficulty": 2,
   "words": [
     {
-      "korean": "도서관",
+      "korean": "(명) 도서관 / 책을 보는 곳",
       "english": "library",
       "options": ["library", "museum", "hospital", "station"]
     },
     {
-      "korean": "운동장",
+      "korean": "(명) 운동장 / 체육하는 곳",
       "english": "playground",
       "options": ["playground", "classroom", "cafeteria", "office"]
     },
     {
-      "korean": "요리하다",
+      "korean": "(동) 요리하다 / 음식을 만들다",
       "english": "cook",
       "options": ["cook", "clean", "study", "sleep"]
     },
     {
-      "korean": "친구",
+      "korean": "(명) 친구 / 동무",
       "english": "friend",
       "options": ["friend", "teacher", "parent", "student"]
     },
     {
-      "korean": "여행",
+      "korean": "(명) 여행 / 구경하기",
       "english": "travel",
       "options": ["travel", "work", "study", "play"]
+    },
+    {
+      "korean": "(명) 과제 / 숙제",
+      "english": "assignment",
+      "options": ["assignment", "homework", "project", "report"]
+    },
+    {
+      "korean": "(명) 발표 / 앞에서 말하기",
+      "english": "presentation",
+      "options": ["presentation", "speech", "report", "lecture"]
+    },
+    {
+      "korean": "(명) 토론 / 의견을 나누기",
+      "english": "discussion",
+      "options": ["discussion", "debate", "argument", "conversation"]
+    },
+    {
+      "korean": "(명) 회의 / 모여서 상의하기",
+      "english": "meeting",
+      "options": ["meeting", "conference", "gathering", "assembly"]
+    },
+    {
+      "korean": "(명) 계획 / 미리 정하기",
+      "english": "plan",
+      "options": ["plan", "schedule", "agenda", "proposal"]
+    },
+    {
+      "korean": "(명) 보고서 / 결과를 적은 글",
+      "english": "report",
+      "options": ["report", "document", "paper", "assignment"]
+    },
+    {
+      "korean": "(명) 연구 / 자세히 조사하기",
+      "english": "research",
+      "options": ["research", "study", "investigation", "analysis"]
+    },
+    {
+      "korean": "(명) 분석 / 자세히 살펴보기",
+      "english": "analysis",
+      "options": ["analysis", "examination", "study", "review"]
+    },
+    {
+      "korean": "(명) 비교 / 견주어보기",
+      "english": "comparison",
+      "options": ["comparison", "contrast", "analysis", "evaluation"]
+    },
+    {
+      "korean": "(명) 대조 / 다른 점 찾기",
+      "english": "contrast",
+      "options": ["contrast", "comparison", "difference", "opposition"]
+    },
+    {
+      "korean": "(명) 유사점 / 비슷한 점",
+      "english": "similarity",
+      "options": ["similarity", "difference", "likeness", "resemblance"]
+    },
+    {
+      "korean": "(명) 차이점 / 다른 점",
+      "english": "difference",
+      "options": ["difference", "similarity", "distinction", "variation"]
+    },
+    {
+      "korean": "(명) 특징 / 특별한 점",
+      "english": "characteristic",
+      "options": ["characteristic", "feature", "trait", "quality"]
+    },
+    {
+      "korean": "(명) 성격 / 사람의 됨됨이",
+      "english": "personality",
+      "options": ["personality", "character", "nature", "temperament"]
+    },
+    {
+      "korean": "(명) 태도 / 마음가짐",
+      "english": "attitude",
+      "options": ["attitude", "behavior", "manner", "approach"]
+    },
+    {
+      "korean": "(명) 행동 / 몸짓이나 말",
+      "english": "behavior",
+      "options": ["behavior", "action", "conduct", "manner"]
+    },
+    {
+      "korean": "(명) 예의 / 공손함",
+      "english": "manners",
+      "options": ["manners", "politeness", "courtesy", "etiquette"]
+    },
+    {
+      "korean": "(명) 예절 / 지켜야 할 법도",
+      "english": "etiquette",
+      "options": ["etiquette", "manners", "protocol", "courtesy"]
+    },
+    {
+      "korean": "(명) 문화 / 사람들의 생활양식",
+      "english": "culture",
+      "options": ["culture", "tradition", "custom", "civilization"]
+    },
+    {
+      "korean": "(명) 전통 / 옛날부터 내려오는 것",
+      "english": "tradition",
+      "options": ["tradition", "custom", "heritage", "culture"]
+    },
+    {
+      "korean": "(명) 관습 / 습관적으로 하는 것",
+      "english": "custom",
+      "options": ["custom", "tradition", "practice", "habit"]
+    },
+    {
+      "korean": "(명) 유산 / 물려받은 것",
+      "english": "heritage",
+      "options": ["heritage", "legacy", "inheritance", "tradition"]
+    },
+    {
+      "korean": "(형) 역사적 / 역사와 관련된",
+      "english": "historical",
+      "options": ["historical", "ancient", "past", "traditional"]
+    },
+    {
+      "korean": "(형) 고대의 / 아주 옛날의",
+      "english": "ancient",
+      "options": ["ancient", "old", "historical", "prehistoric"]
+    },
+    {
+      "korean": "(형) 현대의 / 요즘의",
+      "english": "modern",
+      "options": ["modern", "contemporary", "current", "recent"]
+    },
+    {
+      "korean": "(명) 미래 / 앞으로의 시간",
+      "english": "future",
+      "options": ["future", "tomorrow", "upcoming", "next"]
+    },
+    {
+      "korean": "(명) 과거 / 지나간 시간",
+      "english": "past",
+      "options": ["past", "history", "previous", "former"]
+    },
+    {
+      "korean": "(명) 현재 / 지금 이 시간",
+      "english": "present",
+      "options": ["present", "current", "now", "today"]
+    },
+    {
+      "korean": "(명) 순간 / 아주 짧은 시간",
+      "english": "moment",
+      "options": ["moment", "instant", "second", "time"]
+    },
+    {
+      "korean": "(명) 기간 / 일정한 시간",
+      "english": "period",
+      "options": ["period", "duration", "time", "span"]
+    },
+    {
+      "korean": "(형) 영구적인 / 계속 지속되는",
+      "english": "permanent",
+      "options": ["permanent", "lasting", "eternal", "continuous"]
+    },
+    {
+      "korean": "(형) 임시적인 / 잠시 동안만의",
+      "english": "temporary",
+      "options": ["temporary", "brief", "short", "provisional"]
+    },
+    {
+      "korean": "(형) 지속적인 / 계속되는",
+      "english": "continuous",
+      "options": ["continuous", "constant", "ongoing", "persistent"]
+    },
+    {
+      "korean": "(형) 정기적인 / 일정한 때마다의",
+      "english": "regular",
+      "options": ["regular", "routine", "periodic", "consistent"]
+    },
+    {
+      "korean": "(형) 불규칙한 / 일정하지 않은",
+      "english": "irregular",
+      "options": ["irregular", "uneven", "random", "inconsistent"]
+    },
+    {
+      "korean": "(명) 패턴 / 일정한 모양이나 형태",
+      "english": "pattern",
+      "options": ["pattern", "design", "model", "structure"]
+    },
+    {
+      "korean": "(명) 구조 / 짜임새",
+      "english": "structure",
+      "options": ["structure", "framework", "organization", "system"]
+    },
+    {
+      "korean": "(명) 체계 / 조직이나 질서",
+      "english": "system",
+      "options": ["system", "method", "organization", "structure"]
+    },
+    {
+      "korean": "(명) 방법 / 어떤 일을 하는 길",
+      "english": "method",
+      "options": ["method", "way", "technique", "approach"]
+    },
+    {
+      "korean": "(명) 기술 / 솜씨나 방법",
+      "english": "technique",
+      "options": ["technique", "skill", "method", "ability"]
+    },
+    {
+      "korean": "(명) 능력 / 어떤 일을 할 수 있는 힘",
+      "english": "ability",
+      "options": ["ability", "skill", "talent", "capacity"]
+    },
+    {
+      "korean": "(명) 재능 / 타고난 능력",
+      "english": "talent",
+      "options": ["talent", "gift", "ability", "skill"]
+    },
+    {
+      "korean": "(명) 기능 / 역할이나 작용",
+      "english": "function",
+      "options": ["function", "role", "purpose", "operation"]
+    },
+    {
+      "korean": "(명) 역할 / 맡은 일",
+      "english": "role",
+      "options": ["role", "part", "function", "responsibility"]
+    },
+    {
+      "korean": "(명) 책임 / 맡아서 해야 할 일",
+      "english": "responsibility",
+      "options": ["responsibility", "duty", "obligation", "role"]
+    },
+    {
+      "korean": "(명) 의무 / 마땅히 해야 할 일",
+      "english": "duty",
+      "options": ["duty", "responsibility", "obligation", "task"]
+    },
+    {
+      "korean": "(명) 권리 / 정당하게 가지는 힘",
+      "english": "right",
+      "options": ["right", "privilege", "authority", "power"]
+    },
+    {
+      "korean": "(명) 권한 / 어떤 일을 할 수 있는 자격",
+      "english": "authority",
+      "options": ["authority", "power", "right", "control"]
+    },
+    {
+      "korean": "(명) 통제 / 다스리고 관리함",
+      "english": "control",
+      "options": ["control", "management", "authority", "power"]
+    },
+    {
+      "korean": "(명) 관리 / 잘 다스림",
+      "english": "management",
+      "options": ["management", "control", "administration", "supervision"]
+    },
+    {
+      "korean": "(명) 감독 / 살펴보고 지도함",
+      "english": "supervision",
+      "options": ["supervision", "management", "control", "oversight"]
+    },
+    {
+      "korean": "(명) 지도 / 가르치고 이끎",
+      "english": "guidance",
+      "options": ["guidance", "direction", "instruction", "leadership"]
+    },
+    {
+      "korean": "(명) 지시 / 명령이나 가르침",
+      "english": "instruction",
+      "options": ["instruction", "direction", "guidance", "command"]
+    },
+    {
+      "korean": "(명) 명령 / 시키는 말",
+      "english": "command",
+      "options": ["command", "order", "instruction", "direction"]
+    },
+    {
+      "korean": "(명) 요청 / 부탁하거나 청함",
+      "english": "request",
+      "options": ["request", "ask", "petition", "appeal"]
+    },
+    {
+      "korean": "(명) 제안 / 의견을 내놓음",
+      "english": "suggestion",
+      "options": ["suggestion", "proposal", "recommendation", "advice"]
+    },
+    {
+      "korean": "(명) 추천 / 좋다고 권함",
+      "english": "recommendation",
+      "options": ["recommendation", "suggestion", "advice", "proposal"]
+    },
+    {
+      "korean": "(명) 조언 / 도움이 되는 말",
+      "english": "advice",
+      "options": ["advice", "suggestion", "guidance", "counsel"]
+    },
+    {
+      "korean": "(명) 상담 / 서로 의논함",
+      "english": "consultation",
+      "options": ["consultation", "advice", "counseling", "discussion"]
+    },
+    {
+      "korean": "(명) 상의 / 함께 의논함",
+      "english": "consultation",
+      "options": ["consultation", "discussion", "conference", "meeting"]
+    },
+    {
+      "korean": "(명) 협의 / 함께 의논하여 정함",
+      "english": "negotiation",
+      "options": ["negotiation", "discussion", "consultation", "agreement"]
+    },
+    {
+      "korean": "(명) 합의 / 의견을 같이함",
+      "english": "agreement",
+      "options": ["agreement", "consensus", "accord", "understanding"]
+    },
+    {
+      "korean": "(명) 계약 / 약속을 정함",
+      "english": "contract",
+      "options": ["contract", "agreement", "deal", "pact"]
+    },
+    {
+      "korean": "(명) 거래 / 사고팔거나 주고받음",
+      "english": "transaction",
+      "options": ["transaction", "deal", "trade", "exchange"]
+    },
+    {
+      "korean": "(명) 교환 / 서로 바꿈",
+      "english": "exchange",
+      "options": ["exchange", "trade", "swap", "transaction"]
+    },
+    {
+      "korean": "(명) 무역 / 나라 간 물건 사고팔기",
+      "english": "trade",
+      "options": ["trade", "commerce", "business", "exchange"]
+    },
+    {
+      "korean": "(명) 상업 / 장사",
+      "english": "commerce",
+      "options": ["commerce", "business", "trade", "industry"]
+    },
+    {
+      "korean": "(명) 사업 / 돈을 벌기 위한 일",
+      "english": "business",
+      "options": ["business", "company", "enterprise", "commerce"]
+    },
+    {
+      "korean": "(명) 회사 / 사업하는 단체",
+      "english": "company",
+      "options": ["company", "corporation", "business", "firm"]
+    },
+    {
+      "korean": "(명) 기업 / 사업을 하는 조직",
+      "english": "enterprise",
+      "options": ["enterprise", "company", "business", "corporation"]
+    },
+    {
+      "korean": "(명) 산업 / 물건을 만드는 일",
+      "english": "industry",
+      "options": ["industry", "manufacturing", "production", "business"]
+    },
+    {
+      "korean": "(명) 제조업 / 물건을 만드는 업종",
+      "english": "manufacturing",
+      "options": ["manufacturing", "production", "industry", "factory"]
+    },
+    {
+      "korean": "(명) 생산 / 물건을 만들어 냄",
+      "english": "production",
+      "options": ["production", "manufacturing", "creation", "output"]
+    },
+    {
+      "korean": "(명) 창조 / 새로 만들어 냄",
+      "english": "creation",
+      "options": ["creation", "invention", "innovation", "production"]
+    },
+    {
+      "korean": "(명) 발명 / 새로운 것을 만들어 냄",
+      "english": "invention",
+      "options": ["invention", "creation", "innovation", "discovery"]
+    },
+    {
+      "korean": "(명) 혁신 / 새롭게 바꿈",
+      "english": "innovation",
+      "options": ["innovation", "change", "improvement", "reform"]
+    },
+    {
+      "korean": "(명) 개혁 / 제도나 방식을 바꿈",
+      "english": "reform",
+      "options": ["reform", "change", "improvement", "revolution"]
+    },
+    {
+      "korean": "(명) 혁명 / 크게 바뀜",
+      "english": "revolution",
+      "options": ["revolution", "change", "transformation", "reform"]
+    },
+    {
+      "korean": "(명) 변화 / 달라짐",
+      "english": "change",
+      "options": ["change", "transformation", "alteration", "modification"]
+    },
+    {
+      "korean": "(명) 변형 / 모양이나 성질이 바뀜",
+      "english": "transformation",
+      "options": ["transformation", "change", "conversion", "alteration"]
+    },
+    {
+      "korean": "(명) 발전 / 앞으로 나아감",
+      "english": "development",
+      "options": ["development", "progress", "advancement", "growth"]
+    },
+    {
+      "korean": "(명) 진보 / 더 나은 상태로 나아감",
+      "english": "progress",
+      "options": ["progress", "advancement", "development", "improvement"]
+    },
+    {
+      "korean": "(명) 성장 / 자라서 커짐",
+      "english": "growth",
+      "options": ["growth", "development", "expansion", "increase"]
+    },
+    {
+      "korean": "(명) 확장 / 크기나 범위가 넓어짐",
+      "english": "expansion",
+      "options": ["expansion", "growth", "extension", "enlargement"]
+    },
+    {
+      "korean": "(명) 증가 / 수나 양이 늘어남",
+      "english": "increase",
+      "options": ["increase", "growth", "rise", "expansion"]
+    },
+    {
+      "korean": "(명) 감소 / 수나 양이 줄어듦",
+      "english": "decrease",
+      "options": ["decrease", "reduction", "decline", "drop"]
+    },
+    {
+      "korean": "(명) 축소 / 크기나 규모가 줄어듦",
+      "english": "reduction",
+      "options": ["reduction", "decrease", "decline", "cut"]
+    },
+    {
+      "korean": "(동) 유지하다 / 그대로 보존하다",
+      "english": "maintain",
+      "options": ["maintain", "keep", "preserve", "sustain"]
+    },
+    {
+      "korean": "(동) 보존하다 / 없어지지 않게 지키다",
+      "english": "preserve",
+      "options": ["preserve", "protect", "conserve", "maintain"]
+    },
+    {
+      "korean": "(동) 보호하다 / 해를 받지 않게 지키다",
+      "english": "protect",
+      "options": ["protect", "defend", "guard", "shield"]
+    },
+    {
+      "korean": "(동) 방어하다 / 공격을 막다",
+      "english": "defend",
+      "options": ["defend", "protect", "guard", "resist"]
+    },
+    {
+      "korean": "(동) 공격하다 / 해를 끼치려 하다",
+      "english": "attack",
+      "options": ["attack", "assault", "strike", "fight"]
+    },
+    {
+      "korean": "(동) 싸우다 / 겨루거나 다투다",
+      "english": "fight",
+      "options": ["fight", "battle", "combat", "struggle"]
+    },
+    {
+      "korean": "(명) 전투 / 싸움",
+      "english": "battle",
+      "options": ["battle", "fight", "war", "combat"]
+    },
+    {
+      "korean": "(명) 전쟁 / 나라 간의 싸움",
+      "english": "war",
+      "options": ["war", "battle", "conflict", "fight"]
+    },
+    {
+      "korean": "(명) 갈등 / 의견이 맞지 않아 다툼",
+      "english": "conflict",
+      "options": ["conflict", "dispute", "disagreement", "argument"]
+    },
+    {
+      "korean": "(명) 분쟁 / 서로 다투는 일",
+      "english": "dispute",
+      "options": ["dispute", "conflict", "argument", "disagreement"]
+    },
+    {
+      "korean": "(명) 평화 / 전쟁이나 다툼이 없는 상태",
+      "english": "peace",
+      "options": ["peace", "harmony", "calm", "tranquility"]
+    },
+    {
+      "korean": "(명) 조화 / 서로 잘 어울림",
+      "english": "harmony",
+      "options": ["harmony", "balance", "unity", "agreement"]
+    },
+    {
+      "korean": "(명) 균형 / 서로 맞먹는 상태",
+      "english": "balance",
+      "options": ["balance", "equilibrium", "stability", "harmony"]
+    },
+    {
+      "korean": "(명) 안정 / 변하지 않고 고른 상태",
+      "english": "stability",
+      "options": ["stability", "balance", "security", "steadiness"]
+    },
+    {
+      "korean": "(명) 안전 / 위험하지 않은 상태",
+      "english": "safety",
+      "options": ["safety", "security", "protection", "shelter"]
+    },
+    {
+      "korean": "(명) 보안 / 안전하게 지킴",
+      "english": "security",
+      "options": ["security", "safety", "protection", "defense"]
+    },
+    {
+      "korean": "(명) 위험 / 해로울 수 있는 상황",
+      "english": "danger",
+      "options": ["danger", "risk", "threat", "hazard"]
+    },
+    {
+      "korean": "(명) 위협 / 해를 끼치려는 말이나 행동",
+      "english": "threat",
+      "options": ["threat", "danger", "menace", "warning"]
+    },
+    {
+      "korean": "(명) 경고 / 미리 알려주는 말",
+      "english": "warning",
+      "options": ["warning", "alert", "notice", "caution"]
+    },
+    {
+      "korean": "(명) 주의 / 조심하는 마음",
+      "english": "caution",
+      "options": ["caution", "care", "attention", "warning"]
+    },
+    {
+      "korean": "(명) 관심 / 마음을 기울임",
+      "english": "attention",
+      "options": ["attention", "interest", "focus", "concentration"]
+    },
+    {
+      "korean": "(명) 집중 / 한 곳에 마음을 모음",
+      "english": "concentration",
+      "options": ["concentration", "focus", "attention", "dedication"]
+    },
+    {
+      "korean": "(명) 헌신 / 정성을 다함",
+      "english": "dedication",
+      "options": ["dedication", "commitment", "devotion", "loyalty"]
+    },
+    {
+      "korean": "(명) 충성 / 진심으로 섬김",
+      "english": "loyalty",
+      "options": ["loyalty", "faithfulness", "devotion", "allegiance"]
+    },
+    {
+      "korean": "(명) 신념 / 굳게 믿는 마음",
+      "english": "belief",
+      "options": ["belief", "faith", "conviction", "trust"]
+    },
+    {
+      "korean": "(명) 확신 / 의심하지 않고 믿음",
+      "english": "conviction",
+      "options": ["conviction", "belief", "certainty", "confidence"]
+    },
+    {
+      "korean": "(명) 의심 / 믿지 못하는 마음",
+      "english": "doubt",
+      "options": ["doubt", "suspicion", "uncertainty", "question"]
+    },
+    {
+      "korean": "(명) 불확실성 / 확실하지 않은 상태",
+      "english": "uncertainty",
+      "options": ["uncertainty", "doubt", "confusion", "ambiguity"]
+    },
+    {
+      "korean": "(명) 혼란 / 어수선하고 뒤섞인 상태",
+      "english": "confusion",
+      "options": ["confusion", "chaos", "disorder", "mess"]
+    },
+    {
+      "korean": "(명) 질서 / 차례와 규칙이 있는 상태",
+      "english": "order",
+      "options": ["order", "organization", "system", "arrangement"]
+    },
+    {
+      "korean": "(명) 조직 / 체계적으로 짜인 단체",
+      "english": "organization",
+      "options": ["organization", "institution", "association", "group"]
+    },
+    {
+      "korean": "(명) 기관 / 특별한 목적의 조직",
+      "english": "institution",
+      "options": ["institution", "organization", "establishment", "agency"]
+    },
+    {
+      "korean": "(명) 협회 / 같은 목적의 사람들이 모인 단체",
+      "english": "association",
+      "options": ["association", "organization", "society", "club"]
+    },
+    {
+      "korean": "(명) 사회 / 사람들이 모여 사는 공동체",
+      "english": "society",
+      "options": ["society", "community", "civilization", "culture"]
+    },
+    {
+      "korean": "(명) 공동체 / 함께 생활하는 집단",
+      "english": "community",
+      "options": ["community", "society", "group", "neighborhood"]
+    },
+    {
+      "korean": "(명) 시민 / 나라의 구성원",
+      "english": "citizen",
+      "options": ["citizen", "resident", "inhabitant", "national"]
+    },
+    {
+      "korean": "(명) 국민 / 한 나라의 사람",
+      "english": "national",
+      "options": ["national", "citizen", "people", "population"]
+    },
+    {
+      "korean": "(명) 인구 / 한 지역에 사는 사람의 수",
+      "english": "population",
+      "options": ["population", "people", "inhabitants", "residents"]
+    },
+    {
+      "korean": "(명) 거주민 / 한 곳에 살고 있는 사람",
+      "english": "resident",
+      "options": ["resident", "inhabitant", "citizen", "dweller"]
+    },
+    {
+      "korean": "(명) 가족 / 함께 사는 친척들",
+      "english": "family",
+      "options": ["family", "relatives", "household", "kin"]
+    },
+    {
+      "korean": "(명) 친척 / 혈연관계에 있는 사람",
+      "english": "relative",
+      "options": ["relative", "family", "relation", "kin"]
+    },
+    {
+      "korean": "(명) 조상 / 앞 세대의 사람들",
+      "english": "ancestor",
+      "options": ["ancestor", "forefather", "predecessor", "elder"]
+    },
+    {
+      "korean": "(명) 후손 / 뒷세대의 사람들",
+      "english": "descendant",
+      "options": ["descendant", "offspring", "heir", "successor"]
+    },
+    {
+      "korean": "(명) 세대 / 비슷한 나이의 사람들",
+      "english": "generation",
+      "options": ["generation", "age group", "era", "period"]
+    },
+    {
+      "korean": "(명) 시대 / 특정한 기간",
+      "english": "era",
+      "options": ["era", "age", "period", "epoch"]
+    },
+    {
+      "korean": "(명) 연령 / 태어난 후 지난 시간",
+      "english": "age",
+      "options": ["age", "years", "maturity", "generation"]
+    },
+    {
+      "korean": "(명) 성숙 / 충분히 자란 상태",
+      "english": "maturity",
+      "options": ["maturity", "adulthood", "ripeness", "development"]
+    },
+    {
+      "korean": "(명) 성인 / 다 자란 사람",
+      "english": "adult",
+      "options": ["adult", "grown-up", "mature person", "elder"]
+    },
+    {
+      "korean": "(명) 어린이 / 나이가 어린 사람",
+      "english": "child",
+      "options": ["child", "kid", "youngster", "minor"]
+    },
+    {
+      "korean": "(명) 청소년 / 어른이 되어가는 시기의 사람",
+      "english": "teenager",
+      "options": ["teenager", "adolescent", "youth", "teen"]
+    },
+    {
+      "korean": "(명) 젊은이 / 나이가 적은 사람",
+      "english": "youth",
+      "options": ["youth", "young person", "teenager", "juvenile"]
+    },
+    {
+      "korean": "(명) 노인 / 나이가 많은 사람",
+      "english": "elderly",
+      "options": ["elderly", "senior", "aged person", "elder"]
+    },
+    {
+      "korean": "(명) 어르신 / 나이가 많은 분",
+      "english": "elder",
+      "options": ["elder", "senior", "elderly person", "aged"]
+    },
+    {
+      "korean": "(형) 젊은 / 나이가 적은",
+      "english": "young",
+      "options": ["young", "youthful", "juvenile", "immature"]
+    },
+    {
+      "korean": "(형) 늙은 / 나이가 많은",
+      "english": "old",
+      "options": ["old", "aged", "elderly", "senior"]
+    },
+    {
+      "korean": "(형) 새로운 / 처음 생긴",
+      "english": "new",
+      "options": ["new", "fresh", "recent", "modern"]
+    },
+    {
+      "korean": "(형) 오래된 / 생긴 지 오래된",
+      "english": "old",
+      "options": ["old", "ancient", "aged", "vintage"]
+    },
+    {
+      "korean": "(형) 신선한 / 새롭고 깨끗한",
+      "english": "fresh",
+      "options": ["fresh", "new", "clean", "crisp"]
+    },
+    {
+      "korean": "(형) 깨끗한 / 더럽지 않은",
+      "english": "clean",
+      "options": ["clean", "pure", "spotless", "tidy"]
+    },
+    {
+      "korean": "(형) 더러운 / 깨끗하지 않은",
+      "english": "dirty",
+      "options": ["dirty", "filthy", "unclean", "messy"]
+    },
+    {
+      "korean": "(형) 지저분한 / 정리되지 않은",
+      "english": "messy",
+      "options": ["messy", "untidy", "disorganized", "chaotic"]
+    },
+    {
+      "korean": "(형) 정리된 / 차례대로 놓인",
+      "english": "organized",
+      "options": ["organized", "tidy", "neat", "orderly"]
+    },
+    {
+      "korean": "(형) 단정한 / 깔끔하고 정돈된",
+      "english": "neat",
+      "options": ["neat", "tidy", "orderly", "clean"]
+    },
+    {
+      "korean": "(형) 완전한 / 빠진 것이 없는",
+      "english": "complete",
+      "options": ["complete", "whole", "entire", "full"]
+    },
+    {
+      "korean": "(형) 불완전한 / 완성되지 않은",
+      "english": "incomplete",
+      "options": ["incomplete", "unfinished", "partial", "imperfect"]
+    },
+    {
+      "korean": "(형) 완벽한 / 흠이 없는",
+      "english": "perfect",
+      "options": ["perfect", "flawless", "ideal", "excellent"]
+    },
+    {
+      "korean": "(형) 불완전한 / 결함이 있는",
+      "english": "imperfect",
+      "options": ["imperfect", "flawed", "defective", "faulty"]
+    },
+    {
+      "korean": "(형) 우수한 / 뛰어난",
+      "english": "excellent",
+      "options": ["excellent", "outstanding", "superior", "great"]
+    },
+    {
+      "korean": "(형) 훌륭한 / 매우 좋은",
+      "english": "wonderful",
+      "options": ["wonderful", "marvelous", "fantastic", "amazing"]
+    },
+    {
+      "korean": "(형) 놀라운 / 매우 신기한",
+      "english": "amazing",
+      "options": ["amazing", "surprising", "astonishing", "incredible"]
+    },
+    {
+      "korean": "(형) 믿기 어려운 / 실제 같지 않은",
+      "english": "incredible",
+      "options": ["incredible", "unbelievable", "amazing", "extraordinary"]
+    },
+    {
+      "korean": "(형) 평범한 / 특별하지 않은",
+      "english": "ordinary",
+      "options": ["ordinary", "normal", "common", "regular"]
+    },
+    {
+      "korean": "(형) 특별한 / 남다른",
+      "english": "special",
+      "options": ["special", "unique", "extraordinary", "exceptional"]
+    },
+    {
+      "korean": "(형) 독특한 / 다른 것과 다른",
+      "english": "unique",
+      "options": ["unique", "special", "distinctive", "unusual"]
+    },
+    {
+      "korean": "(형) 일반적인 / 보통의",
+      "english": "common",
+      "options": ["common", "ordinary", "usual", "typical"]
+    },
+    {
+      "korean": "(형) 드문 / 흔하지 않은",
+      "english": "rare",
+      "options": ["rare", "uncommon", "scarce", "unusual"]
+    },
+    {
+      "korean": "(형) 흔한 / 자주 볼 수 있는",
+      "english": "frequent",
+      "options": ["frequent", "common", "regular", "usual"]
+    },
+    {
+      "korean": "(부) 자주 / 여러 번",
+      "english": "often",
+      "options": ["often", "frequently", "regularly", "usually"]
+    },
+    {
+      "korean": "(부) 가끔 / 때때로",
+      "english": "sometimes",
+      "options": ["sometimes", "occasionally", "now and then", "rarely"]
+    },
+    {
+      "korean": "(부) 항상 / 언제나",
+      "english": "always",
+      "options": ["always", "constantly", "forever", "continuously"]
+    },
+    {
+      "korean": "(부) 절대로 / 결코",
+      "english": "never",
+      "options": ["never", "not ever", "at no time", "under no circumstances"]
+    },
+    {
+      "korean": "(부) 이미 / 벌써",
+      "english": "already",
+      "options": ["already", "before", "previously", "by now"]
+    },
+    {
+      "korean": "(부) 아직 / 지금까지",
+      "english": "still",
+      "options": ["still", "yet", "even now", "up to now"]
+    },
+    {
+      "korean": "(부) 곧 / 머지않아",
+      "english": "soon",
+      "options": ["soon", "shortly", "in a while", "before long"]
+    },
+    {
+      "korean": "(부) 늦게 / 정해진 때보다 뒤에",
+      "english": "late",
+      "options": ["late", "behind", "tardy", "delayed"]
+    },
+    {
+      "korean": "(부) 일찍 / 정해진 때보다 앞서",
+      "english": "early",
+      "options": ["early", "ahead", "beforehand", "in advance"]
+    },
+    {
+      "korean": "(부) 빨리 / 속도가 빠르게",
+      "english": "quickly",
+      "options": ["quickly", "fast", "rapidly", "swiftly"]
+    },
+    {
+      "korean": "(부) 천천히 / 속도가 느리게",
+      "english": "slowly",
+      "options": ["slowly", "gradually", "steadily", "carefully"]
+    },
+    {
+      "korean": "(부) 조심스럽게 / 주의하며",
+      "english": "carefully",
+      "options": ["carefully", "cautiously", "attentively", "gently"]
+    },
+    {
+      "korean": "(부) 부드럽게 / 온화하게",
+      "english": "gently",
+      "options": ["gently", "softly", "tenderly", "carefully"]
+    },
+    {
+      "korean": "(부) 세게 / 힘을 주어서",
+      "english": "hard",
+      "options": ["hard", "strongly", "forcefully", "vigorously"]
+    },
+    {
+      "korean": "(부) 약하게 / 힘이 없이",
+      "english": "weakly",
+      "options": ["weakly", "gently", "softly", "lightly"]
+    },
+    {
+      "korean": "(부) 크게 / 소리나 크기가 큰",
+      "english": "loudly",
+      "options": ["loudly", "aloud", "noisily", "strongly"]
+    },
+    {
+      "korean": "(부) 작게 / 소리나 크기가 작은",
+      "english": "quietly",
+      "options": ["quietly", "softly", "silently", "gently"]
+    },
+    {
+      "korean": "(부) 확실히 / 틀림없이",
+      "english": "certainly",
+      "options": ["certainly", "definitely", "surely", "absolutely"]
+    },
+    {
+      "korean": "(부) 아마도 / 가능성이 있게",
+      "english": "probably",
+      "options": ["probably", "likely", "perhaps", "maybe"]
+    },
+    {
+      "korean": "(부) 분명히 / 확실하게",
+      "english": "clearly",
+      "options": ["clearly", "obviously", "evidently", "definitely"]
+    },
+    {
+      "korean": "(부) 정확히 / 틀리지 않게",
+      "english": "exactly",
+      "options": ["exactly", "precisely", "accurately", "correctly"]
     }
   ]
 }
