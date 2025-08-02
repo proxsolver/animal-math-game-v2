@@ -1,0 +1,30 @@
+{
+  "difficulty": 3,
+  "words": [
+    {
+      "korean": "분석하다",
+      "english": "analyze",
+      "options": ["analyze", "organize", "memorize", "summarize"]
+    },
+    {
+      "korean": "창의성",
+      "english": "creativity",
+      "options": ["creativity", "intelligence", "personality", "ability"]
+    },
+    {
+      "korean": "협력하다",
+      "english": "collaborate",
+      "options": ["collaborate", "compete", "communicate", "concentrate"]
+    },
+    {
+      "korean": "환경",
+      "english": "environment",
+      "options": ["environment", "government", "development", "management"]
+    },
+    {
+      "korean": "기술",
+      "english": "technology",
+      "options": ["technology", "psychology", "philosophy", "biology"]
+    }
+  ]
+}
