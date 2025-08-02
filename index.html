@@ -2344,15 +2344,23 @@ if (currentWordData.source === 'json') {
             }
         }
         
-        window.onFirebaseReady = async (user) => {
-            if (!user) {
-                document.getElementById('login-feedback').textContent = "클라우드 연결 실패! 오프라인 모드로 실행합니다.";
-                return;
-            }
-            currentUserId = user.uid;
-            await updateHallOfFame();
-            document.getElementById('login-overlay').style.display = 'flex';
-        }
+    window.onFirebaseReady = async function(user) {
+    if (!user) {
+        document.getElementById('login-feedback').textContent = "클라우드 연결 실패! 오프라인 모드로 실행합니다.";
+        return;
+    }
+    currentUserId = user.uid;
+    
+    try {
+        // 동물 데이터 먼저 로드
+        await loadAnimalsFromJSON();
+        await updateHallOfFame();
+    } catch (error) {
+        console.error('초기화 오류:', error);
+    }
+    
+    document.getElementById('login-overlay').style.display = 'flex';
+}
 
         // ==================== 로그인/회원가입/랭킹 로직 ====================
         
@@ -2364,28 +2372,50 @@ if (currentWordData.source === 'json') {
             return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
 
-        async function handleSignup() {
-            const nameInput = document.getElementById('player-name-input');
-            const pinInput = document.getElementById('player-pin-input');
-            const feedback = document.getElementById('login-feedback');
-            const name = nameInput.value.trim();
-            const pin = pinInput.value;
+    async function handleSignup() {
+    const nameInput = document.getElementById('player-name-input');
+    const pinInput = document.getElementById('player-pin-input');
+    const feedback = document.getElementById('login-feedback');
+    const name = nameInput.value.trim();
+    const pin = pinInput.value;
 
-            if (!name || !pin) {
-                feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
-                return;
-            }
-            if (!/^\d{4}$/.test(pin)) {
-                feedback.textContent = "PIN은 4자리 숫자여야 합니다.";
-                return;
-            }
+    if (!name || !pin) {
+        feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
+        return;
+    }
+    if (!/^\d{4}$/.test(pin)) {
+        feedback.textContent = "PIN은 4자리 숫자여야 합니다.";
+        return;
+    }
 
-            feedback.textContent = "확인 중...";
-            const existingProfile = await loadUserData(name);
-            if (existingProfile) {
-                feedback.textContent = "이미 사용 중인 이름입니다.";
-                return;
-            }
+    feedback.textContent = "확인 중...";
+    const existingProfile = await loadUserData(name);
+    if (existingProfile) {
+        feedback.textContent = "이미 사용 중인 이름입니다.";
+        return;
+    }
+
+    const hashedPin = await hashPin(pin, name);
+    const newProfile = {
+        name: name,
+        pinHash: hashedPin,
+        score: 0,
+        level: 1,
+        animals: {},
+        totalAnimals: 0,
+        speciesCount: 0,
+        farm: { layout: Array(48).fill(null), items: {} },
+        createdAt: new Date().toISOString(),
+        lastPlayed: new Date().toISOString()
+    };
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+    const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", newProfile.name);
+    await window.firebase.setDoc(userDocRef, newProfile);
+
+    alert(`🎉 ${name} 플레이어 생성 완료!`);
+    await startGameWithProfile(newProfile);
+}
 
             const hashedPin = await hashPin(pin, name);
             const newProfile = {
@@ -2410,34 +2440,34 @@ if (currentWordData.source === 'json') {
         }
 
         async function handleLogin() {
-            const nameInput = document.getElementById('player-name-input');
-            const pinInput = document.getElementById('player-pin-input');
-            const feedback = document.getElementById('login-feedback');
-            const name = nameInput.value.trim();
-            const pin = pinInput.value;
+    const nameInput = document.getElementById('player-name-input');
+    const pinInput = document.getElementById('player-pin-input');
+    const feedback = document.getElementById('login-feedback');
+    const name = nameInput.value.trim();
+    const pin = pinInput.value;
 
-            if (!name || !pin) {
-                feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
-                return;
-            }
+    if (!name || !pin) {
+        feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
+        return;
+    }
 
-            feedback.textContent = "로그인 중...";
-            const profileData = await loadUserData(name);
+    feedback.textContent = "로그인 중...";
+    const profileData = await loadUserData(name);
 
-            if (!profileData) {
-                feedback.textContent = "존재하지 않는 플레이어입니다.";
-                return;
-            }
+    if (!profileData) {
+        feedback.textContent = "존재하지 않는 플레이어입니다.";
+        return;
+    }
 
-            const hashedPin = await hashPin(pin, name);
-            if (hashedPin === profileData.pinHash) {
-                startGameWithProfile(profileData);
-            } else {
-                feedback.textContent = "PIN이 일치하지 않습니다.";
-            }
-        }
+    const hashedPin = await hashPin(pin, name);
+    if (hashedPin === profileData.pinHash) {
+        await startGameWithProfile(profileData);
+    } else {
+        feedback.textContent = "PIN이 일치하지 않습니다.";
+    }
+}
 
-   function startGameWithProfile(profileData) {
+ async function startGameWithProfile(profileData) {
     currentUserProfile = profileData;
     gameState = {
         score: profileData.score || 0,
@@ -2453,13 +2483,23 @@ if (currentWordData.source === 'json') {
     document.querySelector('.game-container').style.display = 'block';
     document.getElementById('current-user-name').textContent = currentUserProfile.name;
     
-    // 게임 초기화
-    initializeGame();
+    // 동물 데이터가 로드되지 않았으면 로드
+    if (animalTypes.length === 0) {
+        await loadAnimalsFromJSON();
+    }
+    
+    updateUI();
+    updateAnimalCollection();
+    initializeFarm();
     
     // 사용자 학습 진행도 로드 후 퀴즈 시작
-    loadUserProgress().then(() => {
+    try {
+        await loadUserProgress();
         selectDifficulty(1);
-    });
+    } catch (error) {
+        console.error('사용자 진행도 로드 실패:', error);
+        selectDifficulty(1);
+    }
     
     showPage('game', document.querySelector('.nav-btn'));
 }
@@ -2539,23 +2579,36 @@ if (currentWordData.source === 'json') {
 
         // ==================== 이벤트 리스너 ====================
         
-        document.getElementById('login-btn').addEventListener('click', handleLogin);
-        document.getElementById('signup-btn').addEventListener('click', handleSignup);
-        document.getElementById('player-pin-input').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') handleLogin();
-        });
-        
-        document.getElementById('math-answer-input').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                document.getElementById('math-submit-btn').click();
-            }
-        });
+document.getElementById('login-btn').addEventListener('click', async () => {
+    try {
+        await handleLogin();
+    } catch (error) {
+        console.error('로그인 오류:', error);
+        document.getElementById('login-feedback').textContent = "로그인 중 오류가 발생했습니다.";
+    }
+});
 
-        window.addEventListener('beforeunload', function() {
-            saveCurrentUserData();
-        });
+document.getElementById('signup-btn').addEventListener('click', async () => {
+    try {
+        await handleSignup();
+    } catch (error) {
+        console.error('회원가입 오류:', error);
+        document.getElementById('login-feedback').textContent = "회원가입 중 오류가 발생했습니다.";
+    }
+});
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v6.1 - AI Powered Learning System)');
+document.getElementById('player-pin-input').addEventListener('keypress', async (e) => {
+    if (e.key === 'Enter') {
+        try {
+            await handleLogin();
+        } catch (error) {
+            console.error('로그인 오류:', error);
+            document.getElementById('login-feedback').textContent = "로그인 중 오류가 발생했습니다.";
+        }
+    }
+});
+
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v6.2 - AI Powered Learning System)');
     </script>
 </body>
 </html>
