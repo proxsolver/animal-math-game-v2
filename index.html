@@ -190,6 +190,194 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+
+        /* 난이도 선택 스타일 */
+        .difficulty-selector {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .difficulty-selector h3 {
+            color: #2C5530;
+            margin-bottom: 15px;
+        }
+        .difficulty-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .difficulty-btn {
+            background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+            color: #333;
+            border: 3px solid #ccc;
+            padding: 15px 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            min-width: 80px;
+            text-align: center;
+        }
+        .difficulty-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .difficulty-btn.active {
+            background: linear-gradient(45deg, #32CD32, #228B22);
+            color: white;
+            border-color: #228B22;
+        }
+        .difficulty-btn small {
+            display: block;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        /* 학습 통계 스타일 */
+        .learning-stats {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 15px;
+            margin-top: 20px;
+            border: 2px solid #87CEEB;
+        }
+        .learning-stats h4 {
+            color: #4169E1;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .stats-row {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .stats-row span {
+            background: #f0f8ff;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* 복습 모드 전용 스타일 */
+        .review-mode .english-quiz-section {
+            border: 3px solid #FF6B6B;
+            background: linear-gradient(135deg, #fff5f5, #ffffff);
+        }
+        .review-mode .english-quiz-section h2::after {
+            content: " (복습 모드)";
+            color: #FF6B6B;
+        }
+
+        /* 학습 통계 페이지 스타일 */
+        .learning-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        .learning-container h2 {
+            color: #2C5530;
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        .learning-container h3 {
+            color: #4169E1;
+            margin: 25px 0 15px 0;
+            font-size: 1.4rem;
+        }
+        
+        .overall-stats {
+            background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+        }
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #4169E1;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .weak-words-section, .strong-words-section {
+            background: linear-gradient(135deg, #fff5f5, #ffe6f0);
+            padding: 20px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        .strong-words-section {
+            background: linear-gradient(135deg, #f0fff0, #e6ffe6);
+        }
+        
+        .weak-words-grid, .strong-words-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .word-progress-card {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            border-left: 5px solid #FF6B6B;
+        }
+        .word-progress-card.strong {
+            border-left-color: #32CD32;
+        }
+        .word-progress-card .word-pair {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #2C5530;
+        }
+        .word-progress-card .progress-stats {
+            font-size: 0.9rem;
+            color: #666;
+            display: flex;
+            justify-content: space-between;
+        }
+        .word-progress-card .accuracy-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        .word-progress-card .accuracy-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #FF6B6B, #FFB6C1);
+            transition: width 0.3s ease;
+        }
+        .word-progress-card.strong .accuracy-fill {
+            background: linear-gradient(90deg, #32CD32, #98FB98);
+        }
+        .no-data {
+            text-align: center;
+            color: #999;
+            font-style: italic;
+            grid-column: 1 / -1;
+            padding: 40px;
+        }
     </style>
 </head>
 <body>
@@ -222,6 +410,7 @@
             
             <div class="nav-buttons">
                 <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기 🇬🇧</button>
+                <button class="nav-btn" onclick="showPage('learning', this)">학습 통계 📈</button>
                 <button class="nav-btn" onclick="showPage('synthesis', this)">동물 합성 🧬</button>
                 <button class="nav-btn" onclick="showPage('market', this)">동물 시장 🏪</button>
                 <button class="nav-btn" onclick="showPage('farm', this)">농장 꾸미기 🏡</button>
@@ -247,18 +436,94 @@
             <div class="game-content">
                 <div class="english-quiz-section">
                     <h2>🇬🇧 영어 퀴즈: 동물 잡기!</h2>
+                    
+                    <!-- 난이도 선택 -->
+                    <div class="difficulty-selector">
+                        <h3>난이도 선택:</h3>
+                        <div class="difficulty-buttons">
+                            <button class="difficulty-btn active" data-level="1" onclick="selectDifficulty(1)">
+                                초급 📝<br><small>+10점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="2" onclick="selectDifficulty(2)">
+                                중급 📚<br><small>+20점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="3" onclick="selectDifficulty(3)">
+                                고급 🎓<br><small>+30점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="review" onclick="selectDifficulty('review')">
+                                복습 🔄<br><small>틀린문제</small>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="english-question-container">
-                        <div class="english-question" id="english-question">질문</div>
-                        <span id="speak-button" class="speak-btn" title="단어 발음 듣기">🔊</span>
+                        <div class="english-question" id="english-question">난이도를 선택하고 시작하세요!</div>
+                        <span id="speak-button" class="speak-btn" title="단어 발음 듣기" style="display: none;">🔊</span>
                     </div>
                     <div class="english-options" id="english-options"></div>
                     <div class="feedback" id="feedback"></div>
+                    
+                    <!-- 학습 통계 -->
+                    <div class="learning-stats" id="learning-stats" style="display: none;">
+                        <h4>📊 현재 단어 통계</h4>
+                        <div class="stats-row">
+                            <span>정답: <strong id="word-correct">0</strong>회</span>
+                            <span>오답: <strong id="word-incorrect">0</strong>회</span>
+                            <span>정답률: <strong id="word-accuracy">0</strong>%</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="collection-section">
                     <h2>🐾 내 동물 컬렉션</h2>
                     <p class="collection-hint">💡 동물을 클릭해서 수학 문제로 레벨업 시켜요!</p>
                     <div class="animal-grid" id="animal-collection"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 학습 통계 페이지 -->
+        <div id="learning-page" class="page">
+            <div class="learning-container">
+                <h2>📈 나의 영어 학습 통계</h2>
+                
+                <!-- 전체 학습 통계 -->
+                <div class="overall-stats">
+                    <h3>📊 전체 학습 현황</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-words-learned">0</div>
+                            <div class="stat-label">학습한 단어</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-correct">0</div>
+                            <div class="stat-label">총 정답수</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-accuracy">0%</div>
+                            <div class="stat-label">전체 정답률</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="mastered-words">0</div>
+                            <div class="stat-label">완전 학습</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 취약 단어 목록 -->
+                <div class="weak-words-section">
+                    <h3>🎯 복습이 필요한 단어들</h3>
+                    <div class="weak-words-grid" id="weak-words-grid">
+                        <p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>
+                    </div>
+                </div>
+                
+                <!-- 우수 단어 목록 -->
+                <div class="strong-words-section">
+                    <h3>⭐ 잘 알고 있는 단어들</h3>
+                    <div class="strong-words-grid" id="strong-words-grid">
+                        <p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -353,12 +618,12 @@
         <div id="instructions-page" class="page">
             <div class="instructions">
                 <h2>📖 게임 사용설명서</h2>
-                <h3>🏪 동물 시장 (신규)</h3>
-                <p>'시장' 탭에서 다른 플레이어와 동물을 거래할 수 있습니다. 2마리 이상 보유한 동물을 원하는 가격에 판매 등록하거나, 다른 사람이 올린 동물을 점수를 사용해 구매할 수 있습니다.</p>
+                <h3>📚 AI 영어 학습 시스템</h3>
+                <p>난이도별 영어 단어 학습과 개인화된 복습 시스템으로 효과적인 영어 학습이 가능합니다.</p>
+                <h3>🏪 동물 시장</h3>
+                <p>'시장' 탭에서 다른 플레이어와 동물을 거래할 수 있습니다.</p>
                 <h3>🔑 로그인과 저장</h3>
-                <p>이 게임은 모든 데이터가 클라우드에 자동으로 저장됩니다. 처음 접속 시 플레이어 이름과 4자리 숫자 PIN으로 계정을 만드세요.</p>
-                <h3>🏆 랭킹 시스템</h3>
-                <p>'랭킹' 탭에서 다른 플레이어들과 점수를 비교해볼 수 있습니다.</p>
+                <p>모든 데이터가 클라우드에 자동으로 저장됩니다.</p>
             </div>
         </div>
     </div>
@@ -463,6 +728,12 @@
         let selectedItemToPlace = null;
         let currentEnglishQuiz = {};
         let marketListener = null;
+        
+        // 새로운 학습 시스템 변수
+        let currentDifficulty = 1;
+        let currentWordData = null;
+        let isLoadingWord = false;
+        let userProgress = {}; // 사용자 학습 진행도
 
         const animalTypes = [
             {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1}, {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1}, {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1}, {emoji: '🐷', name: '돼지', specialName: '꿀꿀대마왕', rarity: 1}, {emoji: '🐮', name: '소', specialName: '음메요정', rarity: 1}, {emoji: '🐔', name: '닭', specialName: '꼬꼬댁 사령관', rarity: 1}, {emoji: '🐸', name: '개구리', specialName: '개골박사', rarity: 1}, {emoji: '🦆', name: '오리', specialName: '꽥꽥선장', rarity: 1}, {emoji: '🐭', name: '쥐', specialName: '치즈 탐험가', rarity: 1}, {emoji: '🐹', name: '햄스터', specialName: '해바라기씨 부자', rarity: 1}, {emoji: '🐑', name: '양', specialName: '뭉게구름', rarity: 1}, {emoji: '🦋', name: '나비', specialName: '무지개날개', rarity: 1}, {emoji: '🐝', name: '벌', specialName: '꿀벌기사', rarity: 1}, {emoji: '🐞', name: '무당벌레', specialName: '행운의 요정', rarity: 1}, {emoji: '🐌', name: '달팽이', specialName: '느림의 미학', rarity: 1}, {emoji: '🐟', name: '물고기', specialName: '바다의 여행자', rarity: 1}, {emoji: '🦀', name: '게', specialName: '옆걸음의 달인', rarity: 1}, {emoji: '🐿️', name: '다람쥐', specialName: '도토리 수집가', rarity: 1}, {emoji: '🐦', name: '새', specialName: '하늘의 편지', rarity: 1}, {emoji: '🐛', name: '애벌레', specialName: '변신의 귀재', rarity: 1}, {emoji: '🐜', name: '개미', specialName: '작은 건축가', rarity: 1}, {emoji: '🐢', name: '거북이', specialName: '시간 여행자', rarity: 1}, {emoji: '🐐', name: '염소', specialName: '종이 미식가', rarity: 1}, {emoji: '🐴', name: '말', specialName: '초원의 바람', rarity: 1}, {emoji: '🐠', name: '열대어', specialName: '산호초의 보석', rarity: 1},
@@ -474,9 +745,7 @@
         ];
         
         const quizWords = [
-            { question: '사과', answer: 'apple', options: ['banana', 'orange', 'grape', 'water'] }, { question: '가방', answer: 'bag', options: ['book', 'pen', 'desk', 'chair'] }, { question: '공', answer: 'ball', options: ['doll', 'car', 'toy', 'game'] }, { question: '침대', answer: 'bed', options: ['desk', 'chair', 'table', 'sofa'] }, { question: '자전거', answer: 'bike', options: ['car', 'bus', 'train', 'boat'] }, { question: '새', answer: 'bird', options: ['dog', 'cat', 'fish', 'lion'] }, { question: '보트', answer: 'boat', options: ['car', 'bus', 'train', 'plane'] }, { question: '책', answer: 'book', options: ['pen', 'note', 'desk', 'paper'] }, { question: '상자', answer: 'box', options: ['bag', 'desk', 'chair', 'bed'] }, { question: '소년', answer: 'boy', options: ['girl', 'man', 'woman', 'baby'] }, { question: '빵', answer: 'bread', options: ['milk', 'cheese', 'rice', 'water'] }, { question: '버스', answer: 'bus', options: ['car', 'train', 'bike', 'taxi'] }, { question: '자동차', answer: 'car', options: ['bus', 'train', 'bike', 'plane'] }, { question: '고양이', answer: 'cat', options: ['dog', 'bird', 'fish', 'hamster'] }, { question: '의자', answer: 'chair', options: ['desk', 'table', 'bed', 'sofa'] }, { question: '도시', answer: 'city', options: ['town', 'country', 'village', 'island'] }, { question: '시계', answer: 'clock', options: ['watch', 'timer', 'calendar', 'time'] }, { question: '구름', answer: 'cloud', options: ['sun', 'moon', 'star', 'sky'] }, { question: '컴퓨터', answer: 'computer', options: ['tv', 'phone', 'radio', 'camera'] }, { question: '소', answer: 'cow', options: ['pig', 'sheep', 'horse', 'goat'] }, { question: '컵', answer: 'cup', options: ['glass', 'bowl', 'plate', 'bottle'] }, { question: '낮', answer: 'day', options: ['night', 'morning', 'evening', 'time'] }, { question: '책상', answer: 'desk', options: ['chair', 'table', 'bed', 'sofa'] }, { question: '개', answer: 'dog', options: ['cat', 'bird', 'fish', 'rabbit'] }, { question: '인형', answer: 'doll', options: ['ball', 'toy', 'game', 'robot'] }, { question: '문', answer: 'door', options: ['window', 'wall', 'floor', 'roof'] }, { question: '오리', answer: 'duck', options: ['chicken', 'bird', 'goose', 'swan'] }, { question: '계란', answer: 'egg', options: ['milk', 'bread', 'cheese', 'meat'] }, { question: '눈', answer: 'eye', options: ['nose', 'mouth', 'ear', 'face'] }, { question: '얼굴', answer: 'face', options: ['head', 'hair', 'eye', 'nose'] }, { question: '농장', answer: 'farm', options: ['field', 'garden', 'forest', 'house'] }, { question: '아빠', answer: 'father', options: ['mother', 'son', 'daughter', 'family'] }, { question: '물고기', answer: 'fish', options: ['bird', 'dog', 'cat', 'frog'] }, { question: '꽃', answer: 'flower', options: ['tree', 'leaf', 'grass', 'plant'] }, { question: '음식', answer: 'food', options: ['water', 'drink', 'snack', 'meal'] }, { question: '발', answer: 'foot', options: ['hand', 'leg', 'arm', 'head'] }, { question: '친구', answer: 'friend', options: ['family', 'teacher', 'student', 'neighbor'] }, { question: '개구리', answer: 'frog', options: ['snake', 'lizard', 'turtle', 'fish'] }, { question: '게임', answer: 'game', options: ['sport', 'play', 'toy', 'hobby'] }, { question: '정원', answer: 'garden', options: ['park', 'forest', 'field', 'yard'] }, { question: '소녀', answer: 'girl', options: ['boy', 'woman', 'man', 'baby'] }, { question: '유리', answer: 'glass', options: ['cup', 'bottle', 'bowl', 'plate'] }, { question: '손', answer: 'hand', options: ['foot', 'arm', 'leg', 'finger'] }, { question: '모자', answer: 'hat', options: ['cap', 'helmet', 'scarf', 'glove'] }, { question: '머리', answer: 'head', options: ['face', 'hair', 'eye', 'ear'] }, { question: '집', answer: 'house', options: ['home', 'school', 'store', 'office'] }, { question: '얼음', answer: 'ice', options: ['water', 'snow', 'fire', 'hot'] }, { question: '섬', answer: 'island', options: ['beach', 'sea', 'ocean', 'land'] }, { question: '주스', answer: 'juice', options: ['water', 'milk', 'soda', 'tea'] }, { question: '열쇠', answer: 'key', options: ['lock', 'door', 'box', 'safe'] }, { question: '왕', answer: 'king', options: ['queen', 'prince', 'princess', 'castle'] }, { question: '다리', answer: 'leg', options: ['arm', 'foot', 'hand', 'body'] }, { question: '편지', answer: 'letter', options: ['mail', 'card', 'email', 'word'] }, { question: '사자', answer: 'lion', options: ['tiger', 'bear', 'wolf', 'fox'] }, { question: '남자', answer: 'man', options: ['woman', 'boy', 'girl', 'person'] }, { question: '지도', answer: 'map', options: ['road', 'city', 'country', 'world'] }, { question: '고기', answer: 'meat', options: ['fish', 'chicken', 'pork', 'beef'] }, { question: '우유', answer: 'milk', options: ['water', 'juice', 'cheese', 'yogurt'] }, { question: '돈', answer: 'money', options: ['coin', 'bill', 'cash', 'price'] }, { question: '원숭이', answer: 'monkey', options: ['gorilla', 'chimp', 'banana', 'jungle'] }, { question: '달', answer: 'moon', options: ['sun', 'star', 'sky', 'night'] }, { question: '아침', answer: 'morning', options: ['evening', 'afternoon', 'night', 'day'] }, { question: '엄마', answer: 'mother', options: ['father', 'son', 'daughter', 'parent'] }, { question: '이름', answer: 'name', options: ['age', 'address', 'phone', 'word'] }, { question: '밤', answer: 'night', options: ['day', 'morning', 'evening', 'dark'] }, { question: '코', answer: 'nose', options: ['eye', 'mouth', 'ear', 'smell'] }, { question: '공책', answer: 'note', options: ['book', 'paper', 'pen', 'pencil'] }, { question: '오렌지', answer: 'orange', options: ['apple', 'banana', 'grape', 'lemon'] }, { question: '공원', answer: 'park', options: ['garden', 'playground', 'field', 'forest'] }, { question: '펜', answer: 'pen', options: ['pencil', 'marker', 'crayon', 'write'] }, { question: '연필', answer: 'pencil', options: ['pen', 'eraser', 'ruler', 'draw'] }, { question: '돼지', answer: 'pig', options: ['cow', 'sheep', 'horse', 'farm'] }, { question: '비행기', answer: 'plane', options: ['car', 'bus', 'train', 'sky'] }, { question: '식물', answer: 'plant', options: ['tree', 'flower', 'leaf', 'root'] }, { question: '여왕', answer: 'queen', options: ['king', 'princess', 'prince', 'crown'] }, { question: '토끼', answer: 'rabbit', options: ['hare', 'carrot', 'jump', 'pet'] }, { question: '비', answer: 'rain', options: ['snow', 'sun', 'cloud', 'weather'] }, { question: '쥐', answer: 'rat', options: ['mouse', 'cheese', 'hole', 'trap'] }, { question: '반지', answer: 'ring', options: ['necklace', 'bracelet', 'earring', 'gold'] }, { question: '강', answer: 'river', options: ['sea', 'lake', 'ocean', 'water'] }, { question: '길', answer: 'road', options: ['street', 'way', 'path', 'drive'] }, { question: '로봇', answer: 'robot', options: ['machine', 'computer', 'toy', 'future'] }, { question: '학교', answer: 'school', options: ['class', 'student', 'teacher', 'study'] }, { question: '바다', answer: 'sea', options: ['ocean', 'river', 'lake', 'beach'] }, { question: '양', answer: 'sheep', options: ['goat', 'cow', 'farm', 'wool'] }, { question: '배', answer: 'ship', options: ['boat', 'sea', 'port', 'sail'] }, { question: '신발', answer: 'shoe', options: ['boot', 'sandal', 'sock', 'foot'] }, { question: '하늘', answer: 'sky', options: ['sun', 'moon', 'cloud', 'blue'] }, { question: '눈', answer: 'snow', options: ['rain', 'ice', 'winter', 'white'] }, { question: '노래', answer: 'song', options: ['music', 'sing', 'dance', 'voice'] }, { question: '별', answer: 'star', options: ['sun', 'moon', 'sky', 'night'] }, { question: '돌', answer: 'stone', options: ['rock', 'sand', 'hard', 'build'] }, { question: '가게', answer: 'store', options: ['shop', 'market', 'buy', 'sell'] }, { question: '해', answer: 'sun', options: ['moon', 'star', 'sky', 'day'] }, { question: '식탁', answer: 'table', options: ['desk', 'chair', 'eat', 'food'] }, { question: '호랑이', answer: 'tiger', options: ['lion', 'cat', 'zoo', 'stripe'] }, { question: '장난감', answer: 'toy', options: ['doll', 'ball', 'game', 'play'] }, { question: '기차', answer: 'train', options: ['bus', 'car', 'station', 'track'] }, { question: '나무', answer: 'tree', options: ['plant', 'flower', 'leaf', 'forest'] }, { question: '물', answer: 'water', options: ['drink', 'sea', 'river', 'rain'] }, { question: '창문', answer: 'window', options: ['door', 'wall', 'glass', 'open'] }, { question: '여자', answer: 'woman', options: ['man', 'girl', 'boy', 'person'] }, { question: '세상', answer: 'world', options: ['earth', 'country', 'people', 'map'] }, { question: '동물원', answer: 'zoo', options: ['animal', 'park', 'cage', 'lion'] },
-            { question: '묻다', answer: 'ask', options: ['answer', 'tell', 'say', 'speak'] }, { question: '오다', answer: 'come', options: ['go', 'walk', 'run', 'arrive'] }, { question: '자르다', answer: 'cut', options: ['break', 'tear', 'slice', 'chop'] }, { question: '춤추다', answer: 'dance', options: ['sing', 'jump', 'move', 'music'] }, { question: '하다', answer: 'do', options: ['make', 'work', 'play', 'act'] }, { question: '그리다', answer: 'draw', options: ['paint', 'write', 'color', 'picture'] }, { question: '마시다', answer: 'drink', options: ['eat', 'swallow', 'sip', 'water'] }, { question: '운전하다', answer: 'drive', options: ['ride', 'walk', 'fly', 'car'] }, { question: '먹다', answer: 'eat', options: ['drink', 'bite', 'chew', 'food'] }, { question: '찾다', answer: 'find', options: ['lose', 'search', 'look', 'get'] }, { question: '날다', answer: 'fly', options: ['jump', 'run', 'swim', 'plane'] }, { question: '얻다', answer: 'get', options: ['give', 'take', 'receive', 'have'] }, { question: '주다', answer: 'give', options: ['get', 'take', 'send', 'offer'] }, { question: '가다', answer: 'go', options: ['come', 'walk', 'run', 'leave'] }, { question: '가지다', answer: 'have', options: ['get', 'own', 'hold', 'possess'] }, { question: '듣다', answer: 'hear', options: ['listen', 'sound', 'voice', 'ear'] }, { question: '돕다', answer: 'help', options: ['assist', 'support', 'work', 'aid'] }, { question: '치다', answer: 'hit', options: ['strike', 'beat', 'punch', 'touch'] }, { question: '점프하다', answer: 'jump', options: ['hop', 'leap', 'fly', 'run'] }, { question: '알다', answer: 'know', options: ['think', 'learn', 'see', 'understand'] }, { question: '배우다', answer: 'learn', options: ['study', 'teach', 'know', 'read'] }, { question: '좋아하다', answer: 'like', options: ['love', 'hate', 'enjoy', 'prefer'] }, { question: '듣다(주의깊게)', answer: 'listen', options: ['hear', 'sound', 'music', 'ear'] }, { question: '살다', answer: 'live', options: ['stay', 'be', 'exist', 'house'] }, { question: '보다', answer: 'look', options: ['see', 'watch', 'view', 'eye'] }, { question: '사랑하다', answer: 'love', options: ['like', 'hate', 'adore', 'care'] }, { question: '만들다', answer: 'make', options: ['do', 'create', 'build', 'form'] }, { question: '만나다', answer: 'meet', options: ['see', 'greet', 'find', 'friend'] }, { question: '열다', answer: 'open', options: ['close', 'shut', 'start', 'door'] }, { question: '놀다', answer: 'play', options: ['work', 'study', 'game', 'toy'] }, { question: '놓다', answer: 'put', options: ['place', 'set', 'move', 'lay'] }, { question: '읽다', answer: 'read', options: ['write', 'study', 'book', 'letter'] }, { question: '타다', answer: 'ride', options: ['drive', 'walk', 'bike', 'horse'] }, { question: '달리다', answer: 'run', options: ['walk', 'jog', 'race', 'fast'] }, { question: '말하다', answer: 'say', options: ['tell', 'speak', 'talk', 'ask'] }, { question: '보다', answer: 'see', options: ['look', 'watch', 'view', 'eye'] }, { question: '노래하다', answer: 'sing', options: ['dance', 'shout', 'music', 'song'] }, { question: '앉다', answer: 'sit', options: ['stand', 'lie', 'chair', 'down'] }, { question: '자다', answer: 'sleep', options: ['wake', 'rest', 'dream', 'bed'] }, { question: '말하다', answer: 'speak', options: ['talk', 'say', 'tell', 'language'] }, { question: '서다', answer: 'stand', options: ['sit', 'lie', 'up', 'walk'] }, { question: '멈추다', answer: 'stop', options: ['start', 'go', 'finish', 'end'] }, { question: '공부하다', answer: 'study', options: ['learn', 'read', 'write', 'school'] }, { question: '수영하다', answer: 'swim', options: ['dive', 'float', 'water', 'pool'] }, { question: '가져가다', answer: 'take', options: ['get', 'give', 'bring', 'hold'] }, { question: '말하다', answer: 'talk', options: ['speak', 'say', 'chat', 'discuss'] }, { question: '생각하다', answer: 'think', options: ['know', 'believe', 'guess', 'idea'] }, { question: '걷다', answer: 'walk', options: ['run', 'go', 'step', 'foot'] }, { question: '원하다', answer: 'want', options: ['need', 'wish', 'like', 'desire'] }, { question: '쓰다', answer: 'write', options: ['read', 'draw', 'pen', 'letter'] },
-            { question: '화난', answer: 'angry', options: ['happy', 'sad', 'mad', 'upset'] }, { question: '나쁜', answer: 'bad', options: ['good', 'wrong', 'evil', 'poor'] }, { question: '큰', answer: 'big', options: ['small', 'large', 'huge', 'great'] }, { question: '검은색', answer: 'black', options: ['white', 'red', 'blue', 'dark'] }, { question: '파란색', answer: 'blue', options: ['red', 'yellow', 'green', 'sky'] }, { question: '갈색', answer: 'brown', options: ['black', 'white', 'tan', 'wood'] }, { question: '깨끗한', answer: 'clean', options: ['dirty', 'wash', 'clear', 'neat'] }, { question: '추운', answer: 'cold', options: ['hot', 'cool', 'warm', 'ice'] }, { question: '어두운', answer: 'dark', options: ['light', 'bright', 'black', 'night'] }, { question: '더러운', answer: 'dirty', options: ['clean', 'messy', 'mud', 'dust'] }, { question: '마른', answer: 'dry', options: ['wet', 'water', 'towel', 'sand'] }, { question: '쉬운', answer: 'easy', options: ['hard', 'simple', 'difficult', 'soft'] }, { question: '빠른', answer: 'fast', options: ['slow', 'quick', 'run', 'speed'] }, { question: '뚱뚱한', answer: 'fat', options: ['thin', 'big', 'heavy', 'plump'] }, { question: '좋은', answer: 'good', options: ['bad', 'great', 'nice', 'fine'] }, { question: '초록색', answer: 'green', options: ['red', 'blue', 'yellow', 'grass'] }, { question: '행복한', answer: 'happy', options: ['sad', 'glad', 'joy', 'smile'] }, { question: '어려운', answer: 'hard', options: ['easy', 'soft', 'difficult', 'tough'] }, { question: '무거운', answer: 'heavy', options: ['light', 'big', 'stone', 'lift'] }, { question: '뜨거운', answer: 'hot', options: ['cold', 'warm', 'fire', 'sun'] }, { question: '큰', answer: 'large', options: ['small', 'big', 'huge', 'wide'] }, { question: '가벼운', answer: 'light', options: ['heavy', 'dark', 'bright', 'easy'] }, { question: '긴', answer: 'long', options: ['short', 'tall', 'big', 'line'] }, { question: '새로운', answer: 'new', options: ['old', 'young', 'fresh', 'modern'] }, { question: '오래된', answer: 'old', options: ['new', 'young', 'ancient', 'age'] }, { question: '하나', answer: 'one', options: ['two', 'three', 'four', 'first'] }, { question: '주황색', answer: 'orange', options: ['yellow', 'red', 'fruit', 'color'] }, { question: '가난한', answer: 'poor', options: ['rich', 'needy', 'money', 'bad'] }, { question: '예쁜', answer: 'pretty', options: ['beautiful', 'cute', 'ugly', 'nice'] }, { question: '자주색', answer: 'purple', options: ['violet', 'grape', 'flower', 'color'] }, { question: '빠른', answer: 'quick', options: ['fast', 'slow', 'rapid', 'swift'] }, { question: '조용한', answer: 'quiet', options: ['loud', 'silent', 'calm', 'soft'] }, { question: '빨간색', answer: 'red', options: ['blue', 'yellow', 'green', 'apple'] }, { question: '부유한', answer: 'rich', options: ['poor', 'wealthy', 'money', 'gold'] }, { question: '슬픈', answer: 'sad', options: ['happy', 'unhappy', 'cry', 'tear'] }, { question: '짧은', answer: 'short', options: ['long', 'tall', 'small', 'brief'] }, { question: '아픈', answer: 'sick', options: ['ill', 'well', 'healthy', 'pain'] }, { question: '느린', answer: 'slow', options: ['fast', 'quick', 'late', 'walk'] }, { question: '작은', answer: 'small', options: ['big', 'little', 'tiny', 'short'] }, { question: '부드러운', answer: 'soft', options: ['hard', 'gentle', 'smooth', 'fluffy'] }, { question: '강한', answer: 'strong', options: ['weak', 'powerful', 'tough', 'hard'] }, { question: '키가 큰', answer: 'tall', options: ['short', 'long', 'high', 'big'] }, { question: '마른', answer: 'thin', options: ['fat', 'slim', 'narrow', 'light'] }, { question: '못생긴', answer: 'ugly', options: ['pretty', 'beautiful', 'bad', 'horrible'] }, { question: '따뜻한', answer: 'warm', options: ['hot', 'cold', 'cool', 'sun'] }, { question: '약한', answer: 'weak', options: ['strong', 'feeble', 'frail', 'sick'] }, { question: '젖은', answer: 'wet', options: ['dry', 'damp', 'water', 'rain'] }, { question: '흰색', answer: 'white', options: ['black', 'red', 'snow', 'light'] }, { question: '어린', answer: 'young', options: ['old', 'new', 'child', 'baby'] }, { question: '노란색', answer: 'yellow', options: ['red', 'blue', 'sun', 'lemon'] }
+            { question: '사과', answer: 'apple', options: ['banana', 'orange', 'grape', 'water'] }, { question: '가방', answer: 'bag', options: ['book', 'pen', 'desk', 'chair'] }, { question: '공', answer: 'ball', options: ['doll', 'car', 'toy', 'game'] }, { question: '침대', answer: 'bed', options: ['desk', 'chair', 'table', 'sofa'] }, { question: '자전거', answer: 'bike', options: ['car', 'bus', 'train', 'boat'] }, { question: '새', answer: 'bird', options: ['dog', 'cat', 'fish', 'lion'] }, { question: '보트', answer: 'boat', options: ['car', 'bus', 'train', 'plane'] }, { question: '책', answer: 'book', options: ['pen', 'note', 'desk', 'paper'] }, { question: '상자', answer: 'box', options: ['bag', 'desk', 'chair', 'bed'] }, { question: '소년', answer: 'boy', options: ['girl', 'man', 'woman', 'baby'] }, { question: '빵', answer: 'bread', options: ['milk', 'cheese', 'rice', 'water'] }, { question: '버스', answer: 'bus', options: ['car', 'train', 'bike', 'taxi'] }, { question: '자동차', answer: 'car', options: ['bus', 'train', 'bike', 'plane'] }, { question: '고양이', answer: 'cat', options: ['dog', 'bird', 'fish', 'hamster'] }, { question: '의자', answer: 'chair', options: ['desk', 'table', 'bed', 'sofa'] }, { question: '도시', answer: 'city', options: ['town', 'country', 'village', 'island'] }, { question: '시계', answer: 'clock', options: ['watch', 'timer', 'calendar', 'time'] }, { question: '구름', answer: 'cloud', options: ['sun', 'moon', 'star', 'sky'] }, { question: '컴퓨터', answer: 'computer', options: ['tv', 'phone', 'radio', 'camera'] }, { question: '소', answer: 'cow', options: ['pig', 'sheep', 'horse', 'goat'] }, { question: '컵', answer: 'cup', options: ['glass', 'bowl', 'plate', 'bottle'] }, { question: '낮', answer: 'day', options: ['night', 'morning', 'evening', 'time'] }, { question: '책상', answer: 'desk', options: ['chair', 'table', 'bed', 'sofa'] }, { question: '개', answer: 'dog', options: ['cat', 'bird', 'fish', 'rabbit'] }, { question: '인형', answer: 'doll', options: ['ball', 'toy', 'game', 'robot'] }, { question: '문', answer: 'door', options: ['window', 'wall', 'floor', 'roof'] }, { question: '오리', answer: 'duck', options: ['chicken', 'bird', 'goose', 'swan'] }, { question: '계란', answer: 'egg', options: ['milk', 'bread', 'cheese', 'meat'] }, { question: '눈', answer: 'eye', options: ['nose', 'mouth', 'ear', 'face'] }, { question: '얼굴', answer: 'face', options: ['head', 'hair', 'eye', 'nose'] }, { question: '농장', answer: 'farm', options: ['field', 'garden', 'forest', 'house'] }, { question: '아빠', answer: 'father', options: ['mother', 'son', 'daughter', 'family'] }, { question: '물고기', answer: 'fish', options: ['bird', 'dog', 'cat', 'frog'] }, { question: '꽃', answer: 'flower', options: ['tree', 'leaf', 'grass', 'plant'] }, { question: '음식', answer: 'food', options: ['water', 'drink', 'snack', 'meal'] }, { question: '발', answer: 'foot', options: ['hand', 'leg', 'arm', 'head'] }, { question: '친구', answer: 'friend', options: ['family', 'teacher', 'student', 'neighbor'] }, { question: '개구리', answer: 'frog', options: ['snake', 'lizard', 'turtle', 'fish'] }, { question: '게임', answer: 'game', options: ['sport', 'play', 'toy', 'hobby'] }, { question: '정원', answer: 'garden', options: ['park', 'forest', 'field', 'yard'] }, { question: '소녀', answer: 'girl', options: ['boy', 'woman', 'man', 'baby'] }, { question: '유리', answer: 'glass', options: ['cup', 'bottle', 'bowl', 'plate'] }, { question: '손', answer: 'hand', options: ['foot', 'arm', 'leg', 'finger'] }, { question: '모자', answer: 'hat', options: ['cap', 'helmet', 'scarf', 'glove'] }, { question: '머리', answer: 'head', options: ['face', 'hair', 'eye', 'ear'] }, { question: '집', answer: 'house', options: ['home', 'school', 'store', 'office'] }, { question: '얼음', answer: 'ice', options: ['water', 'snow', 'fire', 'hot'] }, { question: '섬', answer: 'island', options: ['beach', 'sea', 'ocean', 'land'] }, { question: '주스', answer: 'juice', options: ['water', 'milk', 'soda', 'tea'] }, { question: '열쇠', answer: 'key', options: ['lock', 'door', 'box', 'safe'] }, { question: '왕', answer: 'king', options: ['queen', 'prince', 'princess', 'castle'] }, { question: '다리', answer: 'leg', options: ['arm', 'foot', 'hand', 'body'] }, { question: '편지', answer: 'letter', options: ['mail', 'card', 'email', 'word'] }, { question: '사자', answer: 'lion', options: ['tiger', 'bear', 'wolf', 'fox'] }, { question: '남자', answer: 'man', options: ['woman', 'boy', 'girl', 'person'] }, { question: '지도', answer: 'map', options: ['road', 'city', 'country', 'world'] }, { question: '고기', answer: 'meat', options: ['fish', 'chicken', 'pork', 'beef'] }, { question: '우유', answer: 'milk', options: ['water', 'juice', 'cheese', 'yogurt'] }, { question: '돈', answer: 'money', options: ['coin', 'bill', 'cash', 'price'] }, { question: '원숭이', answer: 'monkey', options: ['gorilla', 'chimp', 'banana', 'jungle'] }, { question: '달', answer: 'moon', options: ['sun', 'star', 'sky', 'night'] }, { question: '아침', answer: 'morning', options: ['evening', 'afternoon', 'night', 'day'] }, { question: '엄마', answer: 'mother', options: ['father', 'son', 'daughter', 'parent'] }, { question: '이름', answer: 'name', options: ['age', 'address', 'phone', 'word'] }, { question: '밤', answer: 'night', options: ['day', 'morning', 'evening', 'dark'] }, { question: '코', answer: 'nose', options: ['eye', 'mouth', 'ear', 'smell'] }, { question: '공책', answer: 'note', options: ['book', 'paper', 'pen', 'pencil'] }, { question: '오렌지', answer: 'orange', options: ['apple', 'banana', 'grape', 'lemon'] }, { question: '공원', answer: 'park', options: ['garden', 'playground', 'field', 'forest'] }, { question: '펜', answer: 'pen', options: ['pencil', 'marker', 'crayon', 'write'] }, { question: '연필', answer: 'pencil', options: ['pen', 'eraser', 'ruler', 'draw'] }, { question: '돼지', answer: 'pig', options: ['cow', 'sheep', 'horse', 'farm'] }, { question: '비행기', answer: 'plane', options: ['car', 'bus', 'train', 'sky'] }, { question: '식물', answer: 'plant', options: ['tree', 'flower', 'leaf', 'root'] }, { question: '여왕', answer: 'queen', options: ['king', 'princess', 'prince', 'crown'] }, { question: '토끼', answer: 'rabbit', options: ['hare', 'carrot', 'jump', 'pet'] }, { question: '비', answer: 'rain', options: ['snow', 'sun', 'cloud', 'weather'] }, { question: '쥐', answer: 'rat', options: ['mouse', 'cheese', 'hole', 'trap'] }, { question: '반지', answer: 'ring', options: ['necklace', 'bracelet', 'earring', 'gold'] }, { question: '강', answer: 'river', options: ['sea', 'lake', 'ocean', 'water'] }, { question: '길', answer: 'road', options: ['street', 'way', 'path', 'drive'] }, { question: '로봇', answer: 'robot', options: ['machine', 'computer', 'toy', 'future'] }, { question: '학교', answer: 'school', options: ['class', 'student', 'teacher', 'study'] }, { question: '바다', answer: 'sea', options: ['ocean', 'river', 'lake', 'beach'] }, { question: '양', answer: 'sheep', options: ['goat', 'cow', 'farm', 'wool'] }, { question: '배', answer: 'ship', options: ['boat', 'sea', 'port', 'sail'] }, { question: '신발', answer: 'shoe', options: ['boot', 'sandal', 'sock', 'foot'] }, { question: '하늘', answer: 'sky', options: ['sun', 'moon', 'cloud', 'blue'] }, { question: '눈', answer: 'snow', options: ['rain', 'ice', 'winter', 'white'] }, { question: '노래', answer: 'song', options: ['music', 'sing', 'dance', 'voice'] }, { question: '별', answer: 'star', options: ['sun', 'moon', 'sky', 'night'] }, { question: '돌', answer: 'stone', options: ['rock', 'sand', 'hard', 'build'] }, { question: '가게', answer: 'store', options: ['shop', 'market', 'buy', 'sell'] }, { question: '해', answer: 'sun', options: ['moon', 'star', 'sky', 'day'] }, { question: '식탁', answer: 'table', options: ['desk', 'chair', 'eat', 'food'] }, { question: '호랑이', answer: 'tiger', options: ['lion', 'cat', 'zoo', 'stripe'] }, { question: '장난감', answer: 'toy', options: ['doll', 'ball', 'game', 'play'] }, { question: '기차', answer: 'train', options: ['bus', 'car', 'station', 'track'] }, { question: '나무', answer: 'tree', options: ['plant', 'flower', 'leaf', 'forest'] }, { question: '물', answer: 'water', options: ['drink', 'sea', 'river', 'rain'] }, { question: '창문', answer: 'window', options: ['door', 'wall', 'glass', 'open'] }, { question: '여자', answer: 'woman', options: ['man', 'girl', 'boy', 'person'] }, { question: '세상', answer: 'world', options: ['earth', 'country', 'people', 'map'] }, { question: '동물원', answer: 'zoo', options: ['animal', 'park', 'cage', 'lion'] }
         ];
 
         const shopItems = [
@@ -511,6 +780,33 @@
 
         // ==================== 핵심 게임 함수 ====================
         
+        // 난이도 선택 함수
+        window.selectDifficulty = function(level) {
+            currentDifficulty = level;
+            
+            // 모든 버튼에서 active 클래스 제거
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 선택된 버튼에 active 클래스 추가
+            const selectedBtn = document.querySelector(`[data-level="${level}"]`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
+            
+            // 복습 모드 스타일 적용/제거
+            const gameContainer = document.querySelector('.game-container');
+            if (level === 'review') {
+                gameContainer.classList.add('review-mode');
+            } else {
+                gameContainer.classList.remove('review-mode');
+            }
+            
+            // 새로운 문제 생성
+            generateEnglishQuiz();
+        }
+
         // 단어 발음 재생 함수
         function speakWord(word) {
             if ('speechSynthesis' in window) {
@@ -532,36 +828,261 @@
             window.speechSynthesis.getVoices();
         };
 
-        // 영어 퀴즈 정답 확인
-        function checkEnglishQuizAnswer(selectedOption) {
+        // 영어 퀴즈 생성 (새로운 시스템)
+        async function generateEnglishQuiz() {
+            if (isLoadingWord) return;
+            
+            isLoadingWord = true;
+            
+            // UI 초기화
+            const questionElement = document.getElementById('english-question');
+            const optionsContainer = document.getElementById('english-options');
+            const speakButton = document.getElementById('speak-button');
+            const feedbackElement = document.getElementById('feedback');
+            
+            questionElement.textContent = '단어를 불러오는 중...';
+            optionsContainer.innerHTML = '';
+            speakButton.style.display = 'none';
+            feedbackElement.textContent = '';
+            feedbackElement.className = 'feedback';
+            
+            try {
+                if (currentDifficulty === 'review') {
+                    // 복습 모드: 틀린 단어들 중에서 선택
+                    await loadReviewWord();
+                } else {
+                    // 일반 모드: 새로운 단어 또는 기존 단어 로드
+                    await loadWordForDifficulty(currentDifficulty);
+                }
+                
+                displayCurrentWord();
+                updateWordStats();
+                
+            } catch (error) {
+                console.error('Error generating quiz:', error);
+                questionElement.textContent = '단어를 불러오는 중 오류가 발생했습니다.';
+            } finally {
+                isLoadingWord = false;
+            }
+        }
+
+        // 난이도별 단어 로드
+        async function loadWordForDifficulty(difficulty) {
+            try {
+                // Firebase Cloud Function 호출하여 단어 생성/로드
+                const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getEnglishWord');
+                const result = await getWordFunction({ 
+                    difficulty: difficulty,
+                    userId: currentUserId 
+                });
+                
+                currentWordData = result.data.word;
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+                
+            } catch (error) {
+                console.error('Error loading word:', error);
+                // 폴백: 기존 단어 사용
+                const fallbackQuiz = quizWords[Math.floor(Math.random() * quizWords.length)];
+                currentWordData = {
+                    id: 'fallback_' + Date.now(),
+                    korean: fallbackQuiz.question,
+                    english: fallbackQuiz.answer,
+                    options: fallbackQuiz.options,
+                    difficulty: difficulty
+                };
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+            }
+        }
+
+        // 복습용 단어 로드
+        async function loadReviewWord() {
+            // 로컬 진행도에서 틀린 단어들 찾기
+            const strugglingWords = [];
+            
+            for (const [wordId, progress] of Object.entries(userProgress)) {
+                const total = progress.correct + progress.incorrect;
+                if (total >= 3 && progress.incorrect > progress.correct) {
+                    strugglingWords.push(wordId);
+                }
+            }
+            
+            if (strugglingWords.length === 0) {
+                // 복습할 단어가 없으면 일반 단어로 대체
+                alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
+                await loadWordForDifficulty(1);
+                return;
+            }
+            
+            // 랜덤하게 하나 선택
+            const randomWordId = strugglingWords[Math.floor(Math.random() * strugglingWords.length)];
+            
+            try {
+                // Firebase에서 해당 단어 데이터 로드
+                const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getWordById');
+                const result = await getWordFunction({ wordId: randomWordId });
+                
+                currentWordData = result.data.word;
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+                
+            } catch (error) {
+                console.error('Error loading review word:', error);
+                // 폴백
+                await loadWordForDifficulty(1);
+            }
+        }
+
+        // 현재 단어 표시
+        function displayCurrentWord() {
+            if (!currentWordData) return;
+            
+            const questionElement = document.getElementById('english-question');
+            const optionsContainer = document.getElementById('english-options');
+            const speakButton = document.getElementById('speak-button');
+            
+            questionElement.textContent = `"${currentWordData.korean}"`;
+            speakButton.style.display = 'inline';
+            speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            
+            // 옵션 생성 (정답 + 오답 3개)
+            const wrongOptions = currentWordData.options.filter(opt => opt !== currentWordData.english);
+            const shuffledWrong = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
+            const finalOptions = [currentWordData.english, ...shuffledWrong].sort(() => Math.random() - 0.5);
+            
+            optionsContainer.innerHTML = '';
+            finalOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'english-option-btn';
+                button.innerText = option;
+                button.onclick = () => checkEnglishQuizAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // 단어 통계 업데이트
+        function updateWordStats() {
+            if (!currentWordData || !currentWordData.id) return;
+            
+            const progress = userProgress[currentWordData.id] || { correct: 0, incorrect: 0 };
+            const total = progress.correct + progress.incorrect;
+            const accuracy = total > 0 ? Math.round((progress.correct / total) * 100) : 0;
+            
+            document.getElementById('word-correct').textContent = progress.correct;
+            document.getElementById('word-incorrect').textContent = progress.incorrect;
+            document.getElementById('word-accuracy').textContent = accuracy;
+            document.getElementById('learning-stats').style.display = 'block';
+        }
+
+        // 영어 퀴즈 정답 확인 (새로운 시스템)
+        async function checkEnglishQuizAnswer(selectedOption) {
             const optionsContainer = document.getElementById('english-options');
             optionsContainer.querySelectorAll('.english-option-btn').forEach(btn => {
                 btn.disabled = true;
             });
 
             const feedback = document.getElementById('feedback');
-            if (selectedOption === currentEnglishQuiz.answer) {
+            const isCorrect = selectedOption === currentEnglishQuiz.answer;
+            
+            // 학습 기록 업데이트
+            if (currentWordData && currentWordData.id) {
+                if (!userProgress[currentWordData.id]) {
+                    userProgress[currentWordData.id] = { correct: 0, incorrect: 0, lastSeen: new Date() };
+                }
+                
+                if (isCorrect) {
+                    userProgress[currentWordData.id].correct++;
+                } else {
+                    userProgress[currentWordData.id].incorrect++;
+                }
+                userProgress[currentWordData.id].lastSeen = new Date();
+                
+                // Firebase에 학습 기록 저장
+                await saveUserProgress();
+            }
+            
+            if (isCorrect) {
                 speakWord(currentEnglishQuiz.answer);
-                gameState.score += 10 * gameState.level;
-                feedback.textContent = '정답! 동물을 잡았어요! 🎉';
+                
+                // 난이도별 점수 계산
+                let baseScore = 10;
+                if (currentDifficulty === 2) baseScore = 20;
+                else if (currentDifficulty === 3) baseScore = 30;
+                else if (currentDifficulty === 'review') baseScore = 15; // 복습 보너스
+                
+                const earnedScore = baseScore * gameState.level;
+                gameState.score += earnedScore;
+                
+                feedback.textContent = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
                 feedback.className = 'feedback correct';
                 
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-                if (gameState.score >= gameState.level * 2500) {
+                if (gameState.score >= gameState.level * 100) {
                     gameState.level++;
                     showLevelUp();
                 }
                 
                 saveCurrentUserData();
-                setTimeout(generateEnglishQuiz, 1500);
+                setTimeout(() => generateEnglishQuiz(), 1500);
             } else {
-                feedback.textContent = `아! 정답은 "${currentEnglishQuiz.answer}"였어요.`;
+                feedback.textContent = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
                 feedback.className = 'feedback incorrect';
-                setTimeout(generateEnglishQuiz, 2500);
+                setTimeout(() => generateEnglishQuiz(), 2500);
             }
+            
             updateUI();
+            updateWordStats();
+        }
+
+        // 사용자 학습 진행도 저장
+        async function saveUserProgress() {
+            if (!currentUserProfile.name) return;
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const progressDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/progress", currentUserProfile.name);
+                
+                await window.firebase.setDoc(progressDocRef, {
+                    userId: currentUserProfile.name,
+                    progress: userProgress,
+                    lastUpdated: new Date().toISOString()
+                }, { merge: true });
+                
+                console.log("User progress saved");
+            } catch (error) {
+                console.error("Error saving user progress:", error);
+            }
+        }
+
+        // 사용자 학습 진행도 로드
+        async function loadUserProgress() {
+            if (!currentUserProfile.name) return;
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const progressDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/progress", currentUserProfile.name);
+                const docSnap = await window.firebase.getDoc(progressDocRef);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    userProgress = data.progress || {};
+                    console.log("User progress loaded");
+                } else {
+                    userProgress = {};
+                }
+            } catch (error) {
+                console.error("Error loading user progress:", error);
+                userProgress = {};
+            }
         }
 
         // 동물 레벨업을 위한 수학 문제 생성
@@ -692,6 +1213,127 @@
             gameState.totalAnimals++;
             
             updateAnimalCollection();
+        }
+
+        // ==================== 학습 통계 관련 함수 ====================
+        
+        function updateLearningStats() {
+            const progressEntries = Object.entries(userProgress);
+            
+            // 전체 통계 계산
+            let totalCorrect = 0;
+            let totalIncorrect = 0;
+            let masteredCount = 0;
+            
+            progressEntries.forEach(([wordId, progress]) => {
+                totalCorrect += progress.correct;
+                totalIncorrect += progress.incorrect;
+                
+                // 3번 이상 시도하고 정답률 80% 이상이면 완전 학습
+                const total = progress.correct + progress.incorrect;
+                if (total >= 3 && (progress.correct / total) >= 0.8) {
+                    masteredCount++;
+                }
+            });
+            
+            const totalAttempts = totalCorrect + totalIncorrect;
+            const overallAccuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+            
+            // 전체 통계 표시
+            document.getElementById('total-words-learned').textContent = progressEntries.length;
+            document.getElementById('total-correct').textContent = totalCorrect;
+            document.getElementById('total-accuracy').textContent = overallAccuracy + '%';
+            document.getElementById('mastered-words').textContent = masteredCount;
+            
+            // 취약 단어와 우수 단어 분류 및 표시
+            updateWeakWords(progressEntries);
+            updateStrongWords(progressEntries);
+        }
+        
+        function updateWeakWords(progressEntries) {
+            const weakWordsGrid = document.getElementById('weak-words-grid');
+            const weakWords = progressEntries.filter(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                return total >= 3 && progress.incorrect > progress.correct;
+            });
+            
+            if (weakWords.length === 0) {
+                weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
+                return;
+            }
+            
+            // 정답률이 낮은 순으로 정렬
+            weakWords.sort(([,a], [,b]) => {
+                const aAccuracy = a.correct / (a.correct + a.incorrect);
+                const bAccuracy = b.correct / (b.correct + b.incorrect);
+                return aAccuracy - bAccuracy;
+            });
+            
+            weakWordsGrid.innerHTML = '';
+            weakWords.slice(0, 12).forEach(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                const accuracy = Math.round((progress.correct / total) * 100);
+                
+                const card = document.createElement('div');
+                card.className = 'word-progress-card';
+                card.innerHTML = `
+                    <div class="word-pair">단어 ID: ${wordId}</div>
+                    <div class="progress-stats">
+                        <span>정답: ${progress.correct}</span>
+                        <span>오답: ${progress.incorrect}</span>
+                    </div>
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">
+                        정답률: ${accuracy}%
+                    </div>
+                `;
+                weakWordsGrid.appendChild(card);
+            });
+        }
+        
+        function updateStrongWords(progressEntries) {
+            const strongWordsGrid = document.getElementById('strong-words-grid');
+            const strongWords = progressEntries.filter(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                return total >= 3 && (progress.correct / total) >= 0.8;
+            });
+            
+            if (strongWords.length === 0) {
+                strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
+                return;
+            }
+            
+            // 정답률이 높은 순으로 정렬
+            strongWords.sort(([,a], [,b]) => {
+                const aAccuracy = a.correct / (a.correct + a.incorrect);
+                const bAccuracy = b.correct / (b.correct + b.incorrect);
+                return bAccuracy - aAccuracy;
+            });
+            
+            strongWordsGrid.innerHTML = '';
+            strongWords.slice(0, 12).forEach(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                const accuracy = Math.round((progress.correct / total) * 100);
+                
+                const card = document.createElement('div');
+                card.className = 'word-progress-card strong';
+                card.innerHTML = `
+                    <div class="word-pair">단어 ID: ${wordId}</div>
+                    <div class="progress-stats">
+                        <span>정답: ${progress.correct}</span>
+                        <span>오답: ${progress.incorrect}</span>
+                    </div>
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem; color: #32CD32;">
+                        정답률: ${accuracy}%
+                    </div>
+                `;
+                strongWordsGrid.appendChild(card);
+            });
         }
 
         // ==================== UI 업데이트 함수 ====================
@@ -1179,6 +1821,10 @@
             if (pageName === 'game') {
                 gameStats.style.display = 'flex';
                 userInfo.style.display = 'block';
+            } else if (pageName === 'learning') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateLearningStats();
             } else if (pageName === 'encyclopedia') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
@@ -1312,7 +1958,13 @@
             
             updateUI();
             updateAnimalCollection();
-            generateEnglishQuiz();
+            
+            // 사용자 학습 진행도 로드 후 퀴즈 시작
+            loadUserProgress().then(() => {
+                // 기본 난이도 선택
+                selectDifficulty(1);
+            });
+            
             initializeFarm();
             showPage('game', document.querySelector('.nav-btn'));
         }
@@ -1408,7 +2060,7 @@
             saveCurrentUserData();
         });
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v5.4 - Fixed Farm & Story)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v6.0 - AI Powered Learning System)');
     </script>
 </body>
-</html> 
+</html>
