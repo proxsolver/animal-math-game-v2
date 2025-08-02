@@ -2178,6 +2178,10 @@
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
                 updateLearningStats();
+            } else if (pageName === 'market') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateMarketPage();
             } else if (pageName === 'encyclopedia') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
@@ -2413,7 +2417,7 @@
             saveCurrentUserData();
         });
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v6.0 - AI Powered Learning System)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v6.1 - AI Powered Learning System)');
     </script>
 </body>
 </html>
