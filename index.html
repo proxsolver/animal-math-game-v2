@@ -2437,34 +2437,32 @@ if (currentWordData.source === 'json') {
             }
         }
 
-        function startGameWithProfile(profileData) {
-            currentUserProfile = profileData;
-            gameState = {
-                score: profileData.score || 0,
-                level: profileData.level || 1,
-                animals: profileData.animals || {},
-                totalAnimals: profileData.totalAnimals || 0,
-                speciesCount: profileData.speciesCount || 0,
-                farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
-                currentQuestion: {}
-            };
+   function startGameWithProfile(profileData) {
+    currentUserProfile = profileData;
+    gameState = {
+        score: profileData.score || 0,
+        level: profileData.level || 1,
+        animals: profileData.animals || {},
+        totalAnimals: profileData.totalAnimals || 0,
+        speciesCount: profileData.speciesCount || 0,
+        farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
+        currentQuestion: {}
+    };
 
-            document.getElementById('login-overlay').style.display = 'none';
-            document.querySelector('.game-container').style.display = 'block';
-            document.getElementById('current-user-name').textContent = currentUserProfile.name;
-            
-            updateUI();
-            updateAnimalCollection();
-            
-            // 사용자 학습 진행도 로드 후 퀴즈 시작
-            loadUserProgress().then(() => {
-                // 기본 난이도 선택
-                selectDifficulty(1);
-            });
-            
-            initializeFarm();
-            showPage('game', document.querySelector('.nav-btn'));
-        }
+    document.getElementById('login-overlay').style.display = 'none';
+    document.querySelector('.game-container').style.display = 'block';
+    document.getElementById('current-user-name').textContent = currentUserProfile.name;
+    
+    // 게임 초기화
+    initializeGame();
+    
+    // 사용자 학습 진행도 로드 후 퀴즈 시작
+    loadUserProgress().then(() => {
+        selectDifficulty(1);
+    });
+    
+    showPage('game', document.querySelector('.nav-btn'));
+}
 
         window.logout = function() {
             saveCurrentUserData();
