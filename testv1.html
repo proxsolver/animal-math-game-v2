@@ -386,7 +386,7 @@
                 <div class="market-sell-section">
                     <h3>내 동물 판매하기</h3>
                     <select id="sell-animal-select"></select>
-                    <input type="number" id="sell-price-input" placeholder="판매 가격 (점수)">
+<input type="number" id="sell-price-input" placeholder="판매 가격 (코인)">
                     <button class="nav-btn" onclick="sellAnimal()">판매 등록</button>
                 </div>
                 <h3>판매 중인 동물 목록</h3>
@@ -398,7 +398,7 @@
                                 <th>이름</th>
                                 <th>레벨</th>
                                 <th>판매자</th>
-                                <th>가격</th>
+                                <th>가격(🪙)</th>
                                 <th>구매</th>
                             </tr>
                         </thead>
@@ -1335,13 +1335,76 @@ function updateUI() {
                 card.style.borderColor = borderColor;
                 card.style.boxShadow = `0 6px 20px ${borderColor}40`;
                 
-                card.innerHTML = `
-                    <span class="animal-emoji">${animal.emoji}</span>
-                    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
-                    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
-                    <div class="special-name">"${animal.specialName}"</div>
-                    <div class="rarity-badge">★${animal.rarity}</div>
-                `;
+             card.innerHTML = `
+             const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
+// 위의 rarity-badge 아래에 추가:
+<div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}코인</div>
+
+    <span class="animal-emoji">${animal.emoji}</span>
+    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+    <div class="special-name">"${animal.specialName}"</div>
+    <div class="rarity-badge">★${animal.rarity}</div>
+    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+        <button onclick="startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+        <button onclick="quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+    </div>
+`;
+
+// 바로 판매 시스템
+window.quickSellAnimal = function(animalName) {
+    const animal = gameState.animals[animalName];
+    if (!animal || animal.count <= 0) {
+        alert('판매할 동물이 없습니다.');
+        return;
+    }
+    
+    // 레벨별 판매가 계산
+    const basePrice = animal.animalLevel * 10;
+    const rarityBonus = animal.rarity * 5;
+    const finalPrice = basePrice + rarityBonus;
+    
+    const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}점에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}점`;
+    
+    if (confirm(confirmMessage)) {
+        // 동물 제거
+        animal.count--;
+        gameState.totalAnimals--;
+        
+        // 동물이 0마리가 되면 종류에서도 제거
+        if (animal.count <= 0) {
+            gameState.speciesCount--;
+            delete gameState.animals[animalName];
+        }
+        
+        // 점수 추가
+// 돈 추가 (점수 대신)
+gameState.coins += finalPrice;  // score 대신 coins 사용
+
+  
+        // 판매 완료 알림
+        const sellAlert = document.createElement('div');
+        sellAlert.className = 'new-animal-alert';
+        sellAlert.style.background = 'linear-gradient(45deg, #32CD32, #90EE90)';
+        sellAlert.innerHTML = `
+            <span class="new-animal-emoji">💰</span>
+            <h3>판매 완료! 🎉</h3>
+// 알림 메시지도 수정
+<p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}코인</strong>에 판매했습니다!</p>      
+        `;
+        document.body.appendChild(sellAlert);
+        setTimeout(() => { sellAlert.remove(); }, 3000);
+        
+        // UI 업데이트
+        updateUI();
+        updateAnimalCollection();
+        saveCurrentUserData();
+        
+        console.log(`${animalName} 판매 완료: +${finalPrice}점`);
+    }
+}
+
+                
                 
                 card.onclick = () => startMathProblem(animal.name);
                 collection.appendChild(card);
@@ -1424,7 +1487,7 @@ function updateUI() {
                 shopItemDiv.innerHTML = `
                     <div class="item-emoji">${item.emoji}</div>
                     <div class="item-name">${item.name}</div>
-                    <div class="item-price">💰 ${item.price}</div>
+<div class="item-price">🪙 ${item.price}</div>
                 `;
                 shopItemDiv.onclick = () => buyItem(item.name);
                 shopGrid.appendChild(shopItemDiv);
@@ -1433,8 +1496,8 @@ function updateUI() {
 
         function buyItem(itemName) {
             const item = shopItems.find(i => i.name === itemName);
-            if (gameState.score >= item.price) {
-                gameState.score -= item.price;
+            if (gameState.coins >= item.price) {
+                gameState.coins -= item.price;
                 if (!gameState.farm.items[itemName]) {
                     gameState.farm.items[itemName] = { ...item, count: 0 };
                 }
@@ -1444,7 +1507,7 @@ function updateUI() {
                 updateInventory();
                 saveCurrentUserData();
             } else {
-                alert('점수가 부족합니다!');
+                alert('코인이 부족합니다!');
             }
         }
 
@@ -1618,10 +1681,10 @@ function updateUI() {
                 return;
             }
             
-            if (price > gameState.score * 10) { // 너무 비싼 가격 방지
-                alert('가격이 너무 높습니다. 현재 점수의 10배 이하로 설정해주세요.');
-                return;
-            }
+if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
+    alert('가격이 너무 높습니다. 좀 더 합리적인 가격으로 설정해주세요.');
+    return;
+}
             
             const animal = gameState.animals[animalName];
             if (animal.count < 2) {
@@ -1721,7 +1784,7 @@ function updateUI() {
                     <td>${listing.animalName}<br><small>"${listing.specialName}"</small></td>
                     <td>Lv. ${listing.animalLevel}<br><small>★${listing.rarity}</small></td>
                     <td>${listing.seller}</td>
-                    <td><strong>${listing.price}</strong>점</td>
+                    <td><strong>${listing.price}</strong>🪙</td>
                     <td>
                         ${listing.seller === currentUserProfile.name 
                             ? `<button class="nav-btn" onclick="cancelListing('${listing.id}')" style="background: #ff6b6b;">취소</button>`
@@ -1735,12 +1798,12 @@ function updateUI() {
         }
 
         window.buyAnimal = async function(listingId, price, animalName) {
-            if (gameState.score < price) {
-                alert('점수가 부족합니다!');
+            if (gameState.coins < price) {
+                alert('코인이 부족합니다!');
                 return;
             }
-            
-            if (!confirm(`${animalName}을(를) ${price}점에 구매하시겠습니까?`)) {
+
+            if (!confirm(`${animalName}을(를) ${price}코인에 구매하시겠습니까?`)) {
                 return;
             }
             
@@ -1759,7 +1822,7 @@ function updateUI() {
                 const listingData = listingDoc.data();
                 
                 // 점수 차감
-                gameState.score -= price;
+            gameState.coins -= price;  // score 대신 coins
                 
                 // 동물 추가
                 const animalType = animalTypes.find(a => a.name === animalName);
@@ -1828,6 +1891,58 @@ function updateUI() {
                 }
                 gameState.animals[listingData.animalName].count++;
                 gameState.totalAnimals++;
+
+// 판매자에게 알람 전송
+const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
+const notification = {
+    type: 'sale_completed',
+    message: `${animalName}이(가) ${price}점에 판매되었습니다!`,
+    buyer: currentUserProfile.name,
+    animalName: animalName,
+    price: price,
+    timestamp: new Date().toISOString(),
+    read: false
+};
+
+try {
+    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
+    if (sellerDoc.exists()) {
+        const sellerData = sellerDoc.data();
+        const notifications = sellerData.notifications || [];
+        notifications.unshift(notification); // 최신 알람을 맨 앞에
+        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
+    }
+} catch (error) {
+    console.error('알람 전송 실패:', error);
+}
+                // 알람 확인 및 표시
+async function checkAndShowNotifications() {
+    if (!currentUserProfile.name) return;
+    
+    try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
+        const docSnap = await window.firebase.getDoc(userDocRef);
+        
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            const notifications = userData.notifications || [];
+            const unreadNotifications = notifications.filter(n => !n.read);
+            
+            if (unreadNotifications.length > 0) {
+                // 가장 최신 알람 하나만 표시
+                const latestNotification = unreadNotifications[0];
+                alert(`🔔 ${latestNotification.message}`);
+                
+                // 읽음 처리
+                notifications.forEach(n => { if (!n.read) n.read = true; });
+                await window.firebase.setDoc(userDocRef, { notifications }, { merge: true });
+            }
+        }
+    } catch (error) {
+        console.error('알람 확인 실패:', error);
+    }
+}
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
@@ -2154,6 +2269,10 @@ gameState = {
             }
             
             showPage('game', document.querySelector('.nav-btn'));
+            // 알람 확인 (3초 후)
+setTimeout(() => {
+    checkAndShowNotifications();
+}, 3000);
         }
 
         window.logout = function() {
@@ -2254,11 +2373,12 @@ gameState = {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
                 updateLearningStats();
-            } else if (pageName === 'market') {
-                gameStats.style.display = 'none';
-                userInfo.style.display = 'block';
-                updateMarketPage();
-            } else if (pageName === 'encyclopedia') {
+            } if (pageName === 'market') {
+    gameStats.style.display = 'none';
+    userInfo.style.display = 'block';
+    updateMarketPage();
+    checkAndShowNotifications(); // 이 줄 추가
+} else if (pageName === 'encyclopedia') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
                 updateEncyclopedia();
