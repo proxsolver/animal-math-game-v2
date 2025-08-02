@@ -1315,42 +1315,46 @@ function updateUI() {
     document.getElementById('total-animals').textContent = gameState.totalAnimals;
 }
 
-        function updateAnimalCollection() {
-            const collection = document.getElementById('animal-collection');
-            if (!collection) return;
-            collection.innerHTML = '';
-            
-            const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
-            
-            sortedAnimals.forEach(animal => {
-                if (animal.count === 0) return;
+    function updateAnimalCollection() {
+    const collection = document.getElementById('animal-collection');
+    if (!collection) return;
+    collection.innerHTML = '';
+    
+    const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
+    
+    sortedAnimals.forEach(animal => {
+        if (animal.count === 0) return;
 
-                const card = document.createElement('div');
-                card.className = 'animal-card';
-                
-                let borderColor = '#87CEEB';
-                if (animal.rarity >= 5) borderColor = '#FFD700';
-                else if (animal.rarity >= 4) borderColor = '#9370DB';
-                else if (animal.rarity >= 3) borderColor = '#32CD32';
-                
-                card.style.borderColor = borderColor;
-                card.style.boxShadow = `0 6px 20px ${borderColor}40`;
-                
-             card.innerHTML = `
-             const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
-// 위의 rarity-badge 아래에 추가:
-<div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}코인</div>
-
-    <span class="animal-emoji">${animal.emoji}</span>
-    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
-    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
-    <div class="special-name">"${animal.specialName}"</div>
-    <div class="rarity-badge">★${animal.rarity}</div>
-    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
-        <button onclick="startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
-        <button onclick="quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
-    </div>
-`;
+        const card = document.createElement('div');
+        card.className = 'animal-card';
+        
+        let borderColor = '#87CEEB';
+        if (animal.rarity >= 5) borderColor = '#FFD700';
+        else if (animal.rarity >= 4) borderColor = '#9370DB';
+        else if (animal.rarity >= 3) borderColor = '#32CD32';
+        
+        card.style.borderColor = borderColor;
+        card.style.boxShadow = `0 6px 20px ${borderColor}40`;
+        
+        // 판매가 계산
+        const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
+        
+        card.innerHTML = `
+            <span class="animal-emoji">${animal.emoji}</span>
+            <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+            <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+            <div class="special-name">"${animal.specialName}"</div>
+            <div class="rarity-badge">★${animal.rarity}</div>
+            <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
+            <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+                <button onclick="startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+                <button onclick="quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+            </div>
+        `;
+        
+        collection.appendChild(card);
+    });
+}
 
 // 바로 판매 시스템
 window.quickSellAnimal = function(animalName) {
@@ -1365,7 +1369,7 @@ window.quickSellAnimal = function(animalName) {
     const rarityBonus = animal.rarity * 5;
     const finalPrice = basePrice + rarityBonus;
     
-    const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}점에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}점`;
+    const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}🪙에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}🪙`;
     
     if (confirm(confirmMessage)) {
         // 동물 제거
@@ -1378,11 +1382,9 @@ window.quickSellAnimal = function(animalName) {
             delete gameState.animals[animalName];
         }
         
-        // 점수 추가
-// 돈 추가 (점수 대신)
-gameState.coins += finalPrice;  // score 대신 coins 사용
-
-  
+        // 코인 추가
+        gameState.coins += finalPrice;
+        
         // 판매 완료 알림
         const sellAlert = document.createElement('div');
         sellAlert.className = 'new-animal-alert';
@@ -1390,8 +1392,7 @@ gameState.coins += finalPrice;  // score 대신 coins 사용
         sellAlert.innerHTML = `
             <span class="new-animal-emoji">💰</span>
             <h3>판매 완료! 🎉</h3>
-// 알림 메시지도 수정
-<p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}코인</strong>에 판매했습니다!</p>      
+            <p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}🪙</strong>에 판매했습니다!</p>
         `;
         document.body.appendChild(sellAlert);
         setTimeout(() => { sellAlert.remove(); }, 3000);
@@ -1401,16 +1402,10 @@ gameState.coins += finalPrice;  // score 대신 coins 사용
         updateAnimalCollection();
         saveCurrentUserData();
         
-        console.log(`${animalName} 판매 완료: +${finalPrice}점`);
+        console.log(`${animalName} 판매 완료: +${finalPrice}🪙`);
     }
 }
 
-                
-                
-                card.onclick = () => startMathProblem(animal.name);
-                collection.appendChild(card);
-            });
-        }
         
         function updateEncyclopedia() {
             const grid = document.getElementById('encyclopedia-grid');
