@@ -402,7 +402,11 @@
             grid-column: 1 / -1;
             padding: 40px;
         }
-
+.source-badge.json-file {
+    background: linear-gradient(45deg, #2196F3, #64B5F6);
+    color: white;
+    border-color: #2196F3;
+}
         /* 단어 출처 표시 스타일 */
         .word-source {
             text-align: center;
@@ -955,39 +959,60 @@ async function generateEnglishQuiz() {
 
   // 난이도별 단어 로드
         // 난이도별 단어 로드
+// JSON 파일에서 단어 로드
 async function loadWordForDifficulty(difficulty) {
     try {
-        // Firebase Cloud Function 호출하여 단어 생성/로드
-        const getWordFunction = window.firebase.httpsCallable(window.firebase.functions, 'getEnglishWord');
-        const result = await getWordFunction({ 
-            difficulty: difficulty,
-            userId: currentUserId 
-        });
+        console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
         
-        currentWordData = result.data.word;
+        // GitHub Pages에서 JSON 파일 로드
+        const response = await fetch(`./words/level${difficulty}.json`);
+        
+        if (!response.ok) {
+            throw new Error(`JSON 파일 로드 실패: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const words = data.words;
+        
+        if (!words || words.length === 0) {
+            throw new Error('JSON 파일에 단어가 없습니다');
+        }
+        
+        // 랜덤으로 단어 선택
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        
+        currentWordData = {
+            id: `json_${difficulty}_${Date.now()}`,
+            korean: randomWord.korean,
+            english: randomWord.english,
+            options: randomWord.options,
+            difficulty: difficulty,
+            source: 'json'
+        };
+        
         currentEnglishQuiz = {
             answer: currentWordData.english,
             wordId: currentWordData.id
         };
         
-        console.log('AI 단어 로드 성공:', currentWordData);
+        console.log('JSON에서 단어 로드 성공:', currentWordData);
         
     } catch (error) {
-        console.error('AI 단어 로드 실패, 폴백 사용:', error);
-        // 폴백: 기존 단어 사용
-        const fallbackQuiz = quizWords[Math.floor(Math.random() * quizWords.length)];
+        console.error('JSON 단어 로드 실패, 폴백 사용:', error);
         
-        // 올바른 옵션 배열 생성 (정답 + 오답들)
+        // 폴백: 기존 하드코딩된 단어 사용
+        const fallbackQuiz = quizWords[Math.floor(Math.random() * quizWords.length)];
         const allOptions = [fallbackQuiz.answer, ...fallbackQuiz.options];
         
         currentWordData = {
             id: 'fallback_' + Date.now(),
             korean: fallbackQuiz.question,
             english: fallbackQuiz.answer,
-            options: allOptions, // 정답도 포함된 전체 옵션
+            options: allOptions,
             difficulty: difficulty,
             source: 'fallback'
         };
+        
         currentEnglishQuiz = {
             answer: currentWordData.english,
             wordId: currentWordData.id
@@ -999,6 +1024,7 @@ async function loadWordForDifficulty(difficulty) {
 
         // 복습용 단어 로드
 // 복습용 단어 로드
+// 복습용 단어 로드 (JSON 파일 활용)
 async function loadReviewWord() {
     // 로컬 진행도에서 틀린 단어들 찾기
     const strugglingWords = [];
@@ -1011,11 +1037,15 @@ async function loadReviewWord() {
     }
     
     if (strugglingWords.length === 0) {
-        // 복습할 단어가 없으면 일반 단어로 대체
         alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
         await loadWordForDifficulty(1);
         return;
     }
+    
+    // 복습 단어가 있으면 쉬운 레벨부터 JSON에서 로드
+    console.log('복습 모드: JSON 파일에서 단어 로드');
+    await loadWordForDifficulty(1); // 복습할 때는 쉬운 단어부터
+}
     
     // 랜덤하게 하나 선택
     const randomWordId = strugglingWords[Math.floor(Math.random() * strugglingWords.length)];
@@ -1075,19 +1105,23 @@ function displayCurrentWord() {
     // 단어 출처 표시
     wordSourceElement.style.display = 'block';
     
-    if (currentWordData.source === 'ai') {
-        sourceBadge.className = 'source-badge ai-generated';
-        sourceBadge.innerHTML = '🤖 AI 생성';
-        sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
-    } else if (currentWordData.source === 'fallback') {
-        sourceBadge.className = 'source-badge fallback';
-        sourceBadge.innerHTML = '🔄 대체 단어';
-        sourceBadge.title = 'AI 생성 실패로 대체된 단어입니다';
-    } else {
-        sourceBadge.className = 'source-badge hardcoded';
-        sourceBadge.innerHTML = '📝 기본 단어';
-        sourceBadge.title = '미리 준비된 단어입니다';
-    }
+if (currentWordData.source === 'json') {
+    sourceBadge.className = 'source-badge json-file';
+    sourceBadge.innerHTML = '📁 JSON 파일';
+    sourceBadge.title = 'GitHub Pages JSON 파일에서 로드된 단어입니다';
+} else if (currentWordData.source === 'ai') {
+    sourceBadge.className = 'source-badge ai-generated';
+    sourceBadge.innerHTML = '🤖 AI 생성';
+    sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
+} else if (currentWordData.source === 'fallback') {
+    sourceBadge.className = 'source-badge fallback';
+    sourceBadge.innerHTML = '🔄 대체 단어';
+    sourceBadge.title = 'JSON 로드 실패로 대체된 단어입니다';
+} else {
+    sourceBadge.className = 'source-badge hardcoded';
+    sourceBadge.innerHTML = '📝 기본 단어';
+    sourceBadge.title = '미리 준비된 단어입니다';
+}
     
     // 옵션 생성
     let finalOptions = [];
