@@ -2,29 +2,1089 @@
   "difficulty": 3,
   "words": [
     {
-      "korean": "분석하다",
+      "korean": "(명) 소비 / 돈을 써서 물건을 사는 것",
+      "english": "consumption",
+      "options": ["consumption", "production", "investment", "saving"]
+    },
+    {
+      "korean": "(명) 생산 / 물건이나 서비스를 만드는 것",
+      "english": "production",
+      "options": ["production", "consumption", "distribution", "manufacturing"]
+    },
+    {
+      "korean": "(명) 투자 / 돈을 넣어서 더 많은 돈을 얻으려 하는 것",
+      "english": "investment",
+      "options": ["investment", "saving", "spending", "lending"]
+    },
+    {
+      "korean": "(명) 저축 / 돈을 모아두는 것",
+      "english": "saving",
+      "options": ["saving", "spending", "investment", "deposit"]
+    },
+    {
+      "korean": "(명) 이자 / 돈을 빌리거나 맡길 때 받는 추가 돈",
+      "english": "interest",
+      "options": ["interest", "profit", "dividend", "bonus"]
+    },
+    {
+      "korean": "(명) 수요 / 사고 싶어하는 정도",
+      "english": "demand",
+      "options": ["demand", "supply", "market", "price"]
+    },
+    {
+      "korean": "(명) 공급 / 팔 수 있는 물건의 양",
+      "english": "supply",
+      "options": ["supply", "demand", "stock", "inventory"]
+    },
+    {
+      "korean": "(명) 시장 / 물건을 사고파는 곳이나 활동",
+      "english": "market",
+      "options": ["market", "store", "economy", "business"]
+    },
+    {
+      "korean": "(명) 가격 / 물건을 사는 데 드는 돈",
+      "english": "price",
+      "options": ["price", "cost", "value", "expense"]
+    },
+    {
+      "korean": "(명) 비용 / 어떤 일을 하는 데 드는 돈",
+      "english": "cost",
+      "options": ["cost", "price", "expense", "fee"]
+    },
+    {
+      "korean": "(명) 가치 / 물건이나 서비스의 중요성이나 유용함",
+      "english": "value",
+      "options": ["value", "worth", "price", "benefit"]
+    },
+    {
+      "korean": "(명) 이익 / 벌어들인 돈에서 쓴 돈을 뺀 나머지",
+      "english": "profit",
+      "options": ["profit", "loss", "revenue", "income"]
+    },
+    {
+      "korean": "(명) 손실 / 잃은 돈이나 피해",
+      "english": "loss",
+      "options": ["loss", "profit", "deficit", "damage"]
+    },
+    {
+      "korean": "(명) 수입 / 들어오는 돈",
+      "english": "income",
+      "options": ["income", "expense", "salary", "revenue"]
+    },
+    {
+      "korean": "(명) 지출 / 나가는 돈",
+      "english": "expense",
+      "options": ["expense", "income", "cost", "spending"]
+    },
+    {
+      "korean": "(명) 예산 / 쓸 돈을 미리 계획한 것",
+      "english": "budget",
+      "options": ["budget", "plan", "finance", "account"]
+    },
+    {
+      "korean": "(명) 경제 / 돈과 물건이 돌아가는 체계",
+      "english": "economy",
+      "options": ["economy", "finance", "business", "market"]
+    },
+    {
+      "korean": "(명) 금융 / 돈을 다루는 일",
+      "english": "finance",
+      "options": ["finance", "economy", "banking", "money"]
+    },
+    {
+      "korean": "(명) 은행 / 돈을 맡기고 빌려주는 기관",
+      "english": "bank",
+      "options": ["bank", "finance", "institution", "company"]
+    },
+    {
+      "korean": "(명) 계좌 / 은행에 돈을 맡기는 통장",
+      "english": "account",
+      "options": ["account", "balance", "deposit", "record"]
+    },
+    {
+      "korean": "(명) 잔액 / 계좌에 남아있는 돈",
+      "english": "balance",
+      "options": ["balance", "amount", "total", "sum"]
+    },
+    {
+      "korean": "(명) 예금 / 은행에 맡긴 돈",
+      "english": "deposit",
+      "options": ["deposit", "withdrawal", "saving", "account"]
+    },
+    {
+      "korean": "(명) 출금 / 은행에서 돈을 빼는 것",
+      "english": "withdrawal",
+      "options": ["withdrawal", "deposit", "transfer", "payment"]
+    },
+    {
+      "korean": "(명) 대출 / 은행에서 돈을 빌리는 것",
+      "english": "loan",
+      "options": ["loan", "debt", "credit", "mortgage"]
+    },
+    {
+      "korean": "(명) 부채 / 빚진 돈",
+      "english": "debt",
+      "options": ["debt", "loan", "liability", "obligation"]
+    },
+    {
+      "korean": "(명) 신용 / 돈을 빌릴 수 있는 자격",
+      "english": "credit",
+      "options": ["credit", "trust", "reputation", "score"]
+    },
+    {
+      "korean": "(명) 담보 / 빚을 갚지 못할 때 대신 내놓는 것",
+      "english": "collateral",
+      "options": ["collateral", "security", "guarantee", "asset"]
+    },
+    {
+      "korean": "(명) 보험 / 위험에 대비해 미리 내는 돈",
+      "english": "insurance",
+      "options": ["insurance", "protection", "coverage", "policy"]
+    },
+    {
+      "korean": "(명) 보험료 / 보험을 위해 내는 돈",
+      "english": "premium",
+      "options": ["premium", "fee", "payment", "contribution"]
+    },
+    {
+      "korean": "(명) 세금 / 국가에 내는 돈",
+      "english": "tax",
+      "options": ["tax", "fee", "charge", "levy"]
+    },
+    {
+      "korean": "(명) 소득세 / 번 돈에 대해 내는 세금",
+      "english": "income tax",
+      "options": ["income tax", "sales tax", "property tax", "corporate tax"]
+    },
+    {
+      "korean": "(명) 부가가치세 / 물건을 살 때 추가로 내는 세금",
+      "english": "VAT",
+      "options": ["VAT", "sales tax", "income tax", "excise tax"]
+    },
+    {
+      "korean": "(명) 할인 / 원래 가격보다 싸게 파는 것",
+      "english": "discount",
+      "options": ["discount", "sale", "reduction", "bargain"]
+    },
+    {
+      "korean": "(명) 세일 / 특별히 싸게 파는 기간",
+      "english": "sale",
+      "options": ["sale", "discount", "promotion", "offer"]
+    },
+    {
+      "korean": "(명) 쿠폰 / 할인받을 수 있는 표",
+      "english": "coupon",
+      "options": ["coupon", "voucher", "ticket", "certificate"]
+    },
+    {
+      "korean": "(명) 환불 / 산 물건을 돌려주고 돈을 되받는 것",
+      "english": "refund",
+      "options": ["refund", "return", "exchange", "reimbursement"]
+    },
+    {
+      "korean": "(명) 교환 / 산 물건을 다른 것으로 바꾸는 것",
+      "english": "exchange",
+      "options": ["exchange", "return", "swap", "trade"]
+    },
+    {
+      "korean": "(명) 영수증 / 돈을 냈다는 증명서",
+      "english": "receipt",
+      "options": ["receipt", "bill", "invoice", "ticket"]
+    },
+    {
+      "korean": "(명) 계산서 / 내야 할 돈을 적은 종이",
+      "english": "bill",
+      "options": ["bill", "invoice", "receipt", "statement"]
+    },
+    {
+      "korean": "(명) 신용카드 / 나중에 돈을 내기로 하고 쓸 수 있는 카드",
+      "english": "credit card",
+      "options": ["credit card", "debit card", "cash card", "bank card"]
+    },
+    {
+      "korean": "(명) 체크카드 / 계좌에서 바로 돈이 빠지는 카드",
+      "english": "debit card",
+      "options": ["debit card", "credit card", "cash card", "prepaid card"]
+    },
+    {
+      "korean": "(명) 현금 / 종이돈과 동전",
+      "english": "cash",
+      "options": ["cash", "money", "currency", "coin"]
+    },
+    {
+      "korean": "(명) 화폐 / 돈으로 쓰이는 것",
+      "english": "currency",
+      "options": ["currency", "money", "cash", "coin"]
+    },
+    {
+      "korean": "(명) 환율 / 다른 나라 돈과 바꾸는 비율",
+      "english": "exchange rate",
+      "options": ["exchange rate", "interest rate", "inflation rate", "discount rate"]
+    },
+    {
+      "korean": "(명) 인플레이션 / 물가가 계속 오르는 현상",
+      "english": "inflation",
+      "options": ["inflation", "deflation", "recession", "depression"]
+    },
+    {
+      "korean": "(명) 디플레이션 / 물가가 계속 내리는 현상",
+      "english": "deflation",
+      "options": ["deflation", "inflation", "recession", "stagnation"]
+    },
+    {
+      "korean": "(명) 경기침체 / 경제가 나빠지는 상황",
+      "english": "recession",
+      "options": ["recession", "depression", "inflation", "boom"]
+    },
+    {
+      "korean": "(명) 경기호황 / 경제가 좋아지는 상황",
+      "english": "boom",
+      "options": ["boom", "recession", "growth", "expansion"]
+    },
+    {
+      "korean": "(명) 실업 / 일자리가 없는 상태",
+      "english": "unemployment",
+      "options": ["unemployment", "employment", "job loss", "layoff"]
+    },
+    {
+      "korean": "(명) 고용 / 사람을 일자리에 두는 것",
+      "english": "employment",
+      "options": ["employment", "unemployment", "job", "work"]
+    },
+    {
+      "korean": "(명) 최저임금 / 법으로 정한 가장 낮은 시급",
+      "english": "minimum wage",
+      "options": ["minimum wage", "salary", "hourly pay", "basic pay"]
+    },
+    {
+      "korean": "(명) 연봉 / 1년간 받는 돈",
+      "english": "annual salary",
+      "options": ["annual salary", "monthly pay", "hourly wage", "bonus"]
+    },
+    {
+      "korean": "(명) 보너스 / 기본 급여 외에 추가로 받는 돈",
+      "english": "bonus",
+      "options": ["bonus", "salary", "wage", "commission"]
+    },
+    {
+      "korean": "(명) 수수료 / 서비스를 받기 위해 내는 추가 요금",
+      "english": "commission",
+      "options": ["commission", "fee", "charge", "cost"]
+    },
+    {
+      "korean": "(명) 주식 / 회사의 일부를 소유할 수 있는 증서",
+      "english": "stock",
+      "options": ["stock", "share", "bond", "security"]
+    },
+    {
+      "korean": "(명) 주식시장 / 주식을 사고파는 곳",
+      "english": "stock market",
+      "options": ["stock market", "stock exchange", "securities market", "financial market"]
+    },
+    {
+      "korean": "(명) 배당금 / 주식을 가진 사람이 받는 돈",
+      "english": "dividend",
+      "options": ["dividend", "interest", "profit", "return"]
+    },
+    {
+      "korean": "(명) 채권 / 정해진 기간 후 이자와 함께 돌려받는 증서",
+      "english": "bond",
+      "options": ["bond", "stock", "security", "certificate"]
+    },
+    {
+      "korean": "(명) 자산 / 가치가 있는 것들",
+      "english": "asset",
+      "options": ["asset", "property", "wealth", "resource"]
+    },
+    {
+      "korean": "(명) 부동산 / 땅과 건물",
+      "english": "real estate",
+      "options": ["real estate", "property", "land", "building"]
+    },
+    {
+      "korean": "(명) 임대료 / 집이나 건물을 빌려 쓰는 데 내는 돈",
+      "english": "rent",
+      "options": ["rent", "lease", "rental fee", "housing cost"]
+    },
+    {
+      "korean": "(명) 전세 / 큰 돈을 맡기고 집을 빌리는 방식",
+      "english": "jeonse",
+      "options": ["jeonse", "monthly rent", "deposit", "lease"]
+    },
+    {
+      "korean": "(명) 월세 / 매달 내는 집 사용료",
+      "english": "monthly rent",
+      "options": ["monthly rent", "jeonse", "lease", "rental"]
+    },
+    {
+      "korean": "(명) 보증금 / 계약할 때 미리 내는 돈",
+      "english": "security deposit",
+      "options": ["security deposit", "down payment", "advance payment", "guarantee"]
+    },
+    {
+      "korean": "(명) 계약 / 서로 약속을 정하는 것",
+      "english": "contract",
+      "options": ["contract", "agreement", "deal", "arrangement"]
+    },
+    {
+      "korean": "(명) 협상 / 서로 의견을 맞추려고 이야기하는 것",
+      "english": "negotiation",
+      "options": ["negotiation", "discussion", "bargaining", "deal"]
+    },
+    {
+      "korean": "(명) 경쟁 / 서로 이기려고 겨루는 것",
+      "english": "competition",
+      "options": ["competition", "contest", "rivalry", "race"]
+    },
+    {
+      "korean": "(명) 독점 / 혼자서 모든 것을 차지하는 것",
+      "english": "monopoly",
+      "options": ["monopoly", "competition", "market share", "dominance"]
+    },
+    {
+      "korean": "(명) 시장점유율 / 전체 시장에서 차지하는 비율",
+      "english": "market share",
+      "options": ["market share", "market size", "market cap", "market value"]
+    },
+    {
+      "korean": "(명) 브랜드 / 상품이나 회사의 이름과 특징",
+      "english": "brand",
+      "options": ["brand", "trademark", "logo", "label"]
+    },
+    {
+      "korean": "(명) 광고 / 상품을 알리는 활동",
+      "english": "advertisement",
+      "options": ["advertisement", "promotion", "marketing", "publicity"]
+    },
+    {
+      "korean": "(명) 마케팅 / 상품을 잘 팔기 위한 모든 활동",
+      "english": "marketing",
+      "options": ["marketing", "advertising", "promotion", "sales"]
+    },
+    {
+      "korean": "(명) 판매 / 물건을 파는 것",
+      "english": "sales",
+      "options": ["sales", "selling", "marketing", "retail"]
+    },
+    {
+      "korean": "(명) 소매 / 소비자에게 직접 파는 것",
+      "english": "retail",
+      "options": ["retail", "wholesale", "sales", "commerce"]
+    },
+    {
+      "korean": "(명) 도매 / 많은 양을 한꺼번에 파는 것",
+      "english": "wholesale",
+      "options": ["wholesale", "retail", "bulk", "mass"]
+    },
+    {
+      "korean": "(명) 유통 / 물건을 만든 곳에서 소비자까지 전달하는 과정",
+      "english": "distribution",
+      "options": ["distribution", "delivery", "supply", "logistics"]
+    },
+    {
+      "korean": "(명) 물류 / 물건을 운반하고 보관하는 체계",
+      "english": "logistics",
+      "options": ["logistics", "transportation", "distribution", "shipping"]
+    },
+    {
+      "korean": "(명) 재고 / 창고에 쌓아둔 물건",
+      "english": "inventory",
+      "options": ["inventory", "stock", "storage", "warehouse"]
+    },
+    {
+      "korean": "(명) 창고 / 물건을 보관하는 건물",
+      "english": "warehouse",
+      "options": ["warehouse", "storage", "depot", "facility"]
+    },
+    {
+      "korean": "(명) 운송비 / 물건을 옮기는 데 드는 돈",
+      "english": "shipping cost",
+      "options": ["shipping cost", "delivery fee", "transportation cost", "freight"]
+    },
+    {
+      "korean": "(명) 온라인쇼핑 / 인터넷으로 물건을 사는 것",
+      "english": "online shopping",
+      "options": ["online shopping", "e-commerce", "internet shopping", "digital commerce"]
+    },
+    {
+      "korean": "(명) 전자상거래 / 컴퓨터를 이용한 상거래",
+      "english": "e-commerce",
+      "options": ["e-commerce", "online business", "digital trade", "internet commerce"]
+    },
+    {
+      "korean": "(명) 결제 / 돈을 지불하는 것",
+      "english": "payment",
+      "options": ["payment", "transaction", "settlement", "billing"]
+    },
+    {
+      "korean": "(명) 전자결제 / 카드나 스마트폰으로 돈을 내는 것",
+      "english": "electronic payment",
+      "options": ["electronic payment", "digital payment", "mobile payment", "card payment"]
+    },
+    {
+      "korean": "(명) 가상화폐 / 컴퓨터에만 존재하는 돈",
+      "english": "cryptocurrency",
+      "options": ["cryptocurrency", "digital currency", "virtual money", "bitcoin"]
+    },
+    {
+      "korean": "(명) 비트코인 / 가장 유명한 가상화폐",
+      "english": "bitcoin",
+      "options": ["bitcoin", "cryptocurrency", "digital coin", "virtual currency"]
+    },
+    {
+      "korean": "(명) 블록체인 / 거래 기록을 안전하게 보관하는 기술",
+      "english": "blockchain",
+      "options": ["blockchain", "database", "ledger", "network"]
+    },
+    {
+      "korean": "(명) 핀테크 / 금융과 기술을 결합한 서비스",
+      "english": "fintech",
+      "options": ["fintech", "financial technology", "digital banking", "mobile banking"]
+    },
+    {
+      "korean": "(명) 모바일뱅킹 / 휴대폰으로 하는 은행업무",
+      "english": "mobile banking",
+      "options": ["mobile banking", "online banking", "digital banking", "internet banking"]
+    },
+    {
+      "korean": "(명) 자동화 / 기계가 사람 대신 일하게 하는 것",
+      "english": "automation",
+      "options": ["automation", "mechanization", "robotics", "digitization"]
+    },
+    {
+      "korean": "(명) 인공지능 / 컴퓨터가 사람처럼 생각하는 기술",
+      "english": "artificial intelligence",
+      "options": ["artificial intelligence", "machine learning", "robotics", "automation"]
+    },
+    {
+      "korean": "(명) 로봇 / 사람 대신 일하는 기계",
+      "english": "robot",
+      "options": ["robot", "machine", "automation", "android"]
+    },
+    {
+      "korean": "(명) 기술혁신 / 새로운 기술로 크게 바뀌는 것",
+      "english": "technological innovation",
+      "options": ["technological innovation", "digital transformation", "tech revolution", "advancement"]
+    },
+    {
+      "korean": "(명) 디지털화 / 모든 것을 컴퓨터로 처리하게 바꾸는 것",
+      "english": "digitization",
+      "options": ["digitization", "digitalization", "computerization", "automation"]
+    },
+    {
+      "korean": "(명) 스타트업 / 새로 시작하는 회사",
+      "english": "startup",
+      "options": ["startup", "new company", "venture", "entrepreneur"]
+    },
+    {
+      "korean": "(명) 창업 / 새로운 사업을 시작하는 것",
+      "english": "entrepreneurship",
+      "options": ["entrepreneurship", "startup", "business creation", "venture"]
+    },
+    {
+      "korean": "(명) 벤처기업 / 새로운 기술로 사업하는 회사",
+      "english": "venture company",
+      "options": ["venture company", "startup", "tech company", "innovation firm"]
+    },
+    {
+      "korean": "(명) 투자자 / 돈을 투자하는 사람",
+      "english": "investor",
+      "options": ["investor", "shareholder", "stakeholder", "financier"]
+    },
+    {
+      "korean": "(명) 주주 / 주식을 가진 사람",
+      "english": "shareholder",
+      "options": ["shareholder", "stockholder", "investor", "owner"]
+    },
+    {
+      "korean": "(명) 이해관계자 / 어떤 일에 관련된 모든 사람",
+      "english": "stakeholder",
+      "options": ["stakeholder", "shareholder", "participant", "party"]
+    },
+    {
+      "korean": "(명) 고객 / 물건이나 서비스를 사는 사람",
+      "english": "customer",
+      "options": ["customer", "client", "consumer", "buyer"]
+    },
+    {
+      "korean": "(명) 소비자 / 최종적으로 물건을 사용하는 사람",
+      "english": "consumer",
+      "options": ["consumer", "customer", "user", "buyer"]
+    },
+    {
+      "korean": "(명) 공급자 / 물건이나 서비스를 제공하는 사람",
+      "english": "supplier",
+      "options": ["supplier", "provider", "vendor", "manufacturer"]
+    },
+    {
+      "korean": "(명) 제조업체 / 물건을 만드는 회사",
+      "english": "manufacturer",
+      "options": ["manufacturer", "producer", "maker", "factory"]
+    },
+    {
+      "korean": "(명) 서비스업 / 물건이 아닌 서비스를 제공하는 업종",
+      "english": "service industry",
+      "options": ["service industry", "service sector", "tertiary industry", "hospitality"]
+    },
+    {
+      "korean": "(명) 관광업 / 여행객을 위한 서비스업",
+      "english": "tourism industry",
+      "options": ["tourism industry", "travel industry", "hospitality", "leisure industry"]
+    },
+    {
+      "korean": "(명) 숙박업 / 잠자리를 제공하는 업종",
+      "english": "hospitality industry",
+      "options": ["hospitality industry", "hotel industry", "accommodation", "lodging"]
+    },
+    {
+      "korean": "(명) 음식업 / 음식을 만들어 파는 업종",
+      "english": "food service industry",
+      "options": ["food service industry", "restaurant business", "catering", "hospitality"]
+    },
+    {
+      "korean": "(명) 운송업 / 사람이나 물건을 옮기는 업종",
+      "english": "transportation industry",
+      "options": ["transportation industry", "logistics", "shipping", "freight"]
+    },
+    {
+      "korean": "(명) 건설업 / 건물이나 도로를 만드는 업종",
+      "english": "construction industry",
+      "options": ["construction industry", "building industry", "real estate", "infrastructure"]
+    },
+    {
+      "korean": "(명) 농업 / 농작물을 기르는 업종",
+      "english": "agriculture",
+      "options": ["agriculture", "farming", "cultivation", "rural industry"]
+    },
+    {
+      "korean": "(명) 어업 / 물고기를 잡는 업종",
+      "english": "fishing industry",
+      "options": ["fishing industry", "fishery", "marine industry", "aquaculture"]
+    },
+    {
+      "korean": "(명) 에너지산업 / 전기나 연료를 만드는 업종",
+      "english": "energy industry",
+      "options": ["energy industry", "power industry", "utilities", "fuel industry"]
+    },
+    {
+      "korean": "(명) 재생에너지 / 다시 만들어 낼 수 있는 에너지",
+      "english": "renewable energy",
+      "options": ["renewable energy", "clean energy", "sustainable energy", "green energy"]
+    },
+    {
+      "korean": "(명) 환경보호 / 자연을 깨끗하게 지키는 것",
+      "english": "environmental protection",
+      "options": ["environmental protection", "conservation", "sustainability", "ecology"]
+    },
+    {
+      "korean": "(명) 지속가능성 / 오래도록 계속할 수 있는 성질",
+      "english": "sustainability",
+      "options": ["sustainability", "durability", "continuity", "longevity"]
+    },
+    {
+      "korean": "(명) 탄소배출 / 이산화탄소를 내보내는 것",
+      "english": "carbon emission",
+      "options": ["carbon emission", "greenhouse gas", "pollution", "environmental impact"]
+    },
+    {
+      "korean": "(명) 온실가스 / 지구를 따뜻하게 만드는 기체",
+      "english": "greenhouse gas",
+      "options": ["greenhouse gas", "carbon dioxide", "emission", "pollutant"]
+    },
+    {
+      "korean": "(명) 기후변화 / 지구의 날씨가 오랫동안 바뀌는 것",
+      "english": "climate change",
+      "options": ["climate change", "global warming", "environmental change", "weather pattern"]
+    },
+    {
+      "korean": "(명) 지구온난화 / 지구의 온도가 올라가는 현상",
+      "english": "global warming",
+      "options": ["global warming", "climate change", "temperature rise", "greenhouse effect"]
+    },
+    {
+      "korean": "(명) 친환경 / 환경에 해롭지 않은",
+      "english": "eco-friendly",
+      "options": ["eco-friendly", "environmentally friendly", "green", "sustainable"]
+    },
+    {
+      "korean": "(명) 재활용 / 쓴 것을 다시 활용하는 것",
+      "english": "recycling",
+      "options": ["recycling", "reuse", "waste management", "circular economy"]
+    },
+    {
+      "korean": "(명) 순환경제 / 버리지 않고 계속 사용하는 경제",
+      "english": "circular economy",
+      "options": ["circular economy", "recycling economy", "sustainable economy", "green economy"]
+    },
+    {
+      "korean": "(명) 녹색경제 / 환경을 생각하는 경제",
+      "english": "green economy",
+      "options": ["green economy", "sustainable economy", "environmental economy", "clean economy"]
+    },
+    {
+      "korean": "(명) 사회적기업 / 사회문제를 해결하려는 기업",
+      "english": "social enterprise",
+      "options": ["social enterprise", "social business", "nonprofit", "charity organization"]
+    },
+    {
+      "korean": "(명) 비영리단체 / 돈을 벌지 않고 사회를 위해 일하는 단체",
+      "english": "nonprofit organization",
+      "options": ["nonprofit organization", "NGO", "charity", "foundation"]
+    },
+    {
+      "korean": "(명) 기부 / 도움이 될 수 있도록 돈이나 물건을 주는 것",
+      "english": "donation",
+      "options": ["donation", "charity", "contribution", "gift"]
+    },
+    {
+      "korean": "(명) 자선 / 어려운 사람을 돕는 일",
+      "english": "charity",
+      "options": ["charity", "philanthropy", "donation", "goodwill"]
+    },
+    {
+      "korean": "(명) 사회공헌 / 사회를 위해 좋은 일을 하는 것",
+      "english": "social contribution",
+      "options": ["social contribution", "community service", "social responsibility", "philanthropy"]
+    },
+    {
+      "korean": "(명) 기업의사회적책임 / 기업이 사회에 대해 져야 할 책임",
+      "english": "corporate social responsibility",
+      "options": ["corporate social responsibility", "CSR", "business ethics", "social accountability"]
+    },
+    {
+      "korean": "(명) 윤리 / 옳고 그름을 판단하는 기준",
+      "english": "ethics",
+      "options": ["ethics", "morals", "principles", "values"]
+    },
+    {
+      "korean": "(명) 공정거래 / 정당하고 공평한 거래",
+      "english": "fair trade",
+      "options": ["fair trade", "ethical trade", "equitable commerce", "just trade"]
+    },
+    {
+      "korean": "(명) 부정부패 / 정직하지 않은 행위",
+      "english": "corruption",
+      "options": ["corruption", "fraud", "dishonesty", "misconduct"]
+    },
+    {
+      "korean": "(명) 사기 / 남을 속여서 이익을 얻는 것",
+      "english": "fraud",
+      "options": ["fraud", "scam", "deception", "cheating"]
+    },
+    {
+      "korean": "(명) 투명성 / 숨기지 않고 공개하는 성질",
+      "english": "transparency",
+      "options": ["transparency", "openness", "accountability", "disclosure"]
+    },
+    {
+      "korean": "(명) 책임성 / 자신의 행동에 대해 책임지는 성질",
+      "english": "accountability",
+      "options": ["accountability", "responsibility", "liability", "answerability"]
+    },
+    {
+      "korean": "(명) 거버넌스 / 조직을 이끌어가는 방식",
+      "english": "governance",
+      "options": ["governance", "management", "administration", "leadership"]
+    },
+    {
+      "korean": "(명) 리더십 / 다른 사람을 이끄는 능력",
+      "english": "leadership",
+      "options": ["leadership", "management", "guidance", "direction"]
+    },
+    {
+      "korean": "(명) 팀워크 / 팀이 하나가 되어 일하는 것",
+      "english": "teamwork",
+      "options": ["teamwork", "collaboration", "cooperation", "partnership"]
+    },
+    {
+      "korean": "(명) 협력 / 서로 힘을 합쳐 일하는 것",
+      "english": "collaboration",
+      "options": ["collaboration", "cooperation", "teamwork", "partnership"]
+    },
+    {
+      "korean": "(명) 파트너십 / 동반자 관계",
+      "english": "partnership",
+      "options": ["partnership", "alliance", "cooperation", "collaboration"]
+    },
+    {
+      "korean": "(명) 네트워크 / 서로 연결된 관계망",
+      "english": "network",
+      "options": ["network", "connection", "system", "web"]
+    },
+    {
+      "korean": "(명) 연결 / 서로 이어지는 것",
+      "english": "connection",
+      "options": ["connection", "link", "relationship", "bond"]
+    },
+    {
+      "korean": "(명) 관계 / 서로 연관이 있는 상태",
+      "english": "relationship",
+      "options": ["relationship", "connection", "association", "bond"]
+    },
+    {
+      "korean": "(명) 소통 / 서로 의견을 주고받는 것",
+      "english": "communication",
+      "options": ["communication", "interaction", "dialogue", "exchange"]
+    },
+    {
+      "korean": "(명) 상호작용 / 서로 영향을 주고받는 것",
+      "english": "interaction",
+      "options": ["interaction", "communication", "exchange", "engagement"]
+    },
+    {
+      "korean": "(명) 피드백 / 결과에 대한 반응이나 의견",
+      "english": "feedback",
+      "options": ["feedback", "response", "reaction", "evaluation"]
+    },
+    {
+      "korean": "(명) 평가 / 성과나 가치를 판단하는 것",
+      "english": "evaluation",
+      "options": ["evaluation", "assessment", "appraisal", "review"]
+    },
+    {
+      "korean": "(명) 성과 / 노력한 결과",
+      "english": "performance",
+      "options": ["performance", "result", "achievement", "outcome"]
+    },
+    {
+      "korean": "(명) 효율성 / 적은 노력으로 좋은 결과를 내는 정도",
+      "english": "efficiency",
+      "options": ["efficiency", "productivity", "effectiveness", "optimization"]
+    },
+    {
+      "korean": "(명) 효과성 / 목표를 달성하는 정도",
+      "english": "effectiveness",
+      "options": ["effectiveness", "efficiency", "success rate", "impact"]
+    },
+    {
+      "korean": "(명) 생산성 / 일정 시간에 만들어내는 양",
+      "english": "productivity",
+      "options": ["productivity", "efficiency", "output", "performance"]
+    },
+    {
+      "korean": "(명) 품질 / 물건이나 서비스의 좋고 나쁜 정도",
+      "english": "quality",
+      "options": ["quality", "standard", "grade", "level"]
+    },
+    {
+      "korean": "(명) 표준 / 기준이 되는 것",
+      "english": "standard",
+      "options": ["standard", "norm", "criteria", "benchmark"]
+    },
+    {
+      "korean": "(명) 기준 / 판단의 근거가 되는 것",
+      "english": "criteria",
+      "options": ["criteria", "standard", "requirement", "measure"]
+    },
+    {
+      "korean": "(명) 요구사항 / 필요하다고 요구하는 조건",
+      "english": "requirement",
+      "options": ["requirement", "condition", "specification", "demand"]
+    },
+    {
+      "korean": "(명) 조건 / 어떤 일이 이루어지기 위해 필요한 것",
+      "english": "condition",
+      "options": ["condition", "requirement", "term", "circumstance"]
+    },
+    {
+      "korean": "(명) 약관 / 계약이나 거래의 조건",
+      "english": "terms and conditions",
+      "options": ["terms and conditions", "agreement terms", "contract terms", "policy"]
+    },
+    {
+      "korean": "(명) 정책 / 목표를 달성하기 위한 방침",
+      "english": "policy",
+      "options": ["policy", "strategy", "plan", "guideline"]
+    },
+    {
+      "korean": "(명) 전략 / 목표를 달성하기 위한 계획",
+      "english": "strategy",
+      "options": ["strategy", "plan", "approach", "tactic"]
+    },
+    {
+      "korean": "(명) 목표 / 이루고자 하는 것",
+      "english": "goal",
+      "options": ["goal", "objective", "target", "aim"]
+    },
+    {
+      "korean": "(명) 목적 / 어떤 일을 하는 이유",
+      "english": "purpose",
+      "options": ["purpose", "objective", "goal", "intention"]
+    },
+    {
+      "korean": "(명) 비전 / 미래에 대한 꿈이나 계획",
+      "english": "vision",
+      "options": ["vision", "dream", "aspiration", "future plan"]
+    },
+    {
+      "korean": "(명) 사명 / 해야 할 중요한 일",
+      "english": "mission",
+      "options": ["mission", "purpose", "duty", "calling"]
+    },
+    {
+      "korean": "(명) 가치 / 중요하다고 여기는 것",
+      "english": "value",
+      "options": ["value", "principle", "belief", "worth"]
+    },
+    {
+      "korean": "(명) 원칙 / 지켜야 할 기본 규칙",
+      "english": "principle",
+      "options": ["principle", "rule", "standard", "guideline"]
+    },
+    {
+      "korean": "(명) 문화 / 조직이나 사회의 특별한 분위기",
+      "english": "culture",
+      "options": ["culture", "atmosphere", "environment", "climate"]
+    },
+    {
+      "korean": "(명) 분위기 / 어떤 상황의 느낌",
+      "english": "atmosphere",
+      "options": ["atmosphere", "mood", "environment", "climate"]
+    },
+    {
+      "korean": "(동) 분석하다 / 자세히 나누어 살펴보다",
       "english": "analyze",
-      "options": ["analyze", "organize", "memorize", "summarize"]
+      "options": ["analyze", "examine", "study", "investigate"]
     },
     {
-      "korean": "창의성",
-      "english": "creativity",
-      "options": ["creativity", "intelligence", "personality", "ability"]
+      "korean": "(동) 예측하다 / 앞으로 일어날 일을 미리 생각하다",
+      "english": "predict",
+      "options": ["predict", "forecast", "anticipate", "expect"]
     },
     {
-      "korean": "협력하다",
-      "english": "collaborate",
-      "options": ["collaborate", "compete", "communicate", "concentrate"]
+      "korean": "(동) 예상하다 / 앞으로 어떻게 될지 생각하다",
+      "english": "expect",
+      "options": ["expect", "anticipate", "predict", "assume"]
     },
     {
-      "korean": "환경",
-      "english": "environment",
-      "options": ["environment", "government", "development", "management"]
+      "korean": "(동) 추정하다 / 대략 짐작하다",
+      "english": "estimate",
+      "options": ["estimate", "calculate", "assess", "evaluate"]
     },
     {
-      "korean": "기술",
-      "english": "technology",
-      "options": ["technology", "psychology", "philosophy", "biology"]
+      "korean": "(동) 계산하다 / 수를 세거나 값을 구하다",
+      "english": "calculate",
+      "options": ["calculate", "compute", "figure", "estimate"]
+    },
+    {
+      "korean": "(동) 측정하다 / 크기나 양을 재다",
+      "english": "measure",
+      "options": ["measure", "gauge", "assess", "evaluate"]
+    },
+    {
+      "korean": "(동) 비교하다 / 둘 이상을 견주어 보다",
+      "english": "compare",
+      "options": ["compare", "contrast", "evaluate", "assess"]
+    },
+    {
+      "korean": "(동) 검토하다 / 자세히 살펴보다",
+      "english": "review",
+      "options": ["review", "examine", "check", "evaluate"]
+    },
+    {
+      "korean": "(동) 확인하다 / 맞는지 알아보다",
+      "english": "verify",
+      "options": ["verify", "confirm", "check", "validate"]
+    },
+    {
+      "korean": "(동) 보장하다 / 확실히 지켜주겠다고 약속하다",
+      "english": "guarantee",
+      "options": ["guarantee", "ensure", "promise", "assure"]
+    },
+    {
+      "korean": "(동) 개선하다 / 더 좋게 만들다",
+      "english": "improve",
+      "options": ["improve", "enhance", "upgrade", "better"]
+    },
+    {
+      "korean": "(동) 향상시키다 / 더 높은 수준으로 만들다",
+      "english": "enhance",
+      "options": ["enhance", "improve", "upgrade", "boost"]
+    },
+    {
+      "korean": "(동) 최적화하다 / 가장 좋은 상태로 만들다",
+      "english": "optimize",
+      "options": ["optimize", "maximize", "improve", "enhance"]
+    },
+    {
+      "korean": "(동) 최대화하다 / 가장 크게 만들다",
+      "english": "maximize",
+      "options": ["maximize", "optimize", "increase", "boost"]
+    },
+    {
+      "korean": "(동) 최소화하다 / 가장 작게 만들다",
+      "english": "minimize",
+      "options": ["minimize", "reduce", "decrease", "lower"]
+    },
+    {
+      "korean": "(동) 통합하다 / 여러 개를 하나로 합치다",
+      "english": "integrate",
+      "options": ["integrate", "combine", "merge", "unite"]
+    },
+    {
+      "korean": "(동) 분리하다 / 하나를 여러 부분으로 나누다",
+      "english": "separate",
+      "options": ["separate", "divide", "split", "isolate"]
+    },
+    {
+      "korean": "(동) 조직하다 / 체계적으로 정리하다",
+      "english": "organize",
+      "options": ["organize", "arrange", "structure", "coordinate"]
+    },
+    {
+      "korean": "(동) 관리하다 / 잘 돌보고 운영하다",
+      "english": "manage",
+      "options": ["manage", "control", "supervise", "handle"]
+    },
+    {
+      "korean": "(동) 운영하다 / 일이 잘 돌아가게 하다",
+      "english": "operate",
+      "options": ["operate", "run", "manage", "conduct"]
+    },
+    {
+      "korean": "(동) 수행하다 / 맡은 일을 해내다",
+      "english": "perform",
+      "options": ["perform", "execute", "carry out", "accomplish"]
+    },
+    {
+      "korean": "(동) 달성하다 / 목표를 이루다",
+      "english": "achieve",
+      "options": ["achieve", "accomplish", "attain", "reach"]
+    },
+    {
+      "korean": "(동) 성취하다 / 어려운 일을 해내다",
+      "english": "accomplish",
+      "options": ["accomplish", "achieve", "complete", "fulfill"]
+    },
+    {
+      "korean": "(동) 실현하다 / 계획이나 꿈을 현실로 만들다",
+      "english": "realize",
+      "options": ["realize", "achieve", "fulfill", "accomplish"]
+    },
+    {
+      "korean": "(형) 경제적인 / 돈과 관련된",
+      "english": "economic",
+      "options": ["economic", "financial", "monetary", "fiscal"]
+    },
+    {
+      "korean": "(형) 금융의 / 돈을 다루는 일과 관련된",
+      "english": "financial",
+      "options": ["financial", "monetary", "economic", "fiscal"]
+    },
+    {
+      "korean": "(형) 상업적인 / 장사와 관련된",
+      "english": "commercial",
+      "options": ["commercial", "business", "trade", "economic"]
+    },
+    {
+      "korean": "(형) 산업의 / 공업과 관련된",
+      "english": "industrial",
+      "options": ["industrial", "manufacturing", "commercial", "business"]
+    },
+    {
+      "korean": "(형) 전략적인 / 중요한 계획과 관련된",
+      "english": "strategic",
+      "options": ["strategic", "tactical", "planned", "systematic"]
+    },
+    {
+      "korean": "(형) 효율적인 / 적은 노력으로 좋은 결과를 내는",
+      "english": "efficient",
+      "options": ["efficient", "effective", "productive", "optimal"]
+    },
+    {
+      "korean": "(형) 생산적인 / 많은 것을 만들어내는",
+      "english": "productive",
+      "options": ["productive", "efficient", "fruitful", "effective"]
+    },
+    {
+      "korean": "(형) 혁신적인 / 새롭고 창의적인",
+      "english": "innovative",
+      "options": ["innovative", "creative", "original", "revolutionary"]
+    },
+    {
+      "korean": "(형) 창의적인 / 새로운 아이디어를 만드는",
+      "english": "creative",
+      "options": ["creative", "innovative", "original", "imaginative"]
+    },
+    {
+      "korean": "(형) 지속가능한 / 오래도록 계속할 수 있는",
+      "english": "sustainable",
+      "options": ["sustainable", "lasting", "durable", "long-term"]
+    },
+    {
+      "korean": "(형) 안정적인 / 변하지 않고 믿을 만한",
+      "english": "stable",
+      "options": ["stable", "steady", "reliable", "consistent"]
+    },
+    {
+      "korean": "(형) 신뢰할 수 있는 / 믿을 만한",
+      "english": "reliable",
+      "options": ["reliable", "trustworthy", "dependable", "consistent"]
+    },
+    {
+      "korean": "(형) 투명한 / 숨기지 않고 공개하는",
+      "english": "transparent",
+      "options": ["transparent", "open", "clear", "honest"]
+    },
+    {
+      "korean": "(형) 공정한 / 치우치지 않고 바른",
+      "english": "fair",
+      "options": ["fair", "just", "equitable", "impartial"]
+    },
+    {
+      "korean": "(형) 윤리적인 / 도덕적으로 옳은",
+      "english": "ethical",
+      "options": ["ethical", "moral", "righteous", "principled"]
+    },
+    {
+      "korean": "(형) 책임감 있는 / 의무를 다하는",
+      "english": "responsible",
+      "options": ["responsible", "accountable", "reliable", "trustworthy"]
+    },
+    {
+      "korean": "(형) 경쟁력 있는 / 다른 것과 겨룰 만한",
+      "english": "competitive",
+      "options": ["competitive", "rival", "challenging", "strong"]
+    },
+    {
+      "korean": "(형) 협력적인 / 함께 일하려는",
+      "english": "cooperative",
+      "options": ["cooperative", "collaborative", "helpful", "supportive"]
+    },
+    {
+      "korean": "(형) 국제적인 / 여러 나라와 관련된",
+      "english": "international",
+      "options": ["international", "global", "worldwide", "multinational"]
+    },
+    {
+      "korean": "(형) 세계적인 / 전 세계와 관련된",
+      "english": "global",
+      "options": ["global", "worldwide", "international", "universal"]
+    },
+    {
+      "korean": "(형) 지역적인 / 특정 지역과 관련된",
+      "english": "regional",
+      "options": ["regional", "local", "territorial", "area-specific"]
+    },
+    {
+      "korean": "(형) 개인적인 / 한 사람과 관련된",
+      "english": "individual",
+      "options": ["individual", "personal", "private", "single"]
+    },
+    {
+      "korean": "(형) 사회적인 / 사회와 관련된",
+      "english": "social",
+      "options": ["social", "societal", "community", "public"]
+    },
+    {
+      "korean": "(형) 공적인 / 개인이 아닌 사회 전체의",
+      "english": "public",
+      "options": ["public", "social", "community", "governmental"]
+    },
+    {
+      "korean": "(형) 사적인 / 개인의",
+      "english": "private",
+      "options": ["private", "personal", "individual", "confidential"]
     }
   ]
 }
