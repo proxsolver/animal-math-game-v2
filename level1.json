@@ -1,0 +1,30 @@
+{
+  "difficulty": 1,
+  "words": [
+    {
+      "korean": "사과",
+      "english": "apple",
+      "options": ["apple", "banana", "orange", "grape"]
+    },
+    {
+      "korean": "고양이",
+      "english": "cat",
+      "options": ["cat", "dog", "bird", "fish"]
+    },
+    {
+      "korean": "책",
+      "english": "book",
+      "options": ["book", "pen", "desk", "paper"]
+    },
+    {
+      "korean": "물",
+      "english": "water",
+      "options": ["water", "juice", "milk", "tea"]
+    },
+    {
+      "korean": "집",
+      "english": "house",
+      "options": ["house", "school", "park", "store"]
+    }
+  ]
+}
