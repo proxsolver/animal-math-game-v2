@@ -1229,91 +1229,101 @@ let gameState = {
 
       
         
-        function updateWeakWords(progressEntries) {
-            const weakWordsGrid = document.getElementById('weak-words-grid');
-            const weakWords = progressEntries.filter(([wordId, progress]) => {
-                const total = progress.correct + progress.incorrect;
-                return total >= 3 && progress.incorrect > progress.correct;
-            });
-            
-            if (weakWords.length === 0) {
-                weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
-                return;
-            }
-            
-            // 정답률이 낮은 순으로 정렬
-            weakWords.sort(([,a], [,b]) => {
-                const aAccuracy = a.correct / (a.correct + a.incorrect);
-                const bAccuracy = b.correct / (b.correct + b.incorrect);
-                return aAccuracy - bAccuracy;
-            });
-            
-            weakWordsGrid.innerHTML = '';
-            weakWords.slice(0, 12).forEach(([wordId, progress]) => {
-                const total = progress.correct + progress.incorrect;
-                const accuracy = Math.round((progress.correct / total) * 100);
-                
-                const card = document.createElement('div');
-                card.className = 'word-progress-card';
-                card.innerHTML = `
-                    <div class="word-pair">단어 ID: ${wordId}</div>
-                    <div class="progress-stats">
-                        <span>정답: ${progress.correct}</span>
-                        <span>오답: ${progress.incorrect}</span>
-                    </div>
-                    <div class="accuracy-bar">
-                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
-                    </div>
-                    <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">
-                        정답률: ${accuracy}%
-                    </div>
-                `;
-                weakWordsGrid.appendChild(card);
-            });
-        }
+       function updateWeakWords(progressEntries) {
+  console.log("updateWeakWords 호출됨", progressEntries);
+
+  const weakWordsGrid = document.getElementById('weak-words-grid');
+  if (!weakWordsGrid) {
+    console.error("weak-words-grid 요소를 찾을 수 없음");
+    return;
+  }
+
+  const weakWords = progressEntries.filter(([wordId, progress]) => {
+    const total = progress.correct + progress.incorrect;
+    console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+    return total >= 3 && progress.incorrect > progress.correct;
+  });
+
+  console.log("취약 단어 후보:", weakWords);
+
+  if (weakWords.length === 0) {
+    weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
+    return;
+  }
+
+  weakWords.sort(([,a], [,b]) => {
+    const aAccuracy = a.correct / (a.correct + a.incorrect);
+    const bAccuracy = b.correct / (b.correct + b.incorrect);
+    return aAccuracy - bAccuracy;
+  });
+
+  weakWordsGrid.innerHTML = '';
+  weakWords.slice(0, 12).forEach(([wordId, progress]) => {
+    const total = progress.correct + progress.incorrect;
+    const accuracy = Math.round((progress.correct / total) * 100);
+    const card = document.createElement('div');
+    card.className = 'word-progress-card';
+    card.innerHTML = `
+      <div class="word-pair">단어 ID: ${wordId}</div>
+      <div class="progress-stats">
+        <span>정답: ${progress.correct}</span>
+        <span>오답: ${progress.incorrect}</span>
+      </div>
+      <div class="accuracy-bar">
+        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+      </div>
+      <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">정답률: ${accuracy}%</div>`;
+    weakWordsGrid.appendChild(card);
+  });
+}
         
-        function updateStrongWords(progressEntries) {
-            const strongWordsGrid = document.getElementById('strong-words-grid');
-            const strongWords = progressEntries.filter(([wordId, progress]) => {
-                const total = progress.correct + progress.incorrect;
-                return total >= 3 && (progress.correct / total) >= 0.8;
-            });
-            
-            if (strongWords.length === 0) {
-                strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
-                return;
-            }
-            
-            // 정답률이 높은 순으로 정렬
-            strongWords.sort(([,a], [,b]) => {
-                const aAccuracy = a.correct / (a.correct + a.incorrect);
-                const bAccuracy = b.correct / (b.correct + b.incorrect);
-                return bAccuracy - aAccuracy;
-            });
-            
-            strongWordsGrid.innerHTML = '';
-            strongWords.slice(0, 12).forEach(([wordId, progress]) => {
-                const total = progress.correct + progress.incorrect;
-                const accuracy = Math.round((progress.correct / total) * 100);
-                
-                const card = document.createElement('div');
-                card.className = 'word-progress-card strong';
-                card.innerHTML = `
-                    <div class="word-pair">단어 ID: ${wordId}</div>
-                    <div class="progress-stats">
-                        <span>정답: ${progress.correct}</span>
-                        <span>오답: ${progress.incorrect}</span>
-                    </div>
-                    <div class="accuracy-bar">
-                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
-                    </div>
-                    <div style="text-align: center; font-size: 0.9rem; color: #32CD32;">
-                        정답률: ${accuracy}%
-                    </div>
-                `;
-                strongWordsGrid.appendChild(card);
-            });
-        }
+       function updateStrongWords(progressEntries) {
+  console.log("updateStrongWords 호출됨", progressEntries);
+
+  const strongWordsGrid = document.getElementById('strong-words-grid');
+  if (!strongWordsGrid) {
+    console.error("strong-words-grid 요소를 찾을 수 없음");
+    return;
+  }
+
+  const strongWords = progressEntries.filter(([wordId, progress]) => {
+    const total = progress.correct + progress.incorrect;
+    console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+    return total >= 3 && (progress.correct / total) >= 0.8;
+  });
+
+  console.log("우수 단어 후보:", strongWords);
+
+  if (strongWords.length === 0) {
+    strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
+    return;
+  }
+
+  strongWords.sort(([,a], [,b]) => {
+    const aAccuracy = a.correct / (a.correct + a.incorrect);
+    const bAccuracy = b.correct / (b.correct + b.incorrect);
+    return bAccuracy - aAccuracy;
+  });
+
+  strongWordsGrid.innerHTML = '';
+  strongWords.slice(0, 12).forEach(([wordId, progress]) => {
+    const total = progress.correct + progress.incorrect;
+    const accuracy = Math.round((progress.correct / total) * 100);
+    const card = document.createElement('div');
+    card.className = 'word-progress-card strong';
+    card.innerHTML = `
+      <div class="word-pair">단어 ID: ${wordId}</div>
+      <div class="progress-stats">
+        <span>정답: ${progress.correct}</span>
+        <span>오답: ${progress.incorrect}</span>
+      </div>
+      <div class="accuracy-bar">
+        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+      </div>
+      <div style="text-align: center; font-size: 0.9rem; color: #4CAF50;">정답률: ${accuracy}%</div>`;
+    strongWordsGrid.appendChild(card);
+  });
+}
 
         // ==================== UI 업데이트 함수 ====================
 
