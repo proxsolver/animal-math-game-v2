@@ -1,11 +1,5 @@
 {
-  "totalCount": 500,
-  "rarities": [
-    {
-      "rarity": 1,
-      "rarityName": "일반 (Common)",
-      "count": 150,
-      "animals": [
+       "animals": [
         {"emoji": "🐶", "name": "강아지", "specialName": "멍멍왕자", "rarity": 1},
         {"emoji": "🐱", "name": "고양이", "specialName": "야옹공주", "rarity": 1},
         {"emoji": "🐰", "name": "토끼", "specialName": "깡총대장", "rarity": 1},
@@ -143,13 +137,6 @@
         {"emoji": "🦖", "name": "새끼티렉스", "specialName": "작은 왕", "rarity": 1},
         {"emoji": "🐊", "name": "새끼악어", "specialName": "물의 사냥꾼", "rarity": 1},
         {"emoji": "🐲", "name": "새끼용", "specialName": "전설의 아이", "rarity": 1}
-      ]
-    },
-    {
-      "rarity": 2,
-      "rarityName": "보통 (Uncommon)",
-      "count": 130,
-      "animals": [
         {"emoji": "🦊", "name": "여우", "specialName": "숲속의 신사", "rarity": 2},
         {"emoji": "🐻", "name": "곰", "specialName": "꿀단지 파수꾼", "rarity": 2},
         {"emoji": "🦝", "name": "너구리", "specialName": "솜사탕 사냥꾼", "rarity": 2},
@@ -264,13 +251,6 @@
         {"emoji": "🫏", "name": "미니어처당나귀", "specialName": "작은 고집쟁이", "rarity": 2},
         {"emoji": "🦓", "name": "산악얼룩말", "specialName": "바위틈의 줄무늬", "rarity": 2},
         {"emoji": "🦓", "name": "평원얼룩말", "specialName": "초원의 바코드", "rarity": 2}
-      ]
-    },
-    {
-      "rarity": 3,
-      "rarityName": "고급 (Rare)",
-      "count": 90,
-      "animals": [
         {"emoji": "🐘", "name": "코끼리", "specialName": "기억의 현자", "rarity": 3},
         {"emoji": "🦒", "name": "기린", "specialName": "구름 산책가", "rarity": 3},
         {"emoji": "🦓", "name": "얼룩말", "specialName": "초원의 수수께끼", "rarity": 3},
@@ -363,13 +343,6 @@
         {"emoji": "🦜", "name": "스칼렛마코", "specialName": "빨간 보석", "rarity": 3},
         {"emoji": "🦜", "name": "아마존앵무", "specialName": "정글의 수다쟁이", "rarity": 3},
         {"emoji": "🦜", "name": "코카투", "specialName": "하얀 관", "rarity": 3}
-      ]
-    },
-    {
-      "rarity": 4,
-      "rarityName": "희귀 (Epic)",
-      "count": 70,
-      "animals": [
         {"emoji": "🦁", "name": "사자", "specialName": "황금갈기왕", "rarity": 4},
         {"emoji": "🐻‍❄️", "name": "북극곰", "specialName": "설원의 지배자", "rarity": 4},
         {"emoji": "🦣", "name": "매머드", "specialName": "빙하기의 거인", "rarity": 4},
@@ -442,13 +415,6 @@
         {"emoji": "🦦", "name": "자이언트수달", "specialName": "강의 거인", "rarity": 4},
         {"emoji": "🦔", "name": "사막고슴도치", "specialName": "모래의 바늘", "rarity": 4},
         {"emoji": "🦔", "name": "유럽고슴도치", "specialName": "숲의 바늘방석", "rarity": 4}
-      ]
-    },
-    {
-      "rarity": 5,
-      "rarityName": "전설 (Legendary)",
-      "count": 35,
-      "animals": [
         {"emoji": "🦄", "name": "유니콘", "specialName": "순수의 뿔", "rarity": 5},
         {"emoji": "🐲", "name": "동양용", "specialName": "여의주의 주인", "rarity": 5},
         {"emoji": "🔥", "name": "불사조", "specialName": "불멸의 화신", "rarity": 5},
@@ -484,13 +450,6 @@
         {"emoji": "🐉", "name": "와이번", "specialName": "두 다리 용", "rarity": 5},
         {"emoji": "🐲", "name": "드레이크", "specialName": "땅의 용", "rarity": 5},
         {"emoji": "🧜‍♀️", "name": "세이렌", "specialName": "유혹의 바다요정", "rarity": 5}
-      ]
-    },
-    {
-      "rarity": 6,
-      "rarityName": "신화 (Mythical)",
-      "count": 25,
-      "animals": [
         {"emoji": "🌟", "name": "별의 정령", "specialName": "우주의 속삭임", "rarity": 6},
         {"emoji": "☀️", "name": "태양의 화신", "specialName": "모든 빛의 근원", "rarity": 6},
         {"emoji": "🌙", "name": "달의 수호자", "specialName": "밤하늘의 눈", "rarity": 6},
@@ -517,6 +476,4 @@
         {"emoji": "🎪", "name": "현실 조작자", "specialName": "세계의 무대 감독", "rarity": 6},
         {"emoji": "🎯", "name": "운명의 화살", "specialName": "모든 목표를 꿰뚫는 자", "rarity": 6}
       ]
-    }
-  ]
 }
