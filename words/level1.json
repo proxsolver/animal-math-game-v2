@@ -1,755 +1,250 @@
 {
-  "difficulty": 1,
-  "words": [
-    {
-      "korean": "교실",
-      "english": "classroom",
-      "options": ["classroom", "library", "office", "hallway"]
-    },
-    {
-      "korean": "선생님",
-      "english": "teacher",
-      "options": ["teacher", "student", "principal", "parent"]
-    },
-    {
-      "korean": "학생",
-      "english": "student",
-      "options": ["student", "teacher", "friend", "child"]
-    },
-    {
-      "korean": "숙제",
-      "english": "homework",
-      "options": ["homework", "test", "book", "lesson"]
-    },
-    {
-      "korean": "시험",
-      "english": "test",
-      "options": ["test", "homework", "quiz", "exam"]
-    },
-    {
-      "korean": "과학",
-      "english": "science",
-      "options": ["science", "math", "history", "art"]
-    },
-    {
-      "korean": "수학",
-      "english": "math",
-      "options": ["math", "science", "english", "history"]
-    },
-    {
-      "korean": "영어",
-      "english": "English",
-      "options": ["English", "Korean", "Chinese", "Japanese"]
-    },
-    {
-      "korean": "역사",
-      "english": "history",
-      "options": ["history", "geography", "science", "literature"]
-    },
-    {
-      "korean": "지리",
-      "english": "geography",
-      "options": ["geography", "history", "science", "math"]
-    },
-    {
-      "korean": "미술",
-      "english": "art",
-      "options": ["art", "music", "dance", "drama"]
-    },
-    {
-      "korean": "체육",
-      "english": "physical education",
-      "options": ["physical education", "art", "music", "science"]
-    },
-    {
-      "korean": "급식",
-      "english": "school lunch",
-      "options": ["school lunch", "breakfast", "dinner", "snack"]
-    },
-    {
-      "korean": "운동장",
-      "english": "playground",
-      "options": ["playground", "classroom", "library", "cafeteria"]
-    },
-    {
-      "korean": "도구",
-      "english": "tool",
-      "options": ["tool", "machine", "equipment", "device"]
-    },
-    {
-      "korean": "실험",
-      "english": "experiment",
-      "options": ["experiment", "test", "research", "study"]
-    },
-    {
-      "korean": "발명",
-      "english": "invention",
-      "options": ["invention", "discovery", "creation", "design"]
-    },
-    {
-      "korean": "발견",
-      "english": "discovery",
-      "options": ["discovery", "invention", "finding", "research"]
-    },
-    {
-      "korean": "계획",
-      "english": "plan",
-      "options": ["plan", "idea", "project", "goal"]
-    },
-    {
-      "korean": "약속",
-      "english": "promise",
-      "options": ["promise", "plan", "meeting", "agreement"]
-    },
-    {
-      "korean": "규칙",
-      "english": "rule",
-      "options": ["rule", "law", "regulation", "instruction"]
-    },
-    {
-      "korean": "습관",
-      "english": "habit",
-      "options": ["habit", "routine", "custom", "practice"]
-    },
-    {
-      "korean": "건강",
-      "english": "health",
-      "options": ["health", "medicine", "fitness", "wellness"]
-    },
-    {
-      "korean": "운동",
-      "english": "exercise",
-      "options": ["exercise", "sport", "activity", "training"]
-    },
-    {
-      "korean": "휴식",
-      "english": "rest",
-      "options": ["rest", "sleep", "break", "relaxation"]
-    },
-    {
-      "korean": "여행",
-      "english": "travel",
-      "options": ["travel", "trip", "journey", "vacation"]
-    },
-    {
-      "korean": "모험",
-      "english": "adventure",
-      "options": ["adventure", "journey", "exploration", "quest"]
-    },
-    {
-      "korean": "경험",
-      "english": "experience",
-      "options": ["experience", "memory", "event", "story"]
-    },
-    {
-      "korean": "기억",
-      "english": "memory",
-      "options": ["memory", "thought", "dream", "idea"]
-    },
-    {
-      "korean": "꿈",
-      "english": "dream",
-      "options": ["dream", "hope", "wish", "goal"]
-    },
-    {
-      "korean": "희망",
-      "english": "hope",
-      "options": ["hope", "wish", "dream", "desire"]
-    },
-    {
-      "korean": "소원",
-      "english": "wish",
-      "options": ["wish", "hope", "dream", "desire"]
-    },
-    {
-      "korean": "목표",
-      "english": "goal",
-      "options": ["goal", "target", "aim", "purpose"]
-    },
-    {
-      "korean": "성공",
-      "english": "success",
-      "options": ["success", "victory", "achievement", "win"]
-    },
-    {
-      "korean": "실패",
-      "english": "failure",
-      "options": ["failure", "mistake", "error", "loss"]
-    },
-    {
-      "korean": "노력",
-      "english": "effort",
-      "options": ["effort", "work", "try", "attempt"]
-    },
-    {
-      "korean": "연습",
-      "english": "practice",
-      "options": ["practice", "training", "exercise", "rehearsal"]
-    },
-    {
-      "korean": "실력",
-      "english": "skill",
-      "options": ["skill", "ability", "talent", "power"]
-    },
-    {
-      "korean": "재능",
-      "english": "talent",
-      "options": ["talent", "skill", "gift", "ability"]
-    },
-    {
-      "korean": "능력",
-      "english": "ability",
-      "options": ["ability", "skill", "power", "strength"]
-    },
-    {
-      "korean": "지식",
-      "english": "knowledge",
-      "options": ["knowledge", "information", "wisdom", "learning"]
-    },
-    {
-      "korean": "정보",
-      "english": "information",
-      "options": ["information", "data", "news", "knowledge"]
-    },
-    {
-      "korean": "소식",
-      "english": "news",
-      "options": ["news", "information", "message", "story"]
-    },
-    {
-      "korean": "메시지",
-      "english": "message",
-      "options": ["message", "letter", "note", "text"]
-    },
-    {
-      "korean": "편지",
-      "english": "letter",
-      "options": ["letter", "message", "mail", "note"]
-    },
-    {
-      "korean": "우편",
-      "english": "mail",
-      "options": ["mail", "letter", "package", "delivery"]
-    },
-    {
-      "korean": "선물",
-      "english": "gift",
-      "options": ["gift", "present", "surprise", "prize"]
-    },
-    {
-      "korean": "상품",
-      "english": "prize",
-      "options": ["prize", "award", "gift", "reward"]
-    },
-    {
-      "korean": "대회",
-      "english": "competition",
-      "options": ["competition", "contest", "race", "game"]
-    },
-    {
-      "korean": "시합",
-      "english": "match",
-      "options": ["match", "game", "competition", "contest"]
-    },
-    {
-      "korean": "팀",
-      "english": "team",
-      "options": ["team", "group", "club", "crew"]
-    },
-    {
-      "korean": "그룹",
-      "english": "group",
-      "options": ["group", "team", "club", "organization"]
-    },
-    {
-      "korean": "클럽",
-      "english": "club",
-      "options": ["club", "group", "team", "society"]
-    },
-    {
-      "korean": "모임",
-      "english": "meeting",
-      "options": ["meeting", "gathering", "assembly", "conference"]
-    },
-    {
-      "korean": "파티",
-      "english": "party",
-      "options": ["party", "celebration", "festival", "event"]
-    },
-    {
-      "korean": "축제",
-      "english": "festival",
-      "options": ["festival", "celebration", "party", "event"]
-    },
-    {
-      "korean": "행사",
-      "english": "event",
-      "options": ["event", "program", "activity", "ceremony"]
-    },
-    {
-      "korean": "공연",
-      "english": "performance",
-      "options": ["performance", "show", "concert", "play"]
-    },
-    {
-      "korean": "연극",
-      "english": "play",
-      "options": ["play", "drama", "theater", "performance"]
-    },
-    {
-      "korean": "콘서트",
-      "english": "concert",
-      "options": ["concert", "show", "performance", "recital"]
-    },
-    {
-      "korean": "관객",
-      "english": "audience",
-      "options": ["audience", "viewer", "spectator", "crowd"]
-    },
-    {
-      "korean": "구경",
-      "english": "watching",
-      "options": ["watching", "viewing", "seeing", "looking"]
-    },
-    {
-      "korean": "관찰",
-      "english": "observation",
-      "options": ["observation", "watching", "study", "examination"]
-    },
-    {
-      "korean": "조사",
-      "english": "research",
-      "options": ["research", "study", "investigation", "survey"]
-    },
-    {
-      "korean": "질문",
-      "english": "question",
-      "options": ["question", "inquiry", "problem", "quiz"]
-    },
-    {
-      "korean": "답변",
-      "english": "answer",
-      "options": ["answer", "reply", "response", "solution"]
-    },
-    {
-      "korean": "해결",
-      "english": "solution",
-      "options": ["solution", "answer", "resolution", "fix"]
-    },
-    {
-      "korean": "문제",
-      "english": "problem",
-      "options": ["problem", "issue", "trouble", "difficulty"]
-    },
-    {
-      "korean": "어려움",
-      "english": "difficulty",
-      "options": ["difficulty", "problem", "challenge", "trouble"]
-    },
-    {
-      "korean": "도전",
-      "english": "challenge",
-      "options": ["challenge", "difficulty", "test", "trial"]
-    },
-    {
-      "korean": "기회",
-      "english": "opportunity",
-      "options": ["opportunity", "chance", "possibility", "opening"]
-    },
-    {
-      "korean": "가능성",
-      "english": "possibility",
-      "options": ["possibility", "chance", "opportunity", "potential"]
-    },
-    {
-      "korean": "선택",
-      "english": "choice",
-      "options": ["choice", "option", "selection", "decision"]
-    },
-    {
-      "korean": "결정",
-      "english": "decision",
-      "options": ["decision", "choice", "determination", "resolution"]
-    },
-    {
-      "korean": "의견",
-      "english": "opinion",
-      "options": ["opinion", "idea", "thought", "view"]
-    },
-    {
-      "korean": "생각",
-      "english": "thought",
-      "options": ["thought", "idea", "opinion", "mind"]
-    },
-    {
-      "korean": "마음",
-      "english": "mind",
-      "options": ["mind", "heart", "soul", "spirit"]
-    },
-    {
-      "korean": "감정",
-      "english": "emotion",
-      "options": ["emotion", "feeling", "mood", "sentiment"]
-    },
-    {
-      "korean": "기분",
-      "english": "mood",
-      "options": ["mood", "feeling", "emotion", "spirit"]
-    },
-    {
-      "korean": "행복",
-      "english": "happiness",
-      "options": ["happiness", "joy", "pleasure", "delight"]
-    },
-    {
-      "korean": "즐거움",
-      "english": "joy",
-      "options": ["joy", "happiness", "pleasure", "fun"]
-    },
-    {
-      "korean": "슬픔",
-      "english": "sadness",
-      "options": ["sadness", "sorrow", "grief", "unhappiness"]
-    },
-    {
-      "korean": "화",
-      "english": "anger",
-      "options": ["anger", "rage", "fury", "irritation"]
-    },
-    {
-      "korean": "걱정",
-      "english": "worry",
-      "options": ["worry", "concern", "anxiety", "fear"]
-    },
-    {
-      "korean": "두려움",
-      "english": "fear",
-      "options": ["fear", "worry", "anxiety", "terror"]
-    },
-    {
-      "korean": "용기",
-      "english": "courage",
-      "options": ["courage", "bravery", "boldness", "valor"]
-    },
-    {
-      "korean": "자신감",
-      "english": "confidence",
-      "options": ["confidence", "assurance", "certainty", "trust"]
-    },
-    {
-      "korean": "믿음",
-      "english": "belief",
-      "options": ["belief", "faith", "trust", "confidence"]
-    },
-    {
-      "korean": "신뢰",
-      "english": "trust",
-      "options": ["trust", "faith", "confidence", "reliance"]
-    },
-    {
-      "korean": "존경",
-      "english": "respect",
-      "options": ["respect", "honor", "admiration", "regard"]
-    },
-    {
-      "korean": "감사",
-      "english": "gratitude",
-      "options": ["gratitude", "thanks", "appreciation", "acknowledgment"]
-    },
-    {
-      "korean": "칭찬",
-      "english": "praise",
-      "options": ["praise", "compliment", "approval", "commendation"]
-    },
-    {
-      "korean": "비판",
-      "english": "criticism",
-      "options": ["criticism", "critique", "judgment", "evaluation"]
-    },
-    {
-      "korean": "평가",
-      "english": "evaluation",
-      "options": ["evaluation", "assessment", "judgment", "review"]
-    },
-    {
-      "korean": "점수",
-      "english": "score",
-      "options": ["score", "grade", "mark", "point"]
-    },
-    {
-      "korean": "성적",
-      "english": "grade",
-      "options": ["grade", "score", "mark", "result"]
-    },
-    {
-      "korean": "결과",
-      "english": "result",
-      "options": ["result", "outcome", "consequence", "effect"]
-    },
-    {
-      "korean": "영향",
-      "english": "influence",
-      "options": ["influence", "effect", "impact", "power"]
-    },
-    {
-      "korean": "변화",
-      "english": "change",
-      "options": ["change", "transformation", "alteration", "modification"]
-    },
-    {
-      "korean": "발전",
-      "english": "development",
-      "options": ["development", "progress", "growth", "improvement"]
-    },
-    {
-      "korean": "성장",
-      "english": "growth",
-      "options": ["growth", "development", "progress", "expansion"]
-    },
-    {
-      "korean": "진보",
-      "english": "progress",
-      "options": ["progress", "advancement", "development", "improvement"]
-    },
-    {
-      "korean": "개선",
-      "english": "improvement",
-      "options": ["improvement", "progress", "enhancement", "betterment"]
-    },
-    {
-      "korean": "완성",
-      "english": "completion",
-      "options": ["completion", "finish", "accomplishment", "achievement"]
-    },
-    {
-      "korean": "시작",
-      "english": "beginning",
-      "options": ["beginning", "start", "opening", "commencement"]
-    },
-    {
-      "korean": "끝",
-      "english": "end",
-      "options": ["end", "finish", "conclusion", "termination"]
-    },
-    {
-      "korean": "중간",
-      "english": "middle",
-      "options": ["middle", "center", "halfway", "midst"]
-    },
-    {
-      "korean": "방향",
-      "english": "direction",
-      "options": ["direction", "way", "course", "path"]
-    },
-    {
-      "korean": "위치",
-      "english": "position",
-      "options": ["position", "location", "place", "spot"]
-    },
-    {
-      "korean": "장소",
-      "english": "place",
-      "options": ["place", "location", "spot", "site"]
-    },
-    {
-      "korean": "지역",
-      "english": "area",
-      "options": ["area", "region", "zone", "district"]
-    },
-    {
-      "korean": "환경",
-      "english": "environment",
-      "options": ["environment", "surroundings", "atmosphere", "setting"]
-    },
-    {
-      "korean": "자연",
-      "english": "nature",
-      "options": ["nature", "environment", "natural", "wild"]
-    },
-    {
-      "korean": "날씨",
-      "english": "weather",
-      "options": ["weather", "climate", "temperature", "condition"]
-    },
-    {
-      "korean": "기후",
-      "english": "climate",
-      "options": ["climate", "weather", "temperature", "atmosphere"]
-    },
-    {
-      "korean": "온도",
-      "english": "temperature",
-      "options": ["temperature", "heat", "cold", "degree"]
-    },
-    {
-      "korean": "계절",
-      "english": "season",
-      "options": ["season", "weather", "climate", "period"]
-    },
-    {
-      "korean": "봄",
-      "english": "spring",
-      "options": ["spring", "summer", "fall", "winter"]
-    },
-    {
-      "korean": "여름",
-      "english": "summer",
-      "options": ["summer", "spring", "fall", "winter"]
-    },
-    {
-      "korean": "가을",
-      "english": "fall",
-      "options": ["fall", "autumn", "spring", "winter"]
-    },
-    {
-      "korean": "겨울",
-      "english": "winter",
-      "options": ["winter", "spring", "summer", "fall"]
-    },
-    {
-      "korean": "비",
-      "english": "rain",
-      "options": ["rain", "snow", "wind", "storm"]
-    },
-    {
-      "korean": "눈",
-      "english": "snow",
-      "options": ["snow", "rain", "ice", "frost"]
-    },
-    {
-      "korean": "바람",
-      "english": "wind",
-      "options": ["wind", "air", "breeze", "storm"]
-    },
-    {
-      "korean": "태양",
-      "english": "sun",
-      "options": ["sun", "moon", "star", "planet"]
-    },
-    {
-      "korean": "달",
-      "english": "moon",
-      "options": ["moon", "sun", "star", "planet"]
-    },
-    {
-      "korean": "별",
-      "english": "star",
-      "options": ["star", "sun", "moon", "planet"]
-    },
-    {
-      "korean": "구름",
-      "english": "cloud",
-      "options": ["cloud", "sky", "rain", "storm"]
-    },
-    {
-      "korean": "무지개",
-      "english": "rainbow",
-      "options": ["rainbow", "cloud", "rain", "storm"]
-    },
-    {
-      "korean": "지구",
-      "english": "Earth",
-      "options": ["Earth", "planet", "world", "globe"]
-    },
-    {
-      "korean": "세계",
-      "english": "world",
-      "options": ["world", "earth", "globe", "planet"]
-    },
-    {
-      "korean": "나라",
-      "english": "country",
-      "options": ["country", "nation", "state", "kingdom"]
-    },
-    {
-      "korean": "도시",
-      "english": "city",
-      "options": ["city", "town", "village", "capital"]
-    },
-    {
-      "korean": "마을",
-      "english": "village",
-      "options": ["village", "town", "city", "community"]
-    },
-    {
-      "korean": "이웃",
-      "english": "neighbor",
-      "options": ["neighbor", "friend", "resident", "community"]
-    },
-    {
-      "korean": "거리",
-      "english": "street",
-      "options": ["street", "road", "avenue", "lane"]
-    },
-    {
-      "korean": "주소",
-      "english": "address",
-      "options": ["address", "location", "place", "home"]
-    },
-    {
-      "korean": "전화",
-      "english": "telephone",
-      "options": ["telephone", "phone", "mobile", "call"]
-    },
-    {
-      "korean": "통화",
-      "english": "call",
-      "options": ["call", "phone", "conversation", "talk"]
-    },
-    {
-      "korean": "대화",
-      "english": "conversation",
-      "options": ["conversation", "talk", "discussion", "chat"]
-    },
-    {
-      "korean": "언어",
-      "english": "language",
-      "options": ["language", "speech", "tongue", "dialect"]
-    },
-    {
-      "korean": "단어",
-      "english": "word",
-      "options": ["word", "vocabulary", "term", "expression"]
-    },
-    {
-      "korean": "문장",
-      "english": "sentence",
-      "options": ["sentence", "phrase", "statement", "expression"]
-    },
-    {
-      "korean": "설명",
-      "english": "explanation",
-      "options": ["explanation", "description", "instruction", "clarification"]
-    },
-    {
-      "korean": "지시",
-      "english": "instruction",
-      "options": ["instruction", "direction", "guidance", "order"]
-    },
-    {
-      "korean": "명령",
-      "english": "command",
-      "options": ["command", "order", "instruction", "direction"]
-    },
-    {
-      "korean": "요청",
-      "english": "request",
-      "options": ["request", "ask", "demand", "petition"]
-    },
-    {
-      "korean": "초대",
-      "english": "invitation",
-      "options": ["invitation", "request", "offer", "welcome"]
-    },
-    {
-      "korean": "방문",
-      "english": "visit",
-      "options": ["visit", "trip", "call", "tour"]
-    },
-    {
-      "korean": "관광",
-      "english": "tourism",
-      "options": ["tourism", "travel", "sightseeing", "vacation"]
-    }
-  ]
+"difficulty": 1,
+"words": [
+{"korean": "(명) 모험 / 새로운 일 경험", "english": "adventure", "options": ["adventure", "journey", "exploration", "quest"]},
+{"korean": "(명) 친구 / 같이 노는 사람", "english": "friend", "options": ["friend", "enemy", "stranger", "classmate"]},
+{"korean": "(명) 가족 / 같이 사는 사람들", "english": "family", "options": ["family", "friends", "neighbors", "classmates"]},
+{"korean": "(명) 학교 / 공부하는 장소", "english": "school", "options": ["school", "home", "park", "library"]},
+{"korean": "(명) 책 / 읽는 물건", "english": "book", "options": ["book", "notebook", "magazine", "newspaper"]},
+{"korean": "(명) 음식 / 먹는 것", "english": "food", "options": ["food", "drink", "snack", "meal"]},
+{"korean": "(명) 동물 / 살아있는 생물", "english": "animal", "options": ["animal", "plant", "insect", "bird"]},
+{"korean": "(명) 날씨 / 하늘 상태", "english": "weather", "options": ["weather", "climate", "temperature", "season"]},
+{"korean": "(명) 물 / 마시는 것", "english": "water", "options": ["water", "juice", "milk", "soda"]},
+{"korean": "(명) 집 / 사는 곳", "english": "house", "options": ["house", "apartment", "school", "office"]},
+{"korean": "(명) 시간 / 때를 나타내는 것", "english": "time", "options": ["time", "clock", "hour", "minute"]},
+{"korean": "(동) 걷다 / 발로 이동하다", "english": "walk", "options": ["walk", "run", "jump", "sit"]},
+{"korean": "(동) 먹다 / 음식을 입에 넣다", "english": "eat", "options": ["eat", "drink", "sleep", "play"]},
+{"korean": "(동) 자다 / 눈 감고 쉬다", "english": "sleep", "options": ["sleep", "wake", "run", "eat"]},
+{"korean": "(동) 공부하다 / 배우고 익히다", "english": "study", "options": ["study", "play", "sleep", "eat"]},
+{"korean": "(명) 과일 / 달콤한 나무 열매", "english": "fruit", "options": ["fruit", "vegetable", "candy", "bread"]},
+{"korean": "(형) 빠른 / 빨리 움직이는", "english": "fast", "options": ["fast", "slow", "big", "small"]},
+{"korean": "(형) 느린 / 천천히 가는", "english": "slow", "options": ["slow", "fast", "quick", "rapid"]},
+{"korean": "(명) 자동차 / 바퀴 달린 이동 수단", "english": "car", "options": ["car", "bike", "bus", "train"]},
+{"korean": "(명) 교통 / 길을 다니는 것들", "english": "transportation", "options": ["transportation", "car", "road", "traffic"]},
+{"korean": "(명) 색깔 / 빨강, 파랑 등", "english": "color", "options": ["color", "shape", "size", "number"]},
+{"korean": "(명) 숫자 / 1, 2, 3 같은 것", "english": "number", "options": ["number", "letter", "word", "sentence"]},
+{"korean": "(명) 음악 / 소리로 만드는 예술", "english": "music", "options": ["music", "song", "dance", "art"]},
+{"korean": "(명) 그림 / 색으로 그린 것", "english": "picture", "options": ["picture", "photo", "drawing", "painting"]},
+{"korean": "(명) 꽃 / 아름다운 식물", "english": "flower", "options": ["flower", "tree", "grass", "leaf"]},
+{"korean": "(명) 나무 / 크게 자라는 식물", "english": "tree", "options": ["tree", "flower", "bush", "plant"]},
+{"korean": "(명) 바다 / 큰 물", "english": "sea", "options": ["sea", "ocean", "river", "lake"]},
+{"korean": "(명) 산 / 높은 땅", "english": "mountain", "options": ["mountain", "hill", "valley", "plain"]},
+{"korean": "(명) 강 / 흐르는 물", "english": "river", "options": ["river", "stream", "lake", "ocean"]},
+{"korean": "(명) 호수 / 고인 물", "english": "lake", "options": ["lake", "river", "pond", "sea"]},
+{"korean": "(명) 하늘 / 위에 있는 공간", "english": "sky", "options": ["sky", "cloud", "sun", "moon"]},
+{"korean": "(명) 구름 / 하얀 솜", "english": "cloud", "options": ["cloud", "sky", "rain", "wind"]},
+{"korean": "(명) 비 / 내리는 물방울", "english": "rain", "options": ["rain", "snow", "hail", "storm"]},
+{"korean": "(명) 눈 / 흰 꽃처럼 내리는 것", "english": "snow", "options": ["snow", "rain", "ice", "frost"]},
+{"korean": "(명) 바람 / 움직이는 공기", "english": "wind", "options": ["wind", "breeze", "storm", "gust"]},
+{"korean": "(명) 태양 / 밝은 별", "english": "sun", "options": ["sun", "moon", "star", "planet"]},
+{"korean": "(명) 달 / 밤에 빛나는 것", "english": "moon", "options": ["moon", "sun", "star", "earth"]},
+{"korean": "(명) 별 / 하늘의 빛", "english": "star", "options": ["star", "planet", "moon", "sun"]},
+{"korean": "(명) 지구 / 우리가 사는 별", "english": "earth", "options": ["earth", "planet", "world", "globe"]},
+{"korean": "(명) 행성 / 별 주위 도는 것", "english": "planet", "options": ["planet", "star", "moon", "sun"]},
+{"korean": "(명) 우주 / 하늘 너머", "english": "space", "options": ["space", "universe", "sky", "galaxy"]},
+{"korean": "(명) 별자리 / 별 무리", "english": "constellation", "options": ["constellation", "star", "galaxy", "planet"]},
+{"korean": "(명) 로켓 / 우주선", "english": "rocket", "options": ["rocket", "spaceship", "plane", "car"]},
+{"korean": "(명) 우주인 / 우주 여행자", "english": "astronaut", "options": ["astronaut", "pilot", "scientist", "teacher"]},
+{"korean": "(명) 로봇 / 기계 사람", "english": "robot", "options": ["robot", "machine", "computer", "toy"]},
+{"korean": "(명) 컴퓨터 / 계산 기계", "english": "computer", "options": ["computer", "laptop", "tablet", "phone"]},
+{"korean": "(명) 전화 / 말하는 기계", "english": "telephone", "options": ["telephone", "phone", "mobile", "cellphone"]},
+{"korean": "(명) 텔레비전 / 화면 기계", "english": "television", "options": ["television", "TV", "monitor", "screen"]},
+{"korean": "(명) 게임 / 재미있는 놀이", "english": "game", "options": ["game", "play", "sport", "toy"]},
+{"korean": "(명) 장난감 / 아이들 놀이물건", "english": "toy", "options": ["toy", "game", "doll", "ball"]},
+{"korean": "(명) 인형 / 사람 모양 장난감", "english": "doll", "options": ["doll", "toy", "robot", "bear"]},
+{"korean": "(명) 공 / 던지는 둥근 것", "english": "ball", "options": ["ball", "toy", "sphere", "circle"]},
+{"korean": "(명) 자전거 / 두 바퀴 탈 것", "english": "bicycle", "options": ["bicycle", "bike", "car", "scooter"]},
+{"korean": "(명) 스쿠터 / 발로 미는 탈 것", "english": "scooter", "options": ["scooter", "bike", "skateboard", "rollerblade"]},
+{"korean": "(명) 스케이트보드 / 판 위 타는 것", "english": "skateboard", "options": ["skateboard", "board", "skate", "roller"]},
+{"korean": "(명) 축구 / 발로 차는 공놀이", "english": "soccer", "options": ["soccer", "football", "basketball", "tennis"]},
+{"korean": "(명) 농구 / 손으로 던지는 공놀이", "english": "basketball", "options": ["basketball", "soccer", "tennis", "volleyball"]},
+{"korean": "(명) 테니스 / 라켓으로 치는 공놀이", "english": "tennis", "options": ["tennis", "badminton", "ping pong", "golf"]},
+{"korean": "(명) 수영 / 물에서 헤엄치는 것", "english": "swimming", "options": ["swimming", "diving", "floating", "running"]},
+{"korean": "(명) 노래 / 목소리로 하는 음악", "english": "song", "options": ["song", "music", "melody", "tune"]},
+{"korean": "(명) 춤 / 몸으로 하는 움직임", "english": "dance", "options": ["dance", "move", "jump", "run"]},
+{"korean": "(명) 그림책 / 이야기 있는 그림", "english": "picture book", "options": ["picture book", "comic", "novel", "textbook"]},
+{"korean": "(명) 만화 / 재미있는 그림 이야기", "english": "comic", "options": ["comic", "cartoon", "book", "movie"]},
+{"korean": "(명) 영화 / 움직이는 그림 이야기", "english": "movie", "options": ["movie", "film", "video", "TV show"]},
+{"korean": "(명) 선물 / 주는 기쁜 것", "english": "gift", "options": ["gift", "present", "toy", "candy"]},
+{"korean": "(명) 생일 / 태어난 날", "english": "birthday", "options": ["birthday", "holiday", "anniversary", "festival"]},
+{"korean": "(명) 케이크 / 달콤한 빵", "english": "cake", "options": ["cake", "bread", "cookie", "pie"]},
+{"korean": "(명) 사탕 / 달콤한 간식", "english": "candy", "options": ["candy", "chocolate", "cookie", "ice cream"]},
+{"korean": "(명) 아이스크림 / 차가운 디저트", "english": "ice cream", "options": ["ice cream", "yogurt", "pudding", "jelly"]},
+{"korean": "(명) 피자 / 둥근 빵 위에 치즈", "english": "pizza", "options": ["pizza", "hamburger", "sandwich", "pasta"]},
+{"korean": "(명) 햄버거 / 고기 사이 빵", "english": "hamburger", "options": ["hamburger", "burger", "sandwich", "hot dog"]},
+{"korean": "(명) 과자 / 간단한 먹거리", "english": "snack", "options": ["snack", "candy", "chips", "cookie"]},
+{"korean": "(명) 과자 / 바삭한 감자", "english": "chips", "options": ["chips", "crisps", "snack", "fries"]},
+{"korean": "(명) 사과 / 빨간 과일", "english": "apple", "options": ["apple", "banana", "orange", "grape"]},
+{"korean": "(명) 바나나 / 노란 과일", "english": "banana", "options": ["banana", "apple", "pear", "melon"]},
+{"korean": "(명) 오렌지 / 주황색 과일", "english": "orange", "options": ["orange", "lemon", "lime", "grapefruit"]},
+{"korean": "(명) 포도 / 작은 열매 무리", "english": "grape", "options": ["grape", "berry", "cherry", "strawberry"]},
+{"korean": "(명) 딸기 / 빨간 작은 과일", "english": "strawberry", "options": ["strawberry", "berry", "raspberry", "blueberry"]},
+{"korean": "(명) 수박 / 큰 녹색 과일", "english": "watermelon", "options": ["watermelon", "melon", "pumpkin", "cantaloupe"]},
+{"korean": "(명) 당근 / 주황색 채소", "english": "carrot", "options": ["carrot", "potato", "onion", "cucumber"]},
+{"korean": "(명) 감자 / 땅에서 나는 것", "english": "potato", "options": ["potato", "sweet potato", "yam", "carrot"]},
+{"korean": "(명) 토마토 / 빨간 채소 과일", "english": "tomato", "options": ["tomato", "apple", "pepper", "eggplant"]},
+{"korean": "(명) 브로콜리 / 녹색 작은 나무", "english": "broccoli", "options": ["broccoli", "cauliflower", "spinach", "lettuce"]},
+{"korean": "(명) 상추 / 샐러드 잎", "english": "lettuce", "options": ["lettuce", "cabbage", "spinach", "kale"]},
+{"korean": "(명) 고양이 / 야옹 하는 동물", "english": "cat", "options": ["cat", "dog", "bird", "fish"]},
+{"korean": "(명) 개 / 멍멍 하는 동물", "english": "dog", "options": ["dog", "cat", "rabbit", "hamster"]},
+{"korean": "(명) 새 / 날아다니는 동물", "english": "bird", "options": ["bird", "fish", "insect", "mammal"]},
+{"korean": "(명) 물고기 / 헤엄치는 동물", "english": "fish", "options": ["fish", "bird", "frog", "snake"]},
+{"korean": "(명) 토끼 / 깡총 뛰는 동물", "english": "rabbit", "options": ["rabbit", "squirrel", "mouse", "rat"]},
+{"korean": "(명) 햄스터 / 작은 쥐 같은 동물", "english": "hamster", "options": ["hamster", "mouse", "rat", "guinea pig"]},
+{"korean": "(명) 거북이 / 느린 동물", "english": "turtle", "options": ["turtle", "tortoise", "snail", "frog"]},
+{"korean": "(명) 개구리 / 점프하는 동물", "english": "frog", "options": ["frog", "toad", "lizard", "snake"]},
+{"korean": "(명) 뱀 / 길쭉한 동물", "english": "snake", "options": ["snake", "worm", "lizard", "eel"]},
+{"korean": "(명) 사자 / 왕 같은 동물", "english": "lion", "options": ["lion", "tiger", "bear", "wolf"]},
+{"korean": "(명) 호랑이 / 줄무늬 동물", "english": "tiger", "options": ["tiger", "lion", "leopard", "cheetah"]},
+{"korean": "(명) 곰 / 큰 동물", "english": "bear", "options": ["bear", "panda", "koala", "racoon"]},
+{"korean": "(명) 코끼리 / 코가 긴 동물", "english": "elephant", "options": ["elephant", "giraffe", "rhinoceros", "hippo"]},
+{"korean": "(명) 기린 / 목이 긴 동물", "english": "giraffe", "options": ["giraffe", "elephant", "zebra", "deer"]},
+{"korean": "(명) 원숭이 / 장난꾸러기 동물", "english": "monkey", "options": ["monkey", "ape", "chimpanzee", "gorilla"]},
+{"korean": "(명) 펭귄 / 얼음에 사는 새", "english": "penguin", "options": ["penguin", "seal", "walrus", "polar bear"]},
+{"korean": "(명) 상어 / 바다의 사냥꾼", "english": "shark", "options": ["shark", "whale", "dolphin", "fish"]},
+{"korean": "(명) 고래 / 큰 바다 동물", "english": "whale", "options": ["whale", "shark", "dolphin", "seal"]},
+{"korean": "(명) 돌고래 / 똑똑한 바다 동물", "english": "dolphin", "options": ["dolphin", "whale", "shark", "fish"]},
+{"korean": "(명) 여름 / 더운 계절", "english": "summer", "options": ["summer", "winter", "spring", "fall"]},
+{"korean": "(명) 겨울 / 추운 계절", "english": "winter", "options": ["winter", "summer", "spring", "fall"]},
+{"korean": "(명) 봄 / 꽃피는 계절", "english": "spring", "options": ["spring", "summer", "fall", "winter"]},
+{"korean": "(명) 가을 / 잎 떨어지는 계절", "english": "fall", "options": ["fall", "autumn", "spring", "summer"]},
+{"korean": "(명) 비 / 내리는 물", "english": "rain", "options": ["rain", "snow", "sun", "wind"]},
+{"korean": "(명) 눈 / 흰 결정", "english": "snow", "options": ["snow", "rain", "hail", "ice"]},
+{"korean": "(명) 태양 / 밝은 별", "english": "sun", "options": ["sun", "moon", "star", "cloud"]},
+{"korean": "(명) 달 / 밤의 빛", "english": "moon", "options": ["moon", "sun", "star", "planet"]},
+{"korean": "(명) 별 / 하늘의 반짝임", "english": "star", "options": ["star", "moon", "sun", "planet"]},
+{"korean": "(명) 무지개 / 색색의 아치", "english": "rainbow", "options": ["rainbow", "cloud", "rain", "sun"]},
+{"korean": "(명) 산 / 높은 땅", "english": "mountain", "options": ["mountain", "hill", "valley", "river"]},
+{"korean": "(명) 강 / 흐르는 물", "english": "river", "options": ["river", "lake", "ocean", "stream"]},
+{"korean": "(명) 호수 / 고인 물", "english": "lake", "options": ["lake", "river", "pond", "sea"]},
+{"korean": "(명) 바다 / 넓은 물", "english": "sea", "options": ["sea", "ocean", "lake", "river"]},
+{"korean": "(명) 숲 / 나무가 많은 곳", "english": "forest", "options": ["forest", "jungle", "wood", "park"]},
+{"korean": "(명) 사막 / 모래 땅", "english": "desert", "options": ["desert", "beach", "forest", "mountain"]},
+{"korean": "(명) 도시 / 사람들이 많은 곳", "english": "city", "options": ["city", "town", "village", "country"]},
+{"korean": "(명) 마을 / 작은 동네", "english": "village", "options": ["village", "city", "town", "farm"]},
+{"korean": "(명) 길 / 걷는 곳", "english": "road", "options": ["road", "street", "path", "way"]},
+{"korean": "(명) 다리 / 건너는 것", "english": "bridge", "options": ["bridge", "river", "road", "tunnel"]},
+{"korean": "(명) 건물 / 큰 집", "english": "building", "options": ["building", "house", "tower", "school"]},
+{"korean": "(명) 병원 / 아픈 곳 치료", "english": "hospital", "options": ["hospital", "school", "shop", "park"]},
+{"korean": "(명) 상점 / 물건 사는 곳", "english": "shop", "options": ["shop", "store", "market", "mall"]},
+{"korean": "(명) 공원 / 놀고 쉬는 곳", "english": "park", "options": ["park", "playground", "garden", "forest"]},
+{"korean": "(명) 도서관 / 책 빌리는 곳", "english": "library", "options": ["library", "school", "bookstore", "museum"]},
+{"korean": "(명) 박물관 / 옛 물건 보는 곳", "english": "museum", "options": ["museum", "library", "zoo", "aquarium"]},
+{"korean": "(명) 동물원 / 동물 보는 곳", "english": "zoo", "options": ["zoo", "park", "farm", "aquarium"]},
+{"korean": "(명) 수족관 / 물고기 보는 곳", "english": "aquarium", "options": ["aquarium", "zoo", "pool", "lake"]},
+{"korean": "(명) 영화관 / 영화 보는 곳", "english": "cinema", "options": ["cinema", "theater", "museum", "library"]},
+{"korean": "(명) 음악회 / 노래 듣는 곳", "english": "concert", "options": ["concert", "show", "movie", "play"]},
+{"korean": "(명) 놀이공원 / 타고 노는 곳", "english": "amusement park", "options": ["amusement park", "zoo", "park", "playground"]},
+{"korean": "(명) 수영장 / 물에서 노는 곳", "english": "swimming pool", "options": ["swimming pool", "lake", "river", "beach"]},
+{"korean": "(명) 해변 / 모래가 있는 바다", "english": "beach", "options": ["beach", "sea", "ocean", "desert"]},
+{"korean": "(명) 섬 / 물 둘러싼 땅", "english": "island", "options": ["island", "mountain", "valley", "continent"]},
+{"korean": "(명) 대륙 / 큰 땅덩이", "english": "continent", "options": ["continent", "country", "island", "city"]},
+{"korean": "(명) 나라 / 사람들이 사는 큰 곳", "english": "country", "options": ["country", "city", "village", "continent"]},
+{"korean": "(명) 세계 / 모든 나라 모음", "english": "world", "options": ["world", "earth", "planet", "universe"]},
+{"korean": "(명) 행복 / 기쁜 마음", "english": "happiness", "options": ["happiness", "joy", "sadness", "anger"]},
+{"korean": "(명) 슬픔 / 서운한 마음", "english": "sadness", "options": ["sadness", "happiness", "anger", "fear"]},
+{"korean": "(명) 화 / 짜증 나는 마음", "english": "anger", "options": ["anger", "rage", "happiness", "joy"]},
+{"korean": "(명) 두려움 / 무서운 마음", "english": "fear", "options": ["fear", "scare", "bravery", "courage"]},
+{"korean": "(명) 사랑 / 소중히 여기는 마음", "english": "love", "options": ["love", "like", "hate", "friendship"]},
+{"korean": "(명) 미움 / 싫어하는 마음", "english": "hate", "options": ["hate", "love", "like", "dislike"]},
+{"korean": "(명) 웃음 / 기쁠 때 짓는 표정", "english": "laugh", "options": ["laugh", "smile", "cry", "frown"]},
+{"korean": "(명) 울음 / 슬플 때 하는 것", "english": "cry", "options": ["cry", "laugh", "smile", "shout"]},
+{"korean": "(명) 꿈 / 이루고 싶은 것", "english": "dream", "options": ["dream", "wish", "hope", "goal"]},
+{"korean": "(명) 희망 / 바라는 것", "english": "hope", "options": ["hope", "dream", "wish", "fear"]},
+{"korean": "(명) 목표 / 이루려는 것", "english": "goal", "options": ["goal", "target", "dream", "plan"]},
+{"korean": "(명) 공부 / 배우는 것", "english": "study", "options": ["study", "learn", "play", "work"]},
+{"korean": "(명) 시험 / 실력 보는 것", "english": "test", "options": ["test", "exam", "quiz", "game"]},
+{"korean": "(명) 숙제 / 집에서 하는 공부", "english": "homework", "options": ["homework", "assignment", "test", "game"]},
+{"korean": "(명) 선생님 / 가르치는 사람", "english": "teacher", "options": ["teacher", "student", "friend", "parent"]},
+{"korean": "(명) 학생 / 배우는 사람", "english": "student", "options": ["student", "teacher", "parent", "friend"]},
+{"korean": "(명) 교실 / 수업하는 방", "english": "classroom", "options": ["classroom", "playground", "library", "home"]},
+{"korean": "(명) 책가방 / 책 넣는 가방", "english": "backpack", "options": ["backpack", "bag", "suitcase", "wallet"]},
+{"korean": "(명) 연필 / 쓰는 도구", "english": "pencil", "options": ["pencil", "pen", "eraser", "ruler"]},
+{"korean": "(명) 지우개 / 지우는 것", "english": "eraser", "options": ["eraser", "pencil", "pen", "book"]},
+{"korean": "(명) 공책 / 쓰는 종이", "english": "notebook", "options": ["notebook", "book", "paper", "diary"]},
+{"korean": "(명) 색연필 / 색색으로 그리는 것", "english": "colored pencil", "options": ["colored pencil", "crayon", "marker", "paint"]},
+{"korean": "(명) 미술 / 그림 그리는 것", "english": "art", "options": ["art", "drawing", "painting", "music"]},
+{"korean": "(명) 음악 / 소리 예술", "english": "music", "options": ["music", "song", "dance", "art"]},
+{"korean": "(명) 체육 / 운동하는 수업", "english": "physical education", "options": ["physical education", "sports", "gym", "exercise"]},
+{"korean": "(명) 수학 / 숫자 공부", "english": "math", "options": ["math", "science", "language", "history"]},
+{"korean": "(명) 과학 / 실험하는 공부", "english": "science", "options": ["science", "math", "art", "music"]},
+{"korean": "(명) 역사 / 옛날 이야기", "english": "history", "options": ["history", "past", "future", "present"]},
+{"korean": "(명) 지리 / 땅 공부", "english": "geography", "options": ["geography", "map", "country", "city"]},
+{"korean": "(명) 영어 / 다른 나라 말", "english": "English", "options": ["English", "Korean", "Chinese", "Japanese"]},
+{"korean": "(명) 컴퓨터 / 계산 기계", "english": "computer", "options": ["computer", "laptop", "tablet", "phone"]},
+{"korean": "(명) 인터넷 / 연결된 정보", "english": "internet", "options": ["internet", "web", "network", "wifi"]},
+{"korean": "(명) 게임 / 재미있는 놀이", "english": "game", "options": ["game", "play", "toy", "sport"]},
+{"korean": "(명) 만화 / 그림 이야기", "english": "comic", "options": ["comic", "cartoon", "book", "movie"]},
+{"korean": "(명) 영화 / 움직이는 이야기", "english": "movie", "options": ["movie", "film", "cartoon", "TV show"]},
+{"korean": "(명) 노래 / 목소리 음악", "english": "song", "options": ["song", "music", "melody", "tune"]},
+{"korean": "(명) 춤 / 몸 움직임", "english": "dance", "options": ["dance", "move", "jump", "run"]},
+{"korean": "(명) 그림 / 색으로 표현", "english": "drawing", "options": ["drawing", "painting", "art", "photo"]},
+{"korean": "(명) 사진 / 찍은 그림", "english": "photo", "options": ["photo", "picture", "image", "drawing"]},
+{"korean": "(명) 카메라 / 사진 찍는 기계", "english": "camera", "options": ["camera", "phone", "video", "TV"]},
+{"korean": "(명) 휴대폰 / 들고 다니는 전화", "english": "mobile phone", "options": ["mobile phone", "cellphone", "telephone", "computer"]},
+{"korean": "(명) 텔레비전 / 화면으로 보는 것", "english": "television", "options": ["television", "TV", "monitor", "screen"]},
+{"korean": "(명) 라디오 / 소리 들려주는 기계", "english": "radio", "options": ["radio", "music player", "speaker", "TV"]},
+{"korean": "(명) 시계 / 시간 알려주는 것", "english": "clock", "options": ["clock", "watch", "timer", "alarm"]},
+{"korean": "(명) 달력 / 날짜 보는 것", "english": "calendar", "options": ["calendar", "date", "month", "year"]},
+{"korean": "(명) 지도 / 길 알려주는 그림", "english": "map", "options": ["map", "guide", "book", "picture"]},
+{"korean": "(명) 나침반 / 방향 알려주는 것", "english": "compass", "options": ["compass", "map", "GPS", "arrow"]},
+{"korean": "(명) 안경 / 눈에 쓰는 것", "english": "glasses", "options": ["glasses", "sunglasses", "lens", "eye"]},
+{"korean": "(명) 모자 / 머리에 쓰는 것", "english": "hat", "options": ["hat", "cap", "helmet", "scarf"]},
+{"korean": "(명) 옷 / 몸에 입는 것", "english": "clothes", "options": ["clothes", "shirt", "pants", "dress"]},
+{"korean": "(명) 신발 / 발에 신는 것", "english": "shoes", "options": ["shoes", "sneakers", "boots", "sandals"]},
+{"korean": "(명) 가방 / 물건 넣는 것", "english": "bag", "options": ["bag", "backpack", "suitcase", "wallet"]},
+{"korean": "(명) 지갑 / 돈 넣는 것", "english": "wallet", "options": ["wallet", "purse", "bag", "pocket"]},
+{"korean": "(명) 열쇠 / 문 여는 것", "english": "key", "options": ["key", "lock", "door", "handle"]},
+{"korean": "(명) 문 / 열고 닫는 것", "english": "door", "options": ["door", "window", "gate", "wall"]},
+{"korean": "(명) 창문 / 빛 들어오는 것", "english": "window", "options": ["window", "door", "glass", "curtain"]},
+{"korean": "(명) 의자 / 앉는 것", "english": "chair", "options": ["chair", "seat", "bench", "sofa"]},
+{"korean": "(명) 책상 / 공부하는 테이블", "english": "desk", "options": ["desk", "table", "chair", "bed"]},
+{"korean": "(명) 침대 / 자는 곳", "english": "bed", "options": ["bed", "sofa", "chair", "desk"]},
+{"korean": "(명) 부엌 / 요리하는 곳", "english": "kitchen", "options": ["kitchen", "room", "bathroom", "bedroom"]},
+{"korean": "(명) 욕실 / 씻는 곳", "english": "bathroom", "options": ["bathroom", "kitchen", "bedroom", "living room"]},
+{"korean": "(명) 거실 / 가족 모이는 곳", "english": "living room", "options": ["living room", "bedroom", "kitchen", "bathroom"]},
+{"korean": "(명) 방 / 개인 공간", "english": "room", "options": ["room", "house", "classroom", "office"]},
+{"korean": "(명) 계단 / 오르내리는 것", "english": "stairs", "options": ["stairs", "elevator", "ladder", "ramp"]},
+{"korean": "(명) 엘리베이터 / 위아래로 움직이는 상자", "english": "elevator", "options": ["elevator", "stairs", "escalator", "lift"]},
+{"korean": "(명) 버스 / 많은 사람 태우는 차", "english": "bus", "options": ["bus", "car", "train", "airplane"]},
+{"korean": "(명) 기차 / 선로 다니는 차", "english": "train", "options": ["train", "bus", "car", "subway"]},
+{"korean": "(명) 비행기 / 하늘 나는 것", "english": "airplane", "options": ["airplane", "helicopter", "bird", "rocket"]},
+{"korean": "(명) 배 / 물 위 다니는 것", "english": "ship", "options": ["ship", "boat", "submarine", "canoe"]},
+{"korean": "(명) 자전거 / 페달 밟는 탈 것", "english": "bicycle", "options": ["bicycle", "scooter", "car", "bus"]},
+{"korean": "(명) 택시 / 돈 주고 타는 차", "english": "taxi", "options": ["taxi", "bus", "train", "car"]},
+{"korean": "(명) 지하철 / 땅 밑 기차", "english": "subway", "options": ["subway", "train", "bus", "metro"]},
+{"korean": "(명) 병원 / 아픈 사람 가는 곳", "english": "hospital", "options": ["hospital", "clinic", "school", "shop"]},
+{"korean": "(명) 약국 / 약 파는 곳", "english": "pharmacy", "options": ["pharmacy", "hospital", "store", "market"]},
+{"korean": "(명) 슈퍼마켓 / 음식 사는 곳", "english": "supermarket", "options": ["supermarket", "market", "shop", "mall"]},
+{"korean": "(명) 백화점 / 큰 상점", "english": "department store", "options": ["department store", "mall", "shop", "market"]},
+{"korean": "(명) 도서관 / 책 빌리는 곳", "english": "library", "options": ["library", "bookstore", "school", "museum"]},
+{"korean": "(명) 박물관 / 옛 물건 보는 곳", "english": "museum", "options": ["museum", "library", "zoo", "aquarium"]},
+{"korean": "(명) 동물원 / 동물 보는 곳", "english": "zoo", "options": ["zoo", "park", "farm", "aquarium"]},
+{"korean": "(명) 수족관 / 물 동물 보는 곳", "english": "aquarium", "options": ["aquarium", "zoo", "lake", "ocean"]},
+{"korean": "(명) 놀이공원 / 놀이기구 타는 곳", "english": "amusement park", "options": ["amusement park", "park", "zoo", "museum"]},
+{"korean": "(명) 축제 / 재미있는 행사", "english": "festival", "options": ["festival", "party", "holiday", "event"]},
+{"korean": "(명) 크리스마스 / 선물 주는 날", "english": "Christmas", "options": ["Christmas", "Halloween", "birthday", "New Year"]},
+{"korean": "(명) 할로윈 / 유령 날", "english": "Halloween", "options": ["Halloween", "Christmas", "Easter", "Thanksgiving"]},
+{"korean": "(명) 생일 / 태어난 날", "english": "birthday", "options": ["birthday", "anniversary", "holiday", "festival"]},
+{"korean": "(명) 새해 / 새 해 시작", "english": "New Year", "options": ["New Year", "Christmas", "birthday", "holiday"]},
+{"korean": "(명) 휴가 / 쉬는 기간", "english": "vacation", "options": ["vacation", "holiday", "break", "trip"]},
+{"korean": "(명) 주말 / 토요일 일요일", "english": "weekend", "options": ["weekend", "weekday", "holiday", "vacation"]},
+{"korean": "(명) 아침 / 해 뜨는 때", "english": "morning", "options": ["morning", "evening", "night", "afternoon"]},
+{"korean": "(명) 오후 / 점심 후", "english": "afternoon", "options": ["afternoon", "morning", "evening", "night"]},
+{"korean": "(명) 저녁 / 해 지는 때", "english": "evening", "options": ["evening", "morning", "afternoon", "night"]},
+{"korean": "(명) 밤 / 어두운 때", "english": "night", "options": ["night", "day", "evening", "morning"]},
+{"korean": "(명) 오늘 / 지금 날", "english": "today", "options": ["today", "tomorrow", "yesterday", "now"]},
+{"korean": "(명) 내일 / 다음 날", "english": "tomorrow", "options": ["tomorrow", "today", "yesterday", "future"]},
+{"korean": "(명) 어제 / 지난 날", "english": "yesterday", "options": ["yesterday", "today", "tomorrow", "past"]},
+{"korean": "(명) 주 / 7일", "english": "week", "options": ["week", "month", "day", "year"]},
+{"korean": "(명) 달 / 약 30일", "english": "month", "options": ["month", "week", "year", "day"]},
+{"korean": "(명) 해 / 365일", "english": "year", "options": ["year", "month", "week", "day"]},
+{"korean": "(명) 월요일 / 주의 첫 날", "english": "Monday", "options": ["Monday", "Tuesday", "Sunday", "Friday"]},
+{"korean": "(명) 화요일 / 월요일 다음", "english": "Tuesday", "options": ["Tuesday", "Monday", "Wednesday", "Thursday"]},
+{"korean": "(명) 수요일 / 주의 중간", "english": "Wednesday", "options": ["Wednesday", "Tuesday", "Thursday", "Friday"]},
+{"korean": "(명) 목요일 / 금요일 전", "english": "Thursday", "options": ["Thursday", "Wednesday", "Friday", "Saturday"]},
+{"korean": "(명) 금요일 / 주말 전", "english": "Friday", "options": ["Friday", "Thursday", "Saturday", "Sunday"]},
+{"korean": "(명) 토요일 / 쉬는 날", "english": "Saturday", "options": ["Saturday", "Friday", "Sunday", "Monday"]},
+{"korean": "(명) 일요일 / 주의 마지막", "english": "Sunday", "options": ["Sunday", "Saturday", "Monday", "Tuesday"]}
+]
 }
