@@ -805,7 +805,7 @@ let gameState = {
                 const randomWord = words[Math.floor(Math.random() * words.length)];
                 
                 currentWordData = {
-                    id: `json_${difficulty}_${Date.now()}`,
+                    id: `word_${randomWord.english.toLowerCase()}`, // 영어 단어를 ID로 사용                    
                     korean: randomWord.korean,
                     english: randomWord.english,
                     options: randomWord.options,
