@@ -1110,7 +1110,7 @@
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-                if (gameState.score >= gameState.level * 100) {
+                if (gameState.score >= gameState.level * 2500) {
                     gameState.level++;
                     showLevelUp();
                 }
@@ -1693,6 +1693,275 @@
             });
         }
         
+        // ==================== 동물 시장 관련 함수 ====================
+        
+        function updateMarketPage() {
+            updateSellAnimalSelect();
+            loadMarketListings();
+        }
+
+        function updateSellAnimalSelect() {
+            const select = document.getElementById('sell-animal-select');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">판매할 동물 선택</option>';
+            
+            Object.values(gameState.animals).forEach(animal => {
+                if (animal.count >= 2) { // 2마리 이상 보유한 동물만 판매 가능
+                    const option = document.createElement('option');
+                    option.value = animal.name;
+                    option.textContent = `${animal.emoji} ${animal.name} (${animal.count}마리, Lv.${animal.animalLevel})`;
+                    select.appendChild(option);
+                }
+            });
+        }
+
+        window.sellAnimal = async function() {
+            const select = document.getElementById('sell-animal-select');
+            const priceInput = document.getElementById('sell-price-input');
+            
+            const animalName = select.value;
+            const price = parseInt(priceInput.value);
+            
+            if (!animalName) {
+                alert('판매할 동물을 선택해주세요.');
+                return;
+            }
+            
+            if (!price || price <= 0) {
+                alert('올바른 가격을 입력해주세요.');
+                return;
+            }
+            
+            if (price > gameState.score * 10) { // 너무 비싼 가격 방지
+                alert('가격이 너무 높습니다. 현재 점수의 10배 이하로 설정해주세요.');
+                return;
+            }
+            
+            const animal = gameState.animals[animalName];
+            if (animal.count < 2) {
+                alert('최소 2마리 이상 보유해야 판매할 수 있습니다.');
+                return;
+            }
+            
+            try {
+                // Firebase에 판매 등록
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const marketRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/market");
+                
+                const listingData = {
+                    animalName: animalName,
+                    animalEmoji: animal.emoji,
+                    animalLevel: animal.animalLevel,
+                    specialName: animal.specialName,
+                    rarity: animal.rarity,
+                    price: price,
+                    seller: currentUserProfile.name,
+                    sellerId: currentUserId,
+                    listedAt: new Date().toISOString()
+                };
+                
+                await window.firebase.setDoc(window.firebase.doc(marketRef, `${currentUserId}_${animalName}_${Date.now()}`), listingData);
+                
+                // 인벤토리에서 동물 제거
+                animal.count--;
+                gameState.totalAnimals--;
+                
+                alert(`${animalName}이(가) ${price}점에 판매 등록되었습니다!`);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                updateSellAnimalSelect();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+                // 입력 초기화
+                select.value = '';
+                priceInput.value = '';
+                
+            } catch (error) {
+                console.error('Error selling animal:', error);
+                alert('판매 등록 중 오류가 발생했습니다.');
+            }
+        }
+
+        async function loadMarketListings() {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const marketRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/market");
+                const querySnapshot = await window.firebase.getDocs(marketRef);
+                
+                const listings = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    listings.push({
+                        id: doc.id,
+                        ...data
+                    });
+                });
+                
+                // 최신순으로 정렬
+                listings.sort((a, b) => new Date(b.listedAt) - new Date(a.listedAt));
+                
+                displayMarketListings(listings);
+                
+            } catch (error) {
+                console.error('Error loading market listings:', error);
+                document.getElementById('market-body').innerHTML = '<tr><td colspan="6">시장 정보를 불러오는 중 오류가 발생했습니다.</td></tr>';
+            }
+        }
+
+        function displayMarketListings(listings) {
+            const tbody = document.getElementById('market-body');
+            if (!tbody) return;
+            
+            if (listings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6">현재 판매 중인 동물이 없습니다.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = '';
+            
+            listings.forEach(listing => {
+                const row = document.createElement('tr');
+                
+                // 자신이 올린 상품은 다른 색상으로 표시
+                if (listing.seller === currentUserProfile.name) {
+                    row.style.backgroundColor = '#f0f8ff';
+                }
+                
+                row.innerHTML = `
+                    <td>${listing.animalEmoji}</td>
+                    <td>${listing.animalName}<br><small>"${listing.specialName}"</small></td>
+                    <td>Lv. ${listing.animalLevel}<br><small>★${listing.rarity}</small></td>
+                    <td>${listing.seller}</td>
+                    <td><strong>${listing.price}</strong>점</td>
+                    <td>
+                        ${listing.seller === currentUserProfile.name 
+                            ? `<button class="nav-btn" onclick="cancelListing('${listing.id}')" style="background: #ff6b6b;">취소</button>`
+                            : `<button class="nav-btn" onclick="buyAnimal('${listing.id}', ${listing.price}, '${listing.animalName}')">구매</button>`
+                        }
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        window.buyAnimal = async function(listingId, price, animalName) {
+            if (gameState.score < price) {
+                alert('점수가 부족합니다!');
+                return;
+            }
+            
+            if (!confirm(`${animalName}을(를) ${price}점에 구매하시겠습니까?`)) {
+                return;
+            }
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
+                
+                // 판매 정보 가져오기
+                const listingDoc = await window.firebase.getDoc(listingRef);
+                if (!listingDoc.exists()) {
+                    alert('이미 판매된 상품입니다.');
+                    loadMarketListings();
+                    return;
+                }
+                
+                const listingData = listingDoc.data();
+                
+                // 점수 차감
+                gameState.score -= price;
+                
+                // 동물 추가
+                const animalType = animalTypes.find(a => a.name === animalName);
+                if (!gameState.animals[animalName]) {
+                    gameState.animals[animalName] = {
+                        ...animalType,
+                        count: 0,
+                        animalLevel: listingData.animalLevel,
+                        story: ""
+                    };
+                    gameState.speciesCount++;
+                }
+                gameState.animals[animalName].count++;
+                gameState.animals[animalName].animalLevel = Math.max(
+                    gameState.animals[animalName].animalLevel, 
+                    listingData.animalLevel
+                );
+                gameState.totalAnimals++;
+                
+                // 판매 정보 삭제
+                await window.firebase.deleteDoc(listingRef);
+                
+                alert(`${animalName}을(를) 성공적으로 구매했습니다!`);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+            } catch (error) {
+                console.error('Error buying animal:', error);
+                alert('구매 중 오류가 발생했습니다.');
+            }
+        }
+
+        window.cancelListing = async function(listingId) {
+            if (!confirm('판매를 취소하시겠습니까?')) {
+                return;
+            }
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
+                
+                // 판매 정보 가져오기
+                const listingDoc = await window.firebase.getDoc(listingRef);
+                if (!listingDoc.exists()) {
+                    alert('이미 처리된 상품입니다.');
+                    loadMarketListings();
+                    return;
+                }
+                
+                const listingData = listingDoc.data();
+                
+                // 동물 다시 인벤토리에 추가
+                const animalType = animalTypes.find(a => a.name === listingData.animalName);
+                if (!gameState.animals[listingData.animalName]) {
+                    gameState.animals[listingData.animalName] = {
+                        ...animalType,
+                        count: 0,
+                        animalLevel: listingData.animalLevel,
+                        story: ""
+                    };
+                    gameState.speciesCount++;
+                }
+                gameState.animals[listingData.animalName].count++;
+                gameState.totalAnimals++;
+                
+                // 판매 정보 삭제
+                await window.firebase.deleteDoc(listingRef);
+                
+                alert('판매가 취소되었습니다. 동물이 인벤토리로 돌아왔습니다.');
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                updateSellAnimalSelect();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+            } catch (error) {
+                console.error('Error canceling listing:', error);
+                alert('판매 취소 중 오류가 발생했습니다.');
+            }
+        }
+
         // ==================== 동물 합성 함수 ====================
         
         function updateSynthesisPage() {
