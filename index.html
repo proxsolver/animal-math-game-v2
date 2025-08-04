@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -127,6 +126,7 @@
         .ranking-table th, .market-table th { background-color: #e0f0ff; color: #4169E1; }
         .ranking-table tr:nth-child(even), .market-table tr:nth-child(even) { background-color: #f9f9f9; }
         .ranking-table .my-rank { background-color: #fffde7; font-weight: bold; }
+        .clickable-user-name:hover { color: #FF69B4 !important; background-color: rgba(255, 105, 180, 0.1); padding: 2px 6px; border-radius: 8px; }
         .market-sell-section { background: #e6f3ff; padding: 20px; border-radius: 20px; margin-bottom: 30px; }
         .market-sell-section h3 { color: #4169E1; margin-bottom: 15px; }
         .market-sell-section select, .market-sell-section input { padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin: 0 5px; }
@@ -260,13 +260,13 @@
                 <div class="current-user">현재 플레이어: <span id="current-user-name"></span></div>
             </div>
 
-<div class="game-stats" id="game-stats">
-    <div class="stat-item">레벨 <span id="level">1</span></div>
-    <div class="stat-item">점수: <span id="score">0</span></div>
-    <div class="stat-item">💰 코인: <span id="coins">0</span></div>  <!-- 🆕 새로 추가! -->
-    <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
-    <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
-</div>
+            <div class="game-stats" id="game-stats">
+                <div class="stat-item">레벨 <span id="level">1</span></div>
+                <div class="stat-item">점수: <span id="score">0</span></div>
+                <div class="stat-item">💰 코인: <span id="coins">0</span></div>
+                <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
+                <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
+            </div>
         </div>
 
         <!-- 게임 페이지 -->
@@ -387,7 +387,7 @@
                 <div class="market-sell-section">
                     <h3>내 동물 판매하기</h3>
                     <select id="sell-animal-select"></select>
-<input type="number" id="sell-price-input" placeholder="판매 가격 (코인)">
+                    <input type="number" id="sell-price-input" placeholder="판매 가격 (코인)">
                     <button class="nav-btn" onclick="sellAnimal()">판매 등록</button>
                 </div>
                 <h3>판매 중인 동물 목록</h3>
@@ -451,6 +451,8 @@
                             <th>점수</th>
                             <th>레벨</th>
                             <th>동물 종류</th>
+                            <th>플레이 시간</th>
+                            <th>농장 방문</th>
                         </tr>
                     </thead>
                     <tbody id="ranking-body"></tbody>
@@ -483,6 +485,23 @@
                     <div class="spinner"></div>
                 </div>
                 <p id="story-text"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 농장 방문 모달 -->
+    <div id="farm-visit-modal" class="modal">
+        <div class="modal-content" style="max-width: 90%; max-height: 90%;">
+            <span class="close-btn" onclick="closeFarmVisitModal()">&times;</span>
+            <h3 id="visit-farm-title">🏡 농장 방문</h3>
+            <div style="margin: 15px 0; text-align: center;">
+                <span id="farm-owner-info" style="background: linear-gradient(45deg, #FF69B4, #FFB6C1); color: white; padding: 8px 16px; border-radius: 15px; font-weight: bold;"></span>
+            </div>
+            <div style="background: linear-gradient(to bottom, #a8e063, #56ab2f); padding: 20px; border-radius: 15px; margin-top: 20px;">
+                <div id="visit-farm-grid" class="farm-grid" style="pointer-events: none;"></div>
+            </div>
+            <div style="text-align: center; margin-top: 15px; color: #666; font-style: italic;">
+                💡 다른 사용자의 농장은 구경만 가능합니다
             </div>
         </div>
     </div>
@@ -580,19 +599,23 @@
     <script>
         // ==================== 게임 데이터 ====================
         
-let gameState = {
-    score: 0,
-    coins: 0,      // 🆕 새로 추가!
-    level: 1,
-    currentQuestion: {},
-    animals: {},
-    totalAnimals: 0,
-    speciesCount: 0,
-    farm: {
-        layout: Array(48).fill(null),
-        items: {}
-    }
-};
+        let gameState = {
+            score: 0,
+            coins: 0,      // 🆕 새로 추가!
+            level: 1,
+            currentQuestion: {},
+            animals: {},
+            totalAnimals: 0,
+            speciesCount: 0,
+            farm: {
+                layout: Array(48).fill(null),
+                items: {}
+            }
+        };
+
+        // 플레이 시간 추적 변수들
+        let sessionStartTime = null;
+        let totalPlayTimeMinutes = 0;
 
         let currentUserId = null;
         let currentUserProfile = {};
@@ -610,37 +633,37 @@ let gameState = {
         let animalTypes = [];
 
         // JSON 파일에서 동물 데이터 로드
-      window.loadAnimalsFromJSON = async function() {
-    try {
-        console.log('동물 JSON 파일 로딩 시작...');
-        
-        const response = await fetch('./animals.json');
-        
-        if (!response.ok) {
-            throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
+        window.loadAnimalsFromJSON = async function() {
+            try {
+                console.log('동물 JSON 파일 로딩 시작...');
+                
+                const response = await fetch('./animals.json');
+                
+                if (!response.ok) {
+                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                animalTypes = data.animals;
+                
+                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
+                return true;
+                
+            } catch (error) {
+                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+                
+                // 폴백: 기본 동물 몇 마리
+                animalTypes = [
+                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+                ];
+                
+                return false;
+            }
         }
-        
-        const data = await response.json();
-        animalTypes = data.animals;
-        
-        console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
-        return true;
-        
-    } catch (error) {
-        console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
-        
-        // 폴백: 기본 동물 몇 마리
-        animalTypes = [
-            {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
-            {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
-            {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
-            {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
-            {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
-        ];
-        
-        return false;
-    }
-}
 
         const shopItems = [
             { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
@@ -671,6 +694,72 @@ let gameState = {
             { result: '은하룡', ingredients: ['용', '고래'] },
             { result: '궁극의 로봇', ingredients: ['거미', '전갈'] }
         ];
+
+        // ==================== 플레이 시간 및 농장 방문 함수 ====================
+        
+        // 플레이 시간을 사람이 읽기 쉬운 형태로 변환
+        function formatPlayTime(minutes) {
+            if (minutes < 60) {
+                return `${Math.floor(minutes)}분`;
+            } else if (minutes < 1440) {
+                const hours = Math.floor(minutes / 60);
+                const mins = Math.floor(minutes % 60);
+                return `${hours}시간 ${mins}분`;
+            } else {
+                const days = Math.floor(minutes / 1440);
+                const hours = Math.floor((minutes % 1440) / 60);
+                return `${days}일 ${hours}시간`;
+            }
+        }
+        
+        // 현재 세션 플레이 시간 계산
+        function updateSessionPlayTime() {
+            if (sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                return totalPlayTimeMinutes + sessionMinutes;
+            }
+            return totalPlayTimeMinutes;
+        }
+        
+        // 농장 방문 모달 열기
+        window.visitUserFarm = async function(userName) {
+            try {
+                const userData = await loadUserData(userName);
+                if (!userData) {
+                    alert('사용자 데이터를 불러올 수 없습니다.');
+                    return;
+                }
+                
+                document.getElementById('farm-owner-info').textContent = `${userName}님의 농장`;
+                
+                const visitFarmGrid = document.getElementById('visit-farm-grid');
+                visitFarmGrid.innerHTML = '';
+                
+                // 48개 셀 생성
+                for (let i = 0; i < 48; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'farm-cell';
+                    
+                    const farmItem = userData.farm?.layout?.[i];
+                    if (farmItem) {
+                        cell.innerHTML = `<span class="${farmItem.isAnimal ? 'placed-animal' : ''}">${farmItem.emoji}</span>`;
+                    }
+                    
+                    visitFarmGrid.appendChild(cell);
+                }
+                
+                document.getElementById('farm-visit-modal').style.display = 'flex';
+                
+            } catch (error) {
+                console.error('농장 방문 오류:', error);
+                alert('농장을 불러오는 중 오류가 발생했습니다.');
+            }
+        }
+        
+        // 농장 방문 모달 닫기
+        window.closeFarmVisitModal = function() {
+            document.getElementById('farm-visit-modal').style.display = 'none';
+        }
 
         // ==================== 핵심 게임 함수 ====================
         
@@ -989,20 +1078,27 @@ let gameState = {
                 const earnedScore = baseScore * gameState.level;
                 gameState.score += earnedScore;
                 
-                feedback.textContent = `정답! +${earnedScore}점!`;
+                feedback.textContent = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
                 feedback.className = 'feedback correct';
                 
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
-                   // --- 이 부분이 핵심 수정 지점입니다 ---
+                
+
+
+
+
+        // --- 이 부분이 핵심 수정 지점입니다 ---
         // 다음 레벨에 도달하기 위한 필요 점수 계산 로직 변경
         // Math.pow(gameState.level, 2)를 사용하여 레벨의 제곱에 비례하도록 변경
         // 상수 2000은 게임 난이도에 따라 조절할 수 있습니다.
+                
         if (gameState.score >= Math.pow(gameState.level, 2) * 2000) { 
             gameState.level++;
             showLevelUp();
         }
         // --- 수정 끝 ---
+                        
                 
                 saveCurrentUserData();
                 setTimeout(() => generateEnglishQuiz(), 1500);
@@ -1190,252 +1286,249 @@ let gameState = {
 
         // ==================== 학습 통계 관련 함수 ====================
         
- async function updateLearningStats() {
-  // userProgress가 비어있거나 로드되지 않았다면 다시 로드 시도
-  if (!currentUserProfile || Object.keys(userProgress).length === 0) {
-    await loadUserProgress();
-  }
+        async function updateLearningStats() {
+            // userProgress가 비어있거나 로드되지 않았다면 다시 로드 시도
+            if (!currentUserProfile || Object.keys(userProgress).length === 0) {
+                await loadUserProgress();
+            }
 
-  const progressEntries = Object.entries(userProgress);
+            const progressEntries = Object.entries(userProgress);
 
-  // 전체 통계 계산
-  let totalCorrect = 0;
-  let totalIncorrect = 0;
-  let masteredCount = 0;
+            // 전체 통계 계산
+            let totalCorrect = 0;
+            let totalIncorrect = 0;
+            let masteredCount = 0;
 
-  progressEntries.forEach(([wordId, progress]) => {
-    totalCorrect += progress.correct;
-    totalIncorrect += progress.incorrect;
-    const total = progress.correct + progress.incorrect;
-    if (total >= 3 && (progress.correct / total) >= 0.8) {
-      masteredCount++;
-    }
-  });
+            progressEntries.forEach(([wordId, progress]) => {
+                totalCorrect += progress.correct;
+                totalIncorrect += progress.incorrect;
+                const total = progress.correct + progress.incorrect;
+                if (total >= 3 && (progress.correct / total) >= 0.8) {
+                    masteredCount++;
+                }
+            });
 
-  const totalAttempts = totalCorrect + totalIncorrect;
-  const overallAccuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+            const totalAttempts = totalCorrect + totalIncorrect;
+            const overallAccuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
 
-  // 전체 통계 표시
-  const totalLearnedEl = document.getElementById('total-words-learned');
-  const totalCorrectEl = document.getElementById('total-correct');
-  const totalAccuracyEl = document.getElementById('total-accuracy');
-  const masteredWordsEl = document.getElementById('mastered-words');
+            // 전체 통계 표시
+            const totalLearnedEl = document.getElementById('total-words-learned');
+            const totalCorrectEl = document.getElementById('total-correct');
+            const totalAccuracyEl = document.getElementById('total-accuracy');
+            const masteredWordsEl = document.getElementById('mastered-words');
 
-  if (totalLearnedEl) totalLearnedEl.textContent = progressEntries.length;
-  if (totalCorrectEl) totalCorrectEl.textContent = totalCorrect;
-  if (totalAccuracyEl) totalAccuracyEl.textContent = overallAccuracy + '%';
-  if (masteredWordsEl) masteredWordsEl.textContent = masteredCount;
+            if (totalLearnedEl) totalLearnedEl.textContent = progressEntries.length;
+            if (totalCorrectEl) totalCorrectEl.textContent = totalCorrect;
+            if (totalAccuracyEl) totalAccuracyEl.textContent = overallAccuracy + '%';
+            if (masteredWordsEl) masteredWordsEl.textContent = masteredCount;
 
-  // 취약/우수 단어 표시
-  updateWeakWords(progressEntries);
-  updateStrongWords(progressEntries);
-}
+            // 취약/우수 단어 표시
+            updateWeakWords(progressEntries);
+            updateStrongWords(progressEntries);
+        }
 
-      
+        function updateWeakWords(progressEntries) {
+            console.log("updateWeakWords 호출됨", progressEntries);
+
+            const weakWordsGrid = document.getElementById('weak-words-grid');
+            if (!weakWordsGrid) {
+                console.error("weak-words-grid 요소를 찾을 수 없음");
+                return;
+            }
+
+            const weakWords = progressEntries.filter(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+                return total >= 3 && progress.incorrect > progress.correct;
+            });
+
+            console.log("취약 단어 후보:", weakWords);
+
+            if (weakWords.length === 0) {
+                weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
+                return;
+            }
+
+            weakWords.sort(([,a], [,b]) => {
+                const aAccuracy = a.correct / (a.correct + a.incorrect);
+                const bAccuracy = b.correct / (b.correct + b.incorrect);
+                return aAccuracy - bAccuracy;
+            });
+
+            weakWordsGrid.innerHTML = '';
+            weakWords.slice(0, 12).forEach(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                const accuracy = Math.round((progress.correct / total) * 100);
+                const card = document.createElement('div');
+                card.className = 'word-progress-card';
+                card.innerHTML = `
+                    <div class="word-pair">단어 ID: ${wordId}</div>
+                    <div class="progress-stats">
+                        <span>정답: ${progress.correct}</span>
+                        <span>오답: ${progress.incorrect}</span>
+                    </div>
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">정답률: ${accuracy}%</div>`;
+                weakWordsGrid.appendChild(card);
+            });
+        }
         
-       function updateWeakWords(progressEntries) {
-  console.log("updateWeakWords 호출됨", progressEntries);
+        function updateStrongWords(progressEntries) {
+            console.log("updateStrongWords 호출됨", progressEntries);
 
-  const weakWordsGrid = document.getElementById('weak-words-grid');
-  if (!weakWordsGrid) {
-    console.error("weak-words-grid 요소를 찾을 수 없음");
-    return;
-  }
+            const strongWordsGrid = document.getElementById('strong-words-grid');
+            if (!strongWordsGrid) {
+                console.error("strong-words-grid 요소를 찾을 수 없음");
+                return;
+            }
 
-  const weakWords = progressEntries.filter(([wordId, progress]) => {
-    const total = progress.correct + progress.incorrect;
-    console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
-    return total >= 3 && progress.incorrect > progress.correct;
-  });
+            const strongWords = progressEntries.filter(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+                return total >= 3 && (progress.correct / total) >= 0.8;
+            });
 
-  console.log("취약 단어 후보:", weakWords);
+            console.log("우수 단어 후보:", strongWords);
 
-  if (weakWords.length === 0) {
-    weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
-    return;
-  }
+            if (strongWords.length === 0) {
+                strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
+                return;
+            }
 
-  weakWords.sort(([,a], [,b]) => {
-    const aAccuracy = a.correct / (a.correct + a.incorrect);
-    const bAccuracy = b.correct / (b.correct + b.incorrect);
-    return aAccuracy - bAccuracy;
-  });
+            strongWords.sort(([,a], [,b]) => {
+                const aAccuracy = a.correct / (a.correct + a.incorrect);
+                const bAccuracy = b.correct / (b.correct + b.incorrect);
+                return bAccuracy - aAccuracy;
+            });
 
-  weakWordsGrid.innerHTML = '';
-  weakWords.slice(0, 12).forEach(([wordId, progress]) => {
-    const total = progress.correct + progress.incorrect;
-    const accuracy = Math.round((progress.correct / total) * 100);
-    const card = document.createElement('div');
-    card.className = 'word-progress-card';
-    card.innerHTML = `
-      <div class="word-pair">단어 ID: ${wordId}</div>
-      <div class="progress-stats">
-        <span>정답: ${progress.correct}</span>
-        <span>오답: ${progress.incorrect}</span>
-      </div>
-      <div class="accuracy-bar">
-        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
-      </div>
-      <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">정답률: ${accuracy}%</div>`;
-    weakWordsGrid.appendChild(card);
-  });
-}
-        
-       function updateStrongWords(progressEntries) {
-  console.log("updateStrongWords 호출됨", progressEntries);
-
-  const strongWordsGrid = document.getElementById('strong-words-grid');
-  if (!strongWordsGrid) {
-    console.error("strong-words-grid 요소를 찾을 수 없음");
-    return;
-  }
-
-  const strongWords = progressEntries.filter(([wordId, progress]) => {
-    const total = progress.correct + progress.incorrect;
-    console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
-    return total >= 3 && (progress.correct / total) >= 0.8;
-  });
-
-  console.log("우수 단어 후보:", strongWords);
-
-  if (strongWords.length === 0) {
-    strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
-    return;
-  }
-
-  strongWords.sort(([,a], [,b]) => {
-    const aAccuracy = a.correct / (a.correct + a.incorrect);
-    const bAccuracy = b.correct / (b.correct + b.incorrect);
-    return bAccuracy - aAccuracy;
-  });
-
-  strongWordsGrid.innerHTML = '';
-  strongWords.slice(0, 12).forEach(([wordId, progress]) => {
-    const total = progress.correct + progress.incorrect;
-    const accuracy = Math.round((progress.correct / total) * 100);
-    const card = document.createElement('div');
-    card.className = 'word-progress-card strong';
-    card.innerHTML = `
-      <div class="word-pair">단어 ID: ${wordId}</div>
-      <div class="progress-stats">
-        <span>정답: ${progress.correct}</span>
-        <span>오답: ${progress.incorrect}</span>
-      </div>
-      <div class="accuracy-bar">
-        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
-      </div>
-      <div style="text-align: center; font-size: 0.9rem; color: #4CAF50;">정답률: ${accuracy}%</div>`;
-    strongWordsGrid.appendChild(card);
-  });
-}
+            strongWordsGrid.innerHTML = '';
+            strongWords.slice(0, 12).forEach(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                const accuracy = Math.round((progress.correct / total) * 100);
+                const card = document.createElement('div');
+                card.className = 'word-progress-card strong';
+                card.innerHTML = `
+                    <div class="word-pair">단어 ID: ${wordId}</div>
+                    <div class="progress-stats">
+                        <span>정답: ${progress.correct}</span>
+                        <span>오답: ${progress.incorrect}</span>
+                    </div>
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem; color: #4CAF50;">정답률: ${accuracy}%</div>`;
+                strongWordsGrid.appendChild(card);
+            });
+        }
 
         // ==================== UI 업데이트 함수 ====================
 
-function updateUI() {
-    document.getElementById('score').textContent = gameState.score;
-    document.getElementById('coins').textContent = gameState.coins;  // 🆕 새로 추가!
-    document.getElementById('level').textContent = gameState.level;
-    document.getElementById('species-count').textContent = gameState.speciesCount;
-    document.getElementById('total-animals').textContent = gameState.totalAnimals;
-}
-
-    function updateAnimalCollection() {
-    const collection = document.getElementById('animal-collection');
-    if (!collection) return;
-    collection.innerHTML = '';
-    
-    const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
-    
-    sortedAnimals.forEach(animal => {
-        if (animal.count === 0) return;
-
-        const card = document.createElement('div');
-        card.className = 'animal-card';
-        
-        let borderColor = '#87CEEB';
-        if (animal.rarity >= 5) borderColor = '#FFD700';
-        else if (animal.rarity >= 4) borderColor = '#9370DB';
-        else if (animal.rarity >= 3) borderColor = '#32CD32';
-        
-        card.style.borderColor = borderColor;
-        card.style.boxShadow = `0 6px 20px ${borderColor}40`;
-        
-        // 판매가 계산
-        const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
-        
-card.innerHTML = `
-    <span class="animal-emoji">${animal.emoji}</span>
-    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
-    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
-    <div class="special-name">"${animal.specialName}"</div>
-    <div class="rarity-badge">★${animal.rarity}</div>
-    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
-    <div style="font-size: 0.7rem; color: #999; text-align: center; margin-top: 3px;">📖 클릭하면 이야기를 들을 수 있어요</div>
-    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
-        <button onclick="event.stopPropagation(); startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
-        <button onclick="event.stopPropagation(); quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
-    </div>
-`;
-
-// 카드 클릭시 스토리 표시
-card.onclick = () => {
-    generateAnimalStory(animal);
-};
-        
-        collection.appendChild(card);
-    });
-}
-
-// 바로 판매 시스템
-window.quickSellAnimal = function(animalName) {
-    const animal = gameState.animals[animalName];
-    if (!animal || animal.count <= 0) {
-        alert('판매할 동물이 없습니다.');
-        return;
-    }
-    
-    // 레벨별 판매가 계산
-    const basePrice = animal.animalLevel * 10;
-    const rarityBonus = animal.rarity * 5;
-    const finalPrice = basePrice + rarityBonus;
-    
-    const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}🪙에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}🪙`;
-    
-    if (confirm(confirmMessage)) {
-        // 동물 제거
-        animal.count--;
-        gameState.totalAnimals--;
-        
-        // 동물이 0마리가 되면 종류에서도 제거
-        if (animal.count <= 0) {
-            gameState.speciesCount--;
-            delete gameState.animals[animalName];
+        function updateUI() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('coins').textContent = gameState.coins;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('species-count').textContent = gameState.speciesCount;
+            document.getElementById('total-animals').textContent = gameState.totalAnimals;
         }
-        
-        // 코인 추가
-        gameState.coins += finalPrice;
-        
-        // 판매 완료 알림
-        const sellAlert = document.createElement('div');
-        sellAlert.className = 'new-animal-alert';
-        sellAlert.style.background = 'linear-gradient(45deg, #32CD32, #90EE90)';
-        sellAlert.innerHTML = `
-            <span class="new-animal-emoji">💰</span>
-            <h3>판매 완료! 🎉</h3>
-            <p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}🪙</strong>에 판매했습니다!</p>
-        `;
-        document.body.appendChild(sellAlert);
-        setTimeout(() => { sellAlert.remove(); }, 3000);
-        
-        // UI 업데이트
-        updateUI();
-        updateAnimalCollection();
-        saveCurrentUserData();
-        
-        console.log(`${animalName} 판매 완료: +${finalPrice}🪙`);
-    }
-}
 
+        function updateAnimalCollection() {
+            const collection = document.getElementById('animal-collection');
+            if (!collection) return;
+            collection.innerHTML = '';
+            
+            const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
+            
+            sortedAnimals.forEach(animal => {
+                if (animal.count === 0) return;
+
+                const card = document.createElement('div');
+                card.className = 'animal-card';
+                
+                let borderColor = '#87CEEB';
+                if (animal.rarity >= 5) borderColor = '#FFD700';
+                else if (animal.rarity >= 4) borderColor = '#9370DB';
+                else if (animal.rarity >= 3) borderColor = '#32CD32';
+                
+                card.style.borderColor = borderColor;
+                card.style.boxShadow = `0 6px 20px ${borderColor}40`;
+                
+                // 판매가 계산
+                const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
+                
+                card.innerHTML = `
+                    <span class="animal-emoji">${animal.emoji}</span>
+                    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+                    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+                    <div class="special-name">"${animal.specialName}"</div>
+                    <div class="rarity-badge">★${animal.rarity}</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
+                    <div style="font-size: 0.7rem; color: #999; text-align: center; margin-top: 3px;">📖 클릭하면 이야기를 들을 수 있어요</div>
+                    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+                        <button onclick="event.stopPropagation(); startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+                        <button onclick="event.stopPropagation(); quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+                    </div>
+                `;
+
+                // 카드 클릭시 스토리 표시
+                card.onclick = () => {
+                    generateAnimalStory(animal);
+                };
+                
+                collection.appendChild(card);
+            });
+        }
+
+        // 바로 판매 시스템
+        window.quickSellAnimal = function(animalName) {
+            const animal = gameState.animals[animalName];
+            if (!animal || animal.count <= 0) {
+                alert('판매할 동물이 없습니다.');
+                return;
+            }
+            
+            // 레벨별 판매가 계산
+            const basePrice = animal.animalLevel * 10;
+            const rarityBonus = animal.rarity * 5;
+            const finalPrice = basePrice + rarityBonus;
+            
+            const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}🪙에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}🪙`;
+            
+            if (confirm(confirmMessage)) {
+                // 동물 제거
+                animal.count--;
+                gameState.totalAnimals--;
+                
+                // 동물이 0마리가 되면 종류에서도 제거
+                if (animal.count <= 0) {
+                    gameState.speciesCount--;
+                    delete gameState.animals[animalName];
+                }
+                
+                // 코인 추가
+                gameState.coins += finalPrice;
+                
+                // 판매 완료 알림
+                const sellAlert = document.createElement('div');
+                sellAlert.className = 'new-animal-alert';
+                sellAlert.style.background = 'linear-gradient(45deg, #32CD32, #90EE90)';
+                sellAlert.innerHTML = `
+                    <span class="new-animal-emoji">💰</span>
+                    <h3>판매 완료! 🎉</h3>
+                    <p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}🪙</strong>에 판매했습니다!</p>
+                `;
+                document.body.appendChild(sellAlert);
+                setTimeout(() => { sellAlert.remove(); }, 3000);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                saveCurrentUserData();
+                
+                console.log(`${animalName} 판매 완료: +${finalPrice}🪙`);
+            }
+        }
         
         function updateEncyclopedia() {
             const grid = document.getElementById('encyclopedia-grid');
@@ -1513,7 +1606,7 @@ window.quickSellAnimal = function(animalName) {
                 shopItemDiv.innerHTML = `
                     <div class="item-emoji">${item.emoji}</div>
                     <div class="item-name">${item.name}</div>
-<div class="item-price">🪙 ${item.price}</div>
+                    <div class="item-price">🪙 ${item.price}</div>
                 `;
                 shopItemDiv.onclick = () => buyItem(item.name);
                 shopGrid.appendChild(shopItemDiv);
@@ -1707,10 +1800,10 @@ window.quickSellAnimal = function(animalName) {
                 return;
             }
             
-if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
-    alert('가격이 너무 높습니다. 좀 더 합리적인 가격으로 설정해주세요.');
-    return;
-}
+            if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
+                alert('가격이 너무 높습니다. 좀 더 합리적인 가격으로 설정해주세요.');
+                return;
+            }
             
             const animal = gameState.animals[animalName];
             if (animal.count < 2) {
@@ -1848,7 +1941,7 @@ if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
                 const listingData = listingDoc.data();
                 
                 // 점수 차감
-            gameState.coins -= price;  // score 대신 coins
+                gameState.coins -= price;
                 
                 // 동물 추가
                 const animalType = animalTypes.find(a => a.name === animalName);
@@ -1917,35 +2010,6 @@ if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
                 }
                 gameState.animals[listingData.animalName].count++;
                 gameState.totalAnimals++;
-
-// 판매자에게 알람 전송
-const sellerProfileRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", listingData.seller);
-const notification = {
-    type: 'sale_completed',
-    message: `${animalName}이(가) ${price}점에 판매되었습니다!`,
-    buyer: currentUserProfile.name,
-    animalName: animalName,
-    price: price,
-    timestamp: new Date().toISOString(),
-    read: false
-};
-
-try {
-    const sellerDoc = await window.firebase.getDoc(sellerProfileRef);
-    if (sellerDoc.exists()) {
-        const sellerData = sellerDoc.data();
-        const notifications = sellerData.notifications || [];
-        notifications.unshift(notification); // 최신 알람을 맨 앞에
-        await window.firebase.setDoc(sellerProfileRef, { notifications }, { merge: true });
-    }
-} catch (error) {
-    console.error('알람 전송 실패:', error);
-}
-        // 알람 확인 함수 (임시)
-async function checkAndShowNotifications() {
-    console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
-    // 나중에 알람 시스템 구현 예정
-}
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
@@ -1973,28 +2037,28 @@ async function checkAndShowNotifications() {
             
             grid.innerHTML = '';
 
-  synthesisRecipes.forEach(recipe => {
-    const [ing1, ing2] = recipe.ingredients;
-    const result = animalTypes.find(a => a.name === recipe.result);
-    
-    // 동물 데이터가 없으면 건너뛰기
-    if (!result) {
-        console.log(`결과 동물 '${recipe.result}' 데이터가 없습니다.`);
-        return;
-    }
+            synthesisRecipes.forEach(recipe => {
+                const [ing1, ing2] = recipe.ingredients;
+                const result = animalTypes.find(a => a.name === recipe.result);
+                
+                // 동물 데이터가 없으면 건너뛰기
+                if (!result) {
+                    console.log(`결과 동물 '${recipe.result}' 데이터가 없습니다.`);
+                    return;
+                }
 
-    const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
-    const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
-    const canSynthesize = hasIng1 && hasIng2;
+                const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
+                const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
+                const canSynthesize = hasIng1 && hasIng2;
 
-    const ing1Data = animalTypes.find(a => a.name === ing1);
-    const ing2Data = animalTypes.find(a => a.name === ing2);
-    
-    // 재료 동물 데이터가 없으면 건너뛰기
-    if (!ing1Data || !ing2Data) {
-        console.log(`재료 동물 '${ing1}' 또는 '${ing2}' 데이터가 없습니다.`);
-        return;
-    }
+                const ing1Data = animalTypes.find(a => a.name === ing1);
+                const ing2Data = animalTypes.find(a => a.name === ing2);
+                
+                // 재료 동물 데이터가 없으면 건너뛰기
+                if (!ing1Data || !ing2Data) {
+                    console.log(`재료 동물 '${ing1}' 또는 '${ing2}' 데이터가 없습니다.`);
+                    return;
+                }
 
                 const card = document.createElement('div');
                 card.className = 'synthesis-card';
@@ -2132,20 +2196,24 @@ async function checkAndShowNotifications() {
         async function saveCurrentUserData() {
             if (!currentUserProfile.name) return;
             
+            // 현재 세션 플레이 시간 업데이트
+            const currentTotalPlayTime = updateSessionPlayTime();
+            
             const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
             const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
             
-const dataToSave = {
-    ...currentUserProfile,
-    score: gameState.score,
-    coins: gameState.coins,  // 🆕 새로 추가!
-    level: gameState.level,
-    animals: gameState.animals,
-    totalAnimals: gameState.totalAnimals,
-    speciesCount: gameState.speciesCount,
-    farm: gameState.farm,
-    lastPlayed: new Date().toISOString()
-};
+            const dataToSave = {
+                ...currentUserProfile,
+                score: gameState.score,
+                coins: gameState.coins,
+                level: gameState.level,
+                animals: gameState.animals,
+                totalAnimals: gameState.totalAnimals,
+                speciesCount: gameState.speciesCount,
+                farm: gameState.farm,
+                totalPlayTimeMinutes: currentTotalPlayTime,
+                lastPlayed: new Date().toISOString()
+            };
 
             try {
                 await window.firebase.setDoc(userDocRef, dataToSave, { merge: true });
@@ -2203,11 +2271,13 @@ const dataToSave = {
                 name: name,
                 pinHash: hashedPin,
                 score: 0,
+                coins: 0,
                 level: 1,
                 animals: {},
                 totalAnimals: 0,
                 speciesCount: 0,
                 farm: { layout: Array(48).fill(null), items: {} },
+                totalPlayTimeMinutes: 0,
                 createdAt: new Date().toISOString(),
                 lastPlayed: new Date().toISOString()
             };
@@ -2250,16 +2320,21 @@ const dataToSave = {
 
         async function startGameWithProfile(profileData) {
             currentUserProfile = profileData;
-gameState = {
-    score: profileData.score || 0,
-    coins: profileData.coins || 0,  // 🆕 새로 추가! (기존 사용자는 0으로 시작)
-    level: profileData.level || 1,
-    animals: profileData.animals || {},
-    totalAnimals: profileData.totalAnimals || 0,
-    speciesCount: profileData.speciesCount || 0,
-    farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
-    currentQuestion: {}
-};
+            
+            // 플레이 시간 초기화
+            totalPlayTimeMinutes = profileData.totalPlayTimeMinutes || 0;
+            sessionStartTime = Date.now();
+            
+            gameState = {
+                score: profileData.score || 0,
+                coins: profileData.coins || 0,
+                level: profileData.level || 1,
+                animals: profileData.animals || {},
+                totalAnimals: profileData.totalAnimals || 0,
+                speciesCount: profileData.speciesCount || 0,
+                farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
+                currentQuestion: {}
+            };
 
             document.getElementById('login-overlay').style.display = 'none';
             document.querySelector('.game-container').style.display = 'block';
@@ -2285,15 +2360,24 @@ gameState = {
             
             showPage('game', document.querySelector('.nav-btn'));
             // 알람 확인 (3초 후)
-setTimeout(() => {
-    checkAndShowNotifications();
-}, 3000);
+            setTimeout(() => {
+                checkAndShowNotifications();
+            }, 3000);
         }
 
         window.logout = function() {
+            // 로그아웃 전에 플레이 시간 저장
+            if (sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                totalPlayTimeMinutes += sessionMinutes;
+                sessionStartTime = null;
+            }
+            
             saveCurrentUserData();
             currentUserProfile = {};
             gameState = {};
+            totalPlayTimeMinutes = 0;
+            
             document.getElementById('login-overlay').style.display = 'flex';
             document.querySelector('.game-container').style.display = 'none';
             document.getElementById('player-name-input').value = '';
@@ -2356,63 +2440,80 @@ setTimeout(() => {
                 if (p.name === currentUserProfile.name) {
                     row.className = 'my-rank';
                 }
+                
+                // 플레이 시간 계산 (현재 로그인한 사용자의 경우 현재 세션 포함)
+                let displayPlayTime = p.totalPlayTimeMinutes || 0;
+                if (p.name === currentUserProfile.name && sessionStartTime) {
+                    const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                    displayPlayTime += sessionMinutes;
+                }
+                
                 row.innerHTML = `
                     <td>${index + 1}</td>
-                    <td>${p.name}</td>
+                    <td><span class="clickable-user-name" onclick="visitUserFarm('${p.name}')" style="color: #4169E1; cursor: pointer; text-decoration: underline;">${p.name}</span></td>
                     <td>${p.score || 0}</td>
                     <td>${p.level || 1}</td>
                     <td>${p.speciesCount || 0}</td>
+                    <td>${formatPlayTime(displayPlayTime)}</td>
+                    <td><button class="nav-btn" onclick="visitUserFarm('${p.name}')" style="font-size: 0.8rem; padding: 6px 12px;">🏡 방문</button></td>
                 `;
                 rankingBody.appendChild(row);
             });
         }
 
+        // 알람 확인 함수 (임시)
+        async function checkAndShowNotifications() {
+            console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
+            // 나중에 알람 시스템 구현 예정
+        }
+
         // ==================== 페이지 관리 및 초기화 ====================
 
- window.showPage = function(pageName, element) {
-    document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-    
-    document.getElementById(pageName + '-page').classList.add('active');
-    if (element) {
-        element.classList.add('active');
-    }
-    
-    const gameStats = document.getElementById('game-stats');
-    const userInfo = document.getElementById('user-info');
-    
-    if (pageName === 'game') {
-        gameStats.style.display = 'flex';
-        userInfo.style.display = 'block';
-    } else if (pageName === 'learning') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateLearningStats();
-    } else if (pageName === 'market') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateMarketPage();
-    } else if (pageName === 'encyclopedia') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateEncyclopedia();
-    } else if (pageName === 'farm') {
-        gameStats.style.display = 'flex';
-        userInfo.style.display = 'block';
-        initializeFarm();
-    } else if (pageName === 'synthesis') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateSynthesisPage();
-    } else if (pageName === 'ranking') {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'block';
-        updateRankingPage();
-    } else {
-        gameStats.style.display = 'none';
-        userInfo.style.display = 'none';
-    }
-}
+        window.showPage = function(pageName, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageName + '-page').classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
+            
+            const gameStats = document.getElementById('game-stats');
+            const userInfo = document.getElementById('user-info');
+            
+            if (pageName === 'game') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+            } else if (pageName === 'learning') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateLearningStats();
+            } else if (pageName === 'market') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateMarketPage();
+            } else if (pageName === 'encyclopedia') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateEncyclopedia();
+            } else if (pageName === 'farm') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+                initializeFarm();
+            } else if (pageName === 'synthesis') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateSynthesisPage();
+            } else if (pageName === 'ranking') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateRankingPage();
+            } else {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'none';
+            }
+        }
+        
         // ==================== 이벤트 리스너 ====================
         
         document.getElementById('login-btn').addEventListener('click', async () => {
@@ -2449,7 +2550,33 @@ setTimeout(() => {
             window.speechSynthesis.getVoices();
         };
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v7.1 - 모든 기능 복원)');
+        // 페이지 숨김/표시 시 플레이 시간 저장
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && currentUserProfile.name) {
+                saveCurrentUserData();
+            } else if (document.visibilityState === 'visible' && currentUserProfile.name) {
+                sessionStartTime = Date.now(); // 다시 돌아왔을 때 세션 재시작
+            }
+        });
+
+        // 페이지 종료 시 플레이 시간 저장
+        window.addEventListener('beforeunload', () => {
+            if (currentUserProfile.name && sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                totalPlayTimeMinutes += sessionMinutes;
+                // beforeunload에서는 비동기 작업이 제한적이므로 localStorage 사용
+                localStorage.setItem(`playTime_${currentUserProfile.name}`, totalPlayTimeMinutes.toString());
+            }
+        });
+
+        // 주기적으로 플레이 시간 저장 (5분마다)
+        setInterval(() => {
+            if (currentUserProfile.name && sessionStartTime) {
+                saveCurrentUserData();
+            }
+        }, 5 * 60 * 1000);
+
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v8.0 - 플레이시간 & 농장방문 기능 추가)');
     </script>
 </body>
 </html>
