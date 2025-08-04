@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐾 동물 수집 학습 게임 🐾</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .game-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 30px;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .header h1 {
+      color: #2C5530;
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      background: linear-gradient(45deg, #4169E1, #1E90FF);
+      color: white;
+      border: none;
+      padding: 12px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-btn.active {
+      background: linear-gradient(45deg, #32CD32, #228B22);
+    }
+
+    .user-info {
+      margin: 15px 0;
+      text-align: center;
+      font-weight: bold;
+      color: #2C5530;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    .difficulty-selector {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .difficulty-selector h3 {
+      color: #2C5530;
+      margin-bottom: 15px;
+    }
+
+    .difficulty-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .difficulty-btn {
+      background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
+      color: #333;
+      border: 3px solid #ccc;
+      padding: 15px 20px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      min-width: 80px;
+      text-align: center;
+    }
+
+    .difficulty-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .difficulty-btn.active {
+      background: linear-gradient(45deg, #32CD32, #228B22);
+      color: white;
+      border-color: #228B22;
+    }
+
+    .difficulty-btn small {
+      display: block;
+      font-size: 0.8rem;
+      margin-top: 5px;
+    }
+
+    /* 학습 통계 */
+    .learning-container {
+      background: rgba(255, 255, 255, 0.95);
+      padding: 30px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .learning-container h2 {
+      color: #2C5530;
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .overall-stats {
+      background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 30px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+    }
+
+    .stat-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #4169E1;
+      margin-bottom: 10px;
+    }
+
+    .stat-label {
+      color: #666;
+      font-size: 0.9rem;
+    }
+
+    .weak-words-section {
+      background: linear-gradient(135deg, #fff5f5, #ffe6f0);
+      padding: 20px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    .weak-words-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .word-progress-card {
+      background: white;
+      padding: 15px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-left: 5px solid #FF6B6B;
+    }
+
+    .word-pair {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .progress-stats {
+      font-size: 0.9rem;
+      color: #666;
+      margin-top: 5px;
+    }
+
+    .review-btn {
+      margin-top: 10px;
+      background: #FF6B6B;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .no-data {
+      text-align: center;
+      color: #999;
+      font-style: italic;
+      padding: 40px;
+    }
+
+    /* 복습 모달 */
+    .review-modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .review-modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .review-question {
+      font-size: 1.8rem;
+      margin: 20px 0;
+      color: #4169E1;
+    }
+
+    .review-feedback {
+      margin: 15px 0;
+      font-weight: bold;
+      min-height: 30px;
+    }
+
+    .review-input {
+      padding: 10px;
+      font-size: 1.1rem;
+      width: 80%;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .btn-review {
+      background: #4169E1;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <div class="header">
+      <h1>🐾 동물 수집 학습 게임 🐾</h1>
+      <p>영어 단어를 맞히고 동물을 수집하세요!</p>
+    </div>
+
+    <div class="nav-buttons">
+      <button class="nav-btn" onclick="showPage('game', this)">🎮 게임</button>
+      <button class="nav-btn" onclick="showPage('learning', this)">📊 학습 통계</button>
+      <button class="nav-btn" onclick="showPage('encyclopedia', this)">📖 도감</button>
+      <button class="nav-btn" onclick="showPage('synthesis', this)">🔬 합성</button>
+      <button class="nav-btn" onclick="showPage('market', this)">🛒 시장</button>
+      <button class="nav-btn" onclick="showPage('farm', this)">🏡 농장</button>
+      <button class="nav-btn" onclick="showPage('ranking', this)">🏆 랭킹</button>
+    </div>
+
+    <div id="user-info" class="user-info">로그인해 주세요.</div>
+
+    <!-- 게임 페이지 -->
+    <div id="game-page" class="page active">
+      <div class="difficulty-selector">
+        <h3>난이도를 선택하세요</h3>
+        <div class="difficulty-buttons">
+          <button class="difficulty-btn" onclick="selectDifficulty(1)">초급</button>
+          <button class="difficulty-btn" onclick="selectDifficulty(2)">중급</button>
+          <button class="difficulty-btn" onclick="selectDifficulty(3)">고급</button>
+          <button class="difficulty-btn" onclick="selectDifficulty('review')">복습</button>
+        </div>
+      </div>
+      <div id="game-stats" style="display: flex; justify-content: space-between; margin: 20px 0;">
+        <span>점수: <span id="score">0</span></span>
+        <span>코인: <span id="coins">0</span></span>
+        <span>레벨: <span id="level">1</span></span>
+      </div>
+      <div class="english-quiz-section">
+        <h2>영어 퀴즈</h2>
+        <div class="english-question-container">
+          <span class="english-question" id="english-word">cat</span>
+        </div>
+        <input type="text" id="answer-input" placeholder="정답을 입력하세요" class="review-input" style="margin: 20px auto; display: block;" />
+        <button onclick="submitAnswer()" class="btn-review">제출</button>
+        <div id="feedback" class="review-feedback"></div>
+      </div>
+    </div>
+
+    <!-- 학습 통계 페이지 -->
+    <div id="learning-page" class="page">
+      <div class="learning-container">
+        <h2>📈 학습 통계</h2>
+        <div class="overall-stats">
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-number" id="total-words-learned">0</div>
+              <div class="stat-label">학습한 단어 수</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="total-correct">0</div>
+              <div class="stat-label">총 정답 수</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="total-accuracy">0%</div>
+              <div class="stat-label">정답률</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number" id="mastered-words">0</div>
+              <div class="stat-label">완전 정복 단어</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="weak-words-section">
+          <h3>⚠️ 복습이 필요한 단어</h3>
+          <div class="weak-words-grid" id="weak-words-list">
+            <div class="no-data">복습할 단어가 없습니다.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 기타 페이지 (도감, 합성, 시장, 농장, 랭킹) -->
+    <div id="encyclopedia-page" class="page">도감 페이지</div>
+    <div id="synthesis-page" class="page">합성 페이지</div>
+    <div id="market-page" class="page">시장 페이지</div>
+    <div id="farm-page" class="page">농장 페이지</div>
+    <div id="ranking-page" class="page">랭킹 페이지</div>
+
+    <!-- 복습 모달 -->
+    <div id="review-modal" class="review-modal">
+      <div class="review-modal-content">
+        <h3>복습 퀴즈</h3>
+        <p id="review-question-text" class="review-question">"고양이"의 영어는?</p>
+        <input type="text" id="review-answer-input" class="review-input" />
+        <button onclick="submitReviewAnswer()" class="btn-review">확인</button>
+        <div id="review-feedback" class="review-feedback"></div>
+      </div>
+    </div>
+
+    <!-- 로그인 오버레이 -->
+    <div id="login-overlay" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center;">
+      <div id="login-modal" style="background: white; padding: 40px; border-radius: 25px; max-width: 450px; text-align: center;">
+        <h2>로그인</h2>
+        <input type="text" id="player-name-input" placeholder="이름" style="padding: 10px; width: 80%; margin: 10px 0;" />
+        <input type="password" id="player-pin-input" placeholder="4자리 PIN" style="padding: 10px; width: 80%; margin: 10px 0;" />
+        <div id="login-feedback" style="color: red; margin: 10px 0;"></div>
+        <button id="login-btn" style="padding: 10px 20px; background: #4169E1; color: white; border: none; border-radius: 10px; margin: 5px;">로그인</button>
+        <button id="signup-btn" style="padding: 10px 20px; background: #32CD32; color: white; border: none; border-radius: 10px; margin: 5px;">회원가입</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
+    import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+    import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7r3vQ6Kq1u7Z5Y5j5Z5Z5Z5Z5Z5Z5Z5",
+      authDomain: "your-project.firebaseapp.com",
+      projectId: "your-project",
+      storageBucket: "your-project.appspot.com",
+      messagingSenderId: "123456789",
+      appId: "1:123456789:web:abc123"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth();
+
+    window.firebase = { db, doc, getDoc, setDoc };
+
+    signInAnonymously(auth).catch(err => console.error("익명 로그인 실패:", err));
+  </script>
+
+  <script>
+    // ==================== 게임 상태 초기화 ====================
+    let gameState = {
+      score: 0,
+      coins: 0,
+      level: 1,
+      animals: {},
+      totalAnimals: 0,
+      speciesCount: 0,
+      farm: {
+        layout: Array(48).fill(null),
+        items: {}
+      },
+      currentQuestion: {}
+    };
+
+    let currentUserProfile = {};
+    let userProgress = {};
+    let animalTypes = [
+      { name: '고양이', english: 'cat', emoji: '🐱', rarity: 1 },
+      { name: '개', english: 'dog', emoji: '🐶', rarity: 1 },
+      { name: '사자', english: 'lion', emoji: '🦁', rarity: 3 },
+      { name: '코끼리', english: 'elephant', emoji: '🐘', rarity: 4 },
+      { name: '팬더', english: 'panda', emoji: '🐼', rarity: 5 }
+    ];
+
+    let totalPlayTimeMinutes = 0;
+    let sessionStartTime = Date.now();
+
+    // ==================== 복습 기능 ====================
+    window.currentReviewWord = null;
+
+    function openReviewModal(wordId) {
+      const animal = animalTypes.find(a => a.name === wordId);
+      if (!animal) return;
+
+      window.currentReviewWord = animal;
+      document.getElementById('review-question-text').textContent = `"${animal.name}"의 영어는?`;
+      document.getElementById('review-answer-input').value = '';
+      document.getElementById('review-feedback').textContent = '';
+      document.getElementById('review-modal').style.display = 'flex';
+    }
+
+    function submitReviewAnswer() {
+      const input = document.getElementById('review-answer-input').value.trim().toLowerCase();
+      const animal = window.currentReviewWord;
+      const feedback = document.getElementById('review-feedback');
+
+      if (input === animal.english.toLowerCase()) {
+        feedback.textContent = '정답! 👏';
+        feedback.style.color = 'green';
+        setTimeout(() => {
+          document.getElementById('review-modal').style.display = 'none';
+          // 정답 기록
+          if (!userProgress[animal.name]) userProgress[animal.name] = { correct: 0, incorrect: 0 };
+          userProgress[animal.name].correct++;
+          saveCurrentUserData();
+          updateLearningStats();
+        }, 1000);
+      } else {
+        feedback.textContent = `틀렸어요! 정답은 "${animal.english}"입니다.`;
+        feedback.style.color = 'red';
+      }
+    }
+
+    // ==================== 학습 통계 업데이트 ====================
+    function updateLearningStats() {
+      const entries = Object.entries(userProgress);
+      let totalCorrect = 0, totalIncorrect = 0, masteredCount = 0;
+
+      entries.forEach(([word, progress]) => {
+        totalCorrect += progress.correct;
+        totalIncorrect += progress.incorrect;
+        if (progress.correct >= 3 && progress.correct > progress.incorrect * 2) {
+          masteredCount++;
+        }
+      });
+
+      const totalAttempts = totalCorrect + totalIncorrect;
+      const accuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+
+      document.getElementById('total-words-learned').textContent = entries.length;
+      document.getElementById('total-correct').textContent = totalCorrect;
+      document.getElementById('total-accuracy').textContent = accuracy + '%';
+      document.getElementById('mastered-words').textContent = masteredCount;
+
+      // 취약 단어 표시
+      const weakList = document.getElementById('weak-words-list');
+      weakList.innerHTML = '';
+
+      const weakWords = entries
+        .filter(([_, p]) => p.incorrect > p.correct && p.incorrect + p.correct >= 3)
+        .sort((a, b) => b[1].incorrect - a[1].incorrect);
+
+      if (weakWords.length === 0) {
+        weakList.innerHTML = '<div class="no-data">복습할 단어가 없습니다.</div>';
+      } else {
+        weakWords.forEach(([word, progress]) => {
+          const card = document.createElement('div');
+          card.className = 'word-progress-card';
+          card.innerHTML = `
+            <div class="word-pair">${word}</div>
+            <div class="progress-stats">정답: ${progress.correct} | 오답: ${progress.incorrect}</div>
+            <button class="review-btn" onclick="openReviewModal('${word}')">📚 복습하기</button>
+          `;
+          weakList.appendChild(card);
+        });
+      }
+    }
+
+    // ==================== 페이지 관리 ====================
+    window.showPage = function(pageName, element) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(pageName + '-page').classList.add('active');
+      if (element) element.classList.add('active');
+
+      if (pageName === 'learning') updateLearningStats();
+      if (pageName === 'game') displayRandomWord();
+    };
+
+    // ==================== 퀴즈 시스템 ====================
+    function selectDifficulty(difficulty) {
+      gameState.currentQuestion.difficulty = difficulty;
+      displayRandomWord();
+    }
+
+    function displayRandomWord() {
+      const available = animalTypes[Math.floor(Math.random() * animalTypes.length)];
+      gameState.currentQuestion = {
+        korean: available.name,
+        english: available.english,
+        answer: available.english
+      };
+      document.getElementById('english-word').textContent = available.english;
+      document.getElementById('answer-input').value = '';
+      document.getElementById('feedback').textContent = '';
+    }
+
+    function submitAnswer() {
+      const input = document.getElementById('answer-input').value.trim().toLowerCase();
+      const answer = gameState.currentQuestion.answer.toLowerCase();
+      const feedback = document.getElementById('feedback');
+
+      if (input === answer) {
+        feedback.textContent = '정답!';
+        feedback.style.color = 'green';
+        gameState.score += 10;
+        const animalName = gameState.currentQuestion.korean;
+        if (!gameState.animals[animalName]) {
+          gameState.animals[animalName] = { count: 1, animalLevel: 1, rarity: animalTypes.find(a => a.name === animalName).rarity };
+          gameState.speciesCount++;
+        } else {
+          gameState.animals[animalName].count++;
+        }
+        updateUI();
+        saveCurrentUserData();
+        setTimeout(displayRandomWord, 1000);
+      } else {
+        feedback.textContent = '오답입니다. 다시 시도하세요.';
+        feedback.style.color = 'red';
+      }
+    }
+
+    function updateUI() {
+      document.getElementById('score').textContent = gameState.score;
+      document.getElementById('coins').textContent = gameState.coins;
+      document.getElementById('level').textContent = gameState.level;
+    }
+
+    // ==================== 저장 및 로그인 ====================
+    async function saveCurrentUserData() {
+      if (!currentUserProfile.name) return;
+      const profile = {
+        ...currentUserProfile,
+        ...gameState,
+        totalPlayTimeMinutes,
+        lastPlayed: new Date().toISOString()
+      };
+      try {
+        await window.firebase.setDoc(window.firebase.doc(window.firebase.db, "profiles", currentUserProfile.name), profile);
+      } catch (e) {
+        console.error("저장 실패:", e);
+      }
+    }
+
+    async function handleLogin() {
+      const name = document.getElementById('player-name-input').value.trim();
+      const pin = document.getElementById('player-pin-input').value;
+      const feedback = document.getElementById('login-feedback');
+
+      if (!name || !pin) {
+        feedback.textContent = "이름과 PIN을 입력하세요.";
+        return;
+      }
+
+      try {
+        const docRef = window.firebase.doc(window.firebase.db, "profiles", name);
+        const docSnap = await window.firebase.getDoc(docRef);
+        if (docSnap.exists()) {
+          currentUserProfile = docSnap.data();
+          Object.assign(gameState, currentUserProfile);
+          document.getElementById('user-info').textContent = `${name}님 환영합니다!`;
+          document.getElementById('login-overlay').style.display = 'none';
+          updateUI();
+        } else {
+          feedback.textContent = "존재하지 않는 사용자입니다.";
+        }
+      } catch (e) {
+        feedback.textContent = "오류 발생";
+      }
+    }
+
+    document.getElementById('login-btn').onclick = handleLogin;
+    document.getElementById('player-pin-input').onkeypress = e => e.key === 'Enter' && handleLogin();
+
+    // 초기화
+    updateUI();
+  </script>
+</body>
+</html>
