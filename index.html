@@ -989,16 +989,20 @@ let gameState = {
                 const earnedScore = baseScore * gameState.level;
                 gameState.score += earnedScore;
                 
-                feedback.textContent = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                feedback.textContent = `정답! +${earnedScore}점!`;
                 feedback.className = 'feedback correct';
                 
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
-                
-                if (gameState.score >= gameState.level * 5000) {
-                    gameState.level++;
-                    showLevelUp();
-                }
+                   // --- 이 부분이 핵심 수정 지점입니다 ---
+        // 다음 레벨에 도달하기 위한 필요 점수 계산 로직 변경
+        // Math.pow(gameState.level, 2)를 사용하여 레벨의 제곱에 비례하도록 변경
+        // 상수 2000은 게임 난이도에 따라 조절할 수 있습니다.
+        if (gameState.score >= Math.pow(gameState.level, 2) * 2000) { 
+            gameState.level++;
+            showLevelUp();
+        }
+        // --- 수정 끝 ---
                 
                 saveCurrentUserData();
                 setTimeout(() => generateEnglishQuiz(), 1500);
