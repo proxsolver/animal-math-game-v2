@@ -952,97 +952,163 @@
         }
 
         // 난이도별 단어 로드
-        async function loadWordForDifficulty(difficulty) {
-            try {
-                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
-                
-                // GitHub Pages에서 JSON 파일 로드
-                const response = await fetch(`./words/level${difficulty}.json`);
-                
-                if (!response.ok) {
-                    throw new Error(`JSON 파일 로드 실패: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                const words = data.words;
-                
-                if (!words || words.length === 0) {
-                    throw new Error('JSON 파일에 단어가 없습니다');
-                }
-                
-                // 랜덤으로 단어 선택
-                const randomWord = words[Math.floor(Math.random() * words.length)];
-                
-                currentWordData = {
-                    id: randomWord.english.toLowerCase(), // 영어 단어를 ID로 사용                    
-                    korean: randomWord.korean,
-                    english: randomWord.english,
-                    options: randomWord.options,
-                    difficulty: difficulty,
-                    source: 'json'
-                };
-                
-                currentEnglishQuiz = {
-                    answer: currentWordData.english,
-                    wordId: currentWordData.id
-                };
-                
-                console.log('JSON에서 단어 로드 성공:', currentWordData);
-                
-            } catch (error) {
-                console.error('JSON 단어 로드 실패, 폴백 사용:', error);
-                
-                // 폴백: 기존 하드코딩된 단어 사용
-                const fallbackWords = [
-                    { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
-                    { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
-                    { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] },
-                    { question: '집', answer: 'house', options: ['house', 'school', 'park', 'store'] },
-                    { question: '물', answer: 'water', options: ['water', 'juice', 'milk', 'tea'] }
-                ];
-                
-                const fallbackQuiz = fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
-                
-                currentWordData = {
-                    id: 'fallback_' + Date.now(),
-                    korean: fallbackQuiz.question,
-                    english: fallbackQuiz.answer,
-                    options: fallbackQuiz.options,
-                    difficulty: difficulty,
-                    source: 'fallback'
-                };
-                
-                currentEnglishQuiz = {
-                    answer: currentWordData.english,
-                    wordId: currentWordData.id
-                };
-                
-                console.log('폴백 단어 사용:', currentWordData);
-            }
+async function loadWordForDifficulty(difficulty) {
+    console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
+    try {
+        // 난이도에 맞는 JSON 파일 경로 생성
+        const response = await fetch(`./words/level${difficulty}.json`);
+        if (!response.ok) {
+            throw new Error(`JSON 파일 로드 실패: ${response.status}`);
+        }
+        const data = await response.json();
+        const words = data.words;
+        if (!words || words.length === 0) {
+            throw new Error('JSON 파일에 단어가 없습니다');
         }
 
+        // 랜덤으로 단어 선택
+        const randomWord = words[Math.floor(Math.random() * words.length)];
+        currentWordData = {
+            id: randomWord.english.toLowerCase(), // 영어 단어를 ID로 사용
+            korean: randomWord.korean,
+            english: randomWord.english,
+            options: randomWord.options,
+            difficulty: difficulty,
+            source: 'json'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        console.log('JSON에서 단어 로드 성공:', currentWordData);
+    } catch (error) {
+        console.error('JSON 단어 로드 실패, 폴백 사용:', error);
+        // 폴백: 기존 하드코딩된 단어 사용
+        const fallbackWords = [
+            { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
+            { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
+            { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] },
+            { question: '집', answer: 'house', options: ['house', 'school', 'park', 'store'] },
+            { question: '물', answer: 'water', options: ['water', 'juice', 'milk', 'tea'] }
+        ];
+        const fallbackQuiz = fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
+        currentWordData = {
+            id: 'fallback_' + Date.now(),
+            korean: fallbackQuiz.question,
+            english: fallbackQuiz.answer,
+            options: fallbackQuiz.options,
+            difficulty: difficulty,
+            source: 'fallback'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        console.log('폴백 단어 사용:', currentWordData);
+    }
+}
+
+        
         // 복습용 단어 로드
-        async function loadReviewWord() {
-            // 로컬 진행도에서 틀린 단어들 찾기
-            const strugglingWords = [];
-            
-            for (const [wordId, progress] of Object.entries(userProgress)) {
-                const total = progress.correct + progress.incorrect;
-                if (total >= 3 && progress.incorrect > progress.correct) {
-                    strugglingWords.push(wordId);
-                }
-            }
-            
-            if (strugglingWords.length === 0) {
-                alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
-                await loadWordForDifficulty(1);
-                return;
-            }
-            
-            // 복습 단어가 있으면 쉬운 레벨부터 JSON에서 로드
-            console.log('복습 모드: JSON 파일에서 단어 로드');
-            await loadWordForDifficulty(1); // 복습할 때는 쉬운 단어부터
+ async function loadReviewWord() {
+    console.log("loadReviewWord 호출됨");
+    const strugglingWords = [];
+    for (const [wordId, progress] of Object.entries(userProgress)) {
+        const total = progress.correct + progress.incorrect;
+        if (total >= 3 && progress.incorrect > progress.correct) {
+            strugglingWords.push(wordId);
         }
+    }
+
+    if (strugglingWords.length === 0) {
+        alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
+        await loadWordForDifficulty(1);
+        return;
+    }
+
+    console.log('복습 모드: JSON 파일에서 단어 로드');
+    const randomWordId = strugglingWords[Math.floor(Math.random() * strugglingWords.length)];
+
+    try {
+        // 난이도를 결정하기 위해 userProgress 정보 활용
+        const progress = userProgress[randomWordId];
+        let difficulty = 1; // 기본 난이도
+
+        // 난이도 추정: 정답률이 낮을수록 낮은 난이도로 설정
+        const accuracy = progress.correct / (progress.correct + progress.incorrect);
+        if (accuracy < 0.5) {
+            difficulty = 1; // 쉬운 난이도
+        } else if (accuracy < 0.7) {
+            difficulty = 2; // 중간 난이도
+        } else {
+            difficulty = 3; // 어려운 난이도
+        }
+
+        // 해당 난이도의 JSON 파일에서 단어 로드
+        const response = await fetch(`./words/level${difficulty}.json`);
+        if (!response.ok) {
+            throw new Error(`JSON 파일 로드 실패: ${response.status}`);
+        }
+        const data = await response.json();
+        const wordData = data.words.find(word => word.english.toLowerCase() === randomWordId.toLowerCase());
+
+        if (!wordData) {
+            console.warn(`"${randomWordId}"를 JSON에서 찾을 수 없습니다. 폴백 데이터 사용.`);
+            // 폴백: 기존 하드코딩된 단어 사용
+            const fallbackWords = [
+                { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
+                { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
+                { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] }
+            ];
+            const fallbackQuiz = fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
+            currentWordData = {
+                id: fallbackQuiz.answer,
+                korean: fallbackQuiz.question,
+                english: fallbackQuiz.answer,
+                options: fallbackQuiz.options,
+                difficulty: difficulty,
+                source: 'fallback'
+            };
+        } else {
+            currentWordData = {
+                id: wordData.english.toLowerCase(),
+                korean: wordData.korean,
+                english: wordData.english,
+                options: wordData.options,
+                difficulty: difficulty,
+                source: 'json'
+            };
+        }
+
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        console.log('복습 단어 로드 완료:', currentWordData);
+    } catch (error) {
+        console.error('복습 단어 로드 실패, 폴백 사용:', error);
+        // 폴백: 기존 하드코딩된 단어 사용
+        const fallbackWords = [
+            { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
+            { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
+            { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] }
+        ];
+        const fallbackQuiz = fallbackWords[0];
+        currentWordData = {
+            id: 'emergency_fallback',
+            korean: fallbackQuiz.question,
+            english: fallbackQuiz.answer,
+            options: fallbackQuiz.options,
+            difficulty: 'review',
+            source: 'fallback'
+        };
+        currentEnglishQuiz = {
+            answer: currentWordData.english,
+            wordId: currentWordData.id
+        };
+        console.log('긴급 폴백 단어 사용:', currentWordData);
+    }
+}
     
         // 현재 단어 표시
         function displayCurrentWord() {
