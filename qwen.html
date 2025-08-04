@@ -1,644 +1,2776 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🐾 동물 수집 학습 게임 🐾</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐾 동물 수집 학습 게임 🐾</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%); min-height: 100vh; color: #333; }
+        .game-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; margin-bottom: 30px; background: rgba(255, 255, 255, 0.95); padding: 25px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .header h1 { color: #2C5530; font-size: 2.8rem; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1); }
+        .nav-buttons { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .nav-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; border: none; padding: 12px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.8rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+        .nav-btn.active { background: linear-gradient(45deg, #32CD32, #228B22); }
+        .user-info { margin: 15px 0; }
+        .current-user { background: linear-gradient(45deg, #FF69B4, #FFB6C1); color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); word-break: break-all; }
+        .game-stats { display: flex; justify-content: center; gap: 20px; margin-top: 15px; flex-wrap: wrap; }
+        .stat-item { background: linear-gradient(45deg, #FFD700, #FFA500); padding: 10px 20px; border-radius: 20px; font-weight: bold; color: #8B4513; box-shadow: 0 4px 15px rgba(0,0,0,0.2); min-width: 120px; text-align: center; }
+        .page { display: none; }
+        .page.active { display: block; }
+        .game-content { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px; }
+        .english-quiz-section { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); text-align: center; }
+        .english-quiz-section h2 { color: #2C5530; margin-bottom: 20px; font-size: 1.8rem; }
+        .english-question-container { display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .english-question { font-size: 2.5rem; color: #4169E1; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+        .speak-btn { font-size: 2.5rem; cursor: pointer; transition: transform 0.2s; }
+        .speak-btn:hover { transform: scale(1.2); }
+        .english-options { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 20px; }
+        .english-option-btn { background: linear-gradient(45deg, #89CFF0, #4682B4); color: white; border: none; padding: 20px; border-radius: 15px; font-size: 1.5rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .english-option-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .english-option-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        .feedback { margin: 20px 0; padding: 20px; border-radius: 20px; font-weight: bold; text-align: center; font-size: 1.2rem; min-height: 60px; display: flex; align-items: center; justify-content: center; transition: all 0.5s ease; }
+        .feedback.correct { background: linear-gradient(45deg, #90EE90, #32CD32); color: #006400; }
+        .feedback.incorrect { background: linear-gradient(45deg, #FFB6C1, #FF69B4); color: #8B0000; }
+        .collection-section { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .collection-section h2 { color: #2C5530; margin-bottom: 20px; text-align: center; font-size: 1.8rem; }
+        .collection-hint { text-align: center; color: #666; margin-bottom: 20px; font-style: italic; }
+        .animal-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; max-height: 450px; overflow-y: auto; padding: 5px; }
+        .animal-card { background: linear-gradient(45deg, #FFE4E1, #F0E68C); border-radius: 20px; padding: 15px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.15); transition: all 0.3s ease; cursor: pointer; border: 3px solid transparent; }
+        .animal-card:hover { transform: scale(1.08); box-shadow: 0 12px 35px rgba(0,0,0,0.25); }
+        .animal-emoji { font-size: 3.5rem; display: block; margin-bottom: 10px; }
+        .animal-name { font-weight: bold; color: #2C5530; margin-bottom: 5px; font-size: 1rem; word-break: keep-all; }
+        .animal-level { font-weight: bold; font-size: 1.1rem; color: #8A2BE2; margin-bottom: 8px; }
+        .special-name { color: #8B4513; font-style: italic; font-size: 0.9rem; margin-bottom: 8px; }
+        .rarity-badge { background: linear-gradient(45deg, #FFD700, #FFA500); color: #8B4513; font-size: 0.8rem; font-weight: bold; padding: 4px 10px; border-radius: 12px; display: inline-block; }
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; }
+        .modal-content { margin: auto; padding: 30px; border: 1px solid #888; width: 90%; max-width: 500px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); text-align: center; position: relative; }
+        .close-btn { color: #aaa; position: absolute; top: 15px; right: 20px; font-size: 28px; font-weight: bold; cursor: pointer; }
+        .close-btn:hover, .close-btn:focus { color: black; }
+        #math-modal .modal-content { background: linear-gradient(135deg, #e0f7fa, #ffffff, #fffde7); }
+        #math-question { font-size: 2.5rem; color: #4169E1; margin: 25px 0; font-weight: bold; }
+        #math-answer-input { font-size: 1.8rem; padding: 15px 20px; border: 3px solid #87CEEB; border-radius: 20px; width: 250px; margin: 15px; text-align: center; }
+        #math-answer-input:disabled { background-color: #eee; }
+        #math-submit-btn { background: linear-gradient(45deg, #32CD32, #228B22); color: white; border: none; padding: 18px 35px; font-size: 1.3rem; border-radius: 20px; cursor: pointer; margin: 15px; font-weight: bold; }
+        #math-submit-btn:disabled { cursor: not-allowed; opacity: 0.7; }
+        #math-feedback { min-height: 40px; margin-top: 15px; font-weight: bold; font-size: 1.1rem; }
+        .instructions { background: rgba(255, 255, 255, 0.95); padding: 40px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); max-width: 900px; margin: 0 auto; }
+        .instructions h2 { color: #2C5530; font-size: 2.2rem; margin-bottom: 25px; text-align: center; }
+        .instructions h3 { color: #4169E1; font-size: 1.4rem; margin: 25px 0 15px 0; }
+        .instructions p, .instructions li { font-size: 1.1rem; line-height: 1.7; color: #333; margin-bottom: 12px; }
+        .instructions ul { margin-left: 25px; margin-bottom: 18px; }
+        .encyclopedia-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .encyclopedia-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .encyclopedia-progress { text-align: center; font-size: 1.2rem; font-weight: bold; color: #4169E1; margin-bottom: 20px; }
+        .progress-bar-container { width: 80%; max-width: 500px; height: 25px; background-color: #e0e0e0; border-radius: 15px; margin: 10px auto; overflow: hidden; }
+        .progress-bar-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #98FB98, #32CD32); border-radius: 15px; transition: width 0.5s ease-in-out; }
+        .encyclopedia-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 20px; max-height: 60vh; overflow-y: auto; padding: 10px; }
+        .encyclopedia-card { background: #fff; border-radius: 15px; padding: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; }
+        .encyclopedia-card.uncollected { filter: grayscale(100%); opacity: 0.6; }
+        .encyclopedia-card .animal-emoji { font-size: 3rem; }
+        .encyclopedia-card .animal-name { font-size: 1rem; }
+        .encyclopedia-card .animal-count { font-size: 0.9rem; color: #666; }
+        .farm-page-container { display: grid; grid-template-columns: 300px 1fr; gap: 20px; }
+        .farm-controls { background: rgba(255, 255, 255, 0.95); padding: 20px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .farm-controls h3 { color: #2C5530; text-align: center; margin-bottom: 15px; }
+        .shop-grid, .inventory-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-height: 250px; overflow-y: auto; padding: 5px; }
+        .shop-item, .inventory-item { background: #f0f8ff; border-radius: 15px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s ease; border: 2px solid #87CEEB; }
+        .shop-item:hover, .inventory-item:hover { transform: scale(1.05); background: #e0f0ff; }
+        .inventory-item.selected { border-color: #FF69B4; background: #ffe6f0; }
+        .item-emoji { font-size: 2.5rem; }
+        .item-name { font-weight: bold; font-size: 0.9rem; }
+        .item-price, .item-count { font-size: 0.8rem; color: #555; }
+        .farm-area { background: linear-gradient(to bottom, #a8e063, #56ab2f); padding: 20px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .farm-grid { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: repeat(6, 1fr); gap: 5px; aspect-ratio: 8 / 6; }
+        .farm-cell { background: rgba(255, 255, 255, 0.2); border-radius: 10px; cursor: pointer; transition: background-color 0.2s; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; position: relative; }
+        .farm-cell:hover { background: rgba(255, 255, 255, 0.4); }
+        .farm-cell .placed-animal { position: absolute; bottom: 5px; opacity: 0.9; animation: bounce 2s infinite ease-in-out; }
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+        .synthesis-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .synthesis-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .synthesis-grid { display: grid; grid-template-columns: 1fr; gap: 20px; max-height: 70vh; overflow-y: auto; padding: 10px; }
+        .synthesis-card { background: linear-gradient(45deg, #f0e6ff, #e6f3ff); border-radius: 20px; padding: 20px; display: flex; align-items: center; justify-content: space-around; box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+        .synthesis-ingredient, .synthesis-result { text-align: center; }
+        .synthesis-ingredient .animal-emoji { font-size: 3rem; }
+        .synthesis-ingredient.not-owned { filter: grayscale(100%); opacity: 0.5; }
+        .synthesis-symbol { font-size: 2.5rem; font-weight: bold; color: #4169E1; }
+        .synthesis-btn { background: linear-gradient(45deg, #9370DB, #8A2BE2); color: white; border: none; padding: 12px 24px; border-radius: 15px; font-size: 1rem; font-weight: bold; cursor: pointer; transition: all 0.3s ease; }
+        .synthesis-btn:disabled { background: #ccc; cursor: not-allowed; }
+        .new-animal-alert { z-index: 1000; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: linear-gradient(45deg, #FFD700, #FFA500); padding: 35px; border-radius: 25px; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.4); animation: popIn 0.6s ease; }
+        .new-animal-alert .new-animal-emoji { font-size: 6rem; display: block; margin-bottom: 20px; }
+        .new-animal-alert h3 { color: #8B4513; margin-bottom: 15px; font-size: 1.5rem; }
+        .new-animal-alert p { color: #8B4513; font-weight: bold; margin-bottom: 10px; }
+        @keyframes popIn { 0% { transform: translate(-50%, -50%) scale(0); opacity: 0; } 50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; } 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; } }
+        
+        #login-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; display: flex; align-items: center; justify-content: center; }
+        #login-modal { background: white; padding: 40px; border-radius: 25px; width: 90%; max-width: 450px; text-align: center; }
+        #login-modal h2 { margin-bottom: 20px; color: #2C5530; }
+        .login-input { width: 100%; padding: 15px; margin-bottom: 15px; font-size: 1.2rem; border-radius: 15px; border: 2px solid #ccc; }
+        .login-btn { width: 100%; padding: 15px; font-size: 1.2rem; border-radius: 15px; border: none; color: white; cursor: pointer; margin-top: 10px; font-weight: bold; }
+        #login-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); }
+        #signup-btn { background: linear-gradient(45deg, #32CD32, #228B22); }
+        #login-feedback { margin-top: 15px; color: red; font-weight: bold; min-height: 20px; }
+        
+        #hall-of-fame { border-top: 2px dashed #ccc; margin-top: 25px; padding-top: 20px; }
+        #hall-of-fame h3 { color: #8B4513; margin-bottom: 15px; }
+        .fame-entry { margin-bottom: 10px; font-size: 1.1rem; }
+        .fame-entry .trophy { margin-right: 8px; }
+        .fame-entry .player-name { font-weight: bold; color: #4169E1; }
 
-    body {
-      font-family: 'Arial', sans-serif;
-      background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%);
-      min-height: 100vh;
-      color: #333;
-    }
+        .ranking-container, .market-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .ranking-container h2, .market-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 20px; }
+        .ranking-table, .market-table { width: 100%; border-collapse: collapse; }
+        .ranking-table th, .ranking-table td, .market-table th, .market-table td { padding: 12px; text-align: center; border-bottom: 1px solid #ddd; }
+        .ranking-table th, .market-table th { background-color: #e0f0ff; color: #4169E1; }
+        .ranking-table tr:nth-child(even), .market-table tr:nth-child(even) { background-color: #f9f9f9; }
+        .ranking-table .my-rank { background-color: #fffde7; font-weight: bold; }
+        .clickable-user-name:hover { color: #FF69B4 !important; background-color: rgba(255, 105, 180, 0.1); padding: 2px 6px; border-radius: 8px; }
+        .market-sell-section { background: #e6f3ff; padding: 20px; border-radius: 20px; margin-bottom: 30px; }
+        .market-sell-section h3 { color: #4169E1; margin-bottom: 15px; }
+        .market-sell-section select, .market-sell-section input { padding: 10px; border-radius: 10px; border: 1px solid #ccc; margin: 0 5px; }
+        .market-table-container { max-height: 40vh; overflow-y: auto; }
 
-    .game-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 20px;
-    }
+        /* 난이도 선택 스타일 */
+        .difficulty-selector { margin-bottom: 20px; text-align: center; }
+        .difficulty-selector h3 { color: #2C5530; margin-bottom: 15px; }
+        .difficulty-buttons { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .difficulty-btn { background: linear-gradient(45deg, #e0e0e0, #f5f5f5); color: #333; border: 3px solid #ccc; padding: 15px 20px; border-radius: 15px; cursor: pointer; font-weight: bold; transition: all 0.3s ease; min-width: 80px; text-align: center; }
+        .difficulty-btn:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .difficulty-btn.active { background: linear-gradient(45deg, #32CD32, #228B22); color: white; border-color: #228B22; }
+        .difficulty-btn small { display: block; font-size: 0.8rem; margin-top: 5px; }
 
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      background: rgba(255, 255, 255, 0.95);
-      padding: 25px;
-      border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
+        /* 학습 통계 스타일 */
+        .learning-stats { background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 15px; margin-top: 20px; border: 2px solid #87CEEB; }
+        .learning-stats h4 { color: #4169E1; margin-bottom: 10px; text-align: center; }
+        .stats-row { display: flex; justify-content: space-around; flex-wrap: wrap; gap: 10px; }
+        .stats-row span { background: #f0f8ff; padding: 8px 12px; border-radius: 10px; font-size: 0.9rem; }
 
-    .header h1 {
-      color: #2C5530;
-      font-size: 2.8rem;
-      margin-bottom: 15px;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-    }
+        /* 복습 모드 전용 스타일 */
+        .review-mode .english-quiz-section { border: 3px solid #FF6B6B; background: linear-gradient(135deg, #fff5f5, #ffffff); }
+        .review-mode .english-quiz-section h2::after { content: " (복습 모드)"; color: #FF6B6B; }
 
-    .nav-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 20px 0;
-      flex-wrap: wrap;
-    }
+        /* 학습 통계 페이지 스타일 */
+        .learning-container { background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); }
+        .learning-container h2 { color: #2C5530; text-align: center; font-size: 2rem; margin-bottom: 30px; }
+        .learning-container h3 { color: #4169E1; margin: 25px 0 15px 0; font-size: 1.4rem; }
+        
+        .overall-stats { background: linear-gradient(135deg, #f0f8ff, #e6f3ff); padding: 20px; border-radius: 20px; margin-bottom: 30px; }
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
+        .stat-card { background: white; padding: 20px; border-radius: 15px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .stat-number { font-size: 2.5rem; font-weight: bold; color: #4169E1; margin-bottom: 10px; }
+        .stat-label { color: #666; font-size: 0.9rem; }
+        
+        .weak-words-section, .strong-words-section { background: linear-gradient(135deg, #fff5f5, #ffe6f0); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        .strong-words-section { background: linear-gradient(135deg, #f0fff0, #e6ffe6); }
+        
+        .weak-words-grid, .strong-words-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px; max-height: 300px; overflow-y: auto; }
+        .word-progress-card { background: white; padding: 15px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-left: 5px solid #FF6B6B; }
+        .word-progress-card.strong { border-left-color: #32CD32; }
+        .word-progress-card .word-pair { font-weight: bold; margin-bottom: 8px; color: #2C5530; }
+        .word-progress-card .progress-stats { font-size: 0.9rem; color: #666; display: flex; justify-content: space-between; }
+        .word-progress-card .accuracy-bar { width: 100%; height: 8px; background: #e0e0e0; border-radius: 5px; margin: 8px 0; overflow: hidden; }
+        .word-progress-card .accuracy-fill { height: 100%; background: linear-gradient(90deg, #FF6B6B, #FFB6C1); transition: width 0.3s ease; }
+        .word-progress-card.strong .accuracy-fill { background: linear-gradient(90deg, #32CD32, #98FB98); }
+        .no-data { text-align: center; color: #999; font-style: italic; grid-column: 1 / -1; padding: 40px; }
 
-    .nav-btn {
-      background: linear-gradient(45deg, #4169E1, #1E90FF);
-      color: white;
-      border: none;
-      padding: 12px 15px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-weight: bold;
-      font-size: 0.8rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    }
+        /* 단어 출처 표시 스타일 */
+        .word-source { text-align: center; margin: 10px 0; }
+        .source-badge { display: inline-block; padding: 6px 12px; border-radius: 15px; font-size: 0.9rem; font-weight: bold; border: 2px solid; }
+        .source-badge.ai-generated { background: linear-gradient(45deg, #4CAF50, #81C784); color: white; border-color: #4CAF50; animation: aiGlow 2s ease-in-out infinite alternate; }
+        .source-badge.hardcoded { background: linear-gradient(45deg, #FF9800, #FFB74D); color: white; border-color: #FF9800; }
+        .source-badge.fallback { background: linear-gradient(45deg, #9E9E9E, #BDBDBD); color: white; border-color: #9E9E9E; }
+        .source-badge.json-file { background: linear-gradient(45deg, #2196F3, #64B5F6); color: white; border-color: #2196F3; }
+        
+        @keyframes aiGlow { 0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); } 100% { box-shadow: 0 0 20px rgba(76, 175, 80, 0.8), 0 0 30px rgba(76, 175, 80, 0.6); } }
 
-    .nav-btn:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
-    }
+        /* AI 이야기 모달 스타일 */
+        #story-modal .modal-content { background: linear-gradient(135deg, #fffde7, #fff); text-align: left; }
+        #story-content-area { max-height: 60vh; overflow-y: auto; margin-top: 20px; padding-right: 15px; line-height: 1.8; font-size: 1.1rem; }
+        #story-text { white-space: pre-wrap; }
+        
+        .story-content { margin-bottom: 20px; line-height: 1.8; }
+        .story-info { border-top: 1px solid #e0e0e0; padding-top: 15px; margin-top: 20px; text-align: center; }
+        .story-info small { color: #666; font-size: 0.85rem; background: #f5f5f5; padding: 8px 12px; border-radius: 10px; display: inline-block; }
+        .story-info strong { color: #4169E1; }
+        
+        .story-btn { background: linear-gradient(45deg, #ff6b6b, #ff8e8e); color: white; border: none; padding: 5px 10px; border-radius: 10px; cursor: pointer; font-size: 0.8rem; margin-top: 8px; transition: background 0.3s; }
+        .story-btn:hover { background: linear-gradient(45deg, #ff8e8e, #ff6b6b); }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #8A2BE2; border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-    .nav-btn.active {
-      background: linear-gradient(45deg, #32CD32, #228B22);
-    }
+        @media (max-width: 900px) {
+            .game-content, .farm-page-container { grid-template-columns: 1fr; }
+            .farm-controls { margin-bottom: 20px; }
+        }
+        @media (max-width: 768px) {
+            .game-container { padding: 15px; }
+            .header h1 { font-size: 2.2rem; }
+            .game-stats { flex-direction: column; align-items: center; gap: 10px; }
+            .nav-buttons { flex-direction: column; align-items: center; gap: 10px; }
+            .english-question { font-size: 2rem; }
+            .english-option-btn { font-size: 1.2rem; padding: 15px; }
+            .animal-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+            .encyclopedia-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
+            .synthesis-card { flex-direction: column; gap: 10px; }
+     
+        /* 복습용 인터랙티브 스타일 (기존 스타일에 덧붙임) */
+.weak-words-section h3 {
+    color: #FF6B6B;
+    margin: 25px 0 15px 0;
+    font-size: 1.4rem;
+}
 
-    .user-info {
-      margin: 15px 0;
-      text-align: center;
-      font-weight: bold;
-      color: #2C5530;
-    }
+.weak-words-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    padding: 10px;
+}
 
-    .page {
-      display: none;
-    }
+.word-progress-card.weak {
+    background: white;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #FF6B6B;
+    transition: all 0.2s ease;
+}
 
-    .page.active {
-      display: block;
-    }
+.word-progress-card.weak:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.2);
+}
 
-    .difficulty-selector {
-      margin-bottom: 20px;
-      text-align: center;
-    }
+.word-pair {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+}
 
-    .difficulty-selector h3 {
-      color: #2C5530;
-      margin-bottom: 15px;
-    }
+.progress-stats {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 5px 0;
+}
 
-    .difficulty-buttons {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
+.accuracy-bar {
+    width: 100%;
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    margin: 8px 0;
+    overflow: hidden;
+}
 
-    .difficulty-btn {
-      background: linear-gradient(45deg, #e0e0e0, #f5f5f5);
-      color: #333;
-      border: 3px solid #ccc;
-      padding: 15px 20px;
-      border-radius: 15px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: all 0.3s ease;
-      min-width: 80px;
-      text-align: center;
-    }
+.accuracy-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #FF6B6B, #FF9888);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+}
 
-    .difficulty-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    }
+.review-btn {
+    margin-top: 10px;
+    background: linear-gradient(45deg, #FF6B6B, #FF8E8E);
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    width: 100%;
+    font-weight: bold;
+    transition: all 0.2s;
+}
 
-    .difficulty-btn.active {
-      background: linear-gradient(45deg, #32CD32, #228B22);
-      color: white;
-      border-color: #228B22;
-    }
-
-    .difficulty-btn small {
-      display: block;
-      font-size: 0.8rem;
-      margin-top: 5px;
-    }
-
-    /* 학습 통계 */
-    .learning-container {
-      background: rgba(255, 255, 255, 0.95);
-      padding: 30px;
-      border-radius: 25px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-    }
-
-    .learning-container h2 {
-      color: #2C5530;
-      text-align: center;
-      font-size: 2rem;
-      margin-bottom: 30px;
-    }
-
-    .overall-stats {
-      background: linear-gradient(135deg, #f0f8ff, #e6f3ff);
-      padding: 20px;
-      border-radius: 20px;
-      margin-bottom: 30px;
-    }
-
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-    }
-
-    .stat-card {
-      background: white;
-      padding: 20px;
-      border-radius: 15px;
-      text-align: center;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .stat-number {
-      font-size: 2.5rem;
-      font-weight: bold;
-      color: #4169E1;
-      margin-bottom: 10px;
-    }
-
-    .stat-label {
-      color: #666;
-      font-size: 0.9rem;
-    }
-
-    .weak-words-section {
-      background: linear-gradient(135deg, #fff5f5, #ffe6f0);
-      padding: 20px;
-      border-radius: 20px;
-      margin-bottom: 20px;
-    }
-
-    .weak-words-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 15px;
-      max-height: 300px;
-      overflow-y: auto;
-    }
-
-    .word-progress-card {
-      background: white;
-      padding: 15px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border-left: 5px solid #FF6B6B;
-    }
-
-    .word-pair {
-      font-weight: bold;
-      color: #333;
-    }
-
-    .progress-stats {
-      font-size: 0.9rem;
-      color: #666;
-      margin-top: 5px;
-    }
-
-    .review-btn {
-      margin-top: 10px;
-      background: #FF6B6B;
-      color: white;
-      border: none;
-      padding: 8px 12px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 0.8rem;
-    }
-
-    .no-data {
-      text-align: center;
-      color: #999;
-      font-style: italic;
-      padding: 40px;
-    }
-
-    /* 복습 모달 */
-    .review-modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 1000;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .review-modal-content {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      max-width: 500px;
-      text-align: center;
-      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .review-question {
-      font-size: 1.8rem;
-      margin: 20px 0;
-      color: #4169E1;
-    }
-
-    .review-feedback {
-      margin: 15px 0;
-      font-weight: bold;
-      min-height: 30px;
-    }
-
-    .review-input {
-      padding: 10px;
-      font-size: 1.1rem;
-      width: 80%;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-    }
-
-    .btn-review {
-      background: #4169E1;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      cursor: pointer;
-      margin-top: 15px;
-    }
-  </style>
+.review-btn:hover {
+    background: linear-gradient(45deg, #FF8E8E, #FF6B6B);
+    transform: scale(1.05);
+}
+        
+        
+        
+        }
+    </style>
 </head>
 <body>
-  <div class="game-container">
-    <div class="header">
-      <h1>🐾 동물 수집 학습 게임 🐾</h1>
-      <p>영어 단어를 맞히고 동물을 수집하세요!</p>
-    </div>
-
-    <div class="nav-buttons">
-      <button class="nav-btn" onclick="showPage('game', this)">🎮 게임</button>
-      <button class="nav-btn" onclick="showPage('learning', this)">📊 학습 통계</button>
-      <button class="nav-btn" onclick="showPage('encyclopedia', this)">📖 도감</button>
-      <button class="nav-btn" onclick="showPage('synthesis', this)">🔬 합성</button>
-      <button class="nav-btn" onclick="showPage('market', this)">🛒 시장</button>
-      <button class="nav-btn" onclick="showPage('farm', this)">🏡 농장</button>
-      <button class="nav-btn" onclick="showPage('ranking', this)">🏆 랭킹</button>
-    </div>
-
-    <div id="user-info" class="user-info">로그인해 주세요.</div>
-
-    <!-- 게임 페이지 -->
-    <div id="game-page" class="page active">
-      <div class="difficulty-selector">
-        <h3>난이도를 선택하세요</h3>
-        <div class="difficulty-buttons">
-          <button class="difficulty-btn" onclick="selectDifficulty(1)">초급</button>
-          <button class="difficulty-btn" onclick="selectDifficulty(2)">중급</button>
-          <button class="difficulty-btn" onclick="selectDifficulty(3)">고급</button>
-          <button class="difficulty-btn" onclick="selectDifficulty('review')">복습</button>
+    <!-- 로그인 모달 -->
+    <div id="login-overlay">
+        <div id="login-modal">
+            <h2>🐾 동물 수집 학습 게임 🐾</h2>
+            <input type="text" id="player-name-input" class="login-input" placeholder="플레이어 이름">
+            <input type="password" id="player-pin-input" class="login-input" placeholder="4자리 숫자 PIN" maxlength="4" pattern="\d*">
+            <button id="login-btn" class="login-btn">로그인</button>
+            <button id="signup-btn" class="login-btn">새 플레이어 만들기</button>
+            <p id="login-feedback"></p>
+            <!-- 명예의 전당 -->
+            <div id="hall-of-fame">
+                <h3>🏆 명예의 전당 🏆</h3>
+                <div id="fame-species" class="fame-entry">
+                    <span class="trophy">🥇</span> 최다 수집가: <span class="player-name">계산 중...</span>
+                </div>
+                <div id="fame-level" class="fame-entry">
+                    <span class="trophy">🥇</span> 최고 레벨 동물: <span class="player-name">계산 중...</span>
+                </div>
+            </div>
         </div>
-      </div>
-      <div id="game-stats" style="display: flex; justify-content: space-between; margin: 20px 0;">
-        <span>점수: <span id="score">0</span></span>
-        <span>코인: <span id="coins">0</span></span>
-        <span>레벨: <span id="level">1</span></span>
-      </div>
-      <div class="english-quiz-section">
-        <h2>영어 퀴즈</h2>
-        <div class="english-question-container">
-          <span class="english-question" id="english-word">cat</span>
-        </div>
-        <input type="text" id="answer-input" placeholder="정답을 입력하세요" class="review-input" style="margin: 20px auto; display: block;" />
-        <button onclick="submitAnswer()" class="btn-review">제출</button>
-        <div id="feedback" class="review-feedback"></div>
-      </div>
     </div>
 
-    <!-- 학습 통계 페이지 -->
-    <div id="learning-page" class="page">
-      <div class="learning-container">
-        <h2>📈 학습 통계</h2>
-        <div class="overall-stats">
-          <div class="stats-grid">
-            <div class="stat-card">
-              <div class="stat-number" id="total-words-learned">0</div>
-              <div class="stat-label">학습한 단어 수</div>
+    <div class="game-container" style="display: none;">
+        <!-- 헤더 -->
+        <div class="header">
+            <h1>🐾 동물 수집 학습 게임 🐾</h1>
+            
+            <div class="nav-buttons">
+                <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기 🇬🇧</button>
+                <button class="nav-btn" onclick="showPage('learning', this)">학습 통계 📈</button>
+                <button class="nav-btn" onclick="showPage('synthesis', this)">동물 합성 🧬</button>
+                <button class="nav-btn" onclick="showPage('market', this)">동물 시장 🏪</button>
+                <button class="nav-btn" onclick="showPage('farm', this)">농장 꾸미기 🏡</button>
+                <button class="nav-btn" onclick="showPage('encyclopedia', this)">동물 도감 📚</button>
+                <button class="nav-btn" onclick="showPage('ranking', this)">랭킹 🏆</button>
+                <button class="nav-btn" onclick="logout()">로그아웃 🚪</button>
             </div>
-            <div class="stat-card">
-              <div class="stat-number" id="total-correct">0</div>
-              <div class="stat-label">총 정답 수</div>
+
+            <div class="user-info" id="user-info">
+                <div class="current-user">현재 플레이어: <span id="current-user-name"></span></div>
             </div>
-            <div class="stat-card">
-              <div class="stat-number" id="total-accuracy">0%</div>
-              <div class="stat-label">정답률</div>
+
+            <div class="game-stats" id="game-stats">
+                <div class="stat-item">레벨 <span id="level">1</span></div>
+                <div class="stat-item">점수: <span id="score">0</span></div>
+                <div class="stat-item">💰 코인: <span id="coins">0</span></div>
+                <div class="stat-item">동물 종류: <span id="species-count">0</span>종</div>
+                <div class="stat-item">총 동물: <span id="total-animals">0</span>마리</div>
             </div>
-            <div class="stat-card">
-              <div class="stat-number" id="mastered-words">0</div>
-              <div class="stat-label">완전 정복 단어</div>
-            </div>
-          </div>
         </div>
 
-        <div class="weak-words-section">
-          <h3>⚠️ 복습이 필요한 단어</h3>
-          <div class="weak-words-grid" id="weak-words-list">
-            <div class="no-data">복습할 단어가 없습니다.</div>
-          </div>
+        <!-- 게임 페이지 -->
+        <div id="game-page" class="page active">
+            <div class="game-content">
+                <div class="english-quiz-section">
+                    <h2>🇬🇧 영어 퀴즈: 동물 잡기!</h2>
+                    
+                    <!-- 난이도 선택 -->
+                    <div class="difficulty-selector">
+                        <h3>난이도 선택:</h3>
+                        <div class="difficulty-buttons">
+                            <button class="difficulty-btn active" data-level="1" onclick="selectDifficulty(1)">
+                                초급 📝<br><small>+10점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="2" onclick="selectDifficulty(2)">
+                                중급 📚<br><small>+20점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="3" onclick="selectDifficulty(3)">
+                                고급 🎓<br><small>+30점</small>
+                            </button>
+                            <button class="difficulty-btn" data-level="review" onclick="selectDifficulty('review')">
+                                복습 🔄<br><small>틀린문제</small>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="english-question-container">
+                        <div class="english-question" id="english-question">난이도를 선택하고 시작하세요!</div>
+                        <span id="speak-button" class="speak-btn" title="단어 발음 듣기" style="display: none;">🔊</span>
+                    </div>
+                    
+                    <!-- 단어 출처 표시 -->
+                    <div class="word-source" id="word-source" style="display: none;">
+                        <span class="source-badge ai-generated" id="source-badge">🤖 AI 생성</span>
+                    </div>
+                    
+                    <div class="english-options" id="english-options"></div>
+                    <div class="feedback" id="feedback"></div>
+                    
+                    <!-- 학습 통계 -->
+                    <div class="learning-stats" id="learning-stats" style="display: none;">
+                        <h4>📊 현재 단어 통계</h4>
+                        <div class="stats-row">
+                            <span>정답: <strong id="word-correct">0</strong>회</span>
+                            <span>오답: <strong id="word-incorrect">0</strong>회</span>
+                            <span>정답률: <strong id="word-accuracy">0</strong>%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="collection-section">
+                    <h2>🐾 내 동물 컬렉션</h2>
+                    <p class="collection-hint">💡 동물을 클릭해서 수학 문제로 레벨업 시켜요!</p>
+                    <div class="animal-grid" id="animal-collection"></div>
+                </div>
+            </div>
         </div>
-      </div>
+        
+        <!-- 학습 통계 페이지 -->
+        <div id="learning-page" class="page">
+            <div class="learning-container">
+                <h2>📈 나의 영어 학습 통계</h2>
+                
+                <!-- 전체 학습 통계 -->
+                <div class="overall-stats">
+                    <h3>📊 전체 학습 현황</h3>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-words-learned">0</div>
+                            <div class="stat-label">학습한 단어</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-correct">0</div>
+                            <div class="stat-label">총 정답수</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="total-accuracy">0%</div>
+                            <div class="stat-label">전체 정답률</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="mastered-words">0</div>
+                            <div class="stat-label">완전 학습</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 취약 단어 목록 -->
+                <div class="weak-words-section">
+                    <h3>🎯 복습이 필요한 단어들</h3>
+                    <div class="weak-words-grid" id="weak-words-grid">
+                        <p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>
+                    </div>
+                </div>
+                
+                <!-- 우수 단어 목록 -->
+                <div class="strong-words-section">
+                    <h3>⭐ 잘 알고 있는 단어들</h3>
+                    <div class="strong-words-grid" id="strong-words-grid">
+                        <p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 동물 합성 페이지 -->
+        <div id="synthesis-page" class="page">
+            <div class="synthesis-container">
+                <h2>🧬 동물 합성 연구소</h2>
+                <div class="synthesis-grid" id="synthesis-grid"></div>
+            </div>
+        </div>
+        
+        <!-- 시장 페이지 -->
+        <div id="market-page" class="page">
+            <div class="market-container">
+                <h2>🏪 동물 시장</h2>
+                <div class="market-sell-section">
+                    <h3>내 동물 판매하기</h3>
+                    <select id="sell-animal-select"></select>
+                    <input type="number" id="sell-price-input" placeholder="판매 가격 (코인)">
+                    <button class="nav-btn" onclick="sellAnimal()">판매 등록</button>
+                </div>
+                <h3>판매 중인 동물 목록</h3>
+                <div class="market-table-container">
+                    <table class="market-table">
+                        <thead>
+                            <tr>
+                                <th>동물</th>
+                                <th>이름</th>
+                                <th>레벨</th>
+                                <th>판매자</th>
+                                <th>가격(🪙)</th>
+                                <th>구매</th>
+                            </tr>
+                        </thead>
+                        <tbody id="market-body"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 농장 꾸미기 페이지 -->
+        <div id="farm-page" class="page">
+            <div class="farm-page-container">
+                <div class="farm-controls">
+                    <h3>🌳 상점 💰</h3>
+                    <div class="shop-grid" id="shop-grid"></div>
+                    <hr style="margin: 20px 0;">
+                    <h3>🎒 보관함</h3>
+                    <div class="inventory-grid" id="inventory-grid"></div>
+                </div>
+                <div class="farm-area">
+                    <div class="farm-grid" id="farm-grid"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 동물 도감 페이지 -->
+        <div id="encyclopedia-page" class="page">
+            <div class="encyclopedia-container">
+                <h2>📚 동물 도감</h2>
+                <div class="encyclopedia-progress">
+                    수집률: <span id="collection-progress">0 / 105</span> 종
+                    <div class="progress-bar-container">
+                        <div id="progress-bar" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <div class="encyclopedia-grid" id="encyclopedia-grid"></div>
+            </div>
+        </div>
+
+        <!-- 랭킹 페이지 -->
+        <div id="ranking-page" class="page">
+            <div class="ranking-container">
+                <h2>🏆 전체 랭킹 (점수 기준)</h2>
+                <table class="ranking-table">
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>이름</th>
+                            <th>점수</th>
+                            <th>레벨</th>
+                            <th>동물 종류</th>
+                            <th>플레이 시간</th>
+                            <th>농장 방문</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking-body"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 수학 문제 모달 -->
+    <div id="math-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeMathModal()">&times;</span>
+            <h3>🧮 동물 레벨업!</h3>
+            <div id="math-question">5 + 3 = ?</div>
+            <input type="number" id="math-answer-input" placeholder="정답은?">
+            <br>
+            <button id="math-submit-btn">확인</button>
+            <div id="math-feedback"></div>
+        </div>
+    </div>
+    
+    <!-- AI 이야기 모달 -->
+    <div id="story-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeStoryModal()">&times;</span>
+            <h3 id="story-modal-title">동물 이야기</h3>
+            <div id="story-content-area">
+                <div id="story-loading" style="display: none;">
+                    <p>이야기를 만들고 있어요... 잠시만 기다려주세요! 📖</p>
+                    <div class="spinner"></div>
+                </div>
+                <p id="story-text"></p>
+            </div>
+        </div>
     </div>
 
-    <!-- 기타 페이지 (도감, 합성, 시장, 농장, 랭킹) -->
-    <div id="encyclopedia-page" class="page">도감 페이지</div>
-    <div id="synthesis-page" class="page">합성 페이지</div>
-    <div id="market-page" class="page">시장 페이지</div>
-    <div id="farm-page" class="page">농장 페이지</div>
-    <div id="ranking-page" class="page">랭킹 페이지</div>
-
-    <!-- 복습 모달 -->
-    <div id="review-modal" class="review-modal">
-      <div class="review-modal-content">
-        <h3>복습 퀴즈</h3>
-        <p id="review-question-text" class="review-question">"고양이"의 영어는?</p>
-        <input type="text" id="review-answer-input" class="review-input" />
-        <button onclick="submitReviewAnswer()" class="btn-review">확인</button>
-        <div id="review-feedback" class="review-feedback"></div>
-      </div>
+    <!-- 농장 방문 모달 -->
+    <div id="farm-visit-modal" class="modal">
+        <div class="modal-content" style="max-width: 90%; max-height: 90%;">
+            <span class="close-btn" onclick="closeFarmVisitModal()">&times;</span>
+            <h3 id="visit-farm-title">🏡 농장 방문</h3>
+            <div style="margin: 15px 0; text-align: center;">
+                <span id="farm-owner-info" style="background: linear-gradient(45deg, #FF69B4, #FFB6C1); color: white; padding: 8px 16px; border-radius: 15px; font-weight: bold;"></span>
+            </div>
+            <div style="background: linear-gradient(to bottom, #a8e063, #56ab2f); padding: 20px; border-radius: 15px; margin-top: 20px;">
+                <div id="visit-farm-grid" class="farm-grid" style="pointer-events: none;"></div>
+            </div>
+            <div style="text-align: center; margin-top: 15px; color: #666; font-style: italic;">
+                💡 다른 사용자의 농장은 구경만 가능합니다
+            </div>
+        </div>
     </div>
 
-    <!-- 로그인 오버레이 -->
-    <div id="login-overlay" style="display: flex; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); align-items: center; justify-content: center;">
-      <div id="login-modal" style="background: white; padding: 40px; border-radius: 25px; max-width: 450px; text-align: center;">
-        <h2>로그인</h2>
-        <input type="text" id="player-name-input" placeholder="이름" style="padding: 10px; width: 80%; margin: 10px 0;" />
-        <input type="password" id="player-pin-input" placeholder="4자리 PIN" style="padding: 10px; width: 80%; margin: 10px 0;" />
-        <div id="login-feedback" style="color: red; margin: 10px 0;"></div>
-        <button id="login-btn" style="padding: 10px 20px; background: #4169E1; color: white; border: none; border-radius: 10px; margin: 5px;">로그인</button>
-        <button id="signup-btn" style="padding: 10px 20px; background: #32CD32; color: white; border: none; border-radius: 10px; margin: 5px;">회원가입</button>
-      </div>
-    </div>
-  </div>
+    <!-- Firebase SDK -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
 
-  <!-- Firebase SDK -->
-  <script type="module">
-    import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-    import { getFirestore, doc, getDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-    import { getAuth, signInAnonymously } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js';
-
-    const firebaseConfig = {
-      apiKey: "AIzaSyD7r3vQ6Kq1u7Z5Y5j5Z5Z5Z5Z5Z5Z5Z5",
-      authDomain: "your-project.firebaseapp.com",
-      projectId: "your-project",
-      storageBucket: "your-project.appspot.com",
-      messagingSenderId: "123456789",
-      appId: "1:123456789:web:abc123"
-    };
-
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
-    const auth = getAuth();
-
-    window.firebase = { db, doc, getDoc, setDoc };
-
-    signInAnonymously(auth).catch(err => console.error("익명 로그인 실패:", err));
-  </script>
-
-  <script>
-    // ==================== 게임 상태 초기화 ====================
-    let gameState = {
-      score: 0,
-      coins: 0,
-      level: 1,
-      animals: {},
-      totalAnimals: 0,
-      speciesCount: 0,
-      farm: {
-        layout: Array(48).fill(null),
-        items: {}
-      },
-      currentQuestion: {}
-    };
-
-    let currentUserProfile = {};
-    let userProgress = {};
-    let animalTypes = [
-      { name: '고양이', english: 'cat', emoji: '🐱', rarity: 1 },
-      { name: '개', english: 'dog', emoji: '🐶', rarity: 1 },
-      { name: '사자', english: 'lion', emoji: '🦁', rarity: 3 },
-      { name: '코끼리', english: 'elephant', emoji: '🐘', rarity: 4 },
-      { name: '팬더', english: 'panda', emoji: '🐼', rarity: 5 }
-    ];
-
-    let totalPlayTimeMinutes = 0;
-    let sessionStartTime = Date.now();
-
-    // ==================== 복습 기능 ====================
-    window.currentReviewWord = null;
-
-    function openReviewModal(wordId) {
-      const animal = animalTypes.find(a => a.name === wordId);
-      if (!animal) return;
-
-      window.currentReviewWord = animal;
-      document.getElementById('review-question-text').textContent = `"${animal.name}"의 영어는?`;
-      document.getElementById('review-answer-input').value = '';
-      document.getElementById('review-feedback').textContent = '';
-      document.getElementById('review-modal').style.display = 'flex';
-    }
-
-    function submitReviewAnswer() {
-      const input = document.getElementById('review-answer-input').value.trim().toLowerCase();
-      const animal = window.currentReviewWord;
-      const feedback = document.getElementById('review-feedback');
-
-      if (input === animal.english.toLowerCase()) {
-        feedback.textContent = '정답! 👏';
-        feedback.style.color = 'green';
-        setTimeout(() => {
-          document.getElementById('review-modal').style.display = 'none';
-          // 정답 기록
-          if (!userProgress[animal.name]) userProgress[animal.name] = { correct: 0, incorrect: 0 };
-          userProgress[animal.name].correct++;
-          saveCurrentUserData();
-          updateLearningStats();
-        }, 1000);
-      } else {
-        feedback.textContent = `틀렸어요! 정답은 "${animal.english}"입니다.`;
-        feedback.style.color = 'red';
-      }
-    }
-
-    // ==================== 학습 통계 업데이트 ====================
-    function updateLearningStats() {
-      const entries = Object.entries(userProgress);
-      let totalCorrect = 0, totalIncorrect = 0, masteredCount = 0;
-
-      entries.forEach(([word, progress]) => {
-        totalCorrect += progress.correct;
-        totalIncorrect += progress.incorrect;
-        if (progress.correct >= 3 && progress.correct > progress.incorrect * 2) {
-          masteredCount++;
+        let auth, db, functions;
+        
+        // Firebase 준비 함수를 먼저 정의
+        window.onFirebaseReady = async function(user) {
+            console.log("onFirebaseReady 호출됨, user:", user);
+            
+            if (!user) {
+                console.log("사용자 없음, 오프라인 모드");
+                const feedbackEl = document.getElementById('login-feedback');
+                if (feedbackEl) {
+                    feedbackEl.textContent = "클라우드 연결 실패! 오프라인 모드로 실행합니다.";
+                }
+                return;
+            }
+            
+            window.currentUserId = user.uid;
+            console.log("현재 사용자 ID 설정:", window.currentUserId);
+            
+            try {
+                console.log("동물 데이터 로딩 시작...");
+                await window.loadAnimalsFromJSON();
+                console.log("명예의 전당 업데이트 시작...");
+                await window.updateHallOfFame();
+                console.log("초기화 완료");
+            } catch (error) {
+                console.error('초기화 오류:', error);
+            }
+            
+            console.log("로그인 오버레이 표시");
+            const overlayEl = document.getElementById('login-overlay');
+            if (overlayEl) {
+                overlayEl.style.display = 'flex';
+            }
         }
-      });
+        
+        // Firebase 초기화
+        try {
+            const firebaseConfig = {
+              apiKey: "AIzaSyC2JV9KsIZ-M1crdnnxLfxyaRtGS1Brtcc",
+              authDomain: "animal-math-game-6eec2.firebaseapp.com",
+              projectId: "animal-math-game-6eec2",
+              storageBucket: "animal-math-game-6eec2.firebasestorage.app",
+              messagingSenderId: "104144283045",
+              appId: "1:104144283045:web:f0a387d83292a0d508744c",
+              measurementId: "G-M63W08193X"
+            };
+            const app = initializeApp(firebaseConfig);
+            auth = getAuth(app);
+            db = getFirestore(app);
+            functions = getFunctions(app);
 
-      const totalAttempts = totalCorrect + totalIncorrect;
-      const accuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+            console.log("Firebase 초기화 성공");
 
-      document.getElementById('total-words-learned').textContent = entries.length;
-      document.getElementById('total-correct').textContent = totalCorrect;
-      document.getElementById('total-accuracy').textContent = accuracy + '%';
-      document.getElementById('mastered-words').textContent = masteredCount;
+            window.firebase = { auth, db, functions, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot, httpsCallable };
 
-      // 취약 단어 표시
-      const weakList = document.getElementById('weak-words-list');
-      weakList.innerHTML = '';
-
-      const weakWords = entries
-        .filter(([_, p]) => p.incorrect > p.correct && p.incorrect + p.correct >= 3)
-        .sort((a, b) => b[1].incorrect - a[1].incorrect);
-
-      if (weakWords.length === 0) {
-        weakList.innerHTML = '<div class="no-data">복습할 단어가 없습니다.</div>';
-      } else {
-        weakWords.forEach(([word, progress]) => {
-          const card = document.createElement('div');
-          card.className = 'word-progress-card';
-          card.innerHTML = `
-            <div class="word-pair">${word}</div>
-            <div class="progress-stats">정답: ${progress.correct} | 오답: ${progress.incorrect}</div>
-            <button class="review-btn" onclick="openReviewModal('${word}')">📚 복습하기</button>
-          `;
-          weakList.appendChild(card);
-        });
-      }
-    }
-
-    // ==================== 페이지 관리 ====================
-    window.showPage = function(pageName, element) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-      document.getElementById(pageName + '-page').classList.add('active');
-      if (element) element.classList.add('active');
-
-      if (pageName === 'learning') updateLearningStats();
-      if (pageName === 'game') displayRandomWord();
-    };
-
-    // ==================== 퀴즈 시스템 ====================
-    function selectDifficulty(difficulty) {
-      gameState.currentQuestion.difficulty = difficulty;
-      displayRandomWord();
-    }
-
-    function displayRandomWord() {
-      const available = animalTypes[Math.floor(Math.random() * animalTypes.length)];
-      gameState.currentQuestion = {
-        korean: available.name,
-        english: available.english,
-        answer: available.english
-      };
-      document.getElementById('english-word').textContent = available.english;
-      document.getElementById('answer-input').value = '';
-      document.getElementById('feedback').textContent = '';
-    }
-
-    function submitAnswer() {
-      const input = document.getElementById('answer-input').value.trim().toLowerCase();
-      const answer = gameState.currentQuestion.answer.toLowerCase();
-      const feedback = document.getElementById('feedback');
-
-      if (input === answer) {
-        feedback.textContent = '정답!';
-        feedback.style.color = 'green';
-        gameState.score += 10;
-        const animalName = gameState.currentQuestion.korean;
-        if (!gameState.animals[animalName]) {
-          gameState.animals[animalName] = { count: 1, animalLevel: 1, rarity: animalTypes.find(a => a.name === animalName).rarity };
-          gameState.speciesCount++;
-        } else {
-          gameState.animals[animalName].count++;
+            onAuthStateChanged(auth, async (user) => {
+                console.log("Auth 상태 변경:", user ? "로그인됨" : "로그아웃됨");
+                if (user) {
+                    console.log("Firebase Auth User:", user.uid);
+                    window.onFirebaseReady(user);
+                } else {
+                     try {
+                        console.log("익명 로그인 시도...");
+                        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                            await signInWithCustomToken(auth, __initial_auth_token);
+                        } else {
+                            const result = await signInAnonymously(auth);
+                            console.log("익명 로그인 성공:", result.user.uid);
+                        }
+                    } catch (error) {
+                        console.error("익명 로그인 실패:", error);
+                        alert("Firebase 인증 실패: " + error.message);
+                        window.onFirebaseReady(null);
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Firebase 초기화 실패:", error);
+            alert("Firebase 초기화 실패: " + error.message);
+            window.onFirebaseReady(null);
         }
-        updateUI();
-        saveCurrentUserData();
-        setTimeout(displayRandomWord, 1000);
-      } else {
-        feedback.textContent = '오답입니다. 다시 시도하세요.';
-        feedback.style.color = 'red';
-      }
-    }
+    </script>
+    
+    <script>
+        // ==================== 게임 데이터 ====================
+        
+        let gameState = {
+            score: 0,
+            coins: 0,      // 🆕 새로 추가!
+            level: 1,
+            currentQuestion: {},
+            animals: {},
+            totalAnimals: 0,
+            speciesCount: 0,
+            farm: {
+                layout: Array(48).fill(null),
+                items: {}
+            }
+        };
 
-    function updateUI() {
-      document.getElementById('score').textContent = gameState.score;
-      document.getElementById('coins').textContent = gameState.coins;
-      document.getElementById('level').textContent = gameState.level;
-    }
+        // 플레이 시간 추적 변수들
+        let sessionStartTime = null;
+        let totalPlayTimeMinutes = 0;
 
-    // ==================== 저장 및 로그인 ====================
-    async function saveCurrentUserData() {
-      if (!currentUserProfile.name) return;
-      const profile = {
-        ...currentUserProfile,
-        ...gameState,
-        totalPlayTimeMinutes,
-        lastPlayed: new Date().toISOString()
-      };
-      try {
-        await window.firebase.setDoc(window.firebase.doc(window.firebase.db, "profiles", currentUserProfile.name), profile);
-      } catch (e) {
-        console.error("저장 실패:", e);
-      }
-    }
+        let currentUserId = null;
+        let currentUserProfile = {};
+        let selectedItemToPlace = null;
+        let currentEnglishQuiz = {};
+        let marketListener = null;
+        
+        // 새로운 학습 시스템 변수
+        let currentDifficulty = 1;
+        let currentWordData = null;
+        let isLoadingWord = false;
+        let userProgress = {}; // 사용자 학습 진행도
 
-    async function handleLogin() {
-      const name = document.getElementById('player-name-input').value.trim();
-      const pin = document.getElementById('player-pin-input').value;
-      const feedback = document.getElementById('login-feedback');
+        // 동물 데이터를 저장할 전역 변수
+        let animalTypes = [];
 
-      if (!name || !pin) {
-        feedback.textContent = "이름과 PIN을 입력하세요.";
+        // JSON 파일에서 동물 데이터 로드
+        window.loadAnimalsFromJSON = async function() {
+            try {
+                console.log('동물 JSON 파일 로딩 시작...');
+                
+                const response = await fetch('./animals.json');
+                
+                if (!response.ok) {
+                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                animalTypes = data.animals;
+                
+                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
+                return true;
+                
+            } catch (error) {
+                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+                
+                // 폴백: 기본 동물 몇 마리
+                animalTypes = [
+                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+                ];
+                
+                return false;
+            }
+        }
+
+        const shopItems = [
+            { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
+            { name: '새싹', emoji: '🌱', price: 25 }, { name: '자갈길', emoji: '🪨', price: 35 }, { name: '해바라기', emoji: '🌻', price: 40 }, { name: '튤립', emoji: '🌷', price: 45 }, { name: '꽃', emoji: '🌸', price: 50 }, { name: '덤불', emoji: '🌿', price: 55 }, { name: '버섯', emoji: '🍄', price: 60 }, { name: '밀', emoji: '🌾', price: 65 }, { name: '네잎클로버', emoji: '🍀', price: 75 }, { name: '선인장', emoji: '🌵', price: 80 },
+            { name: '길', emoji: '🛤️', price: 80 }, { name: '꽃밭', emoji: '💐', price: 90 }, { name: '나무', emoji: '🌳', price: 100 }, { name: '우체통', emoji: '📮', price: 110 }, { name: '채소밭', emoji: '🥕', price: 120 }, { name: '허수아비', emoji: '🧍', price: 130 }, { name: '상록수', emoji: '🌲', price: 150 }, { name: '울타리', emoji: '🚧', price: 150 }, { name: '벌집', emoji: '🐝', price: 160 }, { name: '벚나무', emoji: '🌸', price: 180 }, { name: '캠프파이어', emoji: '🔥', price: 180 }, { name: '단풍나무', emoji: '🍁', price: 190 }, { name: '야자수', emoji: '🌴', price: 200 }, { name: '가로등', emoji: '💡', price: 220 }, { name: '벤치', emoji: '🪑', price: 250 }, { name: '우물', emoji: '🕳️', price: 280 }, { name: '연못', emoji: '💧', price: 300 },
+            { name: '보물상자', emoji: '🎁', price: 350 }, { name: '분수', emoji: '⛲', price: 400 }, { name: '천막', emoji: '⛺', price: 450 }, { name: '집', emoji: '🏠', price: 500 }, { name: '온실', emoji: '🏡', price: 600 }, { name: '다리', emoji: '🌉', price: 800 }, { name: '성', emoji: '🏰', price: 1000 }, { name: '회전목마', emoji: '🎠', price: 1200 }, { name: '무지개', emoji: '🌈', price: 1500 }, { name: '별똥별', emoji: '🌠', price: 2000 }
+        ];
+
+        const synthesisRecipes = [
+            { result: '그리핀', ingredients: ['사자', '독수리'] },
+            { result: '페가수스', ingredients: ['말', '백조'] },
+            { result: '키메라', ingredients: ['염소', '사자'] },
+            { result: '히드라', ingredients: ['뱀', '용'] },
+            { result: '유니콘', ingredients: ['말', '사슴'] },
+            { result: '불사조', ingredients: ['독수리', '용'] },
+            { result: '동양용', ingredients: ['뱀', '물고기'] },
+            { result: '펜리르', ingredients: ['늑대', '곰'] },
+            { result: '인어', ingredients: ['돌고래', '원숭이'] },
+            { result: '하피', ingredients: ['새', '박쥐'] },
+            { result: '대왕오징어', ingredients: ['오징어', '문어'] },
+            { result: '백호', ingredients: ['호랑이', '북극곰'] },
+            { result: '흑표범', ingredients: ['표범', '늑대'] },
+            { result: '매머드', ingredients: ['코끼리', '멧돼지'] },
+            { result: '티라노사우루스', ingredients: ['악어', '닭'] },
+            { result: '브라키오사우루스', ingredients: ['기린', '소'] },
+            { result: '보석 골렘', ingredients: ['거북이', '게'] },
+            { result: '별의 정령', ingredients: ['나비', '올빼미'] },
+            { result: '은하룡', ingredients: ['용', '고래'] },
+            { result: '궁극의 로봇', ingredients: ['거미', '전갈'] }
+        ];
+
+        // ==================== 플레이 시간 및 농장 방문 함수 ====================
+        
+        // 플레이 시간을 사람이 읽기 쉬운 형태로 변환
+        function formatPlayTime(minutes) {
+            if (minutes < 60) {
+                return `${Math.floor(minutes)}분`;
+            } else if (minutes < 1440) {
+                const hours = Math.floor(minutes / 60);
+                const mins = Math.floor(minutes % 60);
+                return `${hours}시간 ${mins}분`;
+            } else {
+                const days = Math.floor(minutes / 1440);
+                const hours = Math.floor((minutes % 1440) / 60);
+                return `${days}일 ${hours}시간`;
+            }
+        }
+        
+        // 현재 세션 플레이 시간 계산
+        function updateSessionPlayTime() {
+            if (sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                return totalPlayTimeMinutes + sessionMinutes;
+            }
+            return totalPlayTimeMinutes;
+        }
+        
+        // 농장 방문 모달 열기
+        window.visitUserFarm = async function(userName) {
+            try {
+                const userData = await loadUserData(userName);
+                if (!userData) {
+                    alert('사용자 데이터를 불러올 수 없습니다.');
+                    return;
+                }
+                
+                document.getElementById('farm-owner-info').textContent = `${userName}님의 농장`;
+                
+                const visitFarmGrid = document.getElementById('visit-farm-grid');
+                visitFarmGrid.innerHTML = '';
+                
+                // 48개 셀 생성
+                for (let i = 0; i < 48; i++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'farm-cell';
+                    
+                    const farmItem = userData.farm?.layout?.[i];
+                    if (farmItem) {
+                        cell.innerHTML = `<span class="${farmItem.isAnimal ? 'placed-animal' : ''}">${farmItem.emoji}</span>`;
+                    }
+                    
+                    visitFarmGrid.appendChild(cell);
+                }
+                
+                document.getElementById('farm-visit-modal').style.display = 'flex';
+                
+            } catch (error) {
+                console.error('농장 방문 오류:', error);
+                alert('농장을 불러오는 중 오류가 발생했습니다.');
+            }
+        }
+        
+        // 농장 방문 모달 닫기
+        window.closeFarmVisitModal = function() {
+            document.getElementById('farm-visit-modal').style.display = 'none';
+        }
+
+        // ==================== 핵심 게임 함수 ====================
+        
+        // 난이도 선택 함수
+        window.selectDifficulty = function(level) {
+            currentDifficulty = level;
+            
+            // 모든 버튼에서 active 클래스 제거
+            document.querySelectorAll('.difficulty-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // 선택된 버튼에 active 클래스 추가
+            const selectedBtn = document.querySelector(`[data-level="${level}"]`);
+            if (selectedBtn) {
+                selectedBtn.classList.add('active');
+            }
+            
+            // 복습 모드 스타일 적용/제거
+            const gameContainer = document.querySelector('.game-container');
+            if (level === 'review') {
+                gameContainer.classList.add('review-mode');
+            } else {
+                gameContainer.classList.remove('review-mode');
+            }
+            
+            // 새로운 문제 생성
+            generateEnglishQuiz();
+        }
+
+        // 단어 발음 재생 함수
+        function speakWord(word) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(word);
+                const voices = window.speechSynthesis.getVoices();
+                let englishVoice = voices.find(voice => voice.lang.startsWith('en-US')) || voices.find(voice => voice.lang.startsWith('en'));
+                if (englishVoice) {
+                    utterance.voice = englishVoice;
+                }
+                utterance.pitch = 1;
+                utterance.rate = 0.9;
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert("죄송합니다. 사용 중인 브라우저에서는 음성 재생을 지원하지 않습니다.");
+            }
+        }
+
+        // 영어 퀴즈 생성 (새로운 시스템)
+        async function generateEnglishQuiz() {
+            if (isLoadingWord) return;
+            
+            isLoadingWord = true;
+            
+            // UI 초기화
+            const questionElement = document.getElementById('english-question');
+            const optionsContainer = document.getElementById('english-options');
+            const speakButton = document.getElementById('speak-button');
+            const feedbackElement = document.getElementById('feedback');
+            
+            questionElement.textContent = '단어를 불러오는 중...';
+            optionsContainer.innerHTML = '';
+            speakButton.style.display = 'none';
+            feedbackElement.textContent = '';
+            feedbackElement.className = 'feedback';
+            
+            try {
+                if (currentDifficulty === 'review') {
+                    // 복습 모드: 틀린 단어들 중에서 선택
+                    await loadReviewWord();
+                } else {
+                    // 일반 모드: 새로운 단어 또는 기존 단어 로드
+                    await loadWordForDifficulty(currentDifficulty);
+                }
+                
+                console.log('단어 로드 완료:', currentWordData);
+                displayCurrentWord();
+                updateWordStats();
+                
+            } catch (error) {
+                console.error('Error generating quiz:', error);
+                questionElement.textContent = '단어를 불러오는 중 오류가 발생했습니다.';
+                
+                // 최종 폴백: 하드코딩된 단어 사용
+                const fallbackWords = [
+                    { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
+                    { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
+                    { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] }
+                ];
+                const fallbackQuiz = fallbackWords[0];
+                
+                currentWordData = {
+                    id: 'emergency_fallback',
+                    korean: fallbackQuiz.question,
+                    english: fallbackQuiz.answer,
+                    options: fallbackQuiz.options,
+                    difficulty: currentDifficulty,
+                    source: 'fallback'
+                };
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+                
+                console.log('긴급 폴백 단어 사용:', currentWordData);
+                displayCurrentWord();
+            } finally {
+                isLoadingWord = false;
+            }
+        }
+
+        // 난이도별 단어 로드
+        async function loadWordForDifficulty(difficulty) {
+            try {
+                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
+                
+                // GitHub Pages에서 JSON 파일 로드
+                const response = await fetch(`./words/level${difficulty}.json`);
+                
+                if (!response.ok) {
+                    throw new Error(`JSON 파일 로드 실패: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                const words = data.words;
+                
+                if (!words || words.length === 0) {
+                    throw new Error('JSON 파일에 단어가 없습니다');
+                }
+                
+                // 랜덤으로 단어 선택
+                const randomWord = words[Math.floor(Math.random() * words.length)];
+                
+                currentWordData = {
+                    id: randomWord.english.toLowerCase(), // 영어 단어를 ID로 사용                    
+                    korean: randomWord.korean,
+                    english: randomWord.english,
+                    options: randomWord.options,
+                    difficulty: difficulty,
+                    source: 'json'
+                };
+                
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+                
+                console.log('JSON에서 단어 로드 성공:', currentWordData);
+                
+            } catch (error) {
+                console.error('JSON 단어 로드 실패, 폴백 사용:', error);
+                
+                // 폴백: 기존 하드코딩된 단어 사용
+                const fallbackWords = [
+                    { question: '사과', answer: 'apple', options: ['apple', 'banana', 'orange', 'grape'] },
+                    { question: '고양이', answer: 'cat', options: ['cat', 'dog', 'bird', 'fish'] },
+                    { question: '책', answer: 'book', options: ['book', 'pen', 'paper', 'desk'] },
+                    { question: '집', answer: 'house', options: ['house', 'school', 'park', 'store'] },
+                    { question: '물', answer: 'water', options: ['water', 'juice', 'milk', 'tea'] }
+                ];
+                
+                const fallbackQuiz = fallbackWords[Math.floor(Math.random() * fallbackWords.length)];
+                
+                currentWordData = {
+                    id: 'fallback_' + Date.now(),
+                    korean: fallbackQuiz.question,
+                    english: fallbackQuiz.answer,
+                    options: fallbackQuiz.options,
+                    difficulty: difficulty,
+                    source: 'fallback'
+                };
+                
+                currentEnglishQuiz = {
+                    answer: currentWordData.english,
+                    wordId: currentWordData.id
+                };
+                
+                console.log('폴백 단어 사용:', currentWordData);
+            }
+        }
+
+        // 복습용 단어 로드
+        async function loadReviewWord() {
+            // 로컬 진행도에서 틀린 단어들 찾기
+            const strugglingWords = [];
+            
+            for (const [wordId, progress] of Object.entries(userProgress)) {
+                const total = progress.correct + progress.incorrect;
+                if (total >= 3 && progress.incorrect > progress.correct) {
+                    strugglingWords.push(wordId);
+                }
+            }
+            
+            if (strugglingWords.length === 0) {
+                alert('복습할 단어가 없습니다! 더 많은 문제를 풀어보세요.');
+                await loadWordForDifficulty(1);
+                return;
+            }
+            
+            // 복습 단어가 있으면 쉬운 레벨부터 JSON에서 로드
+            console.log('복습 모드: JSON 파일에서 단어 로드');
+            await loadWordForDifficulty(1); // 복습할 때는 쉬운 단어부터
+        }
+    
+        // 현재 단어 표시
+        function displayCurrentWord() {
+            if (!currentWordData) return;
+            
+            const questionElement = document.getElementById('english-question');
+            const optionsContainer = document.getElementById('english-options');
+            const speakButton = document.getElementById('speak-button');
+            const wordSourceElement = document.getElementById('word-source');
+            const sourceBadge = document.getElementById('source-badge');
+            
+            questionElement.textContent = `"${currentWordData.korean}"`;
+            speakButton.style.display = 'inline';
+            speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            
+            // 단어 출처 표시
+            wordSourceElement.style.display = 'block';
+            
+            if (currentWordData.source === 'json') {
+                sourceBadge.className = 'source-badge json-file';
+                sourceBadge.innerHTML = '📁 JSON 파일';
+                sourceBadge.title = 'GitHub Pages JSON 파일에서 로드된 단어입니다';
+            } else if (currentWordData.source === 'ai') {
+                sourceBadge.className = 'source-badge ai-generated';
+                sourceBadge.innerHTML = '🤖 AI 생성';
+                sourceBadge.title = 'Gemini AI가 생성한 단어입니다';
+            } else if (currentWordData.source === 'fallback') {
+                sourceBadge.className = 'source-badge fallback';
+                sourceBadge.innerHTML = '🔄 대체 단어';
+                sourceBadge.title = 'JSON 로드 실패로 대체된 단어입니다';
+            } else {
+                sourceBadge.className = 'source-badge hardcoded';
+                sourceBadge.innerHTML = '📝 기본 단어';
+                sourceBadge.title = '미리 준비된 단어입니다';
+            }
+            
+            // 옵션 생성
+            let finalOptions = [];
+            
+            if (currentWordData.options && currentWordData.options.length >= 4) {
+                // AI에서 받은 단어의 경우: 이미 정답+오답이 모두 포함됨
+                const correctAnswer = currentWordData.english;
+                const wrongOptions = currentWordData.options.filter(opt => opt !== correctAnswer);
+                const shuffledWrong = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
+                finalOptions = [correctAnswer, ...shuffledWrong].sort(() => Math.random() - 0.5);
+            } else {
+                // 폴백 단어의 경우: options 배열을 직접 사용
+                finalOptions = [...currentWordData.options].sort(() => Math.random() - 0.5);
+            }
+            
+            console.log('표시할 옵션들:', finalOptions);
+            
+            optionsContainer.innerHTML = '';
+            finalOptions.forEach(option => {
+                const button = document.createElement('button');
+                button.className = 'english-option-btn';
+                button.innerText = option;
+                button.onclick = () => checkEnglishQuizAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        // 단어 통계 업데이트
+        function updateWordStats() {
+            if (!currentWordData || !currentWordData.id) return;
+            
+            const progress = userProgress[currentWordData.id] || { correct: 0, incorrect: 0 };
+            const total = progress.correct + progress.incorrect;
+            const accuracy = total > 0 ? Math.round((progress.correct / total) * 100) : 0;
+            
+            document.getElementById('word-correct').textContent = progress.correct;
+            document.getElementById('word-incorrect').textContent = progress.incorrect;
+            document.getElementById('word-accuracy').textContent = accuracy;
+            document.getElementById('learning-stats').style.display = 'block';
+        }
+
+        // 영어 퀴즈 정답 확인 (새로운 시스템)
+        async function checkEnglishQuizAnswer(selectedOption) {
+            const optionsContainer = document.getElementById('english-options');
+            optionsContainer.querySelectorAll('.english-option-btn').forEach(btn => {
+                btn.disabled = true;
+            });
+
+            const feedback = document.getElementById('feedback');
+            const isCorrect = selectedOption === currentEnglishQuiz.answer;
+            
+            // 학습 기록 업데이트
+            if (currentWordData && currentWordData.id) {
+                if (!userProgress[currentWordData.id]) {
+                    userProgress[currentWordData.id] = { correct: 0, incorrect: 0, lastSeen: new Date() };
+                }
+                
+                if (isCorrect) {
+                    userProgress[currentWordData.id].correct++;
+                } else {
+                    userProgress[currentWordData.id].incorrect++;
+                }
+                userProgress[currentWordData.id].lastSeen = new Date();
+                
+                // Firebase에 학습 기록 저장
+                await saveUserProgress();
+            }
+            
+            if (isCorrect) {
+                speakWord(currentEnglishQuiz.answer);
+                
+                // 난이도별 점수 계산
+                let baseScore = 10;
+                if (currentDifficulty === 2) baseScore = 20;
+                else if (currentDifficulty === 3) baseScore = 30;
+                else if (currentDifficulty === 'review') baseScore = 15; // 복습 보너스
+                
+                const earnedScore = baseScore * gameState.level;
+                gameState.score += earnedScore;
+                
+                feedback.textContent = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                feedback.className = 'feedback correct';
+                
+                const newAnimal = getRandomAnimal();
+                addAnimal(newAnimal);
+                
+
+
+
+
+        // --- 이 부분이 핵심 수정 지점입니다 ---
+        // 다음 레벨에 도달하기 위한 필요 점수 계산 로직 변경
+        // Math.pow(gameState.level, 2)를 사용하여 레벨의 제곱에 비례하도록 변경
+        // 상수 2000은 게임 난이도에 따라 조절할 수 있습니다.
+                
+        if (gameState.score >= Math.pow(gameState.level, 2) * 2000) { 
+            gameState.level++;
+            showLevelUp();
+        }
+        // --- 수정 끝 ---
+                        
+                
+                saveCurrentUserData();
+                setTimeout(() => generateEnglishQuiz(), 1500);
+            } else {
+                feedback.textContent = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
+                feedback.className = 'feedback incorrect';
+                setTimeout(() => generateEnglishQuiz(), 2500);
+            }
+            
+            updateUI();
+            updateWordStats();
+        }
+
+        // 사용자 학습 진행도 저장
+        async function saveUserProgress() {
+            if (!currentUserProfile.name) return;
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const progressDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/progress", currentUserProfile.name);
+                
+                await window.firebase.setDoc(progressDocRef, {
+                    userId: currentUserProfile.name,
+                    progress: userProgress,
+                    lastUpdated: new Date().toISOString()
+                }, { merge: true });
+                
+                console.log("User progress saved");
+            } catch (error) {
+                console.error("Error saving user progress:", error);
+            }
+        }
+
+        // 사용자 학습 진행도 로드
+        async function loadUserProgress() {
+            if (!currentUserProfile.name) return;
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const progressDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/progress", currentUserProfile.name);
+                const docSnap = await window.firebase.getDoc(progressDocRef);
+                
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    userProgress = data.progress || {};
+                    console.log("User progress loaded");
+                } else {
+                    userProgress = {};
+                }
+            } catch (error) {
+                console.error("Error loading user progress:", error);
+                userProgress = {};
+            }
+        }
+
+        // 동물 레벨업을 위한 수학 문제 생성
+        function generateMathProblemForLevelUp(animalLevel) {
+            const difficulty = Math.min(Math.floor(animalLevel / 5) + 1, 4);
+            let question = {};
+            
+            switch(difficulty) {
+                case 1:
+                    const a1 = Math.floor(Math.random() * 10) + 1;
+                    const b1 = Math.floor(Math.random() * 10) + 1;
+                    if (Math.random() > 0.5) { question = {text: `${a1} + ${b1}`, answer: a1 + b1}; } 
+                    else { const l = Math.max(a1, b1), s = Math.min(a1, b1); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+                case 2:
+                    const a2 = Math.floor(Math.random() * 90) + 10;
+                    const b2 = Math.floor(Math.random() * 90) + 10;
+                    if (Math.random() > 0.5) { question = {text: `${a2} + ${b2}`, answer: a2 + b2}; }
+                    else { const l = Math.max(a2, b2), s = Math.min(a2, b2); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+                case 3:
+                    const a3 = Math.floor(Math.random() * 8) + 2;
+                    const b3 = Math.floor(Math.random() * 8) + 2;
+                    question = {text: `${a3} × ${b3}`, answer: a3 * b3};
+                    break;
+                case 4:
+                    const a4 = Math.floor(Math.random() * 900) + 100;
+                    const b4 = Math.floor(Math.random() * 900) + 100;
+                    if (Math.random() > 0.5) { question = {text: `${a4} + ${b4}`, answer: a4 + b4}; }
+                    else { const l = Math.max(a4, b4), s = Math.min(a4, b4); question = {text: `${l} - ${s}`, answer: l - s}; }
+                    break;
+            }
+            gameState.currentQuestion = question;
+            document.getElementById('math-question').textContent = `${question.text} = ?`;
+        }
+
+        // 수학 문제 모달 열기
+        function startMathProblem(animalName) {
+            const animal = gameState.animals[animalName];
+            generateMathProblemForLevelUp(animal.animalLevel);
+            
+            const answerInput = document.getElementById('math-answer-input');
+            const submitBtn = document.getElementById('math-submit-btn');
+            
+            answerInput.value = '';
+            document.getElementById('math-feedback').textContent = '';
+            
+            answerInput.disabled = false;
+            submitBtn.disabled = false;
+
+            submitBtn.onclick = () => checkMathAnswer(animalName);
+            document.getElementById('math-modal').style.display = 'flex';
+            answerInput.focus();
+        }
+
+        // 수학 문제 정답 확인
+        function checkMathAnswer(animalName) {
+            const answerInput = document.getElementById('math-answer-input');
+            const submitBtn = document.getElementById('math-submit-btn');
+            const userAnswer = parseInt(answerInput.value);
+            const feedback = document.getElementById('math-feedback');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = '숫자를 입력해주세요!';
+                feedback.style.color = 'red';
+                return;
+            }
+            
+            answerInput.disabled = true;
+            submitBtn.disabled = true;
+
+            if (userAnswer === gameState.currentQuestion.answer) {
+                const animal = gameState.animals[animalName];
+                gameState.score += 15 * animal.animalLevel;
+                animal.animalLevel++;
+                
+                feedback.textContent = `정답! ${animal.name}의 레벨이 ${animal.animalLevel}이 되었어요!`;
+                feedback.style.color = 'green';
+
+                updateUI();
+                updateAnimalCollection();
+                saveCurrentUserData();
+                setTimeout(closeMathModal, 1500);
+            } else {
+                feedback.textContent = `땡! 다시 생각해보세요.`;
+                feedback.style.color = 'red';
+                setTimeout(() => {
+                    answerInput.disabled = false;
+                    submitBtn.disabled = false;
+                    answerInput.focus();
+                }, 1000);
+            }
+        }
+
+        function closeMathModal() {
+            document.getElementById('math-modal').style.display = 'none';
+        }
+
+        function getRandomAnimal() {
+            const maxRarity = Math.min(Math.floor(gameState.level / 2) + 1, 6);
+            const availableAnimals = animalTypes.filter(animal => animal.rarity <= maxRarity);
+            const weights = availableAnimals.map(animal => Math.pow(0.7, animal.rarity - 1));
+            const totalWeight = weights.reduce((sum, weight) => sum + weight, 0);
+            let random = Math.random() * totalWeight;
+            for (let i = 0; i < availableAnimals.length; i++) {
+                random -= weights[i];
+                if (random <= 0) {
+                    return availableAnimals[i];
+                }
+            }
+            return availableAnimals[0];
+        }
+
+        function addAnimal(animal) {
+            const key = animal.name;
+            if (!gameState.animals[key]) {
+                gameState.animals[key] = {
+                    ...animal,
+                    count: 0,
+                    animalLevel: 1,
+                    story: ""
+                };
+                gameState.speciesCount++;
+                showNewAnimalAlert(animal);
+            }
+            
+            gameState.animals[key].count++;
+            gameState.totalAnimals++;
+            
+            updateAnimalCollection();
+        }
+
+        // ==================== 학습 통계 관련 함수 ====================
+        
+        async function updateLearningStats() {
+            // userProgress가 비어있거나 로드되지 않았다면 다시 로드 시도
+            if (!currentUserProfile || Object.keys(userProgress).length === 0) {
+                await loadUserProgress();
+            }
+
+            const progressEntries = Object.entries(userProgress);
+
+            // 전체 통계 계산
+            let totalCorrect = 0;
+            let totalIncorrect = 0;
+            let masteredCount = 0;
+
+            progressEntries.forEach(([wordId, progress]) => {
+                totalCorrect += progress.correct;
+                totalIncorrect += progress.incorrect;
+                const total = progress.correct + progress.incorrect;
+                if (total >= 3 && (progress.correct / total) >= 0.8) {
+                    masteredCount++;
+                }
+            });
+
+            const totalAttempts = totalCorrect + totalIncorrect;
+            const overallAccuracy = totalAttempts > 0 ? Math.round((totalCorrect / totalAttempts) * 100) : 0;
+
+            // 전체 통계 표시
+            const totalLearnedEl = document.getElementById('total-words-learned');
+            const totalCorrectEl = document.getElementById('total-correct');
+            const totalAccuracyEl = document.getElementById('total-accuracy');
+            const masteredWordsEl = document.getElementById('mastered-words');
+
+            if (totalLearnedEl) totalLearnedEl.textContent = progressEntries.length;
+            if (totalCorrectEl) totalCorrectEl.textContent = totalCorrect;
+            if (totalAccuracyEl) totalAccuracyEl.textContent = overallAccuracy + '%';
+            if (masteredWordsEl) masteredWordsEl.textContent = masteredCount;
+
+            // 취약/우수 단어 표시
+            updateWeakWords(progressEntries);
+            updateStrongWords(progressEntries);
+        }
+
+// ==================== 🔥 1단계: 복습 단어 바로 학습 기능 (수정된 updateWeakWords) 🔥 ====================
+/**
+ * 학습 통계 페이지에서 복습이 필요한 단어 목록을 업데이트합니다.
+ * 각 단어에 [복습하기] 버튼을 추가합니다.
+ * @param {Array} progressEntries - Object.entries(userProgress) 결과
+ */
+function updateWeakWords(progressEntries) {
+    console.log("updateWeakWords (수정됨) 호출됨", progressEntries);
+    const weakWordsGrid = document.getElementById('weak-words-grid');
+    if (!weakWordsGrid) {
+        console.error("weak-words-grid 요소를 찾을 수 없음");
         return;
-      }
-
-      try {
-        const docRef = window.firebase.doc(window.firebase.db, "profiles", name);
-        const docSnap = await window.firebase.getDoc(docRef);
-        if (docSnap.exists()) {
-          currentUserProfile = docSnap.data();
-          Object.assign(gameState, currentUserProfile);
-          document.getElementById('user-info').textContent = `${name}님 환영합니다!`;
-          document.getElementById('login-overlay').style.display = 'none';
-          updateUI();
-        } else {
-          feedback.textContent = "존재하지 않는 사용자입니다.";
-        }
-      } catch (e) {
-        feedback.textContent = "오류 발생";
-      }
     }
 
-    document.getElementById('login-btn').onclick = handleLogin;
-    document.getElementById('player-pin-input').onkeypress = e => e.key === 'Enter' && handleLogin();
+    // 기존 내용 초기화
+    weakWordsGrid.innerHTML = '';
 
-    // 초기화
-    updateUI();
-  </script>
+    // 복습이 필요한 단어 필터링
+    const weakWords = progressEntries
+        .filter(([wordId, progress]) => {
+            const total = progress.correct + progress.incorrect;
+            console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+            return total >= 3 && progress.incorrect > progress.correct;
+        });
+
+    console.log("취약 단어 후보:", weakWords);
+
+    if (weakWords.length === 0) {
+        weakWordsGrid.innerHTML = '<p class="no-data">복습이 필요한 단어가 없습니다. 더 많은 문제를 풀어보세요!</p>';
+        return;
+    }
+
+    // 각 단어에 대해 카드 생성
+    weakWords.forEach(([wordId, progress]) => {
+        const total = progress.correct + progress.incorrect;
+        const accuracy = total > 0 ? ((progress.correct / total) * 100).toFixed(1) : 0;
+        const card = document.createElement('div');
+        card.className = 'word-progress-card weak';
+        card.innerHTML = `
+            <div class="word-pair">${wordId}</div>
+            <div class="progress-stats">
+                <span>정답: ${progress.correct}</span> |
+                <span>오답: ${progress.incorrect}</span>
+            </div>
+            <div class="accuracy-bar">
+                <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+            </div>
+            <div style="text-align: center; font-size: 0.9rem; color: #FF6B6B;">
+                정답률: ${accuracy}%
+            </div>
+            <!-- 복습 버튼 추가 -->
+            <button class="review-btn" onclick="startTargetedReview('${wordId}')">
+                📚 바로 복습하기
+            </button>
+        `;
+        weakWordsGrid.appendChild(card);
+    });
+}
+
+// ==================== 🔥 startTargetedReview 함수 추가 🔥 ====================
+/**
+ * 특정 단어에 대한 퀴즈를 바로 시작합니다. (복습 기능)
+ * @param {string} wordId - 복습할 동물 이름 (예: '고양이')
+ */
+async function startTargetedReview(wordId) {
+    console.log(`startTargetedReview 호출됨. wordId: ${wordId}`);
+
+    // 1. 먼저 동물 데이터를 로드했는지 확인
+    if (!animalTypes || animalTypes.length === 0) {
+        console.warn("animalTypes가 로드되지 않음. 로드 시도...");
+        await window.loadAnimalsFromJSON(); // 이 함수는 이미 정의되어 있음
+        if (!animalTypes || animalTypes.length === 0) {
+            alert("동물 데이터를 로드할 수 없습니다. 나중에 다시 시도해주세요.");
+            return;
+        }
+    }
+
+    // 2. 선택된 단어에 해당하는 동물 데이터 찾기
+    const animal = animalTypes.find(a => a.name === wordId);
+    if (!animal) {
+        console.error(`해당 동물 데이터를 찾을 수 없습니다: ${wordId}`);
+        alert("단어 데이터를 찾을 수 없습니다.");
+        return;
+    }
+
+    // 3. 퀴즈 데이터 설정 (기존 로직 활용)
+    try {
+        // JSON 파일에서 해당 단어의 상세 정보 로드 시도
+        const response = await fetch('https://raw.githubusercontent.com/ChaSeunghun/animal-collecting-learning-game/main/animals.json');
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        const wordDataFromJson = data.animals.find(a => a.name === wordId);
+
+        if (wordDataFromJson) {
+            // JSON에서 데이터를 성공적으로 가져온 경우
+            currentWordData = {
+                id: wordDataFromJson.name,
+                korean: wordDataFromJson.name,
+                english: wordDataFromJson.english,
+                options: generateOptions(wordDataFromJson.english), // 오답 선택지 생성
+                difficulty: 'targeted-review',
+                source: 'json' // 출처 기록
+            };
+        } else {
+            // JSON에 없으면 폴백 데이터 사용
+            console.warn(`JSON에 단어 ${wordId}가 없습니다. 폴백 데이터 사용.`);
+            currentWordData = {
+                id: animal.name,
+                korean: animal.name,
+                english: animal.english,
+                options: generateOptions(animal.english),
+                difficulty: 'targeted-review',
+                source: 'fallback'
+            };
+        }
+    } catch (error) {
+        console.error('JSON 단어 로드 실패, 폴백 사용:', error);
+        // 네트워크 오류 등으로 JSON 로드 실패 시 폴백
+        currentWordData = {
+            id: animal.name,
+            korean: animal.name,
+            english: animal.english,
+            options: generateOptions(animal.english),
+            difficulty: 'targeted-review',
+            source: 'fallback'
+        };
+    }
+
+    // 4. 현재 퀴즈 정보 설정
+    currentEnglishQuiz = {
+        answer: currentWordData.english,
+        wordId: currentWordData.id
+    };
+
+    // 5. 게임 페이지로 이동
+    showPage('game'); // 기존 함수 사용
+
+    // 6. 화면에 단어 표시
+    displayCurrentWord(); // 기존 함수 사용
+
+    // 7. 사용자에게 복습임을 알림
+    const feedback = document.getElementById('feedback');
+    if (feedback) {
+        feedback.textContent = `"${animal.name}" 복습 퀴즈 시작! 🎯`;
+        feedback.style.color = '#FF6B6B';
+        feedback.style.fontWeight = 'bold';
+
+        // 1.5초 후 알림 제거
+        setTimeout(() => {
+            if (feedback.textContent.includes('복습 퀴즈 시작')) {
+                feedback.textContent = '';
+                feedback.style.color = '';
+                feedback.style.fontWeight = '';
+            }
+        }, 1500);
+    }
+
+    // 8. 🔊 영어 발음 재생
+    speakWord(currentWordData.english); // 기존 함수 사용
+}
+      
+        
+        function updateStrongWords(progressEntries) {
+            console.log("updateStrongWords 호출됨", progressEntries);
+
+            const strongWordsGrid = document.getElementById('strong-words-grid');
+            if (!strongWordsGrid) {
+                console.error("strong-words-grid 요소를 찾을 수 없음");
+                return;
+            }
+
+            const strongWords = progressEntries.filter(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                console.log(`[필터링] 단어 ID: ${wordId}, 정답: ${progress.correct}, 오답: ${progress.incorrect}, 합계: ${total}`);
+                return total >= 3 && (progress.correct / total) >= 0.8;
+            });
+
+            console.log("우수 단어 후보:", strongWords);
+
+            if (strongWords.length === 0) {
+                strongWordsGrid.innerHTML = '<p class="no-data">아직 완전히 학습한 단어가 없습니다.</p>';
+                return;
+            }
+
+            strongWords.sort(([,a], [,b]) => {
+                const aAccuracy = a.correct / (a.correct + a.incorrect);
+                const bAccuracy = b.correct / (b.correct + b.incorrect);
+                return bAccuracy - aAccuracy;
+            });
+
+            strongWordsGrid.innerHTML = '';
+            strongWords.slice(0, 12).forEach(([wordId, progress]) => {
+                const total = progress.correct + progress.incorrect;
+                const accuracy = Math.round((progress.correct / total) * 100);
+                const card = document.createElement('div');
+                card.className = 'word-progress-card strong';
+                card.innerHTML = `
+                    <div class="word-pair">단어 ID: ${wordId}</div>
+                    <div class="progress-stats">
+                        <span>정답: ${progress.correct}</span>
+                        <span>오답: ${progress.incorrect}</span>
+                    </div>
+                    <div class="accuracy-bar">
+                        <div class="accuracy-fill" style="width: ${accuracy}%"></div>
+                    </div>
+                    <div style="text-align: center; font-size: 0.9rem; color: #4CAF50;">정답률: ${accuracy}%</div>`;
+                strongWordsGrid.appendChild(card);
+            });
+        }
+
+        // ==================== UI 업데이트 함수 ====================
+
+        function updateUI() {
+            document.getElementById('score').textContent = gameState.score;
+            document.getElementById('coins').textContent = gameState.coins;
+            document.getElementById('level').textContent = gameState.level;
+            document.getElementById('species-count').textContent = gameState.speciesCount;
+            document.getElementById('total-animals').textContent = gameState.totalAnimals;
+        }
+
+        function updateAnimalCollection() {
+            const collection = document.getElementById('animal-collection');
+            if (!collection) return;
+            collection.innerHTML = '';
+            
+            const sortedAnimals = Object.values(gameState.animals).sort((a, b) => b.rarity - a.rarity);
+            
+            sortedAnimals.forEach(animal => {
+                if (animal.count === 0) return;
+
+                const card = document.createElement('div');
+                card.className = 'animal-card';
+                
+                let borderColor = '#87CEEB';
+                if (animal.rarity >= 5) borderColor = '#FFD700';
+                else if (animal.rarity >= 4) borderColor = '#9370DB';
+                else if (animal.rarity >= 3) borderColor = '#32CD32';
+                
+                card.style.borderColor = borderColor;
+                card.style.boxShadow = `0 6px 20px ${borderColor}40`;
+                
+                // 판매가 계산
+                const sellPrice = (animal.animalLevel * 10) + (animal.rarity * 5);
+                
+                card.innerHTML = `
+                    <span class="animal-emoji">${animal.emoji}</span>
+                    <div class="animal-name">${animal.name} (${animal.count}마리)</div>
+                    <div class="animal-level">Lv. ${animal.animalLevel || 1}</div>
+                    <div class="special-name">"${animal.specialName}"</div>
+                    <div class="rarity-badge">★${animal.rarity}</div>
+                    <div style="font-size: 0.8rem; color: #666; margin-top: 5px;">판매가: ${sellPrice}🪙</div>
+                    <div style="font-size: 0.7rem; color: #999; text-align: center; margin-top: 3px;">📖 클릭하면 이야기를 들을 수 있어요</div>
+                    <div style="margin-top: 10px; display: flex; gap: 5px; justify-content: center;">
+                        <button onclick="event.stopPropagation(); startMathProblem('${animal.name}')" style="background: #4169E1; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">레벨업</button>
+                        <button onclick="event.stopPropagation(); quickSellAnimal('${animal.name}')" style="background: #FF6B6B; color: white; border: none; padding: 8px 12px; border-radius: 10px; font-size: 0.8rem; cursor: pointer;">💰판매</button>
+                    </div>
+                `;
+
+                // 카드 클릭시 스토리 표시
+                card.onclick = () => {
+                    generateAnimalStory(animal);
+                };
+                
+                collection.appendChild(card);
+            });
+        }
+
+        // 바로 판매 시스템
+        window.quickSellAnimal = function(animalName) {
+            const animal = gameState.animals[animalName];
+            if (!animal || animal.count <= 0) {
+                alert('판매할 동물이 없습니다.');
+                return;
+            }
+            
+            // 레벨별 판매가 계산
+            const basePrice = animal.animalLevel * 10;
+            const rarityBonus = animal.rarity * 5;
+            const finalPrice = basePrice + rarityBonus;
+            
+            const confirmMessage = `${animal.name} (Lv.${animal.animalLevel}, ★${animal.rarity})을(를) ${finalPrice}🪙에 판매하시겠습니까?\n\n💡 계산법: (레벨 ${animal.animalLevel} × 10) + (희귀도 ${animal.rarity} × 5) = ${finalPrice}🪙`;
+            
+            if (confirm(confirmMessage)) {
+                // 동물 제거
+                animal.count--;
+                gameState.totalAnimals--;
+                
+                // 동물이 0마리가 되면 종류에서도 제거
+                if (animal.count <= 0) {
+                    gameState.speciesCount--;
+                    delete gameState.animals[animalName];
+                }
+                
+                // 코인 추가
+                gameState.coins += finalPrice;
+                
+                // 판매 완료 알림
+                const sellAlert = document.createElement('div');
+                sellAlert.className = 'new-animal-alert';
+                sellAlert.style.background = 'linear-gradient(45deg, #32CD32, #90EE90)';
+                sellAlert.innerHTML = `
+                    <span class="new-animal-emoji">💰</span>
+                    <h3>판매 완료! 🎉</h3>
+                    <p><strong>${animal.name}</strong>을(를) <strong>${finalPrice}🪙</strong>에 판매했습니다!</p>
+                `;
+                document.body.appendChild(sellAlert);
+                setTimeout(() => { sellAlert.remove(); }, 3000);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                saveCurrentUserData();
+                
+                console.log(`${animalName} 판매 완료: +${finalPrice}🪙`);
+            }
+        }
+        
+        function updateEncyclopedia() {
+            const grid = document.getElementById('encyclopedia-grid');
+            grid.innerHTML = '';
+
+            const collectedCount = gameState.speciesCount;
+            const totalCount = animalTypes.length;
+            document.getElementById('collection-progress').textContent = `${collectedCount} / ${totalCount}`;
+            
+            const progressPercent = totalCount > 0 ? (collectedCount / totalCount) * 100 : 0;
+            document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+
+            animalTypes.forEach(animal => {
+                const collectedAnimal = gameState.animals[animal.name];
+                const card = document.createElement('div');
+                card.className = 'encyclopedia-card';
+                
+                if (collectedAnimal && collectedAnimal.count > 0) {
+                    card.innerHTML = `
+                        <span class="animal-emoji">${animal.emoji}</span>
+                        <div class="animal-name">${animal.name}</div>
+                        <div class="animal-count">${collectedAnimal.count}마리 보유</div>
+                        <div class="rarity-badge">★${animal.rarity}</div>
+                        <button class="story-btn">이야기 듣기 📖</button>
+                    `;
+                    card.querySelector('.story-btn').onclick = (event) => {
+                        event.stopPropagation();
+                        generateAnimalStory(collectedAnimal);
+                    };
+                } else {
+                    card.classList.add('uncollected');
+                    card.innerHTML = `
+                        <span class="animal-emoji">❓</span>
+                        <div class="animal-name">???</div>
+                        <div class="animal-count">미발견</div>
+                        <div class="rarity-badge">★${animal.rarity}</div>
+                    `;
+                }
+                grid.appendChild(card);
+            });
+        }
+
+        // ==================== 농장 관련 함수 ====================
+        
+        function initializeFarm() {
+            const farmGrid = document.getElementById('farm-grid');
+            if (!farmGrid) return;
+            
+            farmGrid.innerHTML = '';
+            for (let i = 0; i < 48; i++) {
+                const cell = document.createElement('div');
+                cell.className = 'farm-cell';
+                cell.dataset.index = i;
+                cell.onclick = (event) => placeItemOnFarm(i, event);
+                cell.oncontextmenu = (event) => {
+                    event.preventDefault();
+                    removeItemFromFarm(i);
+                    return false;
+                };
+                farmGrid.appendChild(cell);
+            }
+            updateShop();
+            updateInventory();
+            renderFarm();
+        }
+
+        function updateShop() {
+            const shopGrid = document.getElementById('shop-grid');
+            if (!shopGrid) return;
+            
+            shopGrid.innerHTML = '';
+            shopItems.forEach(item => {
+                const shopItemDiv = document.createElement('div');
+                shopItemDiv.className = 'shop-item';
+                shopItemDiv.innerHTML = `
+                    <div class="item-emoji">${item.emoji}</div>
+                    <div class="item-name">${item.name}</div>
+                    <div class="item-price">🪙 ${item.price}</div>
+                `;
+                shopItemDiv.onclick = () => buyItem(item.name);
+                shopGrid.appendChild(shopItemDiv);
+            });
+        }
+
+        function buyItem(itemName) {
+            const item = shopItems.find(i => i.name === itemName);
+            if (gameState.coins >= item.price) {
+                gameState.coins -= item.price;
+                if (!gameState.farm.items[itemName]) {
+                    gameState.farm.items[itemName] = { ...item, count: 0 };
+                }
+                gameState.farm.items[itemName].count++;
+                alert(`${itemName}을(를) 구매했습니다!`);
+                updateUI();
+                updateInventory();
+                saveCurrentUserData();
+            } else {
+                alert('코인이 부족합니다!');
+            }
+        }
+
+        function updateInventory() {
+            const inventoryGrid = document.getElementById('inventory-grid');
+            if (!inventoryGrid) return;
+            
+            inventoryGrid.innerHTML = '';
+            
+            // 농장 아이템 표시
+            Object.values(gameState.farm.items).forEach(item => {
+                if (item.count > 0) {
+                    const invItemDiv = document.createElement('div');
+                    invItemDiv.className = 'inventory-item';
+                    invItemDiv.dataset.itemName = item.name;
+                    invItemDiv.innerHTML = `
+                        <div class="item-emoji">${item.emoji}</div>
+                        <div class="item-name">${item.name}</div>
+                        <div class="item-count">x ${item.count}</div>
+                    `;
+                    invItemDiv.onclick = () => selectItemToPlace(item.name, false);
+                    inventoryGrid.appendChild(invItemDiv);
+                }
+            });
+            
+            // 동물 표시
+            Object.values(gameState.animals).forEach(animal => {
+                 if (animal.count > 0) {
+                    const invItemDiv = document.createElement('div');
+                    invItemDiv.className = 'inventory-item';
+                    invItemDiv.dataset.itemName = animal.name;
+                    invItemDiv.innerHTML = `
+                        <div class="item-emoji">${animal.emoji}</div>
+                        <div class="item-name">${animal.name}</div>
+                        <div class="item-count">x ${animal.count}</div>
+                    `;
+                    invItemDiv.onclick = () => selectItemToPlace(animal.name, true);
+                    inventoryGrid.appendChild(invItemDiv);
+                }
+            });
+        }
+
+        function selectItemToPlace(itemName, isAnimal) {
+            selectedItemToPlace = { name: itemName, isAnimal };
+            document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
+            const targetElement = document.querySelector(`.inventory-item[data-item-name="${itemName}"]`);
+            if (targetElement) {
+                targetElement.classList.add('selected');
+            }
+        }
+
+        function placeItemOnFarm(index, event) {
+            if (!selectedItemToPlace) return;
+
+            const { name, isAnimal } = selectedItemToPlace;
+            const currentCellContent = gameState.farm.layout[index];
+
+            // 기존 아이템이 있다면 인벤토리로 돌려보내기
+            if (currentCellContent) {
+                if (currentCellContent.isAnimal) {
+                    if (gameState.animals[currentCellContent.name]) {
+                        gameState.animals[currentCellContent.name].count++;
+                    }
+                } else {
+                    if (gameState.farm.items[currentCellContent.name]) {
+                        gameState.farm.items[currentCellContent.name].count++;
+                    }
+                }
+            }
+
+            // 새 아이템 배치
+            if (isAnimal) {
+                if (gameState.animals[name] && gameState.animals[name].count > 0) {
+                    gameState.farm.layout[index] = { 
+                        name, 
+                        isAnimal: true, 
+                        emoji: gameState.animals[name].emoji 
+                    };
+                    gameState.animals[name].count--;
+                }
+            } else {
+                if (gameState.farm.items[name] && gameState.farm.items[name].count > 0) {
+                    gameState.farm.layout[index] = { 
+                        name, 
+                        isAnimal: false, 
+                        emoji: gameState.farm.items[name].emoji 
+                    };
+                    gameState.farm.items[name].count--;
+                }
+            }
+            
+            selectedItemToPlace = null;
+            document.querySelectorAll('.inventory-item').forEach(el => el.classList.remove('selected'));
+            renderFarm();
+            updateInventory();
+            saveCurrentUserData();
+        }
+
+        function removeItemFromFarm(index) {
+            const currentCellContent = gameState.farm.layout[index];
+            if (currentCellContent) {
+                if (currentCellContent.isAnimal) {
+                    if (gameState.animals[currentCellContent.name]) {
+                        gameState.animals[currentCellContent.name].count++;
+                    }
+                } else {
+                    if (gameState.farm.items[currentCellContent.name]) {
+                        gameState.farm.items[currentCellContent.name].count++;
+                    }
+                }
+                gameState.farm.layout[index] = null;
+                renderFarm();
+                updateInventory();
+                saveCurrentUserData();
+            }
+        }
+
+        function renderFarm() {
+            const farmGrid = document.getElementById('farm-grid');
+            if (!farmGrid) return;
+            
+            gameState.farm.layout.forEach((item, index) => {
+                const cell = farmGrid.children[index];
+                if (cell) {
+                    if (item) {
+                        cell.innerHTML = `<span class="${item.isAnimal ? 'placed-animal' : ''}">${item.emoji}</span>`;
+                    } else {
+                        cell.innerHTML = '';
+                    }
+                }
+            });
+        }
+        
+        // ==================== 동물 시장 관련 함수 ====================
+        
+        function updateMarketPage() {
+            updateSellAnimalSelect();
+            loadMarketListings();
+        }
+
+        function updateSellAnimalSelect() {
+            const select = document.getElementById('sell-animal-select');
+            if (!select) return;
+            
+            select.innerHTML = '<option value="">판매할 동물 선택</option>';
+            
+            Object.values(gameState.animals).forEach(animal => {
+                if (animal.count >= 2) { // 2마리 이상 보유한 동물만 판매 가능
+                    const option = document.createElement('option');
+                    option.value = animal.name;
+                    option.textContent = `${animal.emoji} ${animal.name} (${animal.count}마리, Lv.${animal.animalLevel})`;
+                    select.appendChild(option);
+                }
+            });
+        }
+
+        window.sellAnimal = async function() {
+            const select = document.getElementById('sell-animal-select');
+            const priceInput = document.getElementById('sell-price-input');
+            
+            const animalName = select.value;
+            const price = parseInt(priceInput.value);
+            
+            if (!animalName) {
+                alert('판매할 동물을 선택해주세요.');
+                return;
+            }
+            
+            if (!price || price <= 0) {
+                alert('올바른 가격을 입력해주세요.');
+                return;
+            }
+            
+            if (price > gameState.coins * 10 + 1000) { // 합리적인 가격 설정
+                alert('가격이 너무 높습니다. 좀 더 합리적인 가격으로 설정해주세요.');
+                return;
+            }
+            
+            const animal = gameState.animals[animalName];
+            if (animal.count < 2) {
+                alert('최소 2마리 이상 보유해야 판매할 수 있습니다.');
+                return;
+            }
+            
+            try {
+                // Firebase에 판매 등록
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const marketRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/market");
+                
+                const listingData = {
+                    animalName: animalName,
+                    animalEmoji: animal.emoji,
+                    animalLevel: animal.animalLevel,
+                    specialName: animal.specialName,
+                    rarity: animal.rarity,
+                    price: price,
+                    seller: currentUserProfile.name,
+                    sellerId: currentUserId,
+                    listedAt: new Date().toISOString()
+                };
+                
+                await window.firebase.setDoc(window.firebase.doc(marketRef, `${currentUserId}_${animalName}_${Date.now()}`), listingData);
+                
+                // 인벤토리에서 동물 제거
+                animal.count--;
+                gameState.totalAnimals--;
+                
+                alert(`${animalName}이(가) ${price}점에 판매 등록되었습니다!`);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                updateSellAnimalSelect();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+                // 입력 초기화
+                select.value = '';
+                priceInput.value = '';
+                
+            } catch (error) {
+                console.error('Error selling animal:', error);
+                alert('판매 등록 중 오류가 발생했습니다.');
+            }
+        }
+
+        async function loadMarketListings() {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const marketRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/market");
+                const querySnapshot = await window.firebase.getDocs(marketRef);
+                
+                const listings = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    listings.push({
+                        id: doc.id,
+                        ...data
+                    });
+                });
+                
+                // 최신순으로 정렬
+                listings.sort((a, b) => new Date(b.listedAt) - new Date(a.listedAt));
+                
+                displayMarketListings(listings);
+                
+            } catch (error) {
+                console.error('Error loading market listings:', error);
+                document.getElementById('market-body').innerHTML = '<tr><td colspan="6">시장 정보를 불러오는 중 오류가 발생했습니다.</td></tr>';
+            }
+        }
+
+        function displayMarketListings(listings) {
+            const tbody = document.getElementById('market-body');
+            if (!tbody) return;
+            
+            if (listings.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="6">현재 판매 중인 동물이 없습니다.</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = '';
+            
+            listings.forEach(listing => {
+                const row = document.createElement('tr');
+                
+                // 자신이 올린 상품은 다른 색상으로 표시
+                if (listing.seller === currentUserProfile.name) {
+                    row.style.backgroundColor = '#f0f8ff';
+                }
+                
+                row.innerHTML = `
+                    <td>${listing.animalEmoji}</td>
+                    <td>${listing.animalName}<br><small>"${listing.specialName}"</small></td>
+                    <td>Lv. ${listing.animalLevel}<br><small>★${listing.rarity}</small></td>
+                    <td>${listing.seller}</td>
+                    <td><strong>${listing.price}</strong>🪙</td>
+                    <td>
+                        ${listing.seller === currentUserProfile.name 
+                            ? `<button class="nav-btn" onclick="cancelListing('${listing.id}')" style="background: #ff6b6b;">취소</button>`
+                            : `<button class="nav-btn" onclick="buyAnimal('${listing.id}', ${listing.price}, '${listing.animalName}')">구매</button>`
+                        }
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+
+        window.buyAnimal = async function(listingId, price, animalName) {
+            if (gameState.coins < price) {
+                alert('코인이 부족합니다!');
+                return;
+            }
+
+            if (!confirm(`${animalName}을(를) ${price}코인에 구매하시겠습니까?`)) {
+                return;
+            }
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
+                
+                // 판매 정보 가져오기
+                const listingDoc = await window.firebase.getDoc(listingRef);
+                if (!listingDoc.exists()) {
+                    alert('이미 판매된 상품입니다.');
+                    loadMarketListings();
+                    return;
+                }
+                
+                const listingData = listingDoc.data();
+                
+                // 점수 차감
+                gameState.coins -= price;
+                
+                // 동물 추가
+                const animalType = animalTypes.find(a => a.name === animalName);
+                if (!gameState.animals[animalName]) {
+                    gameState.animals[animalName] = {
+                        ...animalType,
+                        count: 0,
+                        animalLevel: listingData.animalLevel,
+                        story: ""
+                    };
+                    gameState.speciesCount++;
+                }
+                gameState.animals[animalName].count++;
+                gameState.animals[animalName].animalLevel = Math.max(
+                    gameState.animals[animalName].animalLevel, 
+                    listingData.animalLevel
+                );
+                gameState.totalAnimals++;
+                
+                // 판매 정보 삭제
+                await window.firebase.deleteDoc(listingRef);
+                
+                alert(`${animalName}을(를) 성공적으로 구매했습니다!`);
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+            } catch (error) {
+                console.error('Error buying animal:', error);
+                alert('구매 중 오류가 발생했습니다.');
+            }
+        }
+
+        window.cancelListing = async function(listingId) {
+            if (!confirm('판매를 취소하시겠습니까?')) {
+                return;
+            }
+            
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", listingId);
+                
+                // 판매 정보 가져오기
+                const listingDoc = await window.firebase.getDoc(listingRef);
+                if (!listingDoc.exists()) {
+                    alert('이미 처리된 상품입니다.');
+                    loadMarketListings();
+                    return;
+                }
+                
+                const listingData = listingDoc.data();
+                
+                // 동물 다시 인벤토리에 추가
+                const animalType = animalTypes.find(a => a.name === listingData.animalName);
+                if (!gameState.animals[listingData.animalName]) {
+                    gameState.animals[listingData.animalName] = {
+                        ...animalType,
+                        count: 0,
+                        animalLevel: listingData.animalLevel,
+                        story: ""
+                    };
+                    gameState.speciesCount++;
+                }
+                gameState.animals[listingData.animalName].count++;
+                gameState.totalAnimals++;
+                
+                // 판매 정보 삭제
+                await window.firebase.deleteDoc(listingRef);
+                
+                alert('판매가 취소되었습니다. 동물이 인벤토리로 돌아왔습니다.');
+                
+                // UI 업데이트
+                updateUI();
+                updateAnimalCollection();
+                updateSellAnimalSelect();
+                loadMarketListings();
+                saveCurrentUserData();
+                
+            } catch (error) {
+                console.error('Error canceling listing:', error);
+                alert('판매 취소 중 오류가 발생했습니다.');
+            }
+        }
+
+        // ==================== 동물 합성 함수 ====================
+        
+        function updateSynthesisPage() {
+            const grid = document.getElementById('synthesis-grid');
+            if (!grid) return;
+            
+            grid.innerHTML = '';
+
+            synthesisRecipes.forEach(recipe => {
+                const [ing1, ing2] = recipe.ingredients;
+                const result = animalTypes.find(a => a.name === recipe.result);
+                
+                // 동물 데이터가 없으면 건너뛰기
+                if (!result) {
+                    console.log(`결과 동물 '${recipe.result}' 데이터가 없습니다.`);
+                    return;
+                }
+
+                const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
+                const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
+                const canSynthesize = hasIng1 && hasIng2;
+
+                const ing1Data = animalTypes.find(a => a.name === ing1);
+                const ing2Data = animalTypes.find(a => a.name === ing2);
+                
+                // 재료 동물 데이터가 없으면 건너뛰기
+                if (!ing1Data || !ing2Data) {
+                    console.log(`재료 동물 '${ing1}' 또는 '${ing2}' 데이터가 없습니다.`);
+                    return;
+                }
+
+                const card = document.createElement('div');
+                card.className = 'synthesis-card';
+                card.innerHTML = `
+                    <div class="synthesis-ingredient ${hasIng1 ? 'owned' : 'not-owned'}">
+                        <span class="animal-emoji">${ing1Data.emoji}</span>
+                        <div>${ing1}</div>
+                    </div>
+                    <div class="synthesis-symbol">+</div>
+                    <div class="synthesis-ingredient ${hasIng2 ? 'owned' : 'not-owned'}">
+                        <span class="animal-emoji">${ing2Data.emoji}</span>
+                        <div>${ing2}</div>
+                    </div>
+                    <div class="synthesis-symbol">=</div>
+                    <div class="synthesis-result">
+                        <span class="animal-emoji">${result.emoji}</span>
+                        <div>${result.name}</div>
+                    </div>
+                    <button class="synthesis-btn" onclick="performSynthesis('${recipe.result}')" ${!canSynthesize ? 'disabled' : ''}>합성</button>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        window.performSynthesis = function(resultName) {
+            const recipe = synthesisRecipes.find(r => r.result === resultName);
+            if (!recipe) return;
+
+            const [ing1, ing2] = recipe.ingredients;
+            const hasIng1 = gameState.animals[ing1] && gameState.animals[ing1].count > 0;
+            const hasIng2 = gameState.animals[ing2] && gameState.animals[ing2].count > 0;
+
+            if (hasIng1 && hasIng2) {
+                if (confirm(`'${ing1}'와(과) '${ing2}'를 사용해 '${resultName}'을(를) 만드시겠습니까?\n재료로 사용된 동물은 사라집니다!`)) {
+                    gameState.animals[ing1].count--;
+                    gameState.animals[ing2].count--;
+                    gameState.totalAnimals -= 2;
+
+                    const resultAnimalData = animalTypes.find(a => a.name === resultName);
+                    addAnimal(resultAnimalData);
+
+                    alert(`합성 성공! 전설적인 동물 '${resultName}'을(를) 획득했습니다!`);
+                    
+                    updateSynthesisPage();
+                    updateAnimalCollection();
+                    saveCurrentUserData();
+                }
+            } else {
+                alert('재료가 부족합니다!');
+            }
+        }
+
+        // ==================== AI 스토리텔러 함수 ====================
+
+        function openStoryModal(title) {
+            document.getElementById('story-modal-title').textContent = `"${title}" 이야기`;
+            document.getElementById('story-text').textContent = '';
+            document.getElementById('story-loading').style.display = 'block';
+            document.getElementById('story-modal').style.display = 'flex';
+        }
+
+        window.closeStoryModal = function() {
+            document.getElementById('story-modal').style.display = 'none';
+        }
+
+        async function generateAnimalStory(animal) {
+            openStoryModal(animal.specialName);
+            const storyTextElement = document.getElementById('story-text');
+            const loadingElement = document.getElementById('story-loading');
+
+            // 이미 저장된 이야기가 있는지 확인
+            if (animal.story) {
+                storyTextElement.textContent = animal.story;
+                loadingElement.style.display = 'none';
+                console.log("저장된 이야기 불러오기 완료!");
+                return;
+            }
+
+            try {
+                // Firebase Cloud Function 호출
+                const generateStoryFunction = window.firebase.httpsCallable(window.firebase.functions, 'generateStory');
+                const result = await generateStoryFunction({ 
+                    animal: {
+                        name: animal.name,
+                        specialName: animal.specialName,
+                        emoji: animal.emoji,
+                        rarity: animal.rarity
+                    }
+                });
+                
+                const text = result.data.story;
+                storyTextElement.textContent = text;
+                
+                // 생성된 이야기를 gameState에 저장하고, Firebase에 업데이트
+                gameState.animals[animal.name].story = text;
+                await saveCurrentUserData();
+                console.log("새로운 이야기 생성 및 Firebase에 저장 완료!");
+
+            } catch (error) {
+                console.error("Error generating story via Cloud Function:", error);
+                storyTextElement.textContent = "이야기를 불러오는 중 오류가 발생했어요. 잠시 후 다시 시도해주세요.";
+            } finally {
+                loadingElement.style.display = 'none';
+            }
+        }
+
+        // ==================== 특수 효과 함수 ====================
+        function showNewAnimalAlert(animal) {
+            const alert = document.createElement('div');
+            alert.className = 'new-animal-alert';
+            alert.innerHTML = `
+                <span class="new-animal-emoji">${animal.emoji}</span>
+                <h3>새로운 동물 발견! 🎉</h3>
+                <p><strong>${animal.specialName}</strong> (${animal.name})을(를) 획득했습니다!</p>
+            `;
+            document.body.appendChild(alert);
+            setTimeout(() => { alert.remove(); }, 1500);
+        }
+
+        function showLevelUp() {
+            const alert = document.createElement('div');
+            alert.className = 'new-animal-alert';
+            alert.innerHTML = `
+                <span class="new-animal-emoji">⭐</span>
+                <h3>레벨 업! 🎉</h3>
+                <p>레벨 ${gameState.level}이 되었습니다!</p>
+                <p>더 희귀한 동물을 만날 수 있어요!</p>
+            `;
+            document.body.appendChild(alert);
+            setTimeout(() => { alert.remove(); }, 1500);
+        }
+
+        // ==================== 사용자 관리 및 데이터 함수 (Firebase) ====================
+
+        async function saveCurrentUserData() {
+            if (!currentUserProfile.name) return;
+            
+            // 현재 세션 플레이 시간 업데이트
+            const currentTotalPlayTime = updateSessionPlayTime();
+            
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", currentUserProfile.name);
+            
+            const dataToSave = {
+                ...currentUserProfile,
+                score: gameState.score,
+                coins: gameState.coins,
+                level: gameState.level,
+                animals: gameState.animals,
+                totalAnimals: gameState.totalAnimals,
+                speciesCount: gameState.speciesCount,
+                farm: gameState.farm,
+                totalPlayTimeMinutes: currentTotalPlayTime,
+                lastPlayed: new Date().toISOString()
+            };
+
+            try {
+                await window.firebase.setDoc(userDocRef, dataToSave, { merge: true });
+                console.log("Data saved for", currentUserProfile.name);
+            } catch (error) {
+                console.error("Error saving data:", error);
+            }
+        }
+
+        async function loadUserData(userName) {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", userName);
+            const docSnap = await window.firebase.getDoc(userDocRef);
+
+            if (docSnap.exists()) {
+                return docSnap.data();
+            } else {
+                return null;
+            }
+        }
+
+        async function hashPin(pin, salt) {
+            const encoder = new TextEncoder();
+            const data = encoder.encode(pin + salt);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function handleSignup() {
+            const nameInput = document.getElementById('player-name-input');
+            const pinInput = document.getElementById('player-pin-input');
+            const feedback = document.getElementById('login-feedback');
+            const name = nameInput.value.trim();
+            const pin = pinInput.value;
+
+            if (!name || !pin) {
+                feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
+                return;
+            }
+            if (!/^\d{4}$/.test(pin)) {
+                feedback.textContent = "PIN은 4자리 숫자여야 합니다.";
+                return;
+            }
+
+            feedback.textContent = "확인 중...";
+            const existingProfile = await loadUserData(name);
+            if (existingProfile) {
+                feedback.textContent = "이미 사용 중인 이름입니다.";
+                return;
+            }
+
+            const hashedPin = await hashPin(pin, name);
+            const newProfile = {
+                name: name,
+                pinHash: hashedPin,
+                score: 0,
+                coins: 0,
+                level: 1,
+                animals: {},
+                totalAnimals: 0,
+                speciesCount: 0,
+                farm: { layout: Array(48).fill(null), items: {} },
+                totalPlayTimeMinutes: 0,
+                createdAt: new Date().toISOString(),
+                lastPlayed: new Date().toISOString()
+            };
+
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", newProfile.name);
+            await window.firebase.setDoc(userDocRef, newProfile);
+
+            alert(`🎉 ${name} 플레이어 생성 완료!`);
+            await startGameWithProfile(newProfile);
+        }
+
+        async function handleLogin() {
+            const nameInput = document.getElementById('player-name-input');
+            const pinInput = document.getElementById('player-pin-input');
+            const feedback = document.getElementById('login-feedback');
+            const name = nameInput.value.trim();
+            const pin = pinInput.value;
+
+            if (!name || !pin) {
+                feedback.textContent = "이름과 PIN을 모두 입력해주세요.";
+                return;
+            }
+
+            feedback.textContent = "로그인 중...";
+            const profileData = await loadUserData(name);
+
+            if (!profileData) {
+                feedback.textContent = "존재하지 않는 플레이어입니다.";
+                return;
+            }
+
+            const hashedPin = await hashPin(pin, name);
+            if (hashedPin === profileData.pinHash) {
+                await startGameWithProfile(profileData);
+            } else {
+                feedback.textContent = "PIN이 일치하지 않습니다.";
+            }
+        }
+
+        async function startGameWithProfile(profileData) {
+            currentUserProfile = profileData;
+            
+            // 플레이 시간 초기화
+            totalPlayTimeMinutes = profileData.totalPlayTimeMinutes || 0;
+            sessionStartTime = Date.now();
+            
+            gameState = {
+                score: profileData.score || 0,
+                coins: profileData.coins || 0,
+                level: profileData.level || 1,
+                animals: profileData.animals || {},
+                totalAnimals: profileData.totalAnimals || 0,
+                speciesCount: profileData.speciesCount || 0,
+                farm: profileData.farm || { layout: Array(48).fill(null), items: {} },
+                currentQuestion: {}
+            };
+
+            document.getElementById('login-overlay').style.display = 'none';
+            document.querySelector('.game-container').style.display = 'block';
+            document.getElementById('current-user-name').textContent = currentUserProfile.name;
+            
+            // 동물 데이터가 로드되지 않았으면 로드
+            if (animalTypes.length === 0) {
+                await window.loadAnimalsFromJSON();
+            }
+            
+            updateUI();
+            updateAnimalCollection();
+            initializeFarm();
+            
+            // 사용자 학습 진행도 로드 후 퀴즈 시작
+            try {
+                await loadUserProgress();
+                selectDifficulty(1);
+            } catch (error) {
+                console.error('사용자 진행도 로드 실패:', error);
+                selectDifficulty(1);
+            }
+            
+            showPage('game', document.querySelector('.nav-btn'));
+            // 알람 확인 (3초 후)
+            setTimeout(() => {
+                checkAndShowNotifications();
+            }, 3000);
+        }
+
+        window.logout = function() {
+            // 로그아웃 전에 플레이 시간 저장
+            if (sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                totalPlayTimeMinutes += sessionMinutes;
+                sessionStartTime = null;
+            }
+            
+            saveCurrentUserData();
+            currentUserProfile = {};
+            gameState = {};
+            totalPlayTimeMinutes = 0;
+            
+            document.getElementById('login-overlay').style.display = 'flex';
+            document.querySelector('.game-container').style.display = 'none';
+            document.getElementById('player-name-input').value = '';
+            document.getElementById('player-pin-input').value = '';
+            document.getElementById('login-feedback').textContent = '';
+            window.updateHallOfFame();
+        }
+
+        async function getAllProfiles() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
+            const querySnapshot = await window.firebase.getDocs(profilesColRef);
+            const profiles = [];
+            querySnapshot.forEach((doc) => {
+                profiles.push(doc.data());
+            });
+            return profiles;
+        }
+
+        window.updateHallOfFame = async function() {
+            try {
+                const profiles = await getAllProfiles();
+                if (profiles.length === 0) {
+                     document.querySelector('#fame-species .player-name').textContent = `아직 플레이어가 없습니다.`;
+                     document.querySelector('#fame-level .player-name').textContent = `새로운 플레이어가 되어보세요!`;
+                    return;
+                }
+
+                let mostSpecies = { name: '-', count: -1 };
+                let highestLevel = { name: '-', animal: '-', level: 0 };
+
+                profiles.forEach(p => {
+                    if ((p.speciesCount || 0) > mostSpecies.count) {
+                        mostSpecies = { name: p.name, count: p.speciesCount };
+                    }
+                    if (p.animals) {
+                        Object.values(p.animals).forEach(a => {
+                            if ((a.animalLevel || 1) > highestLevel.level) {
+                                highestLevel = { name: p.name, animal: a.name, level: a.animalLevel };
+                            }
+                        });
+                    }
+                });
+
+                document.querySelector('#fame-species .player-name').textContent = `${mostSpecies.name} (${mostSpecies.count}종)`;
+                document.querySelector('#fame-level .player-name').textContent = `${highestLevel.name} (Lv.${highestLevel.level} ${highestLevel.animal})`;
+            } catch (error) {
+                console.error('명예의 전당 업데이트 오류:', error);
+            }
+        }
+
+        async function updateRankingPage() {
+            const profiles = await getAllProfiles();
+            const sortedProfiles = profiles.sort((a, b) => (b.score || 0) - (a.score || 0));
+            const rankingBody = document.getElementById('ranking-body');
+            rankingBody.innerHTML = '';
+
+            sortedProfiles.forEach((p, index) => {
+                const row = document.createElement('tr');
+                if (p.name === currentUserProfile.name) {
+                    row.className = 'my-rank';
+                }
+                
+                // 플레이 시간 계산 (현재 로그인한 사용자의 경우 현재 세션 포함)
+                let displayPlayTime = p.totalPlayTimeMinutes || 0;
+                if (p.name === currentUserProfile.name && sessionStartTime) {
+                    const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                    displayPlayTime += sessionMinutes;
+                }
+                
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td><span class="clickable-user-name" onclick="visitUserFarm('${p.name}')" style="color: #4169E1; cursor: pointer; text-decoration: underline;">${p.name}</span></td>
+                    <td>${p.score || 0}</td>
+                    <td>${p.level || 1}</td>
+                    <td>${p.speciesCount || 0}</td>
+                    <td>${formatPlayTime(displayPlayTime)}</td>
+                    <td><button class="nav-btn" onclick="visitUserFarm('${p.name}')" style="font-size: 0.8rem; padding: 6px 12px;">🏡 방문</button></td>
+                `;
+                rankingBody.appendChild(row);
+            });
+        }
+
+        // 알람 확인 함수 (임시)
+        async function checkAndShowNotifications() {
+            console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
+            // 나중에 알람 시스템 구현 예정
+        }
+
+        // ==================== 페이지 관리 및 초기화 ====================
+
+        window.showPage = function(pageName, element) {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            
+            document.getElementById(pageName + '-page').classList.add('active');
+            if (element) {
+                element.classList.add('active');
+            }
+            
+            const gameStats = document.getElementById('game-stats');
+            const userInfo = document.getElementById('user-info');
+            
+            if (pageName === 'game') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+            } else if (pageName === 'learning') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateLearningStats();
+            } else if (pageName === 'market') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateMarketPage();
+            } else if (pageName === 'encyclopedia') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateEncyclopedia();
+            } else if (pageName === 'farm') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+                initializeFarm();
+            } else if (pageName === 'synthesis') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateSynthesisPage();
+            } else if (pageName === 'ranking') {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'block';
+                updateRankingPage();
+            } else {
+                gameStats.style.display = 'none';
+                userInfo.style.display = 'none';
+            }
+        }
+        
+        // ==================== 이벤트 리스너 ====================
+        
+        document.getElementById('login-btn').addEventListener('click', async () => {
+            try {
+                await handleLogin();
+            } catch (error) {
+                console.error('로그인 오류:', error);
+                document.getElementById('login-feedback').textContent = "로그인 중 오류가 발생했습니다.";
+            }
+        });
+
+        document.getElementById('signup-btn').addEventListener('click', async () => {
+            try {
+                await handleSignup();
+            } catch (error) {
+                console.error('회원가입 오류:', error);
+                document.getElementById('login-feedback').textContent = "회원가입 중 오류가 발생했습니다.";
+            }
+        });
+
+        document.getElementById('player-pin-input').addEventListener('keypress', async (e) => {
+            if (e.key === 'Enter') {
+                try {
+                    await handleLogin();
+                } catch (error) {
+                    console.error('로그인 오류:', error);
+                    document.getElementById('login-feedback').textContent = "로그인 중 오류가 발생했습니다.";
+                }
+            }
+        });
+
+        // 음성 합성 준비
+        window.speechSynthesis.onvoiceschanged = () => {
+            window.speechSynthesis.getVoices();
+        };
+
+        // 페이지 숨김/표시 시 플레이 시간 저장
+        document.addEventListener('visibilitychange', () => {
+            if (document.visibilityState === 'hidden' && currentUserProfile.name) {
+                saveCurrentUserData();
+            } else if (document.visibilityState === 'visible' && currentUserProfile.name) {
+                sessionStartTime = Date.now(); // 다시 돌아왔을 때 세션 재시작
+            }
+        });
+
+        // 페이지 종료 시 플레이 시간 저장
+        window.addEventListener('beforeunload', () => {
+            if (currentUserProfile.name && sessionStartTime) {
+                const sessionMinutes = (Date.now() - sessionStartTime) / (1000 * 60);
+                totalPlayTimeMinutes += sessionMinutes;
+                // beforeunload에서는 비동기 작업이 제한적이므로 localStorage 사용
+                localStorage.setItem(`playTime_${currentUserProfile.name}`, totalPlayTimeMinutes.toString());
+            }
+        });
+
+        // 주기적으로 플레이 시간 저장 (5분마다)
+        setInterval(() => {
+            if (currentUserProfile.name && sessionStartTime) {
+                saveCurrentUserData();
+            }
+        }, 5 * 60 * 1000);
+
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v8.0 - 플레이시간 & 농장방문 기능 추가)');
+    </script>
 </body>
 </html>
