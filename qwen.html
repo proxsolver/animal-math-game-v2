@@ -1532,95 +1532,95 @@ function updateWeakWords(progressEntries) {
     });
 }
 
-// ==================== 🔥 startTargetedReview 함수 추가 🔥 ====================
+
+        // ==================== 🔥 startTargetedReview 함수 (수정됨) 🔥 ====================
 /**
  * 특정 단어에 대한 퀴즈를 바로 시작합니다. (복습 기능)
- * @param {string} wordId - 복습할 동물 이름 (예: '고양이')
+ * words 폴더의 난이도별 JSON 파일에서 단어를 찾습니다.
+ * @param {string} wordId - 복습할 단어의 영어 이름 (예: 'adventure', 'purpose')
  */
 async function startTargetedReview(wordId) {
     console.log(`startTargetedReview 호출됨. wordId: ${wordId}`);
 
-    // 1. 먼저 동물 데이터를 로드했는지 확인
-    if (!animalTypes || animalTypes.length === 0) {
-        console.warn("animalTypes가 로드되지 않음. 로드 시도...");
-        await window.loadAnimalsFromJSON(); // 이 함수는 이미 정의되어 있음
-        if (!animalTypes || animalTypes.length === 0) {
-            alert("동물 데이터를 로드할 수 없습니다. 나중에 다시 시도해주세요.");
-            return;
+    // 1. words 폴더의 난이도별 JSON 파일에서 단어를 찾습니다.
+    let foundWordData = null;
+    let sourceInfo = 'unknown';
+
+    // 난이도 1, 2, 3 순서로 파일을 검색합니다.
+    for (let difficulty = 1; difficulty <= 3; difficulty++) {
+        if (foundWordData) break; // 이미 찾았으면 중단
+        try {
+            console.log(`레벨 ${difficulty} JSON 파일에서 "${wordId}" 검색 중...`);
+            // --- 수정된 부분: 상대 경로로 변경 ---
+            const response = await fetch(`./words/level${difficulty}.json`);
+            // --- 수정된 부분 끝 ---
+            if (!response.ok) {
+                console.warn(`level${difficulty}.json 파일 로드 실패: ${response.status}`);
+                continue;
+            }
+            const data = await response.json();
+            // --- 수정된 부분: 대소문자 구분 없이 찾기 ---
+            const wordEntry = data.words.find(w => w.english.toLowerCase() === wordId.toLowerCase());
+            // --- 수정된 부분 끝 ---
+            if (wordEntry) {
+                foundWordData = {
+                    korean: wordEntry.korean,
+                    english: wordEntry.english,
+                    options: wordEntry.options
+                };
+                sourceInfo = `level${difficulty}.json`;
+                console.log(`"${wordId}"를 ${sourceInfo}에서 찾았습니다.`);
+                break;
+            }
+        } catch (err) {
+            console.error(`level${difficulty}.json 검색 중 오류:`, err);
         }
     }
 
-    // 2. 선택된 단어에 해당하는 동물 데이터 찾기
-    const animal = animalTypes.find(a => a.name === wordId);
-    if (!animal) {
-        console.error(`해당 동물 데이터를 찾을 수 없습니다: ${wordId}`);
-        alert("단어 데이터를 찾을 수 없습니다.");
-        return;
-    }
-
-    // 3. 퀴즈 데이터 설정 (기존 로직 활용)
-    try {
-        // JSON 파일에서 해당 단어의 상세 정보 로드 시도
-        const response = await fetch('https://raw.githubusercontent.com/ChaSeunghun/animal-collecting-learning-game/main/animals.json');
-        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-        const data = await response.json();
-        const wordDataFromJson = data.animals.find(a => a.name === wordId);
-
-        if (wordDataFromJson) {
-            // JSON에서 데이터를 성공적으로 가져온 경우
-            currentWordData = {
-                id: wordDataFromJson.name,
-                korean: wordDataFromJson.name,
-                english: wordDataFromJson.english,
-                options: generateOptions(wordDataFromJson.english), // 오답 선택지 생성
-                difficulty: 'targeted-review',
-                source: 'json' // 출처 기록
-            };
-        } else {
-            // JSON에 없으면 폴백 데이터 사용
-            console.warn(`JSON에 단어 ${wordId}가 없습니다. 폴백 데이터 사용.`);
-            currentWordData = {
-                id: animal.name,
-                korean: animal.name,
-                english: animal.english,
-                options: generateOptions(animal.english),
-                difficulty: 'targeted-review',
-                source: 'fallback'
-            };
-        }
-    } catch (error) {
-        console.error('JSON 단어 로드 실패, 폴백 사용:', error);
-        // 네트워크 오류 등으로 JSON 로드 실패 시 폴백
-        currentWordData = {
-            id: animal.name,
-            korean: animal.name,
-            english: animal.english,
-            options: generateOptions(animal.english),
-            difficulty: 'targeted-review',
-            source: 'fallback'
+    // 2. 어디에서도 찾지 못했을 경우, 폴백 데이터 사용
+    // --- 수정된 부분: animalTypes 관련 로직 제거, 폴백 로직 강화 ---
+    if (!foundWordData) {
+        console.warn(`"${wordId}"를 words 폴더의 JSON 파일에서 찾지 못했습니다. 폴백 데이터 사용.`);
+        foundWordData = {
+            korean: wordId, // 한국어 뜻이 없으므로 영어 단어명을 그대로 표시용으로 사용
+            english: wordId, // 영어 단어명
+            // options는 폴백 단어로 생성
+            options: [wordId, `not-${wordId}`, `${wordId}-word`, `the-${wordId}`] // 매우 기본적인 폴백 옵션
         };
+        sourceInfo = 'fallback';
     }
+    // --- 수정된 부분 끝 ---
 
-    // 4. 현재 퀴즈 정보 설정
+    // 3. 퀴즈 데이터 설정
+    currentWordData = {
+        id: foundWordData.english.toLowerCase(),
+        korean: foundWordData.korean,
+        english: foundWordData.english,
+        // --- 수정된 부분: options가 없을 경우를 대비한 폴백 ---
+        options: foundWordData.options && foundWordData.options.length >= 4 ? foundWordData.options : [foundWordData.english, 'option1', 'option2', 'option3'],
+        // --- 수정된 부분 끝 ---
+        difficulty: 'targeted-review',
+        source: sourceInfo.includes('json') ? 'json' : sourceInfo
+    };
+
     currentEnglishQuiz = {
         answer: currentWordData.english,
         wordId: currentWordData.id
     };
 
-    // 5. 게임 페이지로 이동
-    showPage('game'); // 기존 함수 사용
+    // 4. 게임 페이지로 이동
+    showPage('game');
 
-    // 6. 화면에 단어 표시
-    displayCurrentWord(); // 기존 함수 사용
+    // 5. 화면에 단어 표시
+    displayCurrentWord();
 
-    // 7. 사용자에게 복습임을 알림
+    // 6. 사용자에게 복습임을 알림
     const feedback = document.getElementById('feedback');
     if (feedback) {
-        feedback.textContent = `"${animal.name}" 복습 퀴즈 시작! 🎯`;
+        feedback.textContent = `"${foundWordData.korean}" 복습 퀴즈 시작! 🎯`;
         feedback.style.color = '#FF6B6B';
         feedback.style.fontWeight = 'bold';
 
-        // 1.5초 후 알림 제거
         setTimeout(() => {
             if (feedback.textContent.includes('복습 퀴즈 시작')) {
                 feedback.textContent = '';
@@ -1630,8 +1630,8 @@ async function startTargetedReview(wordId) {
         }, 1500);
     }
 
-    // 8. 🔊 영어 발음 재생
-    speakWord(currentWordData.english); // 기존 함수 사용
+    // 7. 🔊 영어 발음 재생
+    speakWord(currentWordData.english);
 }
       
         
