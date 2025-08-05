@@ -602,7 +602,7 @@
         
         let gameState = {
             score: 0,
-            coins: 0,      // 🆕 새로 추가!
+            coins: 0,
             level: 1,
             currentQuestion: {},
             animals: {},
@@ -706,7 +706,7 @@
                 
                 const notificationData = {
                     recipient: recipientName,
-                    type: type, // 'sale_success', 'sale_expired', 'purchase_success'
+                    type: type,
                     message: message,
                     animalData: animalData,
                     createdAt: new Date().toISOString(),
@@ -961,10 +961,8 @@
             
             try {
                 if (currentDifficulty === 'review') {
-                    // 복습 모드: 틀린 단어들 중에서 선택
                     await loadReviewWord();
                 } else {
-                    // 일반 모드: 새로운 단어 또는 기존 단어 로드
                     await loadWordForDifficulty(currentDifficulty);
                 }
                 
@@ -1009,7 +1007,6 @@
             try {
                 console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
                 
-                // GitHub Pages에서 JSON 파일 로드
                 const response = await fetch(`./words/level${difficulty}.json`);
                 
                 if (!response.ok) {
@@ -1027,7 +1024,7 @@
                 const randomWord = words[Math.floor(Math.random() * words.length)];
                 
                 currentWordData = {
-                    id: randomWord.english.toLowerCase(), // 영어 단어를 ID로 사용                    
+                    id: randomWord.english.toLowerCase(),
                     korean: randomWord.korean,
                     english: randomWord.english,
                     options: randomWord.options,
@@ -1136,13 +1133,11 @@
             let finalOptions = [];
             
             if (currentWordData.options && currentWordData.options.length >= 4) {
-                // AI에서 받은 단어의 경우: 이미 정답+오답이 모두 포함됨
                 const correctAnswer = currentWordData.english;
                 const wrongOptions = currentWordData.options.filter(opt => opt !== correctAnswer);
                 const shuffledWrong = wrongOptions.sort(() => Math.random() - 0.5).slice(0, 3);
                 finalOptions = [correctAnswer, ...shuffledWrong].sort(() => Math.random() - 0.5);
             } else {
-                // 폴백 단어의 경우: options 배열을 직접 사용
                 finalOptions = [...currentWordData.options].sort(() => Math.random() - 0.5);
             }
             
@@ -1217,18 +1212,11 @@
                 const newAnimal = getRandomAnimal();
                 addAnimal(newAnimal);
                 
-
-        // --- 이 부분이 핵심 수정 지점입니다 ---
-        // 다음 레벨에 도달하기 위한 필요 점수 계산 로직 변경
-        // Math.pow(gameState.level, 2)를 사용하여 레벨의 제곱에 비례하도록 변경
-        // 상수 2000은 게임 난이도에 따라 조절할 수 있습니다.
-                
-        if (gameState.score >= Math.pow(gameState.level, 2) * 2000) { 
-            gameState.level++;
-            showLevelUp();
-        }
-        // --- 수정 끝 ---
-                        
+                // 레벨업 조건 체크
+                if (gameState.score >= Math.pow(gameState.level, 2) * 2000) { 
+                    gameState.level++;
+                    showLevelUp();
+                }
                 
                 saveCurrentUserData();
                 setTimeout(() => generateEnglishQuiz(), 1500);
@@ -1325,6 +1313,30 @@
             
             const answerInput = document.getElementById('math-answer-input');
             const submitBtn = document.getElementById('math-submit-btn');
+            
+            answerInput.value = '';
+            document.getElementById('math-feedback').textContent = '';
+            
+            answerInput.disabled = false;
+            submitBtn.disabled = false;
+
+            submitBtn.onclick = () => checkMathAnswer(animalName);
+            document.getElementById('math-modal').style.display = 'flex';
+            answerInput.focus();
+        }
+
+        // 수학 문제 정답 확인
+        function checkMathAnswer(animalName) {
+            const answerInput = document.getElementById('math-answer-input');
+            const submitBtn = document.getElementById('math-submit-btn');
+            const userAnswer = parseInt(answerInput.value);
+            const feedback = document.getElementById('math-feedback');
+            
+            if (isNaN(userAnswer)) {
+                feedback.textContent = '숫자를 입력해주세요!';
+                feedback.style.color = 'red';
+                return;
+            }
             
             answerInput.disabled = true;
             submitBtn.disabled = true;
@@ -2002,7 +2014,7 @@
                 
             } catch (error) {
                 console.error('Error loading market listings:', error);
-                document.getElementById('market-body').innerHTML = '<tr><td colspan="6">시장 정보를 불러오는 중 오류가 발생했습니다.</td></tr>';
+                document.getElementById('market-body').innerHTML = '<tr><td colspan="7">시장 정보를 불러오는 중 오류가 발생했습니다.</td></tr>';
             }
         }
         
