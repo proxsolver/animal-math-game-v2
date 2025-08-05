@@ -400,6 +400,7 @@
                                 <th>레벨</th>
                                 <th>판매자</th>
                                 <th>가격(🪙)</th>
+                                <th>남은 시간</th>
                                 <th>구매</th>
                             </tr>
                         </thead>
@@ -694,6 +695,138 @@
             { result: '은하룡', ingredients: ['용', '고래'] },
             { result: '궁극의 로봇', ingredients: ['거미', '전갈'] }
         ];
+
+        // ==================== 알림 시스템 관련 함수 ====================
+        
+        // 알림 생성
+        async function createNotification(recipientName, type, message, animalData = null) {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const notificationsRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/notifications");
+                
+                const notificationData = {
+                    recipient: recipientName,
+                    type: type, // 'sale_success', 'sale_expired', 'purchase_success'
+                    message: message,
+                    animalData: animalData,
+                    createdAt: new Date().toISOString(),
+                    read: false
+                };
+                
+                await window.firebase.setDoc(window.firebase.doc(notificationsRef, `${recipientName}_${Date.now()}`), notificationData);
+                console.log(`알림 생성 완료: ${recipientName}에게 ${type} 알림`);
+                
+            } catch (error) {
+                console.error('알림 생성 오류:', error);
+            }
+        }
+        
+        // 사용자 알림 로드
+        async function loadNotifications(userName) {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const notificationsRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/notifications");
+                const querySnapshot = await window.firebase.getDocs(notificationsRef);
+                
+                const userNotifications = [];
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    if (data.recipient === userName && !data.read) {
+                        userNotifications.push({
+                            id: doc.id,
+                            ...data
+                        });
+                    }
+                });
+                
+                // 최신순 정렬
+                userNotifications.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+                
+                return userNotifications;
+                
+            } catch (error) {
+                console.error('알림 로드 오류:', error);
+                return [];
+            }
+        }
+        
+        // 알림 읽음 처리 (전역 함수로 변경)
+        window.markNotificationAsRead = async function(notificationId) {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                const notificationRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/notifications", notificationId);
+                
+                await window.firebase.setDoc(notificationRef, { read: true }, { merge: true });
+                
+            } catch (error) {
+                console.error('알림 읽음 처리 오류:', error);
+            }
+        }
+        
+        // 알림 표시
+        async function showNotifications(notifications) {
+            if (notifications.length === 0) return;
+            
+            for (const notification of notifications) {
+                let alertStyle = 'background: linear-gradient(45deg, #4169E1, #1E90FF);';
+                let emoji = '📢';
+                
+                if (notification.type === 'sale_success') {
+                    alertStyle = 'background: linear-gradient(45deg, #32CD32, #90EE90);';
+                    emoji = '💰';
+                } else if (notification.type === 'sale_expired') {
+                    alertStyle = 'background: linear-gradient(45deg, #FF6B6B, #FFB6C1);';
+                    emoji = '⏰';
+                } else if (notification.type === 'purchase_success') {
+                    alertStyle = 'background: linear-gradient(45deg, #9370DB, #DDA0DD);';
+                    emoji = '🎉';
+                } else if (notification.type === 'sale_cancelled') {
+                    alertStyle = 'background: linear-gradient(45deg, #FFA500, #FFD700);';
+                    emoji = '🔄';
+                }
+                
+                const alert = document.createElement('div');
+                alert.className = 'new-animal-alert';
+                alert.style.cssText = alertStyle;
+                alert.innerHTML = `
+                    <span class="new-animal-emoji">${emoji}</span>
+                    <h3>알림 📬</h3>
+                    <p>${notification.message}</p>
+                    <button onclick="this.parentElement.remove(); markNotificationAsRead('${notification.id}')" 
+                            style="background: rgba(255,255,255,0.3); border: none; padding: 8px 16px; border-radius: 10px; margin-top: 10px; cursor: pointer; color: inherit; font-weight: bold;">
+                        확인
+                    </button>
+                `;
+                
+                document.body.appendChild(alert);
+                
+                // 5초 후 자동 제거
+                setTimeout(() => {
+                    if (alert.parentElement) {
+                        alert.remove();
+                        markNotificationAsRead(notification.id);
+                    }
+                }, 5000);
+                
+                // 알림 간 간격
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+        }
+        
+        // 알림 확인 및 표시
+        async function checkAndShowNotifications() {
+            if (!currentUserProfile.name) return;
+            
+            try {
+                const notifications = await loadNotifications(currentUserProfile.name);
+                if (notifications.length > 0) {
+                    console.log(`${notifications.length}개의 새로운 알림이 있습니다.`);
+                    await showNotifications(notifications);
+                }
+            } catch (error) {
+                console.error('알림 확인 오류:', error);
+            }
+        }
 
         // ==================== 플레이 시간 및 농장 방문 함수 ====================
         
@@ -1085,9 +1218,6 @@
                 addAnimal(newAnimal);
                 
 
-
-
-
         // --- 이 부분이 핵심 수정 지점입니다 ---
         // 다음 레벨에 도달하기 위한 필요 점수 계산 로직 변경
         // Math.pow(gameState.level, 2)를 사용하여 레벨의 제곱에 비례하도록 변경
@@ -1195,30 +1325,6 @@
             
             const answerInput = document.getElementById('math-answer-input');
             const submitBtn = document.getElementById('math-submit-btn');
-            
-            answerInput.value = '';
-            document.getElementById('math-feedback').textContent = '';
-            
-            answerInput.disabled = false;
-            submitBtn.disabled = false;
-
-            submitBtn.onclick = () => checkMathAnswer(animalName);
-            document.getElementById('math-modal').style.display = 'flex';
-            answerInput.focus();
-        }
-
-        // 수학 문제 정답 확인
-        function checkMathAnswer(animalName) {
-            const answerInput = document.getElementById('math-answer-input');
-            const submitBtn = document.getElementById('math-submit-btn');
-            const userAnswer = parseInt(answerInput.value);
-            const feedback = document.getElementById('math-feedback');
-            
-            if (isNaN(userAnswer)) {
-                feedback.textContent = '숫자를 입력해주세요!';
-                feedback.style.color = 'red';
-                return;
-            }
             
             answerInput.disabled = true;
             submitBtn.disabled = true;
@@ -1860,13 +1966,34 @@
                 const querySnapshot = await window.firebase.getDocs(marketRef);
                 
                 const listings = [];
+                const expiredListings = [];
+                const currentTime = new Date();
+                const threeDaysInMs = 3 * 24 * 60 * 60 * 1000; // 3일을 밀리초로 변환
+                
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    listings.push({
-                        id: doc.id,
-                        ...data
-                    });
+                    const listingTime = new Date(data.listedAt);
+                    const timeDiff = currentTime - listingTime;
+                    
+                    if (timeDiff > threeDaysInMs) {
+                        // 3일이 지난 항목은 만료된 목록에 추가
+                        expiredListings.push({
+                            id: doc.id,
+                            ...data
+                        });
+                    } else {
+                        // 3일 이내의 항목만 표시 목록에 추가
+                        listings.push({
+                            id: doc.id,
+                            ...data
+                        });
+                    }
                 });
+                
+                // 만료된 항목들 처리
+                for (const expiredListing of expiredListings) {
+                    await returnExpiredAnimal(expiredListing);
+                }
                 
                 // 최신순으로 정렬
                 listings.sort((a, b) => new Date(b.listedAt) - new Date(a.listedAt));
@@ -1878,13 +2005,81 @@
                 document.getElementById('market-body').innerHTML = '<tr><td colspan="6">시장 정보를 불러오는 중 오류가 발생했습니다.</td></tr>';
             }
         }
+        
+        // 만료된 동물을 판매자에게 반환
+        async function returnExpiredAnimal(expiredListing) {
+            try {
+                const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+                
+                // 판매자 데이터 로드
+                const sellerData = await loadUserData(expiredListing.seller);
+                if (!sellerData) {
+                    console.log(`판매자 ${expiredListing.seller}의 데이터를 찾을 수 없습니다.`);
+                    // 판매자 데이터가 없어도 시장에서는 제거
+                    const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", expiredListing.id);
+                    await window.firebase.deleteDoc(listingRef);
+                    return;
+                }
+                
+                // 동물을 판매자에게 반환
+                const animalName = expiredListing.animalName;
+                if (!sellerData.animals) {
+                    sellerData.animals = {};
+                }
+                
+                if (!sellerData.animals[animalName]) {
+                    // 해당 동물이 없으면 새로 생성
+                    const animalType = animalTypes.find(a => a.name === animalName);
+                    if (animalType) {
+                        sellerData.animals[animalName] = {
+                            ...animalType,
+                            count: 0,
+                            animalLevel: expiredListing.animalLevel,
+                            story: ""
+                        };
+                        sellerData.speciesCount = (sellerData.speciesCount || 0) + 1;
+                    }
+                }
+                
+                if (sellerData.animals[animalName]) {
+                    sellerData.animals[animalName].count++;
+                    sellerData.totalAnimals = (sellerData.totalAnimals || 0) + 1;
+                    sellerData.animals[animalName].animalLevel = Math.max(
+                        sellerData.animals[animalName].animalLevel || 1, 
+                        expiredListing.animalLevel
+                    );
+                }
+                
+                // 판매자 데이터 저장
+                const userDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", expiredListing.seller);
+                await window.firebase.setDoc(userDocRef, sellerData, { merge: true });
+                
+                // 시장에서 제거
+                const listingRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/market", expiredListing.id);
+                await window.firebase.deleteDoc(listingRef);
+                
+                // 판매자에게 알림 생성
+                const message = `${expiredListing.animalName}(Lv.${expiredListing.animalLevel})이(가) 3일간 판매되지 않아 인벤토리로 돌아왔습니다. 다시 판매하거나 가격을 조정해보세요!`;
+                await createNotification(expiredListing.seller, 'sale_expired', message, {
+                    name: expiredListing.animalName,
+                    emoji: expiredListing.animalEmoji,
+                    level: expiredListing.animalLevel,
+                    price: expiredListing.price
+                });
+                
+                console.log(`만료된 동물 ${expiredListing.animalName}을(를) ${expiredListing.seller}에게 반환 완료`);
+                
+            } catch (error) {
+                console.error('만료된 동물 반환 오류:', error);
+            }
+        }
 
         function displayMarketListings(listings) {
             const tbody = document.getElementById('market-body');
             if (!tbody) return;
             
             if (listings.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="6">현재 판매 중인 동물이 없습니다.</td></tr>';
+                tbody.innerHTML = '<tr><td colspan="7">현재 판매 중인 동물이 없습니다.</td></tr>';
                 return;
             }
             
@@ -1898,12 +2093,39 @@
                     row.style.backgroundColor = '#f0f8ff';
                 }
                 
+                // 남은 시간 계산
+                const currentTime = new Date();
+                const listingTime = new Date(listing.listedAt);
+                const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
+                const timeLeft = threeDaysInMs - (currentTime - listingTime);
+                
+                let timeLeftText = '';
+                if (timeLeft > 0) {
+                    const hoursLeft = Math.floor(timeLeft / (1000 * 60 * 60));
+                    const daysLeft = Math.floor(hoursLeft / 24);
+                    const remainingHours = hoursLeft % 24;
+                    
+                    if (daysLeft > 0) {
+                        timeLeftText = `${daysLeft}일 ${remainingHours}시간`;
+                    } else {
+                        timeLeftText = `${hoursLeft}시간`;
+                    }
+                    
+                    // 12시간 이하면 빨간색으로 표시
+                    if (hoursLeft <= 12) {
+                        timeLeftText = `<span style="color: #ff0000; font-weight: bold;">${timeLeftText}</span>`;
+                    }
+                } else {
+                    timeLeftText = '<span style="color: #ff0000;">만료됨</span>';
+                }
+                
                 row.innerHTML = `
                     <td>${listing.animalEmoji}</td>
                     <td>${listing.animalName}<br><small>"${listing.specialName}"</small></td>
                     <td>Lv. ${listing.animalLevel}<br><small>★${listing.rarity}</small></td>
                     <td>${listing.seller}</td>
                     <td><strong>${listing.price}</strong>🪙</td>
+                    <td><small>${timeLeftText}</small></td>
                     <td>
                         ${listing.seller === currentUserProfile.name 
                             ? `<button class="nav-btn" onclick="cancelListing('${listing.id}')" style="background: #ff6b6b;">취소</button>`
@@ -1939,6 +2161,7 @@
                 }
                 
                 const listingData = listingDoc.data();
+                const sellerName = listingData.seller;
                 
                 // 점수 차감
                 gameState.coins -= price;
@@ -1960,6 +2183,44 @@
                     listingData.animalLevel
                 );
                 gameState.totalAnimals++;
+                
+                // 판매자에게 코인 지급 및 알림 생성
+                try {
+                    const sellerData = await loadUserData(sellerName);
+                    if (sellerData) {
+                        // 판매자에게 코인 지급
+                        sellerData.coins = (sellerData.coins || 0) + price;
+                        
+                        // 판매자 데이터 저장
+                        const sellerDocRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "public/data/profiles", sellerName);
+                        await window.firebase.setDoc(sellerDocRef, sellerData, { merge: true });
+                        
+                        // 판매자에게 판매 성공 알림
+                        const sellerMessage = `🎉 축하합니다! ${animalName}(Lv.${listingData.animalLevel})이(가) ${price}🪙에 판매되었습니다! 구매자: ${currentUserProfile.name}`;
+                        await createNotification(sellerName, 'sale_success', sellerMessage, {
+                            name: animalName,
+                            emoji: listingData.animalEmoji,
+                            level: listingData.animalLevel,
+                            price: price,
+                            buyer: currentUserProfile.name
+                        });
+                        
+                        console.log(`판매자 ${sellerName}에게 ${price}코인 지급 및 알림 전송 완료`);
+                    }
+                } catch (error) {
+                    console.error('판매자 처리 오류:', error);
+                    // 판매자 처리 실패해도 구매는 진행
+                }
+                
+                // 구매자에게 구매 성공 알림 (선택사항)
+                const buyerMessage = `🎉 ${animalName}(Lv.${listingData.animalLevel})을(를) 성공적으로 구매했습니다! 인벤토리를 확인해보세요.`;
+                await createNotification(currentUserProfile.name, 'purchase_success', buyerMessage, {
+                    name: animalName,
+                    emoji: listingData.animalEmoji,
+                    level: listingData.animalLevel,
+                    price: price,
+                    seller: sellerName
+                });
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
@@ -2013,6 +2274,15 @@
                 
                 // 판매 정보 삭제
                 await window.firebase.deleteDoc(listingRef);
+                
+                // 사용자에게 취소 알림 생성
+                const message = `${listingData.animalName}(Lv.${listingData.animalLevel})의 판매를 취소했습니다. 동물이 인벤토리로 돌아왔습니다.`;
+                await createNotification(currentUserProfile.name, 'sale_cancelled', message, {
+                    name: listingData.animalName,
+                    emoji: listingData.animalEmoji,
+                    level: listingData.animalLevel,
+                    price: listingData.price
+                });
                 
                 alert('판매가 취소되었습니다. 동물이 인벤토리로 돌아왔습니다.');
                 
@@ -2461,12 +2731,6 @@
             });
         }
 
-        // 알람 확인 함수 (임시)
-        async function checkAndShowNotifications() {
-            console.log('알람 확인 함수 호출됨 - 아직 구현되지 않음');
-            // 나중에 알람 시스템 구현 예정
-        }
-
         // ==================== 페이지 관리 및 초기화 ====================
 
         window.showPage = function(pageName, element) {
@@ -2576,7 +2840,7 @@
             }
         }, 5 * 60 * 1000);
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v8.0 - 플레이시간 & 농장방문 기능 추가)');
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v9.0 - 시장 자동 만료 & 알림 시스템 추가)');
     </script>
 </body>
 </html>
