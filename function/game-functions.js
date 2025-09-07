@@ -849,3 +849,23 @@ window.enableFreeStudyMode = enableFreeStudyMode;
 window.saveCurrentUserData = saveCurrentUserData;
 window.loadCurrentUserData = loadCurrentUserData;
 window.updateQuizProgressDisplay = updateQuizProgressDisplay;
+
+// 테스트 함수들 (개발자 도구에서 사용 가능)
+window.testFirebaseSave = async function() {
+    console.log('[테스트] 현재 gameState:', window.gameState);
+    console.log('[테스트] Firebase 저장 시작...');
+    await saveCurrentUserData();
+    console.log('[테스트] Firebase 저장 완료');
+};
+
+window.testFirebaseLoad = async function() {
+    console.log('[테스트] Firebase 로드 시작...');
+    const result = await loadCurrentUserData();
+    console.log('[테스트] Firebase 로드 결과:', result);
+    return result;
+};
+
+window.testMissionProgress = function() {
+    console.log('[테스트] 영어 미션 진행도 1 증가');
+    window.updateMissionProgress('english');
+};
