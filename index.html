@@ -305,10 +305,11 @@
         </div>
     </div>
 
-    <!-- Firebase SDK 및 JavaScript 파일들 -->
-    <script type="module" src="function/firebase-config.js"></script>
+    <!-- JavaScript 파일들 -->
     <script src="function/game-data.js"></script>
     <script src="function/game-functions.js"></script>
     <script src="function/main.js"></script>
+    <!-- Firebase SDK는 마지막에 로드하여 모든 함수가 준비된 후 초기화 -->
+    <script type="module" src="function/firebase-config.js"></script>
 </body>
 </html>
