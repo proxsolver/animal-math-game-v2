@@ -251,8 +251,60 @@ function updateMissionProgress(subject) {
         giveCompletionReward(subject);
     }
     
+    // 대시보드의 미션 UI 업데이트
     updateMissionUI();
+    
+    // 퀴즈 페이지의 실시간 진행도도 업데이트
+    updateQuizProgressDisplay(subject);
+    
     saveCurrentUserData();
+}
+
+// 퀴즈 페이지의 진행도 실시간 업데이트
+function updateQuizProgressDisplay(subject) {
+    // 현재 퀴즈 페이지에서 해당 과목을 학습 중인 경우에만 업데이트
+    if (window.gameState.currentSubject === subject) {
+        const mission = window.gameState.dailyMissions[subject];
+        
+        // 퀴즈 페이지의 진행도 텍스트 업데이트
+        const currentProgressEl = document.getElementById('quiz-current-progress');
+        if (currentProgressEl && !window.gameState.freeStudyMode) {
+            currentProgressEl.textContent = mission.solvedQuestions;
+            
+            // 진행도 애니메이션 효과
+            currentProgressEl.style.transform = 'scale(1.2)';
+            currentProgressEl.style.color = '#4CAF50';
+            setTimeout(() => {
+                currentProgressEl.style.transform = 'scale(1)';
+                currentProgressEl.style.color = '';
+            }, 500);
+        }
+        
+        // 진행률 바 업데이트 (있다면)
+        const progressBar = document.getElementById('quiz-progress-bar');
+        if (progressBar && !window.gameState.freeStudyMode) {
+            const percentage = (mission.solvedQuestions / mission.targetQuestions) * 100;
+            progressBar.style.width = `${percentage}%`;
+            
+            // 진행률 바 애니메이션
+            progressBar.style.transition = 'width 0.5s ease-in-out';
+        }
+        
+        // 완료 시 특별 효과
+        if (mission.completed) {
+            const titleEl = document.getElementById('quiz-subject-title');
+            if (titleEl) {
+                const originalText = titleEl.textContent;
+                titleEl.textContent = '🎉 미션 완료! 축하합니다!';
+                titleEl.style.color = '#FF6B35';
+                
+                setTimeout(() => {
+                    titleEl.textContent = originalText;
+                    titleEl.style.color = '';
+                }, 3000);
+            }
+        }
+    }
 }
 
 // 미션 완료 알림
@@ -589,6 +641,80 @@ function enableFreeStudyMode() {
     }, 1000);
 }
 
+// ==================== Firebase 데이터 저장/로드 시스템 ====================
+
+// 사용자 데이터를 Firebase에 저장
+async function saveCurrentUserData() {
+    if (!window.currentUserId || !window.firebase) {
+        console.log('Firebase 미연결 상태, 로컬 저장만 실행');
+        return;
+    }
+    
+    try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const userDataRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", window.currentUserId);
+        
+        const userData = {
+            gameState: window.gameState,
+            lastSaved: new Date().toISOString(),
+            userAgent: navigator.userAgent.substring(0, 100) // 디버깅용
+        };
+        
+        await window.firebase.setDoc(userDataRef, userData, { merge: true });
+        console.log('사용자 데이터가 Firebase에 저장되었습니다:', userData.lastSaved);
+        
+    } catch (error) {
+        console.error('Firebase 저장 오류:', error);
+        // 저장 실패해도 게임은 계속 진행
+    }
+}
+
+// Firebase에서 사용자 데이터 로드
+async function loadCurrentUserData() {
+    if (!window.currentUserId || !window.firebase) {
+        console.log('Firebase 미연결 상태, 로컬 데이터 사용');
+        return false;
+    }
+    
+    try {
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const userDataRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", window.currentUserId);
+        
+        const docSnap = await window.firebase.getDoc(userDataRef);
+        
+        if (docSnap.exists()) {
+            const userData = docSnap.data();
+            console.log('Firebase에서 사용자 데이터 로드됨:', userData.lastSaved);
+            
+            // 기존 gameState와 병합 (새로운 필드들이 추가되었을 수도 있으므로)
+            if (userData.gameState) {
+                window.gameState = { ...window.gameState, ...userData.gameState };
+                
+                // 일일 미션과 타이머 날짜 체크
+                initializeDailyMissions();
+                checkDailyTimerReset();
+                
+                // UI 업데이트
+                updateMissionUI();
+                updateBonusIndicators();
+                
+                console.log('사용자 데이터가 성공적으로 로드되었습니다');
+                return true;
+            }
+        } else {
+            console.log('Firebase에 저장된 사용자 데이터가 없습니다. 새 사용자로 처리합니다.');
+            // 새 사용자의 경우 초기 데이터를 저장
+            await saveCurrentUserData();
+        }
+        
+        return false;
+        
+    } catch (error) {
+        console.error('Firebase 로드 오류:', error);
+        return false;
+    }
+}
+
 // 미션 시작 함수
 function startMission(subject) {
     console.log(`미션 시작: ${subject}`);
@@ -617,6 +743,13 @@ function startMission(subject) {
     
     if (currentProgressEl) currentProgressEl.textContent = mission.solvedQuestions;
     if (targetProgressEl) targetProgressEl.textContent = mission.targetQuestions;
+    
+    // 진행률 바 초기화
+    const progressBar = document.getElementById('quiz-progress-bar');
+    if (progressBar) {
+        const percentage = (mission.solvedQuestions / mission.targetQuestions) * 100;
+        progressBar.style.width = `${percentage}%`;
+    }
     
     // 과목 선택 UI 업데이트
     const subjectSelect = document.getElementById('subject-select');
@@ -673,3 +806,8 @@ window.checkBonusEligibility = checkBonusEligibility;
 window.checkDailyTimerReset = checkDailyTimerReset;
 window.startMission = startMission;
 window.enableFreeStudyMode = enableFreeStudyMode;
+
+// Firebase 데이터 함수들
+window.saveCurrentUserData = saveCurrentUserData;
+window.loadCurrentUserData = loadCurrentUserData;
+window.updateQuizProgressDisplay = updateQuizProgressDisplay;

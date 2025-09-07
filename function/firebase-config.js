@@ -27,6 +27,11 @@ window.onFirebaseReady = async function(user) {
         await window.loadAnimalsFromJSON();
         console.log("명예의 전당 업데이트 시작...");
         await window.updateHallOfFame();
+        
+        // 사용자 데이터 로드
+        console.log("사용자 데이터 로드 시작...");
+        await window.loadCurrentUserData();
+        
         console.log("초기화 완료");
     } catch (error) {
         console.error('초기화 오류:', error);
