@@ -1,0 +1,349 @@
+{
+  "difficulty": 3,
+  "subject": "general",
+  "words": [
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "소나무나 잣나무 같은 침엽수는 왜 겨울에도 잎이 푸를까요?",
+      "options": ["잎이 춥지 않도록 기름 성분으로 덮여 있어서", "겨울에 더 많은 광합성을 해서", "가을에 새잎이 나서", "원래부터 초록색이라서"], "answer": 0,
+      "explanation": "침엽수 잎은 추위와 건조에 강한 큐티클층으로 덮여 있고, 잎 모양이 뾰족해 수분 손실이 적기 때문에 겨울에도 푸른색을 유지할 수 있어요.",
+      "keywords": ["과학", "식물", "침엽수"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "태평양 주변의 지진과 화산 활동이 활발한 지역을 무엇이라고 부를까요?",
+      "options": ["환태평양 조산대 (불의 고리)", "대서양 중앙 해령", "히말라야 산맥", "알프스 산맥"], "answer": 0,
+      "explanation": "지구의 지각판이 만나는 '환태평양 조산대'는 지진과 화산 활동이 잦아 '불의 고리'라고도 불려요.",
+      "keywords": ["지리", "지구과학", "불의 고리"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "조선왕조실록은 어떤 역사적 가치를 인정받아 유네스코 세계기록유산에 등재되었을까요?",
+      "options": ["왕도 숨기지 못할 만큼 솔직하고 상세해서", "가장 오래된 역사책이라서", "금으로 만들어져서", "왕이 직접 써서"], "answer": 0,
+      "explanation": "조선왕조실록은 왕의 잘못까지도 고치지 않고 그대로 기록한 객관성과 진실성, 그리고 방대한 기록 덕분에 세계적인 가치를 인정받았어요.",
+      "keywords": ["한국사", "조선왕조실록", "유네스코"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "민주주의 국가에서 국민의 대표를 뽑는 '선거'의 4대 원칙이 아닌 것은?",
+      "options": ["보통선거", "평등선거", "직접선거", "공개선거"], "answer": 3,
+      "explanation": "선거는 모든 국민이(보통), 한 표씩(평등), 직접(직접) 투표해야 하며, 누구에게 투표했는지는 비밀(비밀선거)이어야 해요. '공개선거'는 원칙이 아니에요.",
+      "keywords": ["상식", "민주주의", "선거"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "(수수께끼) 나는 껍질은 초록색이고 속은 빨갛지. 여름에 나를 먹으면 아주 시원해. 나는 누구일까요?",
+      "options": ["옥수수", "수박", "참외", "멜론"], "answer": 1,
+      "explanation": "껍질에 줄무늬가 있고 속은 빨갛고 씨가 많은 여름 과일은 '수박'입니다.",
+      "keywords": ["수수께끼", "과일", "여름"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "지구의 자전축이 기울어져 있기 때문에 나타나는 가장 중요한 현상은?",
+      "options": ["계절의 변화", "낮과 밤", "밀물과 썰물", "화산 활동"], "answer": 0,
+      "explanation": "지구의 자전축이 약 23.5도 기울어진 채로 태양 주위를 공전하기 때문에, 지역별로 햇빛을 받는 양이 달라져 '계절의 변화'가 생겨요.",
+      "keywords": ["과학", "지구과학", "계절"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "지구상에서 가장 깊은 바다인 '마리아나 해구'는 어느 바다에 있을까요?",
+      "options": ["태평양", "대서양", "인도양", "남극해"], "answer": 0,
+      "explanation": "에베레스트산도 잠길 만큼 깊은 '마리아나 해구'는 서쪽 '태평양'에 위치하고 있어요.",
+      "keywords": ["지리", "바다", "마리아나 해구"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "고려 말, 원나라로부터 목화씨를 몰래 들여와 우리나라 의생활에 큰 변화를 가져온 인물은?",
+      "options": ["문익점", "최무선", "정몽주", "이성계"], "answer": 0,
+      "explanation": "'문익점'이 붓두껍 속에 숨겨 들여온 목화씨 덕분에 백성들이 따뜻한 솜옷을 입을 수 있게 되었어요.",
+      "keywords": ["한국사", "고려", "문익점"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "'모든 사람은 태어날 때부터 자유롭고 평등한 권리를 가진다'는 내용이 담긴 프랑스 혁명의 중요한 문서는?",
+      "options": ["인권 선언", "독립 선언서", "권리 장전", "마그나 카르타"], "answer": 0,
+      "explanation": "프랑스 혁명 당시 발표된 '인권 선언'은 모든 인간의 자유와 평등을 강조하여 현대 민주주의의 바탕이 되었어요.",
+      "keywords": ["세계사", "프랑스 혁명", "인권"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "벌이나 개미처럼 각자의 역할이 정해져 있고, 함께 협력하며 살아가는 사회를 무엇이라고 할까요?",
+      "options": ["계급 사회", "진사회성 사회", "모계 사회", "부계 사회"], "answer": 1,
+      "explanation": "여왕을 중심으로 일개미, 병정개미 등 역할이 나뉘어 거대한 집단을 이루는 곤충들의 사회를 '진사회성 사회'라고 해요.",
+      "keywords": ["과학", "곤충", "사회성"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "(수수께끼) 나는 몸에 구멍이 많을수록 가벼워져. 나는 누구일까요?",
+      "options": ["스펀지", "나무", "돌", "강철"], "answer": 0,
+      "explanation": "몸에 구멍(기공)이 많아서 물을 잘 흡수하고, 물을 짜내면 가벼워지는 것은 '스펀지'입니다.",
+      "keywords": ["수수께끼", "사물", "성질"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "바닷속 화산 활동으로 만들어진 섬으로, 우리나라 영토의 동쪽 끝을 지키고 있는 섬은?",
+      "options": ["독도", "울릉도", "제주도", "백령도"], "answer": 0,
+      "explanation": "동도와 서도, 두 개의 큰 섬과 주변 바위들로 이루어진 '독도'는 화산 활동으로 생긴 소중한 우리 땅이에요.",
+      "keywords": ["지리", "독도", "화산섬"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "'지구가 태양 주위를 돈다'는 지동설을 주장하여 당시 사회에 큰 충격을 준 과학자는?",
+      "options": ["갈릴레오 갈릴레이", "아이작 뉴턴", "알베르트 아인슈타인", "토마스 에디슨"], "answer": 0,
+      "explanation": "'갈릴레오 갈릴레이'는 망원경으로 천체를 관측하고 코페르니쿠스의 지동설이 옳다는 것을 증명했어요.",
+      "keywords": ["세계사", "과학", "갈릴레이"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "빛의 속도는 소리의 속도보다 훨씬 빠릅니다. 이 현상을 확인할 수 있는 자연 현상은?",
+      "options": ["천둥과 번개", "지진과 해일", "바람과 파도", "눈과 비"], "answer": 0,
+      "explanation": "번개가 치면 빛(번개)이 먼저 보이고 조금 뒤에 소리(천둥)가 들리는 것은 빛이 소리보다 훨씬 빠르기 때문이에요.",
+      "keywords": ["과학", "빛", "소리"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "유전학의 아버지는 '완두콩'을 이용해 유전의 법칙을 발견했습니다. 이 과학자는 누구일까요?",
+      "options": ["그레고어 멘델", "찰스 다윈", "루이 파스퇴르", "마리 퀴리"], "answer": 0,
+      "explanation": "오스트리아의 사제였던 '그레고어 멘델'은 완두콩 실험을 통해 우성과 열성 같은 유전의 기본 법칙을 알아냈어요.",
+      "keywords": ["과학", "생물", "멘델"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "지구 대기권에서 우리를 해로운 자외선으로부터 보호해주는 중요한 층은?",
+      "options": ["성층권", "오존층", "대류권", "열권"], "answer": 1,
+      "explanation": "성층권에 있는 '오존층'은 태양의 강한 자외선을 흡수하여 지구의 생명체를 보호하는 중요한 역할을 해요.",
+      "keywords": ["과학", "지구과학", "오존층"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "육지에서 멀리 떨어진 바다 한가운데에 있는 섬을 '대륙도'가 아닌 무엇이라고 부를까요?",
+      "options": ["해양도", "화산도", "산호도", "군도"], "answer": 0,
+      "explanation": "대륙과 연결된 적 없이 바다에서 직접 솟아오른 섬을 '해양도'라고 해요. 하와이가 대표적인 예입니다.",
+      "keywords": ["지리", "섬", "해양도"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "조선 후기, 천주교를 박해한 사건으로 수많은 신자들이 희생된 사건은 무엇일까요?",
+      "options": ["병인박해", "임진왜란", "병자호란", "갑신정변"], "answer": 0,
+      "explanation": "흥선대원군 시절에 있었던 '병인박해'는 조선 역사상 가장 큰 규모의 천주교 박해 사건이었어요.",
+      "keywords": ["한국사", "조선", "병인박해"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "사막 지역에서 밤낮의 기온 차이가 매우 큰 이유는 무엇일까요?",
+      "options": ["공기 중에 수증기가 거의 없어서", "모래가 많아서", "바람이 강하게 불어서", "태양과 가까워서"], "answer": 0,
+      "explanation": "공기 중의 수증기는 온도를 유지해주는 이불 역할을 하는데, 사막은 건조해서 수증기가 없어 낮에는 뜨겁고 밤에는 급격히 추워져요.",
+      "keywords": ["지리", "기후", "사막"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "(수수께끼) 나는 쌀로 만들지만 밥은 아니야. 나는 여러 가지 색깔 옷을 입고, 생일이나 잔칫날에 꼭 필요해. 나는 누구일까요?",
+      "options": ["국수", "빵", "떡", "과자"], "answer": 2,
+      "explanation": "쌀을 찌거나 쳐서 만드는 우리나라의 전통 음식은 '떡'입니다.",
+      "keywords": ["수수께끼", "음식", "떡"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "식물이 해충으로부터 자신을 보호하기 위해 만들어내는 화학 물질을 통틀어 무엇이라고 할까요?",
+      "options": ["타감 물질", "피톤치드", "엽록소", "리그닌"], "answer": 0,
+      "explanation": "다른 생물의 생장을 방해하거나 자신을 보호하기 위해 식물이 내뿜는 화학 물질을 '타감 물질(알레로파티 물질)'이라고 해요.",
+      "keywords": ["과학", "식물", "생존"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "달의 인력 때문에 생기는 밀물과 썰물의 차이를 이용해 전기를 만드는 발전 방식은?",
+      "options": ["조력 발전", "파력 발전", "수력 발전", "풍력 발전"], "answer": 0,
+      "explanation": "밀물과 썰물의 높이 차이를 이용해 터빈을 돌려 전기를 생산하는 친환경 발전 방식을 '조력 발전'이라고 해요.",
+      "keywords": ["과학", "에너지", "조력발전"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "'비행기'를 최초로 발명하여 하늘을 나는 꿈을 이룬 형제는 누구일까요?",
+      "options": ["라이트 형제", "몽골피에 형제", "그림 형제", "루소 형제"], "answer": 0,
+      "explanation": "미국의 '라이트 형제'는 수많은 실패 끝에 인류 최초로 동력 비행기를 만들어 하늘을 나는 데 성공했어요.",
+      "keywords": ["세계사", "발명", "비행기"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "우리 몸의 피가 온몸을 도는 데 가장 중요한 역할을 하는 심장 근육을 무엇이라고 할까요?",
+      "options": ["심근", "골격근", "내장근", "활문근"], "answer": 0,
+      "explanation": "심장을 이루는 특별한 근육인 '심근'은 우리 의지와 상관없이 스스로 뛰면서 평생 동안 피를 온몸으로 보내요.",
+      "keywords": ["과학", "인체", "심장"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "동물의 도움 없이, 스스로 터지면서 씨앗을 퍼뜨리는 식물이 아닌 것은?",
+      "options": ["봉선화", "제비꽃", "콩", "민들레"], "answer": 3,
+      "explanation": "봉선화, 제비꽃, 콩은 열매가 터지는 힘으로 씨앗을 퍼뜨리지만, '민들레'는 바람의 도움을 받아 씨앗을 퍼뜨려요.",
+      "keywords": ["과학", "식물", "씨앗"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "(수수께끼) 나는 왕이지만 나라가 없어. 멋진 갈기가 있고, 큰 소리로 울부짖지. 나는 누구일까요?",
+      "options": ["사자", "호랑이", "곰", "늑대"], "answer": 0,
+      "explanation": "동물의 왕이라고 불리며, 수컷에게만 멋진 갈기가 있는 동물은 '사자'입니다.",
+      "keywords": ["수수께끼", "동물", "사자"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "심해에 사는 물고기들이 스스로 빛을 내는 가장 큰 이유는?",
+      "options": ["짝을 찾거나 먹이를 유인하기 위해", "길을 밝히기 위해", "몸을 따뜻하게 하기 위해", "재미있어서"], "answer": 0,
+      "explanation": "빛이 전혀 없는 깊은 바닷속에서는 스스로 빛을 내어 친구를 찾거나, 먹잇감을 유인하는 생존 전략을 사용해요.",
+      "keywords": ["과학", "심해 생물", "생존"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "조선시대 왕의 명령을 받아 지방에 파견되어 고을을 다스리던 관리를 무엇이라고 할까요?",
+      "options": ["사또 (수령)", "암행어사", "이방", "포졸"], "answer": 0,
+      "explanation": "왕을 대신하여 각 고을의 행정을 책임지던 지방관을 '수령'이라고 하며, 흔히 '사또'라고 불렀어요.",
+      "keywords": ["한국사", "조선", "직업"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "우리나라와 다른 나라 사이의 시간 차이, 즉 '시차'가 발생하는 근본적인 이유는?",
+      "options": ["지구가 둥글고 자전하기 때문", "지구가 태양 주위를 공전하기 때문", "나라마다 쓰는 시계가 달라서", "시간을 정하는 규칙이 달라서"], "answer": 0,
+      "explanation": "지구가 둥근 상태로 서쪽에서 동쪽으로 자전하기 때문에, 각 지역마다 태양빛을 받는 시간이 달라져 '시차'가 발생해요.",
+      "keywords": ["지리", "시차", "자전"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "GMO는 '유전자 변형 농산물'을 뜻합니다. 이것은 무엇을 의미할까요?",
+      "options": ["다른 생물의 유전자를 넣어 새로운 특징을 만든 농산물", "아주 깨끗한 환경에서 키운 농산물", "오래 보관할 수 있는 농산물", "크기가 아주 큰 농산물"], "answer": 0,
+      "explanation": "병충해에 강하거나 생산량을 늘리는 등 특별한 목적을 위해 인공적으로 '유전자'를 바꾸어 만든 농산물을 GMO라고 해요.",
+      "keywords": ["과학", "생명공학", "GMO"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "캐나다의 숲에 사는 동물로, 나무를 갉아 댐을 만들어 자신의 집을 짓는 동물은?",
+      "options": ["비버", "수달", "너구리", "오소리"], "answer": 0,
+      "explanation": "'비버'는 뛰어난 건축가로, 강가에 댐을 만들어 자신만의 안전한 생태계를 만들어요.",
+      "keywords": ["과학", "동물", "비버"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "육지에서 멀리 떨어진 외딴 섬의 생물들이 육지와 다른 독특한 모습으로 진화하는 현상을 무엇이라고 할까요?",
+      "options": ["고립 진화", "수렴 진화", "평행 진화", "방사 진화"], "answer": 0,
+      "explanation": "갈라파고스 섬의 핀치새처럼, 다른 지역과 교류가 없는 고립된 환경에서 독자적으로 일어나는 진화를 '고립 진화'라고 해요.",
+      "keywords": ["과학", "진화", "고립"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "(수수께끼) 나는 글자도 그림도 아닌데 온갖 이야기를 다 들려줘. 나는 누구일까요?",
+      "options": ["텔레비전", "책", "라디오", "컴퓨터"], "answer": 1,
+      "explanation": "글자와 그림을 통해 시간과 공간을 넘어 다양한 지식과 이야기를 전달해주는 것은 '책'입니다.",
+      "keywords": ["수수께끼", "사물", "책"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "도로의 아스팔트가 여름철에 뜨거운 햇빛을 받아 부풀어 오르는 현상은 무엇 때문일까요?",
+      "options": ["물체의 열팽창", "물의 증발", "빛의 굴절", "소리의 반사"], "answer": 0,
+      "explanation": "대부분의 물체는 열을 받으면 부피가 늘어나는 '열팽창' 현상을 겪기 때문이에요.",
+      "keywords": ["과학", "물리", "열팽창"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "같은 밭에 매년 같은 작물만 심으면 땅의 힘이 약해지는 '연작 피해'를 막기 위해 농부들이 하는 방법은?",
+      "options": ["돌려짓기 (윤작)", "이어짓기 (연작)", "섞어짓기 (혼작)", "사이짓기 (간작)"], "answer": 0,
+      "explanation": "서로 다른 종류의 작물을 번갈아 심는 '돌려짓기(윤작)'를 하면, 특정 양분이 고갈되는 것을 막고 땅의 힘을 회복시킬 수 있어요.",
+      "keywords": ["농업", "상식", "돌려짓기"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "지구의 나이는 약 46억 살입니다. 과학자들은 무엇을 통해 지구의 나이를 추측할까요?",
+      "options": ["운석과 암석의 방사성 동위원소", "나이테", "화석", "지층"], "answer": 0,
+      "explanation": "지구가 만들어질 때 함께 생긴 '운석'이나 지구의 오래된 암석에 포함된 '방사성 동위원소'가 시간이 지나면서 변하는 정도를 측정하여 나이를 계산해요.",
+      "keywords": ["과학", "지구과학", "지구 나이"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "차가운 해류와 따뜻한 해류가 만나는 바다는 좋은 어장이 됩니다. 그 이유는 무엇일까요?",
+      "options": ["바닷물이 뒤섞이며 영양분이 풍부해져서", "물고기들이 놀기 좋아서", "수온이 적당해서", "다양한 물고기들이 만나서"], "answer": 0,
+      "explanation": "두 해류가 만나면 깊은 곳의 영양분이 위로 올라와 플랑크톤이 번성하고, 이를 먹기 위해 물고기들이 모여들어 좋은 어장이 형성돼요.",
+      "keywords": ["지리", "어장", "해류"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "고대 그리스에서 시작된, 건강한 신체와 정신을 기리기 위한 범그리스 제전에서 유래한 세계적인 스포츠 축제는?",
+      "options": ["올림픽", "월드컵", "아시안게임", "유니버시아드"], "answer": 0,
+      "explanation": "고대 그리스의 올림피아 제전에서 유래한 '올림픽'은 평화와 화합을 상징하는 세계인의 축제예요.",
+      "keywords": ["세계사", "올림픽", "그리스"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "우리 몸의 뼈와 뼈를 연결하며, 관절이 부드럽게 움직이도록 돕는 것은?",
+      "options": ["인대", "연골", "힘줄", "근육"], "answer": 1,
+      "explanation": "뼈끝을 덮고 있는 매끄럽고 탄력 있는 조직인 '연골'은 뼈끼리 직접 부딪히는 것을 막아주는 쿠션 역할을 해요. 인대는 뼈와 뼈를, 힘줄은 뼈와 근육을 연결해요.",
+      "keywords": ["과학", "인체", "연골"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "다음 중 광합성을 하지 않는 식물은?",
+      "options": ["수정난풀", "소나무", "해바라기", "토마토"], "answer": 0,
+      "explanation": "엽록소가 없어 전체가 하얀색인 '수정난풀'은 스스로 양분을 만들지 못하고, 다른 식물에 기생하여 양분을 얻는 부생식물이에요.",
+      "keywords": ["과학", "식물", "부생식물"], "difficulty_score": 9
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "(수수께끼) 나는 바늘 옷을 입고 있지만 바느질은 못 해. 추운 겨울에도 늘 푸른 옷을 입고 있지. 나는 누구일까요?",
+      "options": ["소나무", "밤송이", "고슴도치", "선인장"], "answer": 0,
+      "explanation": "잎이 뾰족한 바늘 모양이고, 사계절 내내 푸른 상록수인 것은 '소나무'입니다.",
+      "keywords": ["수수께끼", "식물", "소나무"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "북극의 얼음(빙하)이 녹으면 해수면이 높아져 낮은 지대가 잠길 수 있습니다. 이 현상의 가장 큰 원인은?",
+      "options": ["지구 온난화", "엘니뇨", "라니냐", "오존층 파괴"], "answer": 0,
+      "explanation": "지구의 평균 기온이 올라가는 '지구 온난화' 때문에 극지방의 빙하가 녹아내려 해수면이 상승하는 문제가 발생해요.",
+      "keywords": ["환경", "지구 온난화", "해수면 상승"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "조선시대 후기에 활동한 천재 화가로, 풍속화로 유명한 두 사람은 누구일까요?",
+      "options": ["김홍도와 신윤복", "정선과 김정희", "안견과 강희안", "장승업과 오원"], "answer": 0,
+      "explanation": "서민들의 생활을 익살스럽게 그린 '김홍도'와 양반과 부녀자의 모습을 섬세하게 그린 '신윤복'이 조선의 대표적인 풍속화가예요.",
+      "keywords": ["한국사", "예술", "풍속화"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "공기보다 가벼워서 풍선이나 비행선에 사용되는 기체는 무엇일까요?",
+      "options": ["헬륨", "산소", "이산화탄소", "질소"], "answer": 0,
+      "explanation": "'헬륨'은 공기보다 훨씬 가볍고 불에 타지 않아 안전하기 때문에, 하늘에 뜨는 풍선이나 비행선에 사용돼요.",
+      "keywords": ["과학", "화학", "헬륨"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "farm",
+      "question": "한여름에 옥수수수염이 갈색으로 변하면 옥수수를 수확해도 좋다는 신호입니다. 이 옥수수수염의 역할은 무엇일까요?",
+      "options": ["꽃가루를 받는 암술대", "수분을 저장하는 역할", "벌레를 쫓는 역할", "햇빛을 가리는 역할"], "answer": 0,
+      "explanation": "옥수수수염 한 가닥 한 가닥은 옥수수 알 하나하나와 연결된 '암술대'로, 수술의 꽃가루를 받아 수정을 도와요.",
+      "keywords": ["과학", "식물", "옥수수"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "forest",
+      "question": "다음 중 '변온동물'이 아닌 것은?",
+      "options": ["사자", "개구리", "뱀", "도마뱀"], "answer": 0,
+      "explanation": "개구리, 뱀, 도마뱀은 주변 온도에 따라 체온이 변하는 '변온동물'이지만, '사자'는 스스로 체온을 일정하게 유지하는 '항온동물'이에요.",
+      "keywords": ["과학", "분류", "항온동물"], "difficulty_score": 7
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "ocean",
+      "question": "강물이 바다로 들어가면서 흙과 모래를 쌓아 만든, 강 하류의 삼각형 모양의 땅을 무엇이라고 할까요?",
+      "options": ["삼각주", "선상지", "범람원", "하구둑"], "answer": 0,
+      "explanation": "강물의 흐름이 느려지는 강 하구에 퇴적물이 쌓여 만들어진 삼각형 모양의 비옥한 땅을 '삼각주'라고 해요. 이집트의 나일강 삼각주가 유명해요.",
+      "keywords": ["지리", "지형", "삼각주"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "home",
+      "question": "(수수께끼) 나는 날개도 없는데 하늘을 날고, 눈물도 없는데 울어. 나는 누구일까요?",
+      "options": ["연", "비행기", "구름", "바람"], "answer": 2,
+      "explanation": "하늘에 떠서 비(눈물)를 내리는 '구름'을 빗댄 수수께끼입니다.",
+      "keywords": ["수수께끼", "자연", "구름"], "difficulty_score": 8
+    },
+    {
+      "subject": "general", "level": "advanced", "habitat": "city",
+      "question": "컴퓨터 화면을 이루는 가장 작은 점 단위의 '화소'를 영어로 무엇이라고 할까요?",
+      "options": ["픽셀(Pixel)", "도트(Dot)", "비트(Bit)", "바이트(Byte)"], "answer": 0,
+      "explanation": "디지털 이미지를 구성하는 가장 작은 사각형 점을 '픽셀'이라고 하며, 픽셀 수가 많을수록 화질이 좋아요.",
+      "keywords": ["과학", "컴퓨터", "픽셀"], "difficulty_score": 7
+    }
+  ]
+}
