@@ -58,6 +58,8 @@ let gameState = {
     currentSubject: 'english',
     // 최근 출제된 문제들을 추적하여 중복 방지
     recentQuestions: [],
+    // 자유 학습 모드 여부
+    freeStudyMode: false,
     // 일일 미션 시스템 (도장깨기)
     dailyMissions: {
         date: null, // 마지막 업데이트된 날짜 (YYYY-MM-DD 형식)

@@ -1052,19 +1052,36 @@
             if (window.gameState.dailyMissions[window.gameState.currentSubject] && 
                 window.gameState.dailyMissions[window.gameState.currentSubject].completed) {
                 
-                // 미션 완료 메시지 표시 후 대시보드로 이동
-                const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
-                const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
-                const feedbackElement = document.getElementById('quiz-feedback') || document.getElementById('feedback');
-                
-                if (questionElement) questionElement.textContent = '🎉 오늘의 미션을 완료했습니다!';
-                if (optionsContainer) optionsContainer.innerHTML = '<button class="back-btn" onclick="showPage(\'game\', null)" style="margin: 20px auto; display: block; padding: 15px 30px;">대시보드로 돌아가기</button>';
-                if (feedbackElement) {
-                    feedbackElement.textContent = '다른 과목의 미션도 도전해보세요! 💪';
-                    feedbackElement.className = 'feedback success';
+                // 자유 학습 모드인지 확인
+                if (!window.gameState.freeStudyMode) {
+                    // 미션 완료 메시지 및 선택 옵션 표시
+                    const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
+                    const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
+                    const feedbackElement = document.getElementById('quiz-feedback') || document.getElementById('feedback');
+                    
+                    if (questionElement) questionElement.textContent = '🎉 오늘의 미션을 완료했습니다!';
+                    if (optionsContainer) {
+                        optionsContainer.innerHTML = `
+                            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+                                <button class="continue-study-btn" onclick="enableFreeStudyMode()" 
+                                    style="background: linear-gradient(45deg, #32CD32, #228B22); color: white; border: none; padding: 15px 25px; border-radius: 15px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                                    📚 계속 공부하기 (자유 학습)
+                                </button>
+                                <button class="back-btn" onclick="showPage('game', null)" 
+                                    style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 15px 25px; border-radius: 15px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                                    🏠 대시보드로 돌아가기
+                                </button>
+                            </div>
+                        `;
+                    }
+                    if (feedbackElement) {
+                        feedbackElement.textContent = '미션을 완료했어요! 더 공부하거나 다른 과목에 도전해보세요! 💪';
+                        feedbackElement.className = 'feedback success';
+                    }
+                    
+                    return;
                 }
-                
-                return;
+                // 자유 학습 모드에서는 계속 진행
             }
             
             const analysis = analyzeUserWeaknesses();
@@ -1783,13 +1800,15 @@
                 const earnedScore = baseScore * gameState.level;
                 gameState.score += earnedScore;
                 
-                // 과목별 피드백 메시지
+                // 과목별 피드백 메시지 (자유 학습 모드 고려)
                 let correctMessage = '';
+                const modeText = window.gameState.freeStudyMode ? ' (자유 학습)' : '';
+                
                 if (gameState.currentSubject === 'english') {
-                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요!${modeText} 🎉`;
                 } else {
                     // 사회, 수학, 상식 과목: 해설 포함
-                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요!${modeText} 🎉`;
                     if (currentWordData.explanation) {
                         correctMessage += ` ${currentWordData.explanation}`;
                     }
@@ -1821,8 +1840,10 @@
                 // 랜덤 이벤트 체크
                 checkRandomEvent();
                 
-                // 일일 미션 진행도 업데이트 (정답일 때만)
-                window.updateMissionProgress(gameState.currentSubject);
+                // 일일 미션 진행도 업데이트 (정답일 때만, 자유 학습 모드가 아닐 때만)
+                if (!window.gameState.freeStudyMode) {
+                    window.updateMissionProgress(gameState.currentSubject);
+                }
                 
                 saveCurrentUserData();
                 setTimeout(() => generatePersonalizedQuiz(), 1500);

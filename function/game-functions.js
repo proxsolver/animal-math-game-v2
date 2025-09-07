@@ -311,9 +311,29 @@ function updateMissionUI() {
             if (mission.completed) {
                 statusEl.textContent = '완료 ✅';
                 statusEl.classList.add('completed');
+                
+                // 시작하기 버튼 텍스트도 업데이트
+                const missionCard = document.querySelector(`[data-subject="${subject}"]`);
+                if (missionCard) {
+                    const startBtn = missionCard.querySelector('.mission-start-btn');
+                    if (startBtn) {
+                        startBtn.textContent = '자유 학습';
+                        startBtn.style.background = 'linear-gradient(135deg, #32CD32, #228B22)';
+                    }
+                }
             } else {
                 statusEl.textContent = '미완료';
                 statusEl.classList.remove('completed');
+                
+                // 시작하기 버튼 원상복구
+                const missionCard = document.querySelector(`[data-subject="${subject}"]`);
+                if (missionCard) {
+                    const startBtn = missionCard.querySelector('.mission-start-btn');
+                    if (startBtn) {
+                        startBtn.textContent = '시작하기';
+                        startBtn.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+                    }
+                }
             }
         }
         
@@ -534,9 +554,47 @@ function resetDailyTimer(today) {
     console.log(`학습 타이머가 ${today}로 리셋되었습니다.`);
 }
 
+// 자유 학습 모드 활성화
+function enableFreeStudyMode() {
+    window.gameState.freeStudyMode = true;
+    
+    // 퀴즈 제목 업데이트
+    const titleEl = document.getElementById('quiz-subject-title');
+    if (titleEl) {
+        const currentTitle = titleEl.textContent;
+        titleEl.textContent = currentTitle + ' (자유 학습 모드)';
+    }
+    
+    // 진행도 표시 업데이트
+    const currentProgressEl = document.getElementById('quiz-current-progress');
+    const targetProgressEl = document.getElementById('quiz-target-progress');
+    
+    if (currentProgressEl) currentProgressEl.textContent = '완료';
+    if (targetProgressEl) targetProgressEl.textContent = '∞';
+    
+    // 자유 학습 안내 표시
+    const feedbackElement = document.getElementById('quiz-feedback') || document.getElementById('feedback');
+    if (feedbackElement) {
+        feedbackElement.textContent = '🌟 자유 학습 모드입니다! 원하는 만큼 계속 공부하세요!';
+        feedbackElement.className = 'feedback success';
+    }
+    
+    console.log('자유 학습 모드 활성화');
+    
+    // 새로운 문제 생성
+    setTimeout(() => {
+        if (typeof window.generatePersonalizedQuiz === 'function') {
+            window.generatePersonalizedQuiz();
+        }
+    }, 1000);
+}
+
 // 미션 시작 함수
 function startMission(subject) {
     console.log(`미션 시작: ${subject}`);
+    
+    // 자유 학습 모드 초기화
+    window.gameState.freeStudyMode = false;
     
     // 퀴즈 페이지로 이동하고 해당 과목 설정
     window.gameState.currentSubject = subject;
@@ -614,3 +672,4 @@ window.updateStudyTimerDisplay = updateStudyTimerDisplay;
 window.checkBonusEligibility = checkBonusEligibility;
 window.checkDailyTimerReset = checkDailyTimerReset;
 window.startMission = startMission;
+window.enableFreeStudyMode = enableFreeStudyMode;
