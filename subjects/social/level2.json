@@ -1,5 +1,4 @@
-[
-  // ===== 서식지: 도시 (City) - 25개 =====
+
   {
     "subject": "social", "level": "intermediate", "habitat": "city",
     "question": "판다 요리사가 식당을 열기 위해 은행에서 돈을 빌렸어요. 나중에 판다 요리사는 빌린 돈에 무엇을 더해서 갚아야 할까요?",
@@ -56,8 +55,6 @@
   { "subject": "social", "level": "intermediate", "habitat": "city", "question": "돈을 벌기 위해 스스로 가게를 열거나 회사를 만드는 사람을 무엇이라고 부를까요?", "options": ["사업가", "회사원", "공무원", "학생"], "answer": 0, "explanation": "새로운 아이디어로 사업을 시작하고 운영하는 사람을 '사업가'라고 해요.", "keywords": ["사업가", "직업", "창업"], "difficulty_score": 5 },
   { "subject": "social", "level": "intermediate", "habitat": "city", "question": "큰 할인 마트에 가면 왜 물건 종류가 아주 많을까요?", "options": ["많은 사람들이 원하는 것이 각자 달라서", "주인이 다 갖고 싶어서", "진열하기 예뻐서", "창고가 남아서"], "answer": 0, "explanation": "소비자들의 다양한 '수요'를 만족시키기 위해 여러 종류의 상품을 준비해요.", "keywords": ["수요", "상품", "다양성"], "difficulty_score": 5 },
   { "subject": "social", "level": "intermediate", "habitat": "city", "question": "물건을 산 뒤에 마음에 들지 않으면 바꿀 수 있는 것을 무엇이라고 할까요?", "options": ["교환 및 환불", "선물", "기부", "소유"], "answer": 0, "explanation": "소비자의 권리를 보호하기 위해 대부분의 가게에는 '교환 및 환불' 제도가 있어요.", "keywords": ["소비자 권리", "교환", "환불"], "difficulty_score": 4 },
-
-  // ===== 서식지: 농장 (Farm) - 25개 =====
   {
     "subject": "social", "level": "intermediate", "habitat": "farm", "question": "농부가 트랙터를 이용해 밭을 갈아요. 트랙터는 농부에게 어떤 역할을 할까요?", "options": ["일을 더 쉽게 해주는 도구", "친한 친구", "맛있는 간식", "무서운 동물"], "answer": 0, "explanation": "도구(자본)를 이용하면 같은 시간 동안 더 많은 일을 할 수 있어 '생산성'이 높아져요.", "keywords": ["생산성", "도구", "자본"], "difficulty_score": 5
   },
@@ -93,8 +90,6 @@
   { "subject": "social", "level": "intermediate", "habitat": "farm", "question": "농부가 쌀 한 가마니를 팔아 번 돈으로 옷도 사고, 신발도 샀어요. 이처럼 돈이 계속 돌고 도는 현상을 무엇이라고 할까요?", "options": ["경제 순환", "돈의 여행", "시장 놀이", "자산 증식"], "answer": 0, "explanation": "나의 소비는 다른 사람의 소득이 되고, 그 사람의 소비는 또 다른 사람의 소득이 되는 '경제 순환'이 일어나요.", "keywords": ["경제 순환", "소비", "소득"], "difficulty_score": 6 },
   { "subject": "social", "level": "intermediate", "habitat": "farm", "question": "'친환경 농법'으로 농사를 지으면 땅이 오염되는 것을 막을 수 있어요. 이것은 당장의 이익보다 무엇을 더 생각하는 걸까요?", "options": ["미래의 가치(지속 가능성)", "오늘의 저녁 메뉴", "이웃 농부와의 경쟁", "트랙터의 색깔"], "answer": 0, "explanation": "미래에도 계속 건강한 환경에서 생산 활동을 할 수 있도록 생각하는 것을 '지속 가능한 발전'이라고 해요.", "keywords": ["지속 가능성", "환경", "미래"], "difficulty_score": 6 },
   { "subject": "social", "level": "intermediate", "habitat": "farm", "question": "스마트폰으로 농장의 온도와 습도를 조절하며 농사를 짓는 것을 '스마트팜'이라고 해요. 이것은 무엇이 결합된 걸까요?", "options": ["농업과 기술", "농업과 예술", "농업과 체육", "농업과 역사"], "answer": 0, "explanation": "전통적인 산업에 새로운 '기술'이 더해져 더 발전된 형태로 나아갈 수 있어요.", "keywords": ["기술", "혁신", "스마트팜"], "difficulty_score": 5 },
-
-  // ===== 서식지: 숲 (Forest) & 바다 (Ocean) - 25개 =====
   {
     "subject": "social", "level": "intermediate", "habitat": "forest", "question": "사자는 고기를 잡고, 원숭이는 과일을 따와요. 각자 잘하는 일을 해서 서로 나눠 먹는 것을 무엇이라고 할까요?", "options": ["분업과 협력", "경쟁과 다툼", "명령과 복종", "놀이와 휴식"], "answer": 0, "explanation": "각자 잘하는 일(특화)을 나눠서(분업) 하면 모두에게 더 이득이 될 수 있어요.", "keywords": ["분업", "특화", "협력"], "difficulty_score": 5
   },
@@ -182,4 +177,4 @@
   { "subject": "social", "level": "intermediate", "habitat": "home", "question": "매달 휴대폰 요금을 내는 것은 '소비'입니다. 그럼, 휴대폰을 만드는 회사는 어떤 활동을 할까요?", "options": ["생산", "투자", "저축", "분배"], "answer": 0, "explanation": "우리가 돈을 내고 소비하는 모든 물건과 서비스는 어딘가에서 '생산'된 것이에요.", "keywords": ["생산", "소비", "관계"], "difficulty_score": 4 },
   { "subject": "social", "level": "intermediate", "habitat": "home", "question": "용돈을 올려달라고 부모님과 이야기하는 것을 '협상'이라고 해요. 협상을 잘하려면 무엇이 필요할까요?", "options": ["내가 왜 올려야 하는지 논리적인 이유", "무조건 떼쓰기", "울면서 조르기", "동생과 비교하기"], "answer": 0, "explanation": "자신이 원하는 것을 얻기 위해 상대방을 설득하는 과정을 '협상'이라고 하며, 합리적인 근거가 중요해요.", "keywords": ["협상", "설득", "요구"], "difficulty_score": 6 },
   { "subject": "social", "level": "intermediate", "habitat": "home", "question": "할머니, 할아버지께서 나라에서 매달 용돈을 받아요. 이 돈은 어디서 나오는 걸까요?", "options": ["젊은 사람들이 낸 세금(연금)", "은행", "하늘", "외국"], "answer": 0, "explanation": "일하기 어려운 어르신들의 생활을 돕기 위해, 일하는 사람들이 미리 세금(연금)을 내서 마련해요. 이를 '사회 보장 제도'라고 해요.", "keywords": ["사회 보장", "연금", "세금"], "difficulty_score": 6 }
-]
+}
