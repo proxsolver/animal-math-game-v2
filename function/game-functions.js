@@ -710,22 +710,18 @@ function enableFreeStudyMode() {
 
 // 사용자 데이터를 Firebase에 저장
 async function saveCurrentUserData() {
-    console.log('[DEBUG] saveCurrentUserData 시작');
-    console.log('[DEBUG] currentUserId:', window.currentUserId);
-    console.log('[DEBUG] firebase 객체:', !!window.firebase);
+    console.log('%c[SAVE] saveCurrentUserData 함수 실행 시작', 'color: blue; font-weight: bold;');
     
     if (!window.currentUserId || !window.firebase) {
-        console.log('[DEBUG] Firebase 미연결 상태, 로컬 저장만 실행');
+        console.warn('[SAVE] Firebase 미연결 상태. 저장을 중단합니다.');
         return;
     }
-    
+
     try {
         const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        console.log('[DEBUG] 사용할 appId:', appId);
-        
         const userDataRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", window.currentUserId);
-        console.log('[DEBUG] Firebase 문서 경로 생성 완료');
         
+        // 저장할 핵심 데이터만 선별 (데이터 구조 최적화)
         const minimalGameState = {
             coins: window.gameState.coins,
             level: window.gameState.level,
@@ -734,44 +730,38 @@ async function saveCurrentUserData() {
             subjects: window.gameState.subjects,
             animals: window.gameState.animals,
             farm: window.gameState.farm,
-            // 참고: currentQuestion, recentQuestions 등 일시적인 상태는 제외합니다.
         };
 
         const userData = {
-            gameState: minimalGameState, // 최적화된 gameState 객체를 저장
-            lastSaved: new Date().toISOString(),
-            userAgent: navigator.userAgent.substring(0, 100)
+            gameState: minimalGameState,
+            lastSaved: new Date().toISOString()
         };
-        
-        console.log('[DEBUG] 저장할 데이터 (최적화됨):', {
-            dailyMissions: userData.gameState.dailyMissions,
-            coins: userData.gameState.coins,
-            lastSaved: userData.lastSaved
-        });
-        
-        await window.firebase.setDoc(userDataRef, userData, { merge: true });
 
-        console.log('[SUCCESS] 사용자 데이터가 Firebase에 저장되었습니다:', userData.lastSaved);
+        console.log('[SAVE] Firestore에 다음 데이터를 저장합니다:', userData);
         
+        // Firestore에 데이터 쓰기
+        await window.firebase.setDoc(userDataRef, userData, { merge: true });
+        
+        console.log('%c[SUCCESS] 사용자 데이터가 Firebase에 성공적으로 저장되었습니다!', 'color: green; font-weight: bold;');
+
         // 저장 후 즉시 검증
-        console.log('[VERIFY] 저장 검증 시작...');
+        console.log('[VERIFY] 저장된 데이터 검증 시작...');
         const verifyDoc = await window.firebase.getDoc(userDataRef);
         if (verifyDoc.exists()) {
-            const savedData = verifyDoc.data();
-            console.log('[VERIFY SUCCESS] 저장된 데이터 확인됨:', {
-                lastSaved: savedData.lastSaved,
-                englishMission: savedData.gameState?.dailyMissions?.english
-            });
+            console.log('%c[VERIFY SUCCESS] Firestore에서 방금 저장된 데이터를 확인했습니다.', 'color: green;');
         } else {
-            console.error('[VERIFY FAILED] 저장된 데이터를 찾을 수 없음!');
+            console.error('%c[VERIFY FAILED] 저장 직후 데이터를 확인했으나 찾을 수 없습니다!', 'color: red; font-weight: bold;');
         }
         
     } catch (error) {
-        console.error('[ERROR] Firebase 저장 오류:', error);
-        console.error('[ERROR] 오류 상세:', error.message, error.stack);
-        // 저장 실패해도 게임은 계속 진행
+        console.error('%c[ERROR] Firebase 저장 중 심각한 오류 발생:', 'color: red; font-weight: bold;', error);
+        // 사용자에게 오류 피드백을 주는 UI 로직을 추가할 수 있습니다.
+        // showNotification('클라우드 저장에 실패했습니다. 인터넷 연결을 확인해주세요.', 'error');
+    } finally {
+        console.log('%c[SAVE] saveCurrentUserData 함수 실행 종료', 'color: blue; font-weight: bold;');
     }
 }
+
 
 // Firebase에서 사용자 데이터 로드
 async function loadCurrentUserData() {
