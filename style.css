@@ -643,10 +643,12 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #87
 }
 
 .question-text {
-    font-size: 1.3em;
-    color: #333;
+    font-size: 1.5em;
+    color: #2C5530;
+    font-weight: bold;
     margin-bottom: 15px;
     line-height: 1.4;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 .quiz-options {
@@ -658,18 +660,20 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #87
 
 .quiz-options button {
     padding: 15px 20px;
-    background: white;
-    border: 2px solid #ddd;
+    background: linear-gradient(45deg, #89CFF0, #4682B4);
+    color: white;
+    border: 2px solid #4682B4;
     border-radius: 10px;
     cursor: pointer;
     font-size: 1em;
+    font-weight: bold;
     transition: all 0.3s ease;
 }
 
 .quiz-options button:hover {
-    border-color: #667eea;
-    background: #f8f9ff;
-    transform: translateY(-2px);
+    background: linear-gradient(45deg, #4682B4, #89CFF0);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(70, 130, 180, 0.3);
 }
 
 .quiz-options button.correct {
@@ -681,6 +685,43 @@ body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, #87
 .quiz-options button.incorrect {
     background: #f44336;
     color: white;
+    border-color: #f44336;
+}
+
+/* 퀴즈 옵션 버튼 전용 클래스 */
+.quiz-option-btn {
+    padding: 15px 20px;
+    background: linear-gradient(45deg, #89CFF0, #4682B4);
+    color: white;
+    border: 2px solid #4682B4;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.quiz-option-btn:hover {
+    background: linear-gradient(45deg, #4682B4, #89CFF0);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 4px 15px rgba(70, 130, 180, 0.3);
+}
+
+.quiz-option-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    transform: none;
+}
+
+.quiz-option-btn.correct {
+    background: linear-gradient(45deg, #4CAF50, #45a049);
+    border-color: #4CAF50;
+}
+
+.quiz-option-btn.incorrect {
+    background: linear-gradient(45deg, #f44336, #d32f2f);
     border-color: #f44336;
 }
 

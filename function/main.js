@@ -1704,7 +1704,9 @@
             optionsContainer.innerHTML = '';
             finalOptions.forEach(option => {
                 const button = document.createElement('button');
-                button.className = 'english-option-btn';
+                // 퀴즈 페이지에서는 기본 버튼 스타일, 메인 페이지에서는 영어 옵션 스타일 사용
+                const isQuizPage = document.getElementById('quiz-page') && document.getElementById('quiz-page').classList.contains('active');
+                button.className = isQuizPage ? 'quiz-option-btn' : 'english-option-btn';
                 button.innerText = option;
                 button.onclick = () => checkEnglishQuizAnswer(option);
                 optionsContainer.appendChild(button);
