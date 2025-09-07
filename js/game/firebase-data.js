@@ -64,6 +64,7 @@ export async function saveUserProfile(profile) {
             totalScore: profile.totalScore || 0,
             collectedAnimals: profile.collectedAnimals || [],
             speciesCount: (profile.collectedAnimals || []).length,
+            subjectProgress: profile.subjectProgress || {},
             lastLogin: new Date().toISOString(),
             updatedAt: new Date().toISOString()
         };

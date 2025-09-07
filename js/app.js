@@ -2,11 +2,11 @@
  * 메인 앱 초기화 및 모듈 로더
  */
 
-// 모든 필요한 모듈 import
+// 모든 필요한 모듈 import (과목별 구조로 복원)
 import { initializeFirebase, handleLogin, handleSignup } from './auth/firebase-auth.js';
-import { loadAnimalsFromJSON } from './game/animal-data.js';
+import { loadAllSubjectData, SUBJECTS, LEVELS } from './game/subject-data.js';
 import { getAllProfiles, updateHallOfFame } from './game/hall-of-fame.js';
-import { showPage, selectDifficulty, updateUI, updateAnimalCollection } from './ui/navigation.js';
+import { showPage, selectDifficulty, updateUI } from './ui/navigation.js';
 import './game/game-logic.js'; // 게임 로직 모듈 로드
 import { testFirebaseConnection, saveUserProfile, loadUserProfile, updateLeaderboardUI } from './game/firebase-data.js';
 
@@ -28,25 +28,33 @@ async function initializeApp() {
         window.handleLogin = handleLogin;
         window.handleSignup = handleSignup;
         
-        // 기본 페이지 설정 및 게임 초기화
-        setTimeout(() => {
-            if (window.showPage && !window.currentUserProfile) {
-                const firstNavBtn = document.querySelector('.nav-btn');
-                if (firstNavBtn) {
-                    window.showPage('game', firstNavBtn);
-                    console.log("🎮 기본 게임 페이지 설정 완료");
-                }
-            }
+        // 과목별 데이터 로드 및 게임 초기화
+        const subjectDataLoaded = await loadAllSubjectData();
+        
+        if (subjectDataLoaded) {
+            console.log('📚 모든 과목 데이터 로드 완료');
             
-            // 동물 데이터가 로드된 후 게임 시스템 초기화
-            if (window.animalTypes && window.animalTypes.length > 0) {
-                console.log('🎯 동물 데이터 기반 게임 시스템 초기화');
-                // 게임 로직에서 사용할 수 있도록 데이터 준비 완료 알림
+            // 기본 페이지 설정
+            setTimeout(() => {
+                if (window.showPage && !window.currentUserProfile) {
+                    const firstNavBtn = document.querySelector('.nav-btn');
+                    if (firstNavBtn) {
+                        window.showPage('game', firstNavBtn);
+                        console.log("🎮 기본 게임 페이지 설정 완료");
+                    }
+                }
+                
+                // 기본 난이도와 과목으로 초기화
                 if (window.onDifficultyChange) {
                     window.onDifficultyChange(1); // 기본 난이도로 초기화
                 }
-            }
-        }, 1000);
+                if (window.changeSubject) {
+                    window.changeSubject('math'); // 기본 과목을 수학으로 설정
+                }
+            }, 1000);
+        } else {
+            console.warn('⚠️ 일부 과목 데이터 로드 실패, 계속 진행합니다.');
+        }
         
         console.log('앱 초기화 완료');
         

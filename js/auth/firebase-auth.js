@@ -264,13 +264,14 @@ window.onFirebaseReady = async function(user) {
     console.log("현재 사용자 ID 설정:", window.currentUserId);
     
     try {
-        console.log("동물 데이터 로딩 시작...");
-        await window.loadAnimalsFromJSON();
+        console.log("과목별 데이터 로딩 완료됨 (이미 앱에서 로드됨)");
         console.log("명예의 전당 업데이트 시작...");
-        await window.updateHallOfFame();
+        if (window.updateHallOfFame) {
+            await window.updateHallOfFame();
+        }
         console.log("초기화 완료");
     } catch (error) {
-        console.error('초기화 오류:', error);
+        console.log('초기화 완료 (일부 기능 건너뜀):', error.message);
     }
     
     console.log("로그인 오버레이 표시");

@@ -1,6 +1,8 @@
 /**
- * UI 네비게이션 및 페이지 관리
+ * UI 네비게이션 및 페이지 관리 (과목별 구조 복원)
  */
+
+import { SUBJECTS, LEVELS } from '../game/subject-data.js';
 
 // showPage 함수
 export function showPage(pageName, element) {
@@ -29,6 +31,11 @@ export function showPage(pageName, element) {
     if (targetPage) {
         targetPage.classList.add('active');
         targetPage.style.display = 'block';
+        
+        // 게임 페이지일 때 과목별 UI 업데이트
+        if (pageName === 'game') {
+            updateGamePageUI();
+        }
         
         console.log('페이지 활성화:', pageName);
         
@@ -233,8 +240,206 @@ export function updateAnimalCollection() {
     collectionContainer.insertBefore(stats, grid);
 }
 
-// 전역 함수로 등록
+// 게임 페이지 UI 업데이트 (과목별)
+function updateGamePageUI() {
+    const currentSubject = window.getCurrentSubject ? window.getCurrentSubject() : 'math';
+    const currentLevel = window.getCurrentLevel ? window.getCurrentLevel() : 1;
+    
+    // 퀴즈 섹션 제목 업데이트
+    const quizSection = document.querySelector('.english-quiz-section h2');
+    if (quizSection) {
+        const subjectInfo = SUBJECTS[currentSubject];
+        if (subjectInfo) {
+            quizSection.textContent = `${subjectInfo.icon} ${subjectInfo.name} 퀴즈: 학습하기!`;
+        }
+    }
+    
+    // 과목 드롭다운 동기화
+    const subjectSelect = document.getElementById('subject-select');
+    if (subjectSelect) {
+        subjectSelect.value = currentSubject;
+    }
+    
+    // 게임 질문 영역 기본 메시지 업데이트
+    const questionEl = document.getElementById('english-question');
+    if (questionEl) {
+        const subjectInfo = SUBJECTS[currentSubject];
+        const levelInfo = LEVELS[currentLevel];
+        
+        if (subjectInfo && levelInfo) {
+            questionEl.textContent = `${subjectInfo.name} ${levelInfo.name} 게임을 시작하세요!`;
+        }
+    }
+    
+    // 컬렉션 섹션을 성취도 섹션으로 변경
+    updateAchievementSection();
+}
+
+// 성취도 섹션 업데이트
+function updateAchievementSection() {
+    const collectionSection = document.querySelector('.collection-section');
+    if (!collectionSection) return;
+    
+    // 섹션 제목 변경
+    const title = collectionSection.querySelector('h2');
+    if (title) {
+        title.textContent = '🏆 학습 성취도';
+    }
+    
+    // 힌트 텍스트 변경
+    const hint = collectionSection.querySelector('.collection-hint');
+    if (hint) {
+        hint.textContent = '💡 각 과목별 성취도를 확인하고 레벨업하세요!';
+    }
+    
+    // 성취도 그리드 업데이트
+    const collectionContainer = document.getElementById('animal-collection');
+    if (collectionContainer) {
+        updateSubjectAchievements(collectionContainer);
+    }
+}
+
+// 과목별 성취도 표시
+function updateSubjectAchievements(container) {
+    if (!container) return;
+    
+    const subjectProgress = window.getSubjectProgress ? window.getSubjectProgress() : {};
+    
+    container.innerHTML = '';
+    
+    const achievementsHtml = Object.keys(SUBJECTS).map(subjectKey => {
+        const subject = SUBJECTS[subjectKey];
+        const progress = subjectProgress[subjectKey] || {};
+        
+        // 각 레벨별 최고 점수
+        const level1Score = progress.level1 || 0;
+        const level2Score = progress.level2 || 0;
+        const level3Score = progress.level3 || 0;
+        const totalScore = level1Score + level2Score + level3Score;
+        
+        // 완료한 레벨 수
+        const completedLevels = [level1Score, level2Score, level3Score].filter(score => score > 0).length;
+        
+        return `
+            <div class="subject-achievement-card" style="
+                background: linear-gradient(135deg, ${subject.color}20, ${subject.color}10);
+                border: 3px solid ${subject.color}40;
+                border-radius: 20px; 
+                padding: 20px; 
+                text-align: center; 
+                transition: all 0.3s ease;
+                cursor: pointer;
+            " onclick="selectSubjectAndLevel('${subjectKey}', 1)">
+                <div style="font-size: 4rem; margin-bottom: 15px;">${subject.icon}</div>
+                <h3 style="color: ${subject.color}; margin-bottom: 10px; font-size: 1.3rem;">${subject.name}</h3>
+                <p style="color: #666; font-size: 0.9rem; margin-bottom: 15px;">${subject.description}</p>
+                
+                <div style="margin-bottom: 15px;">
+                    <div style="font-size: 1.8rem; font-weight: bold; color: ${subject.color}; margin-bottom: 5px;">
+                        ${totalScore}점
+                    </div>
+                    <div style="font-size: 0.9rem; color: #666;">총 획득 점수</div>
+                </div>
+                
+                <div style="display: flex; justify-content: space-around; margin-bottom: 15px;">
+                    ${[1, 2, 3].map(level => `
+                        <div style="text-align: center; flex: 1;">
+                            <div style="
+                                width: 40px; height: 40px; 
+                                border-radius: 50%; 
+                                background: ${(progress[`level${level}`] || 0) > 0 ? subject.color : '#ddd'}; 
+                                color: white; 
+                                display: flex; align-items: center; justify-content: center; 
+                                margin: 0 auto 5px; 
+                                font-weight: bold;
+                            ">L${level}</div>
+                            <div style="font-size: 0.8rem; color: #666;">
+                                ${progress[`level${level}`] || 0}점
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+                
+                <div style="
+                    background: ${subject.color}20; 
+                    padding: 8px; 
+                    border-radius: 10px; 
+                    font-size: 0.9rem; 
+                    color: ${subject.color};
+                ">
+                    ${completedLevels}/3 레벨 완료
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    container.innerHTML = `
+        <div style="
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 20px; 
+            margin: 20px 0;
+        ">
+            ${achievementsHtml}
+        </div>
+    `;
+}
+
+// 과목 및 레벨 선택 함수
+function selectSubjectAndLevel(subject, level) {
+    console.log(`📚 과목 선택: ${SUBJECTS[subject].name} Level ${level}`);
+    
+    // 과목 드롭다운 업데이트
+    const subjectSelect = document.getElementById('subject-select');
+    if (subjectSelect) {
+        subjectSelect.value = subject;
+    }
+    
+    // 과목 변경
+    if (window.changeSubject) {
+        window.changeSubject(subject);
+    }
+    
+    // 레벨 변경
+    if (window.onDifficultyChange) {
+        window.onDifficultyChange(level);
+    }
+    
+    // 난이도 버튼 활성화
+    document.querySelectorAll('.difficulty-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.level == level) {
+            btn.classList.add('active');
+        }
+    });
+    
+    // UI 업데이트
+    updateGamePageUI();
+}
+
+// 과목 변경 핸들러
+function handleSubjectChange() {
+    const subjectSelect = document.getElementById('subject-select');
+    if (!subjectSelect) return;
+    
+    const selectedSubject = subjectSelect.value;
+    console.log(`📚 드롭다운에서 과목 변경: ${SUBJECTS[selectedSubject]?.name}`);
+    
+    if (window.changeSubject) {
+        window.changeSubject(selectedSubject);
+    }
+    
+    // UI 업데이트
+    updateGamePageUI();
+}
+
+// 전역 함수로 등록 (과목별 구조)
 window.showPage = showPage;
 window.selectDifficulty = selectDifficulty;
 window.updateUI = updateUI;
 window.updateAnimalCollection = updateAnimalCollection;
+window.updateGamePageUI = updateGamePageUI;
+window.selectSubjectAndLevel = selectSubjectAndLevel;
+window.changeSubject = handleSubjectChange; // HTML에서 호출되는 함수
+
+console.log('📚 과목별 UI 네비게이션 시스템 초기화 완료');
