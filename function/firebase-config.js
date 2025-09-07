@@ -85,31 +85,26 @@ try {
 
     console.log("Firebase 초기화 성공");
 
-    window.firebase = { auth, db, functions, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot, httpsCallable };
+ window.firebase = { auth, db, functions, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot, httpsCallable };
 
-    onAuthStateChanged(auth, async (user) => {
-        console.log("Auth 상태 변경:", user ? "로그인됨" : "로그아웃됨");
+    // 인증 상태를 한 번만 가져와 처리하여 불필요한 재로그인을 방지합니다.
+    try {
+        await auth.authStateReady(); // Firebase 인증 상태가 준비될 때까지 기다립니다.
+        let user = auth.currentUser;
+
         if (user) {
-            console.log("Firebase Auth User:", user.uid);
+            // 이미 로그인된 사용자(익명 포함)가 있는 경우
+            console.log("기존 사용자로 로그인:", user.uid);
             window.onFirebaseReady(user);
         } else {
-             try {
-                console.log("익명 로그인 시도...");
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    const result = await signInAnonymously(auth);
-                    console.log("익명 로그인 성공:", result.user.uid);
-                }
-            } catch (error) {
-                console.error("익명 로그인 실패:", error);
-                alert("Firebase 인증 실패: " + error.message);
-                window.onFirebaseReady(null);
-            }
+            // 로그인된 사용자가 없는 경우, 새로 익명 로그인을 시도합니다.
+            console.log("새로운 익명 로그인 시도...");
+            const userCredential = await signInAnonymously(auth);
+            console.log("익명 로그인 성공:", userCredential.user.uid);
+            window.onFirebaseReady(userCredential.user);
         }
-    });
-} catch (error) {
-    console.error("Firebase 초기화 실패:", error);
-    alert("Firebase 초기화 실패: " + error.message);
-    window.onFirebaseReady(null);
-}
+    } catch (error) {
+        console.error("Firebase 인증 처리 중 오류 발생:", error);
+        alert("Firebase 인증 실패: " + error.message);
+        window.onFirebaseReady(null);
+    }
