@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Login Test</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            padding: 20px; 
+            background: linear-gradient(135deg, #87CEEB, #98FB98); 
+            min-height: 100vh; 
+            margin: 0; 
+        }
+        .test-container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: rgba(255,255,255,0.95); 
+            padding: 30px; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+        }
+        .test-section { 
+            margin: 20px 0; 
+            padding: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+        }
+        button { 
+            background: linear-gradient(45deg, #4169E1, #1E90FF); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin: 5px; 
+        }
+        button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2); 
+        }
+        .success { color: #28a745; font-weight: bold; }
+        .error { color: #dc3545; font-weight: bold; }
+        .info { color: #007bff; font-weight: bold; }
+        input { 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; 
+            margin: 5px; 
+            font-size: 16px; 
+        }
+        pre { 
+            background: #f8f9fa; 
+            padding: 10px; 
+            border-radius: 5px; 
+            overflow-x: auto; 
+            font-size: 12px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🔥 Firebase 로그인 테스트</h1>
+        
+        <div class="test-section">
+            <h2>🎮 로그인 테스트</h2>
+            <input type="text" id="test-name" placeholder="플레이어 이름 (아빠)" value="아빠">
+            <input type="text" id="test-pin" placeholder="PIN (9329)" value="9329" maxlength="4">
+            <button onclick="testLogin()">로그인 테스트</button>
+            <div id="login-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🔥 Firebase 연결 상태</h2>
+            <button onclick="testFirebaseConnection()">연결 테스트</button>
+            <div id="firebase-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🏆 글로벌 리더보드</h2>
+            <button onclick="loadLeaderboard()">리더보드 로드</button>
+            <button onclick="addTestData()">테스트 데이터 추가</button>
+            <div id="leaderboard-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📊 사용자 프로필</h2>
+            <button onclick="saveTestProfile()">프로필 저장</button>
+            <button onclick="loadTestProfile()">프로필 로드</button>
+            <div id="profile-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🐾 실시간 데이터 동기화</h2>
+            <button onclick="simulateGameplay()">게임플레이 시뮬레이션</button>
+            <div id="sync-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>📋 로그</h2>
+            <button onclick="clearLogs()">로그 클리어</button>
+            <div id="log-output"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase 모듈 import
+        import { initializeFirebase, handleLogin } from './js/auth/firebase-auth.js';
+        import { testFirebaseConnection, saveUserProfile, loadUserProfile, 
+                 getGlobalLeaderboard, updateGameScore, updateAnimalCollection } from './js/game/firebase-data.js';
+
+        // 전역 함수들
+        window.currentUserProfile = null;
+        window.currentUserId = null;
+
+        // 로그 함수
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log-output');
+            const timestamp = new Date().toLocaleTimeString();
+            const className = type;
+            logEl.innerHTML += `<div class="${className}">[${timestamp}] ${message}</div>`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+
+        // Firebase 초기화
+        async function initializeTest() {
+            log('🔥 Firebase 테스트 환경 초기화 중...');
+            
+            try {
+                const initialized = await initializeFirebase();
+                if (initialized) {
+                    log('✅ Firebase 초기화 성공', 'success');
+                    
+                    // 익명 로그인 대기
+                    setTimeout(() => {
+                        if (window.currentUserId) {
+                            log(`🔑 익명 로그인 완료: ${window.currentUserId}`, 'success');
+                        }
+                    }, 2000);
+                    
+                } else {
+                    log('❌ Firebase 초기화 실패', 'error');
+                }
+            } catch (error) {
+                log(`❌ Firebase 초기화 오류: ${error.message}`, 'error');
+            }
+        }
+
+        // 로그인 테스트
+        window.testLogin = async function() {
+            const nameInput = document.getElementById('test-name');
+            const pinInput = document.getElementById('test-pin');
+            const resultEl = document.getElementById('login-result');
+            
+            const name = nameInput.value.trim();
+            const pin = pinInput.value.trim();
+            
+            log(`🎮 로그인 테스트 시작: ${name}/${pin}`);
+            
+            try {
+                // 임시 DOM 요소 생성 (handleLogin이 DOM을 찾기 때문)
+                const tempName = document.createElement('input');
+                tempName.id = 'player-name-input';
+                tempName.value = name;
+                document.body.appendChild(tempName);
+                
+                const tempPin = document.createElement('input');
+                tempPin.id = 'player-pin-input';
+                tempPin.value = pin;
+                document.body.appendChild(tempPin);
+                
+                const tempFeedback = document.createElement('div');
+                tempFeedback.id = 'login-feedback';
+                document.body.appendChild(tempFeedback);
+                
+                // 로그인 시도
+                await handleLogin();
+                
+                // 결과 확인
+                if (window.currentUserProfile) {
+                    const profile = window.currentUserProfile;
+                    resultEl.innerHTML = `
+                        <div class="success">✅ 로그인 성공!</div>
+                        <pre>${JSON.stringify(profile, null, 2)}</pre>
+                    `;
+                    log(`✅ 로그인 성공: ${profile.name}`, 'success');
+                } else {
+                    resultEl.innerHTML = `<div class="error">❌ 로그인 실패</div>`;
+                    log('❌ 로그인 실패: 프로필이 생성되지 않음', 'error');
+                }
+                
+                // 임시 요소 정리
+                document.body.removeChild(tempName);
+                document.body.removeChild(tempPin);
+                document.body.removeChild(tempFeedback);
+                
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">❌ 로그인 오류: ${error.message}</div>`;
+                log(`❌ 로그인 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // Firebase 연결 테스트
+        window.testFirebaseConnection = async function() {
+            const statusEl = document.getElementById('firebase-status');
+            
+            log('🔥 Firebase 연결 테스트 시작...');
+            
+            try {
+                const isConnected = await testFirebaseConnection();
+                if (isConnected) {
+                    statusEl.innerHTML = '<div class="success">✅ Firebase 연결 성공!</div>';
+                    log('✅ Firebase 연결 테스트 성공', 'success');
+                } else {
+                    statusEl.innerHTML = '<div class="error">❌ Firebase 연결 실패</div>';
+                    log('❌ Firebase 연결 테스트 실패', 'error');
+                }
+            } catch (error) {
+                statusEl.innerHTML = `<div class="error">❌ 연결 오류: ${error.message}</div>`;
+                log(`❌ Firebase 연결 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // 리더보드 로드
+        window.loadLeaderboard = async function() {
+            const resultEl = document.getElementById('leaderboard-result');
+            
+            log('🏆 글로벌 리더보드 로드 시작...');
+            
+            try {
+                const players = await getGlobalLeaderboard();
+                if (players.length > 0) {
+                    resultEl.innerHTML = `
+                        <div class="success">✅ 리더보드 로드 성공! (${players.length}명)</div>
+                        <pre>${JSON.stringify(players, null, 2)}</pre>
+                    `;
+                    log(`✅ 리더보드 로드 성공: ${players.length}명`, 'success');
+                } else {
+                    resultEl.innerHTML = '<div class="info">📝 리더보드가 비어있습니다.</div>';
+                    log('📝 리더보드가 비어있습니다.', 'info');
+                }
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">❌ 리더보드 오류: ${error.message}</div>`;
+                log(`❌ 리더보드 로드 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // 테스트 데이터 추가
+        window.addTestData = async function() {
+            log('📊 테스트 데이터 추가 시작...');
+            
+            try {
+                const testProfiles = [
+                    { name: '아빠', totalScore: 150, collectedAnimals: ['호랑이', '사자', '코끼리'] },
+                    { name: '테스터1', totalScore: 200, collectedAnimals: ['기린', '얼룩말'] },
+                    { name: '테스터2', totalScore: 75, collectedAnimals: ['판다'] }
+                ];
+                
+                for (const profile of testProfiles) {
+                    window.currentUserProfile = profile;
+                    window.currentUserId = `test_${profile.name}`;
+                    await saveUserProfile(profile);
+                }
+                
+                log('✅ 테스트 데이터 추가 완료', 'success');
+                await loadLeaderboard(); // 자동으로 리더보드 새로고침
+                
+            } catch (error) {
+                log(`❌ 테스트 데이터 추가 실패: ${error.message}`, 'error');
+            }
+        };
+
+        // 프로필 저장 테스트
+        window.saveTestProfile = async function() {
+            const resultEl = document.getElementById('profile-result');
+            
+            if (!window.currentUserProfile) {
+                resultEl.innerHTML = '<div class="error">❌ 먼저 로그인해주세요!</div>';
+                return;
+            }
+            
+            log('💾 프로필 저장 테스트 시작...');
+            
+            try {
+                const success = await saveUserProfile(window.currentUserProfile);
+                if (success) {
+                    resultEl.innerHTML = '<div class="success">✅ 프로필 저장 성공!</div>';
+                    log('✅ 프로필 저장 성공', 'success');
+                } else {
+                    resultEl.innerHTML = '<div class="error">❌ 프로필 저장 실패</div>';
+                    log('❌ 프로필 저장 실패', 'error');
+                }
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">❌ 저장 오류: ${error.message}</div>`;
+                log(`❌ 프로필 저장 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // 프로필 로드 테스트
+        window.loadTestProfile = async function() {
+            const resultEl = document.getElementById('profile-result');
+            
+            if (!window.currentUserId) {
+                resultEl.innerHTML = '<div class="error">❌ 먼저 Firebase 로그인해주세요!</div>';
+                return;
+            }
+            
+            log('📖 프로필 로드 테스트 시작...');
+            
+            try {
+                const profile = await loadUserProfile(window.currentUserId);
+                if (profile) {
+                    resultEl.innerHTML = `
+                        <div class="success">✅ 프로필 로드 성공!</div>
+                        <pre>${JSON.stringify(profile, null, 2)}</pre>
+                    `;
+                    log(`✅ 프로필 로드 성공: ${profile.name}`, 'success');
+                } else {
+                    resultEl.innerHTML = '<div class="info">📝 프로필이 없습니다.</div>';
+                    log('📝 프로필이 없습니다.', 'info');
+                }
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">❌ 로드 오류: ${error.message}</div>`;
+                log(`❌ 프로필 로드 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // 게임플레이 시뮬레이션
+        window.simulateGameplay = async function() {
+            const resultEl = document.getElementById('sync-result');
+            
+            if (!window.currentUserProfile) {
+                resultEl.innerHTML = '<div class="error">❌ 먼저 로그인해주세요!</div>';
+                return;
+            }
+            
+            log('🎮 게임플레이 시뮬레이션 시작...');
+            
+            try {
+                // 점수 업데이트 시뮬레이션
+                const newScore = (window.currentUserProfile.totalScore || 0) + 50;
+                await updateGameScore(newScore);
+                log(`📊 점수 업데이트: ${newScore}점`, 'success');
+                
+                // 동물 수집 시뮬레이션
+                const newAnimal = `랜덤동물_${Date.now()}`;
+                await updateAnimalCollection(newAnimal);
+                log(`🐾 동물 수집: ${newAnimal}`, 'success');
+                
+                resultEl.innerHTML = `
+                    <div class="success">✅ 게임플레이 시뮬레이션 완료!</div>
+                    <div>새 점수: ${newScore}점</div>
+                    <div>수집한 동물: ${newAnimal}</div>
+                `;
+                
+                log('✅ 게임플레이 시뮬레이션 완료', 'success');
+                
+            } catch (error) {
+                resultEl.innerHTML = `<div class="error">❌ 시뮬레이션 오류: ${error.message}</div>`;
+                log(`❌ 게임플레이 시뮬레이션 오류: ${error.message}`, 'error');
+            }
+        };
+
+        // 로그 클리어
+        window.clearLogs = function() {
+            document.getElementById('log-output').innerHTML = '';
+            log('🧹 로그가 클리어되었습니다.');
+        };
+
+        // Firebase 익명 인증 완료 콜백
+        window.onFirebaseReady = function(user) {
+            if (user) {
+                window.currentUserId = user.uid;
+                log(`🔑 Firebase Auth 완료: ${user.uid}`, 'success');
+            } else {
+                log('❌ Firebase Auth 실패', 'error');
+            }
+        };
+
+        // 초기화 실행
+        initializeTest();
+    </script>
+</body>
+</html>

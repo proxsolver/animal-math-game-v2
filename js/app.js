@@ -8,6 +8,7 @@ import { loadAnimalsFromJSON } from './game/animal-data.js';
 import { getAllProfiles, updateHallOfFame } from './game/hall-of-fame.js';
 import { showPage, selectDifficulty, updateUI, updateAnimalCollection } from './ui/navigation.js';
 import './game/game-logic.js'; // 게임 로직 모듈 로드
+import { testFirebaseConnection, saveUserProfile, loadUserProfile, updateLeaderboardUI } from './game/firebase-data.js';
 
 // 앱 초기화
 async function initializeApp() {

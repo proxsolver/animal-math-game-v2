@@ -319,10 +319,15 @@ function updateGameStats() {
         levelEl.textContent = currentGameState.currentLevel;
     }
     
-    // 사용자 프로필 업데이트
+    // 사용자 프로필 업데이트 (로컬 + Firebase)
     if (window.currentUserProfile) {
         window.currentUserProfile.totalScore = currentGameState.score;
         localStorage.setItem(`${window.currentUserProfile.name}_totalScore`, currentGameState.score);
+        
+        // Firebase 동기화
+        if (window.updateGameScore) {
+            window.updateGameScore(currentGameState.score);
+        }
     }
 }
 

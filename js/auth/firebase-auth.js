@@ -92,7 +92,7 @@ const USER_DATABASE = {
 };
 
 // 로그인 처리 함수 (handleLogin 오류 해결)
-export function handleLogin() {
+export async function handleLogin() {
     console.log("로그인 처리 시작");
     
     const nameInput = document.getElementById('player-name-input');
@@ -126,8 +126,18 @@ export function handleLogin() {
         // 로그인 성공
         showLoginFeedback('로그인 성공! 게임을 시작합니다...', 'success');
         
-        // 사용자 프로필 설정
-        window.currentUserProfile = {
+        // Firebase에서 사용자 프로필 로드 시도
+        let firebaseProfile = null;
+        try {
+            if (window.loadUserProfile) {
+                firebaseProfile = await window.loadUserProfile(window.currentUserId);
+            }
+        } catch (error) {
+            console.log('Firebase 프로필 로드 실패, 로컬 데이터 사용');
+        }
+        
+        // 사용자 프로필 설정 (Firebase 우선, 로컬 백업)
+        window.currentUserProfile = firebaseProfile || {
             name: playerName,
             totalScore: parseInt(localStorage.getItem(`${playerName}_totalScore`)) || 0,
             collectedAnimals: JSON.parse(localStorage.getItem(`${playerName}_collectedAnimals`)) || [],
@@ -135,8 +145,18 @@ export function handleLogin() {
             lastLogin: new Date().toISOString()
         };
         
+        // 이름 업데이트 (로그인한 이름으로)
+        window.currentUserProfile.name = playerName;
+        
         // 로컬 스토리지에 현재 사용자 저장
         localStorage.setItem('currentUser', playerName);
+        
+        // Firebase에 프로필 저장 (백그라운드)
+        if (window.saveUserProfile) {
+            window.saveUserProfile(window.currentUserProfile).catch(err => 
+                console.log('Firebase 프로필 저장 실패:', err.message)
+            );
+        }
         
         // 1초 후 로그인 오버레이 숨기고 게임 시작
         setTimeout(() => {
