@@ -1,0 +1,226 @@
+{
+  "difficulty": 1,
+  "subject": "math",
+  "words": [
+    {
+      "subject": "math",
+      "level": "beginner", 
+      "habitat": "home",
+      "question": "3 + 5 = ?",
+      "options": ["7", "8", "9", "10"],
+      "answer": 1,
+      "explanation": "3에 5를 더하면 8이 됩니다.",
+      "keywords": ["덧셈", "더하기", "계산"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "home", 
+      "question": "10 - 4 = ?",
+      "options": ["5", "6", "7", "8"],
+      "answer": 1,
+      "explanation": "10에서 4를 빼면 6이 됩니다.",
+      "keywords": ["뺄셈", "빼기", "계산"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농장에 닭이 7마리 있었는데 3마리가 더 왔어요. 총 몇 마리일까요?",
+      "options": ["9마리", "10마리", "11마리", "12마리"],
+      "answer": 1,
+      "explanation": "7 + 3 = 10이므로 총 10마리입니다.",
+      "keywords": ["문장제", "덧셈", "동물"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "2 × 4 = ?",
+      "options": ["6", "8", "10", "12"],
+      "answer": 1,
+      "explanation": "2를 4번 더하면 8이 됩니다. (2+2+2+2=8)",
+      "keywords": ["곱셈", "곱하기", "계산"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "숲에 나무가 15그루 있었는데 5그루를 베었어요. 남은 나무는 몇 그루일까요?",
+      "options": ["8그루", "10그루", "12그루", "15그루"],
+      "answer": 1,
+      "explanation": "15 - 5 = 10이므로 10그루가 남았습니다.",
+      "keywords": ["문장제", "뺄셈", "자연"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "12 ÷ 3 = ?",
+      "options": ["3", "4", "5", "6"],
+      "answer": 1,
+      "explanation": "12를 3으로 나누면 4가 됩니다.",
+      "keywords": ["나눗셈", "나누기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바다에서 물고기 6마리씩 3그룹을 잡았어요. 총 몇 마리일까요?",
+      "options": ["15마리", "18마리", "21마리", "24마리"],
+      "answer": 1,
+      "explanation": "6 × 3 = 18이므로 총 18마리입니다.",
+      "keywords": ["문장제", "곱셈", "바다"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "9 + 6 = ?",
+      "options": ["14", "15", "16", "17"],
+      "answer": 1,
+      "explanation": "9에 6을 더하면 15가 됩니다.",
+      "keywords": ["덧셈", "더하기", "계산"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "도시에 버스가 20대 있었는데 8대가 출발했어요. 남은 버스는 몇 대일까요?",
+      "options": ["10대", "12대", "14대", "16대"],
+      "answer": 1,
+      "explanation": "20 - 8 = 12이므로 12대가 남았습니다.",
+      "keywords": ["문장제", "뺄셈", "교통"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "16 ÷ 4 = ?",
+      "options": ["3", "4", "5", "6"],
+      "answer": 1,
+      "explanation": "16을 4로 나누면 4가 됩니다.",
+      "keywords": ["나눗셈", "나누기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "엄마가 사과 8개를 2명에게 똑같이 나눠주려고 해요. 한 명당 몇 개씩일까요?",
+      "options": ["3개", "4개", "5개", "6개"],
+      "answer": 1,
+      "explanation": "8 ÷ 2 = 4이므로 한 명당 4개씩입니다.",
+      "keywords": ["문장제", "나눗셈", "나누기"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "7 × 3 = ?",
+      "options": ["18", "21", "24", "27"],
+      "answer": 1,
+      "explanation": "7을 3번 더하면 21이 됩니다. (7+7+7=21)",
+      "keywords": ["곱셈", "곱하기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농장에 양이 24마리 있어요. 3개의 우리에 똑같이 나누어 넣으려면 한 우리에 몇 마리씩일까요?",
+      "options": ["6마리", "8마리", "10마리", "12마리"],
+      "answer": 1,
+      "explanation": "24 ÷ 3 = 8이므로 한 우리에 8마리씩입니다.",
+      "keywords": ["문장제", "나눗셈", "동물"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "14 - 9 = ?",
+      "options": ["4", "5", "6", "7"],
+      "answer": 1,
+      "explanation": "14에서 9를 빼면 5가 됩니다.",
+      "keywords": ["뺄셈", "빼기", "계산"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "6 + 9 = ?",
+      "options": ["13", "14", "15", "16"],
+      "answer": 2,
+      "explanation": "6에 9를 더하면 15가 됩니다.",
+      "keywords": ["덧셈", "더하기", "계산"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "5 × 6 = ?",
+      "options": ["25", "30", "35", "40"],
+      "answer": 1,
+      "explanation": "5를 6번 더하면 30이 됩니다.",
+      "keywords": ["곱셈", "곱하기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "18 ÷ 6 = ?",
+      "options": ["2", "3", "4", "5"],
+      "answer": 1,
+      "explanation": "18을 6으로 나누면 3이 됩니다.",
+      "keywords": ["나눗셈", "나누기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "11 + 7 = ?",
+      "options": ["17", "18", "19", "20"],
+      "answer": 1,
+      "explanation": "11에 7을 더하면 18이 됩니다.",
+      "keywords": ["덧셈", "더하기", "계산"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "25 - 16 = ?",
+      "options": ["8", "9", "10", "11"],
+      "answer": 1,
+      "explanation": "25에서 16을 빼면 9가 됩니다.",
+      "keywords": ["뺄셈", "빼기", "계산"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "math",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "4 × 9 = ?",
+      "options": ["32", "36", "40", "44"],
+      "answer": 1,
+      "explanation": "4를 9번 더하면 36이 됩니다.",
+      "keywords": ["곱셈", "곱하기", "계산"],
+      "difficulty_score": 3
+    }
+  ]
+}

@@ -409,6 +409,8 @@
                     <select id="subject-select" onchange="changeSubject()" class="subject-dropdown">
                         <option value="english">영어 🇬🇧</option>
                         <option value="social">사회 🏛️</option>
+                        <option value="math">수학 🔢</option>
+                        <option value="general">상식 🧠</option>
                     </select>
                     <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기</button>
                 </div>
@@ -802,10 +804,28 @@
                     currentDifficulty: 1,
                     totalCorrect: 0,
                     totalIncorrect: 0 
+                },
+                math: { 
+                    progress: {}, 
+                    level: 1, 
+                    score: 0, 
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0 
+                },
+                general: { 
+                    progress: {}, 
+                    level: 1, 
+                    score: 0, 
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0 
                 }
             },
             // 현재 선택된 과목
-            currentSubject: 'english'
+            currentSubject: 'english',
+            // 최근 출제된 문제들을 추적하여 중복 방지
+            recentQuestions: []
         };
 
         // 플레이 시간 추적 변수들
@@ -2016,7 +2036,7 @@
         
         // 일반 문제 생성 (기존 로직)
         function generateRegularQuiz() {
-            generateEnglishQuiz(); // 기존 함수 호출
+            generateEnglishQuiz(); // 기존 함수 호출 (모든 과목 호환)
         }
         
         // 약점 힌트 표시
@@ -2403,8 +2423,41 @@
                     throw new Error('JSON 파일에 단어가 없습니다');
                 }
                 
-                // 랜덤으로 단어 선택
-                const randomWord = words[Math.floor(Math.random() * words.length)];
+                // 최근 출제된 문제를 피하면서 랜덤으로 단어 선택
+                const recentQuestions = gameState.recentQuestions || [];
+                const maxRecentQuestions = Math.min(words.length - 1, 5); // 최대 5개까지 기억
+                
+                let availableWords = words;
+                
+                // 충분한 문제가 있고 최근 문제가 있다면 제외
+                if (words.length > maxRecentQuestions && recentQuestions.length > 0) {
+                    availableWords = words.filter((word, index) => {
+                        const questionId = word.question || word.korean || index;
+                        return !recentQuestions.includes(questionId);
+                    });
+                    
+                    // 모든 문제가 최근 출제되었다면 최근 기록 초기화
+                    if (availableWords.length === 0) {
+                        gameState.recentQuestions = [];
+                        availableWords = words;
+                    }
+                }
+                
+                // 개선된 랜덤 선택 (시간 기반 시드 사용)
+                const now = Date.now();
+                const randomSeed = (now % 1000) * Math.random();
+                const randomIndex = Math.floor(randomSeed * availableWords.length / 1000);
+                const randomWord = availableWords[randomIndex];
+                
+                // 선택된 문제를 최근 문제 목록에 추가
+                if (!gameState.recentQuestions) gameState.recentQuestions = [];
+                const questionId = randomWord.question || randomWord.korean || words.indexOf(randomWord);
+                gameState.recentQuestions.push(questionId);
+                
+                // 최근 문제 목록 크기 제한
+                if (gameState.recentQuestions.length > maxRecentQuestions) {
+                    gameState.recentQuestions.shift(); // 가장 오래된 것 제거
+                }
                 
                 currentWordData = {
                     id: generateSubjectWordId(randomWord.korean || randomWord.question, randomWord.english || randomWord.options[randomWord.answer]),
@@ -2490,13 +2543,14 @@
             const sourceBadge = document.getElementById('source-badge');
             
             // 질문 표시 (과목에 따라 다름)
-            if (gameState.currentSubject === 'social') {
-                questionElement.textContent = currentWordData.korean; // 사회 과목
-                speakButton.style.display = 'none'; // 사회는 음성 기능 없음
-            } else {
+            if (gameState.currentSubject === 'english') {
                 questionElement.textContent = `"${currentWordData.korean}"`; // 영어 과목
                 speakButton.style.display = 'inline';
                 speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            } else {
+                // 사회, 수학, 상식 과목: 직접 질문 표시
+                questionElement.textContent = currentWordData.korean; 
+                speakButton.style.display = 'none'; // 음성 기능 없음
             }
             
             // 단어 출처 표시
@@ -2569,13 +2623,13 @@
             
             // 정답 체크 (과목에 따라 다름)
             let isCorrect = false;
-            if (gameState.currentSubject === 'social') {
-                // 사회 과목: selectedOption이 선택지 텍스트, answer는 인덱스
+            if (gameState.currentSubject === 'english') {
+                // 영어 과목: 기존 방식 (텍스트 매칭)
+                isCorrect = selectedOption === currentEnglishQuiz.answer;
+            } else {
+                // 사회, 수학, 상식 과목: selectedOption이 선택지 텍스트, answer는 인덱스
                 const selectedIndex = currentWordData.options.indexOf(selectedOption);
                 isCorrect = selectedIndex === currentWordData.answer;
-            } else {
-                // 영어 과목: 기존 방식
-                isCorrect = selectedOption === currentEnglishQuiz.answer;
             }
             
             // 학습 기록 업데이트
@@ -2616,13 +2670,14 @@
                 
                 // 과목별 피드백 메시지
                 let correctMessage = '';
-                if (gameState.currentSubject === 'social') {
+                if (gameState.currentSubject === 'english') {
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                } else {
+                    // 사회, 수학, 상식 과목: 해설 포함
                     correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
                     if (currentWordData.explanation) {
                         correctMessage += ` ${currentWordData.explanation}`;
                     }
-                } else {
-                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
                 }
                 
                 feedback.textContent = correctMessage;
@@ -2656,14 +2711,15 @@
             } else {
                 // 과목별 오답 피드백
                 let incorrectMessage = '';
-                if (gameState.currentSubject === 'social') {
+                if (gameState.currentSubject === 'english') {
+                    incorrectMessage = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
+                } else {
+                    // 사회, 수학, 상식 과목: 정답과 해설 표시
                     const correctAnswer = currentWordData.options[currentWordData.answer];
                     incorrectMessage = `아! 정답은 "${correctAnswer}"였어요.`;
                     if (currentWordData.explanation) {
                         incorrectMessage += ` ${currentWordData.explanation}`;
                     }
-                } else {
-                    incorrectMessage = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
                 }
                 
                 feedback.textContent = incorrectMessage;
@@ -2671,7 +2727,7 @@
                 
                 // 오답 시 피드백 효과
                 showIncorrectAnswerEffects();
-                setTimeout(() => generateEnglishQuiz(), 2500);
+                setTimeout(() => generatePersonalizedQuiz(), 2500);
             }
             
             updateUI();

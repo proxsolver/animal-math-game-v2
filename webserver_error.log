@@ -196,3 +196,46 @@ OSError: [Errno 98] Address already in use
 10.12.199.86 - - [07/Sep/2025 03:05:45] "GET /test-explanation.html HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 03:05:45] "GET /subjects/social/level1.json HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 03:05:45] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 03:06:45] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 03:06:51] "GET /subjects/social/level1.json HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:06:52] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:52] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:06:53] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:53] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:06:54] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:54] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:06:55] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:55] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:06:56] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:56] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:06:56] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:06:56] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:07:38] "GET / HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:07:48] "GET /favicon.ico HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:07:49] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:07:49] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:07:49] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:07:49] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:07:58] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:07:58] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:07:58] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:07:58] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:35:14] "GET / HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:36:06] "GET /subjects/social/level1.json HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:36:08] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:36:08] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:36:09] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:36:09] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:36:17] "GET / HTTP/1.1" 304 -
+10.12.199.86 - - [07/Sep/2025 03:36:28] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 03:36:28] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 03:57:51] "GET /test-randomization.html HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 03:57:51] "GET /subjects/social/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 03:57:51] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:04:21] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:04:21] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:04:22] "GET /animals.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /test-new-subjects.html HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/general/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/math/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /favicon.ico HTTP/1.1" 200 -

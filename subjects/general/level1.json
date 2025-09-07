@@ -1,0 +1,226 @@
+{
+  "difficulty": 1,
+  "subject": "general",
+  "words": [
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "식물이 햇빛을 받아서 양분을 만드는 과정을 뭐라고 할까요?",
+      "options": ["광합성", "호흡", "소화", "순환"],
+      "answer": 0,
+      "explanation": "식물이 햇빛과 이산화탄소로 양분을 만드는 것을 '광합성'이라고 해요.",
+      "keywords": ["과학", "식물", "광합성"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "물고기가 물속에서 숨을 쉬는 데 사용하는 몸의 부분은?",
+      "options": ["아가미", "폐", "코", "입"],
+      "answer": 0,
+      "explanation": "물고기는 '아가미'를 통해 물속의 산소를 받아들여 숨을 쉬어요.",
+      "keywords": ["과학", "물고기", "호흡"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "한글을 만드신 조선시대 임금님은 누구일까요?",
+      "options": ["세종대왕", "이순신", "을지문덕", "연개소문"],
+      "answer": 0,
+      "explanation": "세종대왕이 백성들을 위해 쉬운 우리 글자 한글을 만드셨어요.",
+      "keywords": ["역사", "세종대왕", "한글"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "우리나라의 수도는 어디일까요?",
+      "options": ["서울", "부산", "대구", "인천"],
+      "answer": 0,
+      "explanation": "우리나라 대한민국의 수도는 '서울'입니다.",
+      "keywords": ["지리", "수도", "서울"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "나무의 나이를 알 수 있는 것은?",
+      "options": ["나이테", "잎사귀", "뿌리", "꽃"],
+      "answer": 0,
+      "explanation": "나무를 자르면 보이는 '나이테'를 세어서 나무의 나이를 알 수 있어요.",
+      "keywords": ["과학", "나무", "나이테"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "지구에서 가장 큰 동물은?",
+      "options": ["코끼리", "기린", "대왕고래", "공룡"],
+      "answer": 2,
+      "explanation": "현재 지구에서 가장 큰 동물은 바다에 사는 '대왕고래'입니다.",
+      "keywords": ["과학", "동물", "고래"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "임진왜란 때 거북선을 만들어 왜군을 물리친 장군은?",
+      "options": ["이순신", "세종대왕", "을지문덕", "광개토대왕"],
+      "answer": 0,
+      "explanation": "'이순신' 장군이 거북선을 만들어 바다에서 왜군을 크게 물리쳤어요.",
+      "keywords": ["역사", "이순신", "거북선"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "태극기에 있는 4개의 괘 중에서 빨간색 줄 3개가 있는 것은?",
+      "options": ["건", "곤", "감", "리"],
+      "answer": 3,
+      "explanation": "태극기의 '리(☲)'는 빨간색(양) 줄이 3개 있고 불을 뜻해요.",
+      "keywords": ["상식", "태극기", "괘"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "봄에 꽃이 피고 가을에 열매가 맺는 이유는?",
+      "options": ["계절의 변화", "비가 와서", "바람이 불어서", "사람이 심어서"],
+      "answer": 0,
+      "explanation": "식물은 '계절의 변화'에 맞춰 꽃을 피우고 열매를 맺어요.",
+      "keywords": ["과학", "식물", "계절"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바닷물이 짠 이유는?",
+      "options": ["소금이 녹아있어서", "물고기 때문에", "모래 때문에", "바위 때문에"],
+      "answer": 0,
+      "explanation": "바다에는 많은 '소금'이 녹아있어서 짠맛이 나요.",
+      "keywords": ["과학", "바다", "소금"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "단군왕검이 세웠다고 전해지는 우리나라 최초의 나라는?",
+      "options": ["고조선", "고구려", "백제", "신라"],
+      "answer": 0,
+      "explanation": "'고조선'은 단군왕검이 세운 우리나라 최초의 나라로 전해져요.",
+      "keywords": ["역사", "고조선", "단군"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "우리나라와 가장 가까운 나라는?",
+      "options": ["일본", "중국", "러시아", "미국"],
+      "answer": 0,
+      "explanation": "우리나라와 바다를 사이에 두고 가장 가까운 나라는 '일본'입니다.",
+      "keywords": ["지리", "인접국", "일본"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "겨울잠을 자는 동물은?",
+      "options": ["곰", "사자", "기린", "코끼리"],
+      "answer": 0,
+      "explanation": "'곰'은 추운 겨울 동안 동굴에서 겨울잠을 자요.",
+      "keywords": ["과학", "동물", "겨울잠"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "펭귄이 사는 곳은?",
+      "options": ["남극", "북극", "적도", "사막"],
+      "answer": 0,
+      "explanation": "펭귄은 매우 추운 '남극'에서 살아요.",
+      "keywords": ["지리", "동물", "남극"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "조선시대에 과학 기술 발달에 기여한 장영실이 만든 것은?",
+      "options": ["물시계", "거북선", "한글", "인쇄술"],
+      "answer": 0,
+      "explanation": "'장영실'은 정확한 시간을 알려주는 '물시계'를 만들었어요.",
+      "keywords": ["역사", "장영실", "과학"],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "지구가 태양 주위를 한 바퀴 도는 데 걸리는 시간은?",
+      "options": ["1일", "1달", "1년", "10년"],
+      "answer": 2,
+      "explanation": "지구가 태양 주위를 한 바퀴 도는 데 '1년'이 걸려요.",
+      "keywords": ["과학", "지구", "공전"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "나비가 되기 전의 모습은?",
+      "options": ["애벌레", "개구리", "올챙이", "병아리"],
+      "answer": 0,
+      "explanation": "나비는 '애벌레' → 번데기 → 나비 순으로 변해요.",
+      "keywords": ["과학", "곤충", "변태"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "캥거루가 사는 나라는?",
+      "options": ["호주", "미국", "브라질", "인도"],
+      "answer": 0,
+      "explanation": "캥거루는 '호주'에서만 사는 특별한 동물이에요.",
+      "keywords": ["지리", "동물", "호주"],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "세계에서 가장 높은 산은?",
+      "options": ["한라산", "백두산", "에베레스트", "후지산"],
+      "answer": 2,
+      "explanation": "네팔에 있는 '에베레스트산'이 세계에서 가장 높아요.",
+      "keywords": ["지리", "산", "에베레스트"],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "general",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "무지개는 몇 가지 색깔로 이루어져 있을까요?",
+      "options": ["5가지", "6가지", "7가지", "8가지"],
+      "answer": 2,
+      "explanation": "무지개는 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라색 '7가지' 색으로 이루어져 있어요.",
+      "keywords": ["과학", "빛", "무지개"],
+      "difficulty_score": 2
+    }
+  ]
+}
