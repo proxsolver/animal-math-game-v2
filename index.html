@@ -2390,7 +2390,7 @@
             try {
                 console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
                 
-                const response = await fetch(`./words/level${difficulty}.json`);
+                const response = await fetch(getSubjectFilePath(difficulty));
                 
                 if (!response.ok) {
                     throw new Error(`JSON 파일 로드 실패: ${response.status}`);
