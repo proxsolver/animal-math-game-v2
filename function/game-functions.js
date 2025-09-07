@@ -252,9 +252,12 @@ async function updateMissionProgress(subject) {
         
         // 미션 완료 시에만 Firebase에 저장
         console.log(`[미션 완료] ${subject} 미션 완료로 Firebase 저장 시작`);
+        console.log(`[DEBUG] saveCurrentUserData 함수 타입:`, typeof window.saveCurrentUserData);
         try {
             if (typeof window.saveCurrentUserData === 'function') {
-                await saveCurrentUserData();
+                console.log(`[DEBUG] Firebase 저장 함수 호출 시작`);
+                await window.saveCurrentUserData();
+                console.log(`[DEBUG] Firebase 저장 함수 호출 완료`);
             } else {
                 console.error('[오류] saveCurrentUserData 함수를 찾을 수 없습니다!');
             }
@@ -942,9 +945,9 @@ window.testMissionProgress = function() {
     window.updateMissionProgress('english');
 };
 
-window.testMissionComplete = function() {
+window.testMissionComplete = async function() {
     console.log('[테스트] 영어 미션을 완료 상태로 설정');
     const mission = window.gameState.dailyMissions.english;
     mission.solvedQuestions = 9; // 9개로 설정
-    window.updateMissionProgress('english'); // 10개로 완료
+    await window.updateMissionProgress('english'); // 10개로 완료
 };

@@ -1842,7 +1842,11 @@
                 
                 // 일일 미션 진행도 업데이트 (정답일 때만, 자유 학습 모드가 아닐 때만)
                 if (!window.gameState.freeStudyMode) {
-                    window.updateMissionProgress(gameState.currentSubject);
+                    try {
+                        await window.updateMissionProgress(gameState.currentSubject);
+                    } catch (error) {
+                        console.error('[오류] 미션 진행도 업데이트 실패:', error);
+                    }
                 }
                 
                 // 매 문제마다 저장하지 않음 - 미션 완료 시에만 저장
