@@ -3,224 +3,1082 @@
   "subject": "general",
   "words": [
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "forest",
+      "subject": "general", "level": "beginner", "habitat": "forest",
       "question": "식물이 햇빛을 받아서 양분을 만드는 과정을 뭐라고 할까요?",
-      "options": ["광합성", "호흡", "소화", "순환"],
-      "answer": 0,
+      "options": ["광합성", "호흡", "소화", "순환"], "answer": 0,
       "explanation": "식물이 햇빛과 이산화탄소로 양분을 만드는 것을 '광합성'이라고 해요.",
-      "keywords": ["과학", "식물", "광합성"],
-      "difficulty_score": 2
+      "keywords": ["과학", "식물", "광합성"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "ocean",
+      "subject": "general", "level": "beginner", "habitat": "ocean",
       "question": "물고기가 물속에서 숨을 쉬는 데 사용하는 몸의 부분은?",
-      "options": ["아가미", "폐", "코", "입"],
-      "answer": 0,
+      "options": ["아가미", "폐", "코", "입"], "answer": 0,
       "explanation": "물고기는 '아가미'를 통해 물속의 산소를 받아들여 숨을 쉬어요.",
-      "keywords": ["과학", "물고기", "호흡"],
-      "difficulty_score": 1
+      "keywords": ["과학", "물고기", "호흡"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "home",
+      "subject": "general", "level": "beginner", "habitat": "home",
       "question": "한글을 만드신 조선시대 임금님은 누구일까요?",
-      "options": ["세종대왕", "이순신", "을지문덕", "연개소문"],
-      "answer": 0,
+      "options": ["세종대왕", "이순신", "을지문덕", "궁예"], "answer": 0,
       "explanation": "세종대왕이 백성들을 위해 쉬운 우리 글자 한글을 만드셨어요.",
-      "keywords": ["역사", "세종대왕", "한글"],
-      "difficulty_score": 1
+      "keywords": ["한국사", "세종대왕", "한글"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "city",
+      "subject": "general", "level": "beginner", "habitat": "city",
       "question": "우리나라의 수도는 어디일까요?",
-      "options": ["서울", "부산", "대구", "인천"],
-      "answer": 0,
+      "options": ["서울", "부산", "대구", "인천"], "answer": 0,
       "explanation": "우리나라 대한민국의 수도는 '서울'입니다.",
-      "keywords": ["지리", "수도", "서울"],
-      "difficulty_score": 1
+      "keywords": ["지리", "수도", "서울"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "forest",
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "땅속에서 자라는 채소가 아닌 것은 무엇일까요?",
+      "options": ["고구마", "감자", "당근", "오이"], "answer": 3,
+      "explanation": "'오이'는 땅 위 덩굴에서 열리는 열매 채소예요.",
+      "keywords": ["과학", "식물", "채소"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
       "question": "나무의 나이를 알 수 있는 것은?",
-      "options": ["나이테", "잎사귀", "뿌리", "꽃"],
-      "answer": 0,
+      "options": ["나이테", "잎사귀", "뿌리", "꽃"], "answer": 0,
       "explanation": "나무를 자르면 보이는 '나이테'를 세어서 나무의 나이를 알 수 있어요.",
-      "keywords": ["과학", "나무", "나이테"],
-      "difficulty_score": 2
+      "keywords": ["과학", "나무", "나이테"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "ocean",
+      "subject": "general", "level": "beginner", "habitat": "ocean",
       "question": "지구에서 가장 큰 동물은?",
-      "options": ["코끼리", "기린", "대왕고래", "공룡"],
-      "answer": 2,
+      "options": ["코끼리", "기린", "대왕고래", "공룡"], "answer": 2,
       "explanation": "현재 지구에서 가장 큰 동물은 바다에 사는 '대왕고래'입니다.",
-      "keywords": ["과학", "동물", "고래"],
-      "difficulty_score": 2
+      "keywords": ["과학", "동물", "고래"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "home",
+      "subject": "general", "level": "beginner", "habitat": "home",
       "question": "임진왜란 때 거북선을 만들어 왜군을 물리친 장군은?",
-      "options": ["이순신", "세종대왕", "을지문덕", "광개토대왕"],
-      "answer": 0,
+      "options": ["이순신", "세종대왕", "을지문덕", "광개토대왕"], "answer": 0,
       "explanation": "'이순신' 장군이 거북선을 만들어 바다에서 왜군을 크게 물리쳤어요.",
-      "keywords": ["역사", "이순신", "거북선"],
-      "difficulty_score": 2
+      "keywords": ["한국사", "이순신", "거북선"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "city",
-      "question": "태극기에 있는 4개의 괘 중에서 빨간색 줄 3개가 있는 것은?",
-      "options": ["건", "곤", "감", "리"],
-      "answer": 3,
-      "explanation": "태극기의 '리(☲)'는 빨간색(양) 줄이 3개 있고 불을 뜻해요.",
-      "keywords": ["상식", "태극기", "괘"],
-      "difficulty_score": 3
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "미국의 수도는 어디일까요?",
+      "options": ["뉴욕", "로스앤젤레스", "워싱턴 D.C.", "시카고"], "answer": 2,
+      "explanation": "미국의 수도는 '워싱턴 D.C.'입니다.",
+      "keywords": ["세계지리", "수도", "미국"], "difficulty_score": 3
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "forest",
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "소, 닭, 돼지처럼 사람이 기르는 동물을 무엇이라고 할까요?",
+      "options": ["가축", "야생동물", "애완동물", "공룡"], "answer": 0,
+      "explanation": "사람에게 도움을 주기 위해 기르는 동물을 '가축'이라고 해요.",
+      "keywords": ["상식", "동물", "가축"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
       "question": "봄에 꽃이 피고 가을에 열매가 맺는 이유는?",
-      "options": ["계절의 변화", "비가 와서", "바람이 불어서", "사람이 심어서"],
-      "answer": 0,
+      "options": ["계절의 변화", "비가 와서", "바람이 불어서", "사람이 심어서"], "answer": 0,
       "explanation": "식물은 '계절의 변화'에 맞춰 꽃을 피우고 열매를 맺어요.",
-      "keywords": ["과학", "식물", "계절"],
-      "difficulty_score": 2
+      "keywords": ["과학", "식물", "계절"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "ocean",
+      "subject": "general", "level": "beginner", "habitat": "ocean",
       "question": "바닷물이 짠 이유는?",
-      "options": ["소금이 녹아있어서", "물고기 때문에", "모래 때문에", "바위 때문에"],
-      "answer": 0,
+      "options": ["소금이 녹아있어서", "물고기 때문에", "모래 때문에", "바위 때문에"], "answer": 0,
       "explanation": "바다에는 많은 '소금'이 녹아있어서 짠맛이 나요.",
-      "keywords": ["과학", "바다", "소금"],
-      "difficulty_score": 1
+      "keywords": ["과학", "바다", "소금"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "home",
+      "subject": "general", "level": "beginner", "habitat": "home",
       "question": "단군왕검이 세웠다고 전해지는 우리나라 최초의 나라는?",
-      "options": ["고조선", "고구려", "백제", "신라"],
-      "answer": 0,
+      "options": ["고조선", "고구려", "백제", "신라"], "answer": 0,
       "explanation": "'고조선'은 단군왕검이 세운 우리나라 최초의 나라로 전해져요.",
-      "keywords": ["역사", "고조선", "단군"],
-      "difficulty_score": 2
+      "keywords": ["한국사", "고조선", "단군"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "city",
-      "question": "우리나라와 가장 가까운 나라는?",
-      "options": ["일본", "중국", "러시아", "미국"],
-      "answer": 0,
-      "explanation": "우리나라와 바다를 사이에 두고 가장 가까운 나라는 '일본'입니다.",
-      "keywords": ["지리", "인접국", "일본"],
-      "difficulty_score": 1
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "세계에서 가장 인구가 많은 나라는 어디일까요?",
+      "options": ["인도", "중국", "미국", "러시아"], "answer": 0,
+      "explanation": "현재 세계에서 인구가 가장 많은 나라는 '인도'입니다.",
+      "keywords": ["세계지리", "인구", "인도"], "difficulty_score": 3
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "forest",
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "쌀이 자라는 식물의 이름은 무엇일까요?",
+      "options": ["벼", "밀", "보리", "콩"], "answer": 0,
+      "explanation": "우리가 먹는 쌀은 '벼'라는 식물의 열매예요.",
+      "keywords": ["과학", "식물", "벼"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
       "question": "겨울잠을 자는 동물은?",
-      "options": ["곰", "사자", "기린", "코끼리"],
-      "answer": 0,
+      "options": ["곰", "사자", "기린", "코끼리"], "answer": 0,
       "explanation": "'곰'은 추운 겨울 동안 동굴에서 겨울잠을 자요.",
-      "keywords": ["과학", "동물", "겨울잠"],
-      "difficulty_score": 1
+      "keywords": ["과학", "동물", "겨울잠"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "ocean",
+      "subject": "general", "level": "beginner", "habitat": "ocean",
       "question": "펭귄이 사는 곳은?",
-      "options": ["남극", "북극", "적도", "사막"],
-      "answer": 0,
+      "options": ["남극", "북극", "적도", "사막"], "answer": 0,
       "explanation": "펭귄은 매우 추운 '남극'에서 살아요.",
-      "keywords": ["지리", "동물", "남극"],
-      "difficulty_score": 1
+      "keywords": ["지리", "동물", "남극"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "home",
-      "question": "조선시대에 과학 기술 발달에 기여한 장영실이 만든 것은?",
-      "options": ["물시계", "거북선", "한글", "인쇄술"],
-      "answer": 0,
-      "explanation": "'장영실'은 정확한 시간을 알려주는 '물시계'를 만들었어요.",
-      "keywords": ["역사", "장영실", "과학"],
-      "difficulty_score": 3
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "고구려를 세운 사람은 누구일까요?",
+      "options": ["주몽", "온조", "박혁거세", "김수로"], "answer": 0,
+      "explanation": "활을 아주 잘 쏘았던 '주몽'이 고구려를 세웠어요.",
+      "keywords": ["한국사", "고구려", "주몽"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "city",
+      "subject": "general", "level": "beginner", "habitat": "city",
       "question": "지구가 태양 주위를 한 바퀴 도는 데 걸리는 시간은?",
-      "options": ["1일", "1달", "1년", "10년"],
-      "answer": 2,
-      "explanation": "지구가 태양 주위를 한 바퀴 도는 데 '1년'이 걸려요.",
-      "keywords": ["과학", "지구", "공전"],
-      "difficulty_score": 2
+      "options": ["1일", "1달", "1년", "10년"], "answer": 2,
+      "explanation": "지구가 태양 주위를 한 바퀴 도는 데 '1년'이 걸려요. 이것을 공전이라고 해요.",
+      "keywords": ["과학", "지구", "공전"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "forest",
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "벌이 꿀을 모으는 곳은 어디일까요?",
+      "options": ["꽃", "나뭇잎", "흙", "열매"], "answer": 0,
+      "explanation": "벌은 '꽃' 속에 있는 달콤한 꿀을 모아요.",
+      "keywords": ["과학", "곤충", "벌"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
       "question": "나비가 되기 전의 모습은?",
-      "options": ["애벌레", "개구리", "올챙이", "병아리"],
-      "answer": 0,
-      "explanation": "나비는 '애벌레' → 번데기 → 나비 순으로 변해요.",
-      "keywords": ["과학", "곤충", "변태"],
-      "difficulty_score": 1
+      "options": ["애벌레", "개구리", "올챙이", "병아리"], "answer": 0,
+      "explanation": "나비는 알 → '애벌레' → 번데기 → 나비 순서로 모습이 변해요.",
+      "keywords": ["과학", "곤충", "변태"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "ocean",
+      "subject": "general", "level": "beginner", "habitat": "ocean",
       "question": "캥거루가 사는 나라는?",
-      "options": ["호주", "미국", "브라질", "인도"],
-      "answer": 0,
-      "explanation": "캥거루는 '호주'에서만 사는 특별한 동물이에요.",
-      "keywords": ["지리", "동물", "호주"],
-      "difficulty_score": 1
+      "options": ["호주", "미국", "브라질", "인도"], "answer": 0,
+      "explanation": "캥거루는 아기 주머니가 있는 특별한 동물로 '호주'에서만 살아요.",
+      "keywords": ["지리", "동물", "호주"], "difficulty_score": 1
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "home",
+      "subject": "general", "level": "beginner", "habitat": "home",
       "question": "세계에서 가장 높은 산은?",
-      "options": ["한라산", "백두산", "에베레스트", "후지산"],
-      "answer": 2,
+      "options": ["한라산", "백두산", "에베레스트", "후지산"], "answer": 2,
       "explanation": "네팔에 있는 '에베레스트산'이 세계에서 가장 높아요.",
-      "keywords": ["지리", "산", "에베레스트"],
-      "difficulty_score": 2
+      "keywords": ["지리", "산", "에베레스트"], "difficulty_score": 2
     },
     {
-      "subject": "general",
-      "level": "beginner",
-      "habitat": "city",
+      "subject": "general", "level": "beginner", "habitat": "city",
       "question": "무지개는 몇 가지 색깔로 이루어져 있을까요?",
-      "options": ["5가지", "6가지", "7가지", "8가지"],
-      "answer": 2,
+      "options": ["5가지", "6가지", "7가지", "8가지"], "answer": 2,
       "explanation": "무지개는 빨강, 주황, 노랑, 초록, 파랑, 남색, 보라색 '7가지' 색으로 이루어져 있어요.",
-      "keywords": ["과학", "빛", "무지개"],
-      "difficulty_score": 2
+      "keywords": ["과학", "빛", "무지개"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "암탉이 낳는 것은 무엇일까요?",
+      "options": ["알", "새끼", "우유", "씨앗"], "answer": 0,
+      "explanation": "닭은 '알'을 낳아요. 이 알이 부화하면 병아리가 태어나요.",
+      "keywords": ["과학", "동물", "닭"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "몸의 색깔을 주변 환경과 비슷하게 바꾸는 동물은?",
+      "options": ["카멜레온", "사자", "코끼리", "호랑이"], "answer": 0,
+      "explanation": "'카멜레온'은 자신을 보호하기 위해 몸 색깔을 바꾸는 능력이 있어요.",
+      "keywords": ["과학", "동물", "보호색"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "문어의 다리는 몇 개일까요?",
+      "options": ["6개", "8개", "10개", "12개"], "answer": 1,
+      "explanation": "문어는 머리에 '8개'의 다리가 달려 있어요.",
+      "keywords": ["과학", "동물", "문어"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "삼국을 통일한 나라는 어디일까요?",
+      "options": ["고구려", "백제", "신라", "가야"], "answer": 2,
+      "explanation": "김유신, 김춘추 같은 화랑의 활약으로 '신라'가 삼국을 통일했어요.",
+      "keywords": ["한국사", "신라", "삼국통일"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라 국기(國旗)의 이름은 무엇일까요?",
+      "options": ["태극기", "무궁화", "애국가", "한글"], "answer": 0,
+      "explanation": "우리나라를 대표하는 국기는 '태극기'입니다.",
+      "keywords": ["상식", "대한민국", "태극기"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "말은 어떤 소리를 낼까요?",
+      "options": ["멍멍", "야옹", "히힝", "꿀꿀"], "answer": 2,
+      "explanation": "말은 '히힝'하고 울어요.",
+      "keywords": ["상식", "동물", "소리"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "밤에 주로 활동하는 새는?",
+      "options": ["참새", "올빼미", "까치", "비둘기"], "answer": 1,
+      "explanation": "'올빼미'나 부엉이는 주로 밤에 활동하는 야행성 새예요.",
+      "keywords": ["과학", "동물", "야행성"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "모래사장 위를 옆으로 걷는 동물은?",
+      "options": ["게", "물고기", "거북이", "오징어"], "answer": 0,
+      "explanation": "집게발을 가진 '게'는 옆으로 걷는 특징이 있어요.",
+      "keywords": ["과학", "동물", "게"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "중국의 유명한 건축물로, 아주 길게 이어진 성벽은 무엇일까요?",
+      "options": ["만리장성", "피라미드", "콜로세움", "에펠탑"], "answer": 0,
+      "explanation": "달에서도 보인다는 말이 있을 정도로 아주 긴 '만리장성'은 중국에 있어요.",
+      "keywords": ["세계사", "중국", "만리장성"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라에서 가장 높은 산은 어디일까요?",
+      "options": ["한라산", "지리산", "설악산", "북한산"], "answer": 0,
+      "explanation": "제주도에 있는 '한라산'이 남한에서 가장 높은 산이에요.",
+      "keywords": ["지리", "산", "한라산"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "밀을 갈아서 만드는 하얀 가루는 무엇일까요?",
+      "options": ["밀가루", "쌀가루", "소금", "설탕"], "answer": 0,
+      "explanation": "빵이나 국수를 만드는 '밀가루'는 밀로 만들어요.",
+      "keywords": ["상식", "음식", "밀가루"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "땅속에 굴을 파고 사는 동물은?",
+      "options": ["두더지", "원숭이", "사슴", "새"], "answer": 0,
+      "explanation": "'두더지'는 앞발로 땅을 파서 굴을 만들고 그 속에서 살아요.",
+      "keywords": ["과학", "동물", "두더지"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "몸에서 먹물을 뿜는 바다 동물은?",
+      "options": ["오징어", "고등어", "상어", "새우"], "answer": 0,
+      "explanation": "'오징어'나 문어는 위험할 때 먹물을 뿜고 도망가요.",
+      "keywords": ["과학", "동물", "오징어"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "이집트의 대표적인 건축물로, 왕의 무덤인 것은?",
+      "options": ["피라미드", "스핑크스", "콜로세움", "타지마할"], "answer": 0,
+      "explanation": "이집트에는 왕의 무덤인 거대한 삼각뿔 모양의 '피라미드'가 있어요.",
+      "keywords": ["세계사", "이집트", "피라미드"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라의 4대강이 아닌 것은?",
+      "options": ["한강", "낙동강", "금강", "대동강"], "answer": 3,
+      "explanation": "'대동강'은 북한에 있는 강이에요. 우리나라 4대강은 한강, 낙동강, 금강, 영산강입니다.",
+      "keywords": ["지리", "강", "4대강"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "토마토는 과일일까요, 채소일까요?",
+      "options": ["채소", "과일", "곡식", "꽃"], "answer": 0,
+      "explanation": "토마토는 나무에서 열리지 않고 밭에서 자라기 때문에 '채소'로 분류돼요.",
+      "keywords": ["과학", "식물", "토마토"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "목이 아주 긴 동물은?",
+      "options": ["기린", "하마", "코뿔소", "얼룩말"], "answer": 0,
+      "explanation": "'기린'은 높은 곳에 있는 나뭇잎을 먹기 위해 목이 길게 발달했어요.",
+      "keywords": ["과학", "동물", "기린"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "몸에 딱딱한 등껍질이 있는 바다 동물은?",
+      "options": ["거북", "불가사리", "해마", "해파리"], "answer": 0,
+      "explanation": "바다 '거북'은 위험으로부터 몸을 보호하기 위해 딱딱한 등껍질을 가지고 있어요.",
+      "keywords": ["과학", "동물", "거북"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "고려 시대에 만들어진, 아름다운 푸른빛의 도자기는?",
+      "options": ["고려청자", "백자", "토기", "옹기"], "answer": 0,
+      "explanation": "고려 시대의 '고려청자'는 아름다운 비취색으로 전 세계적으로 유명해요.",
+      "keywords": ["한국사", "고려", "고려청자"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "지구의 대륙 중 가장 큰 대륙은 어디일까요?",
+      "options": ["아시아", "아프리카", "유럽", "북아메리카"], "answer": 0,
+      "explanation": "우리나라가 속해 있는 '아시아' 대륙이 세계에서 가장 커요.",
+      "keywords": ["지리", "대륙", "아시아"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 날 수 있는 동물은?",
+      "options": ["닭", "돼지", "소", "양"], "answer": 0,
+      "explanation": "닭은 날개가 있어서 짧은 거리를 날 수 있어요.",
+      "keywords": ["과학", "동물", "닭"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "가을이 되면 나뭇잎의 색깔이 변하는 현상은?",
+      "options": ["단풍", "개화", "낙엽", "발아"], "answer": 0,
+      "explanation": "가을이 되어 날씨가 추워지면 나뭇잎이 빨갛거나 노랗게 물드는 것을 '단풍'이라고 해요.",
+      "keywords": ["과학", "식물", "단풍"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "몸이 투명하고 쏘이면 아픈 바다 동물은?",
+      "options": ["해파리", "소라게", "멍게", "전복"], "answer": 0,
+      "explanation": "여름 바다에서 조심해야 할 '해파리'는 독이 있어서 쏘이면 아파요.",
+      "keywords": ["과학", "동물", "해파리"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "다음 중 우리나라의 명절이 아닌 것은?",
+      "options": ["설날", "추석", "단오", "할로윈"], "answer": 3,
+      "explanation": "'할로윈'은 다른 나라의 축제예요. 설날, 추석, 단오는 우리나라의 고유한 명절입니다.",
+      "keywords": ["문화", "명절", "상식"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라의 국화(國花)는 무엇일까요?",
+      "options": ["무궁화", "개나리", "진달래", "장미"], "answer": 0,
+      "explanation": "우리나라를 상징하는 꽃은 '무궁화'입니다.",
+      "keywords": ["상식", "대한민국", "무궁화"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "오이는 어디에서 열릴까요?",
+      "options": ["덩굴", "나무", "땅속", "물속"], "answer": 0,
+      "explanation": "오이는 땅 위로 뻗어 나가는 '덩굴'에서 열리는 열매 채소예요.",
+      "keywords": ["과학", "식물", "오이"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "개구리가 되기 전의 모습은?",
+      "options": ["올챙이", "애벌레", "번데기", "알"], "answer": 0,
+      "explanation": "개구리는 알에서 깨어나 물속에서 사는 '올챙이' 시절을 보내요.",
+      "keywords": ["과학", "양서류", "개구리"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "세상에서 가장 큰 사막은 어디일까요?",
+      "options": ["남극", "북극", "사하라 사막", "고비 사막"], "answer": 0,
+      "explanation": "아주 추운 '남극'도 비가 거의 오지 않기 때문에 세상에서 가장 큰 사막(한랭 사막)으로 분류돼요.",
+      "keywords": ["지리", "사막", "남극"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "고려를 세운 임금님은 누구일까요?",
+      "options": ["왕건", "이성계", "궁예", "견훤"], "answer": 0,
+      "explanation": "후삼국을 통일한 '왕건'이 고려를 세웠어요.",
+      "keywords": ["한국사", "고려", "왕건"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "일본의 수도는 어디일까요?",
+      "options": ["도쿄", "오사카", "교토", "삿포로"], "answer": 0,
+      "explanation": "일본의 수도는 '도쿄'입니다.",
+      "keywords": ["세계지리", "수도", "일본"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 씨앗을 먹는 식물은?",
+      "options": ["해바라기", "민들레", "장미", "나팔꽃"], "answer": 0,
+      "explanation": "우리는 '해바라기'의 씨를 볶아서 간식으로 먹어요.",
+      "keywords": ["과학", "식물", "씨앗"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "뱀은 다리가 있을까요?",
+      "options": ["없다", "2개 있다", "4개 있다", "많이 있다"], "answer": 0,
+      "explanation": "뱀은 파충류이지만 다리가 없고, 배를 이용해서 기어 다녀요.",
+      "keywords": ["과학", "동물", "뱀"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "몸에 전기를 만드는 바다 동물은?",
+      "options": ["전기뱀장어", "상어", "가오리", "복어"], "answer": 0,
+      "explanation": "'전기뱀장어'는 몸에서 전기를 만들어 자신을 보호하거나 먹이를 잡아요.",
+      "keywords": ["과학", "동물", "전기"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "미국의 첫 번째 대통령은 누구일까요?",
+      "options": ["조지 워싱턴", "에이브러햄 링컨", "토마스 제퍼슨", "도널드 트럼프"], "answer": 0,
+      "explanation": "미국을 세우는 데 큰 공을 세운 '조지 워싱턴'이 첫 번째 대통령이에요.",
+      "keywords": ["세계사", "미국", "대통령"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라에는 봄, 여름, 가을, 겨울이 있습니다. 이것을 무엇이라고 부를까요?",
+      "options": ["사계절", "환절기", "우기", "건기"], "answer": 0,
+      "explanation": "우리나라는 뚜렷한 특징을 가진 4개의 계절, 즉 '사계절'이 있어요.",
+      "keywords": ["지리", "계절", "사계절"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "벌집은 어떤 모양의 방으로 이루어져 있을까요?",
+      "options": ["육각형", "사각형", "삼각형", "원"], "answer": 0,
+      "explanation": "벌집은 가장 튼튼하고 효율적인 모양인 '육각형'으로 만들어져 있어요.",
+      "keywords": ["과학", "곤충", "벌집"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "아프리카 초원에 사는, 줄무늬가 있는 말처럼 생긴 동물은?",
+      "options": ["얼룩말", "사자", "치타", "하이에나"], "answer": 0,
+      "explanation": "몸에 까만 줄무늬가 있는 '얼룩말'은 아프리카에 살아요.",
+      "keywords": ["과학", "동물", "얼룩말"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "지구 표면의 대부분을 덮고 있는 것은?",
+      "options": ["바다", "육지", "산", "사막"], "answer": 0,
+      "explanation": "지구는 '물의 행성'이라고 불릴 만큼 넓은 '바다'로 덮여 있어요.",
+      "keywords": ["지리", "지구", "바다"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "조선을 세운 임금님은 누구일까요?",
+      "options": ["이성계", "왕건", "세종대왕", "주몽"], "answer": 0,
+      "explanation": "고려의 장군이었던 '이성계'가 위화도 회군을 통해 조선을 세웠어요.",
+      "keywords": ["한국사", "조선", "이성계"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "세계에서 가장 긴 강은 어디일까요?",
+      "options": ["나일강", "아마존강", "미시시피강", "황하강"], "answer": 0,
+      "explanation": "아프리카에 있는 '나일강'이 세계에서 가장 긴 강으로 알려져 있어요.",
+      "keywords": ["세계지리", "강", "나일강"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "돼지는 어떤 소리를 낼까요?",
+      "options": ["꿀꿀", "음메", "어흥", "구구"], "answer": 0,
+      "explanation": "돼지는 '꿀꿀'하고 울어요.",
+      "keywords": ["상식", "동물", "소리"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "사막에 사는 식물로, 몸에 뾰족한 가시가 있는 것은?",
+      "options": ["선인장", "소나무", "단풍나무", "튤립"], "answer": 0,
+      "explanation": "'선인장'은 물을 아끼기 위해 잎이 가시로 변했고, 사막처럼 덥고 건조한 곳에서 잘 자라요.",
+      "keywords": ["과학", "식물", "선인장"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "바다의 왕이라고 불리는, 날카로운 이빨을 가진 물고기는?",
+      "options": ["상어", "고래", "참치", "돌고래"], "answer": 0,
+      "explanation": "무서운 이빨을 가진 '상어'는 바다의 무법자로 알려져 있어요.",
+      "keywords": ["과학", "동물", "상어"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "프랑스의 수도 파리에 있는 유명한 철탑은?",
+      "options": ["에펠탑", "자유의 여신상", "개선문", "피사의 사탑"], "answer": 0,
+      "explanation": "프랑스 파리를 상징하는 유명한 건축물은 '에펠탑'입니다.",
+      "keywords": ["세계지리", "프랑스", "에펠탑"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "하늘에 떠 있는 구름은 무엇으로 이루어져 있을까요?",
+      "options": ["작은 물방울이나 얼음", "솜", "연기", "먼지"], "answer": 0,
+      "explanation": "구름은 아주 작은 '물방울'이나 '얼음' 알갱이들이 모여서 만들어져요.",
+      "keywords": ["과학", "날씨", "구름"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "소는 무엇을 먹고 살까요?",
+      "options": ["풀", "고기", "물고기", "벌레"], "answer": 0,
+      "explanation": "소는 풀을 먹고 사는 초식동물이에요.",
+      "keywords": ["과학", "동물", "초식"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "동물의 왕이라고 불리는 동물은?",
+      "options": ["사자", "호랑이", "곰", "늑대"], "answer": 0,
+      "explanation": "갈기가 멋진 '사자'는 동물의 왕이라고 불려요.",
+      "keywords": ["과학", "동물", "사자"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "바다와 강이 만나는 곳에 사는, 두 개의 집게발을 가진 동물은?",
+      "options": ["가재", "새우", "게", "멸치"], "answer": 2,
+      "explanation": "'게'는 바다뿐만 아니라 강과 바다가 만나는 갯벌에서도 살아요.",
+      "keywords": ["과학", "동물", "게"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "3월 1일에 우리나라 사람들이 태극기를 다는 이유는 무엇일까요?",
+      "options": ["일제로부터 독립을 외친 날이라서", "나라를 세운 날이라서", "전쟁에서 승리한 날이라서", "한글을 만든 날이라서"], "answer": 0,
+      "explanation": "3월 1일은 유관순 열사처럼 많은 분들이 '대한 독립 만세'를 외친 삼일절이기 때문이에요.",
+      "keywords": ["한국사", "삼일절", "독립운동"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "중국의 수도는 어디일까요?",
+      "options": ["베이징", "상하이", "홍콩", "타이베이"], "answer": 0,
+      "explanation": "중국의 수도는 '베이징'입니다.",
+      "keywords": ["세계지리", "수도", "중국"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "씨앗이 자라서 식물이 되는 과정을 무엇이라고 할까요?",
+      "options": ["발아", "광합성", "개화", "결실"], "answer": 0,
+      "explanation": "씨앗에서 싹이 트는 것을 '발아'라고 해요.",
+      "keywords": ["과학", "식물", "발아"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "캥거루는 어디에 아기를 넣고 다닐까요?",
+      "options": ["배주머니", "등", "입", "꼬리"], "answer": 0,
+      "explanation": "캥거루는 배에 있는 '아기 주머니'에 새끼를 넣고 키워요.",
+      "keywords": ["과학", "동물", "캥거루"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "돌고래는 물고기일까요?",
+      "options": ["아니요, 포유류예요", "네, 물고기예요", "양서류예요", "파충류예요"], "answer": 0,
+      "explanation": "돌고래는 물속에 살지만 물고기가 아니라, 새끼를 낳아 젖을 먹여 키우는 '포유류'예요.",
+      "keywords": ["과학", "동물", "포유류"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "신라 시대의 수도는 어디였을까요?",
+      "options": ["경주", "서울", "평양", "부여"], "answer": 0,
+      "explanation": "신라의 수도는 지금의 '경주'로, 첨성대 같은 많은 문화유산이 남아 있어요.",
+      "keywords": ["한국사", "신라", "경주"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라의 동쪽 끝에 있는 섬으로, 해가 가장 먼저 뜨는 곳은 어디일까요?",
+      "options": ["독도", "제주도", "울릉도", "거제도"], "answer": 0,
+      "explanation": "우리나라 가장 동쪽에 있는 '독도'에서 해가 가장 먼저 떠요.",
+      "keywords": ["지리", "섬", "독도"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "식물이 자라는 데 꼭 필요하지 않은 것은?",
+      "options": ["햇빛", "물", "공기", "장난감"], "answer": 3,
+      "explanation": "식물이 살아가려면 햇빛, 물, 공기(이산화탄소), 양분이 꼭 필요해요.",
+      "keywords": ["과학", "식물", "성장 조건"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "판다는 무엇을 주로 먹고 살까요?",
+      "options": ["대나무 잎", "고기", "물고기", "과일"], "answer": 0,
+      "explanation": "귀여운 판다는 '대나무 잎'을 가장 좋아해요.",
+      "keywords": ["과학", "동물", "판다"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "물 위에 뜨는 배는 무엇으로 만들었을까요?",
+      "options": ["쇠", "돌", "나무", "흙"], "answer": 0,
+      "explanation": "무거운 '쇠'로 만든 배도 물에 뜨는 힘(부력)을 이용하면 물 위에 뜰 수 있어요.",
+      "keywords": ["과학", "부력", "배"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "어린이날을 만드신 분은 누구일까요?",
+      "options": ["방정환", "안중근", "김구", "윤봉길"], "answer": 0,
+      "explanation": "어린이들을 사랑한 '방정환' 선생님이 어린이날을 만드셨어요.",
+      "keywords": ["한국사", "인물", "어린이날"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "비가 온 뒤에 땅이 굳는 이유는?",
+      "options": ["물이 증발해서", "흙이 녹아서", "바람이 불어서", "햇빛이 강해서"], "answer": 0,
+      "explanation": "흙 속에 있던 물이 햇빛과 바람에 의해 공기 중으로 날아가는 '증발' 현상 때문에 땅이 굳어요.",
+      "keywords": ["과학", "증발", "물"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 곤충이 아닌 것은?",
+      "options": ["개미", "나비", "잠자리", "거미"], "answer": 3,
+      "explanation": "곤충은 다리가 6개인데, '거미'는 다리가 8개라서 곤충이 아니에요.",
+      "keywords": ["과학", "곤충", "거미"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "사막에 사는 동물로 등에 혹이 있는 것은?",
+      "options": ["낙타", "사막여우", "전갈", "도마뱀"], "answer": 0,
+      "explanation": "'낙타'는 등에 있는 혹에 영양분을 저장해두고 사막에서 오랫동안 버틸 수 있어요.",
+      "keywords": ["과학", "동물", "낙타"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "지구는 어떤 모양일까요?",
+      "options": ["동그란 공 모양", "평평한 판 모양", "세모 모양", "네모 모양"], "answer": 0,
+      "explanation": "지구는 약간 찌그러진 '동그란 공 모양'을 하고 있어요.",
+      "keywords": ["과학", "지구", "모양"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "우리나라 돈에 그려져 있지 않은 인물은?",
+      "options": ["이순신", "세종대왕", "신사임당", "이성계"], "answer": 0,
+      "explanation": "100원 동전에는 '이순신' 장군이 그려져 있어요. 나머지 분들은 지폐에 그려져 있어요.",
+      "keywords": ["상식", "화폐", "인물"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "낮과 밤이 생기는 이유는?",
+      "options": ["지구가 스스로 돌아서(자전)", "지구가 태양 주위를 돌아서(공전)", "달이 지구 주위를 돌아서", "태양이 움직여서"], "answer": 0,
+      "explanation": "지구가 스스로 도는 '자전' 때문에 햇빛을 받는 쪽은 낮, 받지 못하는 쪽은 밤이 돼요.",
+      "keywords": ["과학", "지구", "자전"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "우리가 숨 쉴 때 필요한 공기는 무엇일까요?",
+      "options": ["산소", "이산화탄소", "질소", "수소"], "answer": 0,
+      "explanation": "사람과 동물은 '산소'를 마시고 이산화탄소를 내뱉으며 숨을 쉬어요.",
+      "keywords": ["과학", "호흡", "산소"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "가장 빠른 육지 동물은?",
+      "options": ["치타", "사자", "말", "타조"], "answer": 0,
+      "explanation": "'치타'는 먹이를 사냥할 때 아주 빠른 속도로 달릴 수 있어요.",
+      "keywords": ["과학", "동물", "치타"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "북극에 사는, 하얀 털을 가진 큰 동물은?",
+      "options": ["북극곰", "펭귄", "물개", "바다사자"], "answer": 0,
+      "explanation": "추운 북극에는 하얀 털을 가진 '북극곰'이 살아요.",
+      "keywords": ["과학", "동물", "북극곰"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "8월 15일 광복절은 어떤 날일까요?",
+      "options": ["우리나라가 일본으로부터 독립한 날", "전쟁이 끝난 날", "우리나라가 세워진 날", "한글이 만들어진 날"], "answer": 0,
+      "explanation": "광복절은 우리나라가 일본의 지배에서 벗어나 빛을 되찾은 아주 기쁜 날이에요.",
+      "keywords": ["한국사", "광복절", "독립"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "영국의 수도는 어디일까요?",
+      "options": ["런던", "파리", "로마", "베를린"], "answer": 0,
+      "explanation": "영국의 수도는 '런던'입니다.",
+      "keywords": ["세계지리", "수도", "영국"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 뿌리를 먹는 채소는?",
+      "options": ["무", "상추", "시금치", "배추"], "answer": 0,
+      "explanation": "우리가 먹는 '무'는 식물의 뿌리 부분이에요.",
+      "keywords": ["과학", "식물", "뿌리"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "새는 무엇으로 하늘을 날까요?",
+      "options": ["날개", "다리", "부리", "꼬리"], "answer": 0,
+      "explanation": "새는 튼튼한 '날개'를 위아래로 저어서 하늘을 날아요.",
+      "keywords": ["과학", "동물", "새"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "바다에서 가장 짠 소금은 어디서 만들어질까요?",
+      "options": ["염전", "갯벌", "모래사장", "바위"], "answer": 0,
+      "explanation": "바닷물을 햇볕에 말려서 소금을 만드는 곳을 '염전'이라고 해요.",
+      "keywords": ["지리", "소금", "염전"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "우리나라의 초대 대통령은 누구일까요?",
+      "options": ["이승만", "박정희", "김구", "안창호"], "answer": 0,
+      "explanation": "대한민국 정부가 수립된 후 첫 번째 대통령은 '이승만' 대통령입니다.",
+      "keywords": ["한국사", "현대사", "대통령"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "하늘이 파랗게 보이는 이유는?",
+      "options": ["햇빛이 공기와 부딪혀서", "바닷물이 비쳐서", "원래 파란색이라서", "우주가 파래서"], "answer": 0,
+      "explanation": "태양의 햇빛 중에서 파란색 빛이 공기 중의 작은 알갱이들과 부딪혀 우리 눈에 잘 보이기 때문이에요.",
+      "keywords": ["과학", "빛", "산란"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "젖소에서 얻을 수 있는 것은?",
+      "options": ["우유", "달걀", "꿀", "털"], "answer": 0,
+      "explanation": "우리는 젖소로부터 영양가 많은 '우유'를 얻어요.",
+      "keywords": ["상식", "동물", "우유"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "거미는 곤충일까요?",
+      "options": ["아니요", "네", "가끔 그래요", "알 수 없어요"], "answer": 0,
+      "explanation": "거미는 다리가 8개라서 다리가 6개인 곤충과 달라요.",
+      "keywords": ["과학", "분류", "거미"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "밀물과 썰물 현상은 주로 무엇의 힘 때문에 생길까요?",
+      "options": ["달", "태양", "바람", "지구"], "answer": 0,
+      "explanation": "바닷물이 들어왔다 나갔다 하는 것은 주로 '달'이 바닷물을 끌어당기는 힘 때문에 생겨요.",
+      "keywords": ["과학", "지구과학", "달"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "고려 시대의 유명한 장군으로, 귀주에서 거란군을 물리친 사람은?",
+      "options": ["강감찬", "김유신", "계백", "연개소문"], "answer": 0,
+      "explanation": "'강감찬' 장군이 귀주에서 거란의 큰 군대를 물리친 것을 '귀주대첩'이라고 해요.",
+      "keywords": ["한국사", "고려", "강감찬"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "세계에서 가장 큰 나라는 어디일까요?",
+      "options": ["러시아", "캐나다", "중국", "미국"], "answer": 0,
+      "explanation": "땅 넓이가 가장 넓은 나라는 '러시아'입니다.",
+      "keywords": ["세계지리", "국가", "러시아"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 열매를 먹는 채소는?",
+      "options": ["가지", "당근", "양파", "배추"], "answer": 0,
+      "explanation": "보라색 '가지'는 식물의 열매 부분이에요.",
+      "keywords": ["과학", "식물", "열매"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "코가 손처럼 긴 동물은?",
+      "options": ["코끼리", "코뿔소", "하마", "악어"], "answer": 0,
+      "explanation": "'코끼리'는 긴 코를 손처럼 사용해서 물을 마시거나 물건을 잡아요.",
+      "keywords": ["과학", "동물", "코끼리"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "다음 중 포유류가 아닌 동물은?",
+      "options": ["상어", "고래", "돌고래", "물개"], "answer": 0,
+      "explanation": "'상어'는 아가미로 숨 쉬는 물고기(어류)이고, 나머지는 새끼를 낳는 포유류예요.",
+      "keywords": ["과학", "분류", "포유류"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "우리나라의 가장 남쪽에 있는 큰 섬은 어디일까요?",
+      "options": ["제주도", "거제도", "진도", "강화도"], "answer": 0,
+      "explanation": "우리나라에서 가장 크고 가장 남쪽에 있는 섬은 '제주도'입니다.",
+      "keywords": ["지리", "섬", "제주도"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "다음 중 올림픽 경기에 포함되지 않는 종목은?",
+      "options": ["줄다리기", "수영", "양궁", "태권도"], "answer": 0,
+      "explanation": "수영, 양궁, 태권도는 올림픽 정식 종목이지만, '줄다리기'는 포함되지 않아요.",
+      "keywords": ["상식", "스포츠", "올림픽"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "나비와 벌이 꽃을 찾아다니는 이유는?",
+      "options": ["꿀을 얻기 위해", "쉬기 위해", "숨기 위해", "놀기 위해"], "answer": 0,
+      "explanation": "나비와 벌은 식물의 번식을 도와주고, 그 대가로 달콤한 '꿀'을 얻어요.",
+      "keywords": ["과학", "공생", "꿀"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "하늘을 나는 포유동물은?",
+      "options": ["박쥐", "날다람쥐", "새", "나비"], "answer": 0,
+      "explanation": "'박쥐'는 날개가 있는 유일한 포유동물이에요.",
+      "keywords": ["과학", "동물", "박쥐"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "사람이 물속 깊이 들어가기 위해 사용하는 장비는?",
+      "options": ["잠수정", "비행기", "자동차", "자전거"], "answer": 0,
+      "explanation": "사람은 '잠수정'을 타거나 잠수 장비를 이용해서 깊은 바닷속을 탐험해요.",
+      "keywords": ["과학", "탐험", "잠수정"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "6.25 전쟁은 어느 나라와 어느 나라가 싸운 전쟁일까요?",
+      "options": ["남한과 북한", "한국과 일본", "한국과 중국", "미국과 러시아"], "answer": 0,
+      "explanation": "6.25 전쟁은 같은 민족인 '남한'과 '북한'이 서로 싸운 슬픈 전쟁이에요.",
+      "keywords": ["한국사", "현대사", "6.25 전쟁"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "자동차를 움직이게 하는 에너지는 주로 어디서 나올까요?",
+      "options": ["석유(휘발유, 경유)", "전기", "물", "바람"], "answer": 0,
+      "explanation": "대부분의 자동차는 땅속에서 나온 '석유'를 이용해 움직여요. 요즘은 전기로 가는 자동차도 많아지고 있어요.",
+      "keywords": ["과학", "에너지", "석유"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 열매가 땅속에서 열리는 식물은?",
+      "options": ["땅콩", "딸기", "수박", "참외"], "answer": 0,
+      "explanation": "'땅콩'은 꽃이 진 후에 꼬투리가 땅속으로 들어가 열매를 맺는 신기한 식물이에요.",
+      "keywords": ["과학", "식물", "땅콩"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "새끼를 주머니에 넣어 키우는 동물은?",
+      "options": ["코알라", "원숭이", "사자", "곰"], "answer": 0,
+      "explanation": "캥거루처럼 '코알라'도 배에 있는 아기 주머니에서 새끼를 키워요.",
+      "keywords": ["과학", "동물", "코알라"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "바닷가 모래 속에 숨어 사는 조개는?",
+      "options": ["백합", "전복", "굴", "홍합"], "answer": 0,
+      "explanation": "갯벌 체험 때 우리가 잡는 조개는 주로 모래 속에 숨어 사는 '백합'이나 바지락이에요.",
+      "keywords": ["과학", "동물", "조개"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "세계 여러 나라 사람들이 4년마다 모여 운동 경기를 하는 축제는?",
+      "options": ["올림픽", "월드컵", "아시안게임", "전국체전"], "answer": 0,
+      "explanation": "4년마다 열리는 세계인의 스포츠 축제는 '올림픽'이에요.",
+      "keywords": ["상식", "스포츠", "올림픽"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리 눈에 보이는 달의 모양이 계속 바뀌는 이유는?",
+      "options": ["달이 지구 주위를 돌기 때문", "달이 스스로 빛나지 않기 때문", "구름에 가려져서", "지구가 움직여서"], "answer": 0,
+      "explanation": "달이 지구 주위를 돌면서(공전) 햇빛을 받는 부분이 다르게 보이기 때문이에요.",
+      "keywords": ["과학", "달", "위상 변화"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "사과, 배, 감처럼 나무에서 열리는 열매를 무엇이라고 할까요?",
+      "options": ["과일", "채소", "곡식", "뿌리"], "answer": 0,
+      "explanation": "주로 나무에서 열리고 단맛이 나는 열매를 '과일'이라고 해요.",
+      "keywords": ["상식", "음식", "과일"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "나무 위를 잘 다니고, 꼬리가 긴 동물은?",
+      "options": ["원숭이", "고릴라", "오랑우탄", "침팬지"], "answer": 0,
+      "explanation": "'원숭이'는 긴 꼬리로 균형을 잡으며 나무 위를 아주 잘 다녀요.",
+      "keywords": ["과학", "동물", "원숭이"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "다음 중 가장 깊은 바다는 어디일까요?",
+      "options": ["태평양", "대서양", "인도양", "북극해"], "answer": 0,
+      "explanation": "우리나라 동해와도 이어진 '태평양'이 세계에서 가장 크고 깊은 바다예요.",
+      "keywords": ["지리", "바다", "태평양"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "백제 시대의 마지막 수도는 어디였을까요?",
+      "options": ["부여(사비)", "공주(웅진)", "서울(한성)", "경주"], "answer": 0,
+      "explanation": "백제는 마지막에 지금의 '부여' 지역인 사비성으로 수도를 옮겼어요.",
+      "keywords": ["한국사", "백제", "부여"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "캐나다 국기에 그려져 있는 나뭇잎은 무슨 나무의 잎일까요?",
+      "options": ["단풍나무", "은행나무", "소나무", "참나무"], "answer": 0,
+      "explanation": "캐나다는 '단풍나무'가 유명해서 국기에도 단풍잎을 그려 넣었어요.",
+      "keywords": ["상식", "국기", "캐나다"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 소화가 잘 되게 도와주는 채소는?",
+      "options": ["무", "감자", "오이", "당근"], "answer": 0,
+      "explanation": "'무'에는 소화를 돕는 성분이 많이 들어있어서 체했을 때 먹으면 도움이 돼요.",
+      "keywords": ["과학", "건강", "소화"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "다음 중 날지 못하는 새는?",
+      "options": ["타조", "참새", "독수리", "갈매기"], "answer": 0,
+      "explanation": "새 중에서 가장 큰 '타조'는 날개가 퇴화되어 날지 못하고 대신 아주 빨리 달려요.",
+      "keywords": ["과학", "동물", "타조"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "바다 밑바닥에 사는, 별 모양을 닮은 동물은?",
+      "options": ["불가사리", "해삼", "멍게", "말미잘"], "answer": 0,
+      "explanation": "몸이 별 모양처럼 생긴 '불가사리'는 몸을 잘라도 다시 살아나는 신기한 능력이 있어요.",
+      "keywords": ["과학", "동물", "불가사리"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "이탈리아에 있는, 기울어져 있는 유명한 탑의 이름은?",
+      "options": ["피사의 사탑", "에펠탑", "남산타워", "시계탑"], "answer": 0,
+      "explanation": "이탈리아에는 땅이 기울어서 함께 기울어진 '피사의 사탑'이 있어요.",
+      "keywords": ["세계지리", "이탈리아", "건축물"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "병원에서 환자를 치료해주는 사람은 누구일까요?",
+      "options": ["의사", "경찰관", "소방관", "요리사"], "answer": 0,
+      "explanation": "아픈 사람들을 치료하고 건강을 돌봐주는 고마운 분은 '의사'입니다.",
+      "keywords": ["상식", "직업", "의사"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "고추의 매운맛은 주로 어디에 많이 들어있을까요?",
+      "options": ["씨", "껍질", "꼭지", "잎"], "answer": 0,
+      "explanation": "고추의 매운맛을 내는 캡사이신 성분은 '씨'와 씨가 붙어있는 부분에 가장 많아요.",
+      "keywords": ["과학", "식물", "고추"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "독이 있는 무서운 뱀은?",
+      "options": ["코브라", "구렁이", "실뱀", "꽃뱀"], "answer": 0,
+      "explanation": "머리를 세우고 위협하는 '코브라'는 아주 강한 독을 가진 뱀이에요.",
+      "keywords": ["과학", "동물", "뱀"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "물건을 나르는 큰 배가 드나드는 곳을 무엇이라고 할까요?",
+      "options": ["항구", "공항", "역", "정류장"], "answer": 0,
+      "explanation": "배가 안전하게 머물고, 사람이나 짐을 싣고 내리는 곳을 '항구'라고 해요.",
+      "keywords": ["지리", "시설", "항구"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "독립운동가로, 도시락 폭탄을 던진 의사는 누구일까요?",
+      "options": ["윤봉길", "안중근", "유관순", "김구"], "answer": 0,
+      "explanation": "'윤봉길' 의사가 중국 상하이 홍커우 공원에서 일본의 주요 인물들에게 도시락 모양의 폭탄을 던졌어요.",
+      "keywords": ["한국사", "독립운동가", "윤봉길"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "세계에서 네 번째로 큰 섬으로, 다양한 종류의 여우원숭이가 사는 곳은?",
+      "options": ["마다가스카르", "그린란드", "보르네오", "뉴기니"], "answer": 0,
+      "explanation": "아프리카 옆에 있는 '마다가스카르' 섬에는 신기하고 독특한 동식물이 많이 살아요.",
+      "keywords": ["세계지리", "섬", "마다가스카르"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "가축이 아닌 동물은?",
+      "options": ["호랑이", "소", "돼지", "닭"], "answer": 0,
+      "explanation": "'호랑이'는 산에 사는 무서운 야생동물이에요.",
+      "keywords": ["상식", "동물", "분류"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "스스로 빛을 내는 곤충은?",
+      "options": ["반딧불이", "매미", "사마귀", "메뚜기"], "answer": 0,
+      "explanation": "여름밤에 반짝반짝 빛을 내는 '반딧불이'는 몸에서 스스로 빛을 만들어요.",
+      "keywords": ["과학", "곤충", "반딧불이"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "물속에서도 살고, 땅 위에서도 사는 동물을 무엇이라고 할까요?",
+      "options": ["양서류", "포유류", "어류", "파충류"], "answer": 0,
+      "explanation": "개구리나 도롱뇽처럼 물과 땅을 오가며 사는 동물을 '양서류'라고 해요.",
+      "keywords": ["과학", "분류", "양서류"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "인류 최초로 달에 발을 디딘 사람은 누구일까요?",
+      "options": ["닐 암스트롱", "라이트 형제", "에디슨", "아인슈타인"], "answer": 0,
+      "explanation": "미국의 우주비행사 '닐 암스트롱'이 인류 최초로 달을 밟았어요.",
+      "keywords": ["세계사", "우주", "인물"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "공기 중에 가장 많은 기체는 무엇일까요?",
+      "options": ["질소", "산소", "이산화탄소", "헬륨"], "answer": 0,
+      "explanation": "우리가 숨 쉬는 공기 중에는 '질소'가 가장 많고, 그다음이 산소예요.",
+      "keywords": ["과학", "공기", "질소"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "다음 중 가장 키가 큰 동물은?",
+      "options": ["기린", "코끼리", "말", "소"], "answer": 0,
+      "explanation": "목이 아주 긴 '기린'이 육지 동물 중에서는 키가 가장 커요.",
+      "keywords": ["과학", "동물", "기린"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "가을에 다람쥐가 도토리를 땅에 숨겨두는 이유는?",
+      "options": ["겨울에 먹기 위해", "장난치려고", "집을 만들려고", "선물하려고"], "answer": 0,
+      "explanation": "다람쥐는 먹을 것이 부족한 추운 '겨울'을 대비해 미리 먹이를 저장해 둬요.",
+      "keywords": ["과학", "동물", "겨울나기"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "등에 하얀 점이 있는, 세상에서 가장 큰 상어는?",
+      "options": ["고래상어", "백상아리", "귀상어", "청상아리"], "answer": 0,
+      "explanation": "물고기 중에서 가장 큰 '고래상어'는 성격이 온순해서 사람을 공격하지 않아요.",
+      "keywords": ["과학", "동물", "상어"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "조선시대의 왕들이 살았던 서울의 궁궐 이름은?",
+      "options": ["경복궁", "불국사", "첨성대", "석굴암"], "answer": 0,
+      "explanation": "조선의 대표적인 궁궐인 '경복궁'은 서울에 있어요.",
+      "keywords": ["한국사", "조선", "경복궁"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "화산이 폭발할 때 나오는 뜨거운 돌멩이 물을 무엇이라고 할까요?",
+      "options": ["용암", "마그마", "온천수", "석유"], "answer": 0,
+      "explanation": "화산이 폭발할 때 땅 위로 흘러나오는 뜨거운 액체를 '용암'이라고 해요.",
+      "keywords": ["과학", "화산", "용암"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "물이 얼어서 된 것을 무엇이라고 할까요?",
+      "options": ["얼음", "수증기", "눈", "이슬"], "answer": 0,
+      "explanation": "물은 온도가 0도보다 낮아지면 딱딱한 '얼음'으로 변해요.",
+      "keywords": ["과학", "물의 상태변화", "얼음"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "우리나라를 상징하는 동물은?",
+      "options": ["호랑이", "사자", "곰", "늑대"], "answer": 0,
+      "explanation": "용맹하고 씩씩한 '호랑이'는 우리나라를 상징하는 동물이에요.",
+      "keywords": ["상식", "대한민국", "호랑이"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "육지와 바다가 만나는 곳으로, 모래가 많은 곳은?",
+      "options": ["해수욕장", "갯벌", "항구", "방파제"], "answer": 0,
+      "explanation": "모래가 많고 파도가 치는 '해수욕장'에서 여름에 물놀이를 즐겨요.",
+      "keywords": ["지리", "지형", "해수욕장"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "중국을 처음으로 통일한 황제는 누구일까요?",
+      "options": ["진시황", "유방", "항우", "칭기즈칸"], "answer": 0,
+      "explanation": "'진시황'은 여러 나라로 나뉘어 있던 중국을 처음으로 통일한 황제예요.",
+      "keywords": ["세계사", "중국", "진시황"], "difficulty_score": 3
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "자동차가 다니는 길은?",
+      "options": ["도로", "철도", "항로", "보도"], "answer": 0,
+      "explanation": "자동차가 안전하게 다닐 수 있도록 만든 길을 '도로'라고 해요.",
+      "keywords": ["상식", "교통", "도로"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "farm",
+      "question": "거미가 곤충을 잡기 위해 만드는 것은?",
+      "options": ["거미줄", "집", "굴", "둥지"], "answer": 0,
+      "explanation": "거미는 끈적끈적한 '거미줄'을 쳐서 날아다니는 곤충을 잡아요.",
+      "keywords": ["과학", "동물", "거미"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "forest",
+      "question": "나무가 많이 모여 있는 곳을 무엇이라고 할까요?",
+      "options": ["숲", "들판", "사막", "바다"], "answer": 0,
+      "explanation": "나무와 풀, 여러 동물이 함께 어울려 사는 곳을 '숲'이라고 해요.",
+      "keywords": ["지리", "자연", "숲"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "ocean",
+      "question": "다음 중 헤엄을 가장 잘 치는 동물은?",
+      "options": ["물개", "고양이", "강아지", "토끼"], "answer": 0,
+      "explanation": "'물개'나 바다사자는 바다 생활에 알맞게 몸이 변해서 헤엄을 아주 잘 쳐요.",
+      "keywords": ["과학", "동물", "물개"], "difficulty_score": 1
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "home",
+      "question": "피자를 처음 만든 나라는 어디일까요?",
+      "options": ["이탈리아", "미국", "프랑스", "중국"], "answer": 0,
+      "explanation": "우리가 즐겨 먹는 피자와 스파게티는 '이탈리아'에서 처음 만들어졌어요.",
+      "keywords": ["문화", "음식", "이탈리아"], "difficulty_score": 2
+    },
+    {
+      "subject": "general", "level": "beginner", "habitat": "city",
+      "question": "우리나라의 동쪽에 있는 바다는?",
+      "options": ["동해", "서해", "남해", "북해"], "answer": 0,
+      "explanation": "우리나라의 동쪽에는 '동해'가, 서쪽에는 서해, 남쪽에는 남해가 있어요.",
+      "keywords": ["지리", "바다", "동해"], "difficulty_score": 1
     }
   ]
 }
