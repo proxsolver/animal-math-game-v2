@@ -1460,9 +1460,94 @@
         
         // 동물 데이터를 저장할 전역 변수 (window.animalTypes로 상단 정의됨)
 
-        // (loadAnimalsFromJSON 함수는 상단으로 이동됨)
-        
-        // (getAllProfiles and updateHallOfFame 함수들은 상단으로 이동됨)
+        // loadAnimalsFromJSON 함수 정의 (Firebase 초기화 전에 정의)
+        window.loadAnimalsFromJSON = async function() {
+            try {
+                console.log('동물 JSON 파일 로딩 시작...');
+                
+                const response = await fetch('./animals.json');
+                
+                if (!response.ok) {
+                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                window.animalTypes = data.animals;
+                
+                console.log(`동물 데이터 로드 완료: ${window.animalTypes.length}마리`);
+                return true;
+                
+            } catch (error) {
+                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+                
+                // 폴백: 기본 동물 몇 마리
+                window.animalTypes = [
+                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+                ];
+                
+                return false;
+            }
+        };
+
+        // getAllProfiles 함수 정의 (updateHallOfFame 보다 먼저)
+        window.getAllProfiles = async function() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
+            const querySnapshot = await window.firebase.getDocs(profilesColRef);
+            const profiles = [];
+            querySnapshot.forEach((doc) => {
+                profiles.push(doc.data());
+            });
+            return profiles;
+        };
+
+        // updateHallOfFame 함수 정의 (Firebase 초기화 전에 정의)
+        window.updateHallOfFame = async function() {
+            try {
+                const profiles = await window.getAllProfiles();
+                if (profiles.length === 0) {
+                    console.log("프로필이 없어서 명예의 전당을 업데이트하지 않습니다.");
+                    return;
+                }
+                
+                // 점수별로 정렬
+                profiles.sort((a, b) => (b.totalScore || 0) - (a.totalScore || 0));
+                
+                const hallContainer = document.getElementById('hall-of-fame-list');
+                if (!hallContainer) return;
+                
+                hallContainer.innerHTML = '';
+                
+                profiles.slice(0, 10).forEach((profile, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'hall-item';
+                    
+                    let medal = '';
+                    if (index === 0) medal = '🥇';
+                    else if (index === 1) medal = '🥈';
+                    else if (index === 2) medal = '🥉';
+                    else medal = `${index + 1}위`;
+                    
+                    item.innerHTML = `
+                        <div class="rank">${medal}</div>
+                        <div class="player-info">
+                            <div class="name">${profile.name || '익명'}</div>
+                            <div class="score">${profile.totalScore || 0}점</div>
+                        </div>
+                        <div class="animals-count">${(profile.collectedAnimals || []).length}마리</div>
+                    `;
+                    
+                    hallContainer.appendChild(item);
+                });
+                
+            } catch (error) {
+                console.error('명예의 전당 업데이트 실패:', error);
+            }
+        };
         
         // ==================== 배틀모드 시스템 ====================
         
@@ -2315,83 +2400,7 @@
             window.currentDifficulty = level;
         };
 
-        // loadAnimalsFromJSON 함수 정의 (최우선)
-        window.loadAnimalsFromJSON = async function() {
-            try {
-                console.log('동물 JSON 파일 로딩 시작...');
-                
-                const response = await fetch('./animals.json');
-                
-                if (!response.ok) {
-                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                window.animalTypes = data.animals;
-                
-                console.log(`동물 데이터 로드 완료: ${window.animalTypes.length}마리`);
-                return true;
-                
-            } catch (error) {
-                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
-                
-                // 폴백: 기본 동물 몇 마리
-                window.animalTypes = [
-                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
-                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
-                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
-                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
-                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
-                ];
-                
-                return false;
-            }
-        };
 
-        // getAllProfiles 함수 정의 (updateHallOfFame 보다 먼저)
-        window.getAllProfiles = async function() {
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
-            const querySnapshot = await window.firebase.getDocs(profilesColRef);
-            const profiles = [];
-            querySnapshot.forEach((doc) => {
-                profiles.push(doc.data());
-            });
-            return profiles;
-        };
-
-        // updateHallOfFame 함수 정의 (최우선)
-        window.updateHallOfFame = async function() {
-            try {
-                const profiles = await window.getAllProfiles();
-                if (profiles.length === 0) {
-                     document.querySelector('#fame-species .player-name').textContent = `아직 플레이어가 없습니다.`;
-                     document.querySelector('#fame-level .player-name').textContent = `새로운 플레이어가 되어보세요!`;
-                    return;
-                }
-
-                let mostSpecies = { name: '-', count: -1 };
-                let highestLevel = { name: '-', animal: '-', level: 0 };
-
-                profiles.forEach(p => {
-                    if ((p.speciesCount || 0) > mostSpecies.count) {
-                        mostSpecies = { name: p.name, count: p.speciesCount };
-                    }
-                    if (p.animals) {
-                        Object.values(p.animals).forEach(a => {
-                            if ((a.animalLevel || 1) > highestLevel.level) {
-                                highestLevel = { name: p.name, animal: a.name, level: a.animalLevel };
-                            }
-                        });
-                    }
-                });
-
-                document.querySelector('#fame-species .player-name').textContent = `${mostSpecies.name} (${mostSpecies.count}종)`;
-                document.querySelector('#fame-level .player-name').textContent = `${highestLevel.name} (Lv.${highestLevel.level} ${highestLevel.animal})`;
-            } catch (error) {
-                console.error('명예의 전당 업데이트 오류:', error);
-            }
-        };
 
         // updateUI 함수 정의 (최우선)
         window.updateUI = function() {
