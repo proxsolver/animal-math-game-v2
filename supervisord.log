@@ -56,3 +56,35 @@
 2025-09-07 10:14:45,345 INFO supervisord started with pid 6501
 2025-09-07 10:14:46,349 INFO spawned: 'webserver' with pid 6503
 2025-09-07 10:14:47,438 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 10:32:04,825 INFO waiting for webserver to stop
+2025-09-07 10:32:04,827 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 10:32:04,833 INFO spawned: 'webserver' with pid 9632
+2025-09-07 10:32:05,927 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 10:40:40,961 INFO waiting for webserver to stop
+2025-09-07 10:40:40,962 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 10:40:40,966 INFO spawned: 'webserver' with pid 10333
+2025-09-07 10:40:42,049 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 10:42:01,004 INFO waiting for webserver to stop
+2025-09-07 10:42:01,005 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 10:42:01,010 INFO spawned: 'webserver' with pid 10420
+2025-09-07 10:42:01,109 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:02,113 INFO spawned: 'webserver' with pid 10422
+2025-09-07 10:42:02,214 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:04,220 INFO spawned: 'webserver' with pid 10425
+2025-09-07 10:42:04,321 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:07,327 INFO spawned: 'webserver' with pid 10429
+2025-09-07 10:42:07,428 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:08,430 INFO gave up: webserver entered FATAL state, too many start retries too quickly
+2025-09-07 10:42:09,166 INFO RPC interface 'supervisor' initialized
+2025-09-07 10:42:09,166 CRIT Server 'unix_http_server' running without any HTTP authentication checking
+2025-09-07 10:42:09,169 INFO daemonizing the supervisord process
+2025-09-07 10:42:09,169 INFO supervisord started with pid 10435
+2025-09-07 10:42:10,173 INFO spawned: 'webserver' with pid 10437
+2025-09-07 10:42:10,269 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:11,274 INFO spawned: 'webserver' with pid 10439
+2025-09-07 10:42:11,371 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:14,306 INFO spawned: 'webserver' with pid 10445
+2025-09-07 10:42:14,403 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:17,409 INFO spawned: 'webserver' with pid 10455
+2025-09-07 10:42:17,507 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 10:42:18,509 INFO gave up: webserver entered FATAL state, too many start retries too quickly

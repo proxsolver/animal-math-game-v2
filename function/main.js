@@ -1048,6 +1048,42 @@
         
         // 맞춤형 문제 생성
         function generatePersonalizedQuiz() {
+            // 현재 과목의 미션이 완료되었는지 확인
+            if (window.gameState.dailyMissions[window.gameState.currentSubject] && 
+                window.gameState.dailyMissions[window.gameState.currentSubject].completed) {
+                
+                // 자유 학습 모드인지 확인
+                if (!window.gameState.freeStudyMode) {
+                    // 미션 완료 메시지 및 선택 옵션 표시
+                    const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
+                    const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
+                    const feedbackElement = document.getElementById('quiz-feedback') || document.getElementById('feedback');
+                    
+                    if (questionElement) questionElement.textContent = '🎉 오늘의 미션을 완료했습니다!';
+                    if (optionsContainer) {
+                        optionsContainer.innerHTML = `
+                            <div style="display: flex; flex-direction: column; gap: 15px; max-width: 400px; margin: 0 auto;">
+                                <button class="continue-study-btn" onclick="enableFreeStudyMode()" 
+                                    style="background: linear-gradient(45deg, #32CD32, #228B22); color: white; border: none; padding: 15px 25px; border-radius: 15px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                                    📚 계속 공부하기 (자유 학습)
+                                </button>
+                                <button class="back-btn" onclick="showPage('game', null)" 
+                                    style="background: linear-gradient(45deg, #667eea, #764ba2); color: white; border: none; padding: 15px 25px; border-radius: 15px; font-size: 1.1em; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                                    🏠 대시보드로 돌아가기
+                                </button>
+                            </div>
+                        `;
+                    }
+                    if (feedbackElement) {
+                        feedbackElement.textContent = '미션을 완료했어요! 더 공부하거나 다른 과목에 도전해보세요! 💪';
+                        feedbackElement.className = 'feedback success';
+                    }
+                    
+                    return;
+                }
+                // 자유 학습 모드에서는 계속 진행
+            }
+            
             const analysis = analyzeUserWeaknesses();
             
             // 70% 확률로 약점 단어 출제, 30% 확률로 새 단어
@@ -1437,15 +1473,17 @@
 
         // 영어 퀴즈 생성 (새로운 시스템)
         async function generateEnglishQuiz() {
+            console.log('generateEnglishQuiz 호출됨, 현재 과목:', window.gameState.currentSubject);
+            
             if (isLoadingWord) return;
             
             isLoadingWord = true;
             
-            // UI 초기화
-            const questionElement = document.getElementById('english-question');
-            const optionsContainer = document.getElementById('english-options');
+            // UI 초기화 - 퀴즈 페이지와 메인 페이지 모두 지원
+            const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
+            const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
             const speakButton = document.getElementById('speak-button');
-            const feedbackElement = document.getElementById('feedback');
+            const feedbackElement = document.getElementById('quiz-feedback') || document.getElementById('feedback');
             
             questionElement.textContent = '단어를 불러오는 중...';
             optionsContainer.innerHTML = '';
@@ -1499,9 +1537,10 @@
         // 난이도별 단어 로드
         async function loadWordForDifficulty(difficulty) {
             try {
-                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
+                const filePath = getSubjectFilePath(difficulty);
+                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작... 파일 경로: ${filePath}`);
                 
-                const response = await fetch(getSubjectFilePath(difficulty));
+                const response = await fetch(filePath);
                 
                 if (!response.ok) {
                     throw new Error(`JSON 파일 로드 실패: ${response.status}`);
@@ -1627,8 +1666,8 @@
         function displayCurrentWord() {
             if (!currentWordData) return;
             
-            const questionElement = document.getElementById('english-question');
-            const optionsContainer = document.getElementById('english-options');
+            const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
+            const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
             const speakButton = document.getElementById('speak-button');
             const wordSourceElement = document.getElementById('word-source');
             const sourceBadge = document.getElementById('source-badge');
@@ -1682,7 +1721,9 @@
             optionsContainer.innerHTML = '';
             finalOptions.forEach(option => {
                 const button = document.createElement('button');
-                button.className = 'english-option-btn';
+                // 퀴즈 페이지에서는 기본 버튼 스타일, 메인 페이지에서는 영어 옵션 스타일 사용
+                const isQuizPage = document.getElementById('quiz-page') && document.getElementById('quiz-page').classList.contains('active');
+                button.className = isQuizPage ? 'quiz-option-btn' : 'english-option-btn';
                 button.innerText = option;
                 button.onclick = () => checkEnglishQuizAnswer(option);
                 optionsContainer.appendChild(button);
@@ -1705,12 +1746,12 @@
 
         // 영어 퀴즈 정답 확인 (새로운 시스템)
         async function checkEnglishQuizAnswer(selectedOption) {
-            const optionsContainer = document.getElementById('english-options');
-            optionsContainer.querySelectorAll('.english-option-btn').forEach(btn => {
+            const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
+            optionsContainer.querySelectorAll('button').forEach(btn => {
                 btn.disabled = true;
             });
 
-            const feedback = document.getElementById('feedback');
+            const feedback = document.getElementById('quiz-feedback') || document.getElementById('feedback');
             
             // 정답 체크 (과목에 따라 다름)
             let isCorrect = false;
@@ -1759,13 +1800,15 @@
                 const earnedScore = baseScore * gameState.level;
                 gameState.score += earnedScore;
                 
-                // 과목별 피드백 메시지
+                // 과목별 피드백 메시지 (자유 학습 모드 고려)
                 let correctMessage = '';
+                const modeText = window.gameState.freeStudyMode ? ' (자유 학습)' : '';
+                
                 if (gameState.currentSubject === 'english') {
-                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요!${modeText} 🎉`;
                 } else {
                     // 사회, 수학, 상식 과목: 해설 포함
-                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요!${modeText} 🎉`;
                     if (currentWordData.explanation) {
                         correctMessage += ` ${currentWordData.explanation}`;
                     }
@@ -1796,6 +1839,11 @@
                 
                 // 랜덤 이벤트 체크
                 checkRandomEvent();
+                
+                // 일일 미션 진행도 업데이트 (정답일 때만, 자유 학습 모드가 아닐 때만)
+                if (!window.gameState.freeStudyMode) {
+                    window.updateMissionProgress(gameState.currentSubject);
+                }
                 
                 saveCurrentUserData();
                 setTimeout(() => generatePersonalizedQuiz(), 1500);
@@ -3416,6 +3464,21 @@
             if (pageName === 'game') {
                 gameStats.style.display = 'flex';
                 userInfo.style.display = 'block';
+                // 대시보드 업데이트
+                if (typeof window.updateMissionUI === 'function') {
+                    window.updateMissionUI();
+                }
+                if (typeof window.updateStudyTimerDisplay === 'function') {
+                    window.updateStudyTimerDisplay();
+                }
+            } else if (pageName === 'quiz') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+                // 퀴즈 페이지에서는 이전 퀴즈 상태 유지
+            } else if (pageName === 'zoo') {
+                gameStats.style.display = 'flex';
+                userInfo.style.display = 'block';
+                updateAnimalCollection(); // 동물 컬렉션 업데이트
             } else if (pageName === 'learning') {
                 gameStats.style.display = 'none';
                 userInfo.style.display = 'block';
@@ -3508,4 +3571,19 @@
             }
         }, 5 * 60 * 1000);
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v9.0 - 시장 자동 만료 & 알림 시스템 추가)');
+        // 일일 미션 및 타이머 초기화
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                if (typeof window.initializeDailyMissions === 'function') {
+                    window.initializeDailyMissions();
+                }
+                if (typeof window.checkDailyTimerReset === 'function') {
+                    window.checkDailyTimerReset();
+                }
+                if (typeof window.updateStudyTimerDisplay === 'function') {
+                    window.updateStudyTimerDisplay();
+                }
+            }, 1000);
+        });
+
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v10.0 - 일일 미션 & 학습 타이머 시스템 추가)');

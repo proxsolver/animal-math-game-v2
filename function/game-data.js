@@ -57,7 +57,47 @@ let gameState = {
     // 현재 선택된 과목
     currentSubject: 'english',
     // 최근 출제된 문제들을 추적하여 중복 방지
-    recentQuestions: []
+    recentQuestions: [],
+    // 자유 학습 모드 여부
+    freeStudyMode: false,
+    // 일일 미션 시스템 (도장깨기)
+    dailyMissions: {
+        date: null, // 마지막 업데이트된 날짜 (YYYY-MM-DD 형식)
+        english: {
+            targetQuestions: 10,    // 목표 문제 수
+            solvedQuestions: 0,     // 해결한 문제 수
+            completed: false,       // 완료 여부
+            stamps: []             // 도장 배열 (진행도 표시용)
+        },
+        social: {
+            targetQuestions: 10,
+            solvedQuestions: 0,
+            completed: false,
+            stamps: []
+        },
+        math: {
+            targetQuestions: 10,
+            solvedQuestions: 0,
+            completed: false,
+            stamps: []
+        },
+        general: {
+            targetQuestions: 10,
+            solvedQuestions: 0,
+            completed: false,
+            stamps: []
+        }
+    },
+    // 학습 타이머 시스템
+    studyTimer: {
+        sessionStartTime: null,           // 세션 시작 시간
+        totalStudyTime: 0,               // 총 학습 시간 (분)
+        lastBonusTime: 0,                // 마지막 보너스를 받은 시간 (분)
+        bonusLevels: [15, 30, 60],       // 보너스를 받는 시간 단계 (분)
+        bonusCoins: [50, 100, 200],      // 각 단계별 보너스 코인
+        receivedBonuses: [],             // 오늘 받은 보너스 레벨들
+        lastResetDate: null              // 마지막 리셋 날짜
+    }
 };
 
 // 플레이 시간 추적 변수들
