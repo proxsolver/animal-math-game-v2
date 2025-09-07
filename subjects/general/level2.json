@@ -1,0 +1,489 @@
+{
+  "difficulty": 2,
+  "subject": "general",
+  "words": [
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "가을에 단풍이 드는 가장 큰 이유는 무엇일까요?",
+      "options": ["엽록소가 파괴되어서", "날씨가 추워져서", "나무가 물을 흡수해서", "햇빛이 강해져서"], "answer": 0,
+      "explanation": "가을이 되면 나무가 잎 속의 초록색 색소인 '엽록소'를 파괴하면서 숨어있던 다른 색깔들이 나타나요.",
+      "keywords": ["과학", "식물", "단풍"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "지구의 바다 중 가장 넓은 바다는 어디일까요?",
+      "options": ["태평양", "대서양", "인도양", "북극해"], "answer": 0,
+      "explanation": "우리나라 동쪽에 있는 '태평양'은 지구의 모든 대륙을 합친 것보다 더 넓어요.",
+      "keywords": ["지리", "바다", "태평양"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "고려 시대에 금속 활자를 발명하여 만든 세계 최초의 금속 활자 인쇄본은?",
+      "options": ["직지심체요절", "무구정광대다라니경", "훈민정음", "팔만대장경"], "answer": 0,
+      "explanation": "고려 시대에 만들어진 '직지심체요절'은 구텐베르크보다 앞선 세계 최초의 금속 활자 인쇄본이에요.",
+      "keywords": ["한국사", "고려", "금속활자"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "우리나라에서 대통령 선거는 몇 년에 한 번씩 열릴까요?",
+      "options": ["4년", "5년", "6년", "7년"], "answer": 1,
+      "explanation": "우리나라 대통령의 임기는 5년으로, '5년'마다 선거를 통해 새로운 대통령을 뽑아요.",
+      "keywords": ["상식", "정치", "대통령"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "식물의 세 가지 주요 구성 요소가 아닌 것은?",
+      "options": ["뿌리", "줄기", "잎", "가시"], "answer": 3,
+      "explanation": "대부분의 식물은 양분을 흡수하는 '뿌리', 몸을 지탱하는 '줄기', 숨을 쉬고 양분을 만드는 '잎'으로 이루어져 있어요. 가시는 모든 식물에 있는 것은 아니에요.",
+      "keywords": ["과학", "식물", "구조"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "지구의 허파라고 불리는, 세계에서 가장 큰 열대우림은?",
+      "options": ["아마존 열대우림", "콩고 열대우림", "보르네오 열대우림", "아프리카 열대우림"], "answer": 0,
+      "explanation": "남아메리카에 있는 '아마존 열대우림'은 엄청난 양의 산소를 만들어내어 '지구의 허파'라고 불려요.",
+      "keywords": ["지리", "환경", "아마존"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "연어는 어른이 되면 왜 자신이 태어난 강으로 다시 돌아올까요?",
+      "options": ["알을 낳기 위해", "친구가 보고 싶어서", "먹이가 많아서", "바다가 싫어서"], "answer": 0,
+      "explanation": "연어는 자기가 태어난 곳의 냄새를 기억했다가, 목숨을 걸고 강을 거슬러 올라와 '알을 낳는' 신비한 본능이 있어요.",
+      "keywords": ["과학", "동물", "연어"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "조선 시대 과학자로, 해시계(앙부일구)와 물시계(자격루)를 만든 사람은?",
+      "options": ["장영실", "정약용", "문익점", "최무선"], "answer": 0,
+      "explanation": "세종대왕 시대의 위대한 과학자 '장영실'은 백성들의 생활에 도움이 되는 많은 과학 기구를 발명했어요.",
+      "keywords": ["한국사", "조선", "장영실"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "프랑스의 수도 파리를 상징하는 개선문은 어떤 인물을 기리기 위해 만들어졌을까요?",
+      "options": ["나폴레옹", "루이 14세", "잔 다르크", "샤를 드골"], "answer": 0,
+      "explanation": "프랑스의 영웅 '나폴레옹'이 전쟁에서의 승리를 기념하기 위해 개선문을 짓기 시작했어요.",
+      "keywords": ["세계사", "프랑스", "나폴레옹"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "소는 위를 몇 개 가지고 있을까요?",
+      "options": ["1개", "2개", "3개", "4개"], "answer": 3,
+      "explanation": "소는 질긴 풀을 잘 소화시키기 위해 '4개'의 위를 가지고 되새김질을 해요.",
+      "keywords": ["과학", "동물", "소"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "다음 중 포유류가 아닌 동물은?",
+      "options": ["박쥐", "고래", "사람", "독수리"], "answer": 3,
+      "explanation": "'독수리'는 알을 낳는 조류이고, 나머지는 새끼를 낳아 젖을 먹여 키우는 포유류예요.",
+      "keywords": ["과학", "분류", "포유류"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "산호초는 식물일까요, 동물일까요?",
+      "options": ["식물", "동물", "광물", "둘 다 아님"], "answer": 1,
+      "explanation": "산호초는 식물처럼 보이지만, 여러 개의 산호 폴립이라는 작은 '동물'이 모여서 만들어진 군체예요.",
+      "keywords": ["과학", "동물", "산호"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "조선 후기에, 서양의 학문을 연구하며 새로운 세상을 꿈꾼 학문은 무엇일까요?",
+      "options": ["실학", "성리학", "불교", "도교"], "answer": 0,
+      "explanation": "정약용 같은 학자들이 연구한 '실학'은 백성들의 실제 생활에 도움이 되는 실용적인 학문이었어요.",
+      "keywords": ["한국사", "조선", "실학"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "올림픽의 상징인 오륜기는 5개의 대륙을 뜻합니다. 여기에 해당하지 않는 색깔은?",
+      "options": ["검은색", "초록색", "빨간색", "보라색"], "answer": 3,
+      "explanation": "오륜기는 파랑, 노랑, 검정, 초록, 빨강의 5가지 색으로 이루어져 있어요. '보라색'은 포함되지 않아요.",
+      "keywords": ["상식", "올림픽", "오륜기"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "흙 속에 사는 지렁이가 땅에 좋은 이유는 무엇일까요?",
+      "options": ["흙에 공기가 잘 통하게 해서", "씨앗을 먹어서", "예쁘게 생겨서", "조용해서"], "answer": 0,
+      "explanation": "지렁이가 땅속을 돌아다니며 굴을 파면, 그 굴을 통해 식물 뿌리가 숨을 쉬기 좋아지고 땅이 비옥해져요.",
+      "keywords": ["과학", "생태계", "지렁이"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "스스로 몸의 일부를 자르고 도망가는 도마뱀의 능력은 무엇을 위한 것일까요?",
+      "options": ["살아남기 위해", "재미를 위해", "몸을 가볍게 하기 위해", "먹이를 구하기 위해"], "answer": 0,
+      "explanation": "도마뱀은 적에게 꼬리를 잡혔을 때, 꼬리를 스스로 잘라 적의 시선을 끈 뒤 도망쳐 목숨을 구해요.",
+      "keywords": ["과학", "동물", "생존"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "바다 깊은 곳은 왜 햇빛이 닿지 않아 캄캄할까요?",
+      "options": ["물이 빛을 흡수해서", "물고기가 빛을 가려서", "원래 어두워서", "모래가 빛을 막아서"], "answer": 0,
+      "explanation": "햇빛은 물을 통과하면서 점점 약해지고 흡수되기 때문에, 아주 깊은 바닷속까지는 도달하지 못해요.",
+      "keywords": ["과학", "빛", "바다"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "신라 시대에 별을 관측하기 위해 만든 천문대의 이름은?",
+      "options": ["첨성대", "화성", "석굴암", "다보탑"], "answer": 0,
+      "explanation": "경주에 있는 '첨성대'는 동양에서 가장 오래된 천문대로, 별의 움직임을 관찰하여 농사에 활용했어요.",
+      "keywords": ["한국사", "신라", "첨성대"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "세계에서 가장 큰 나라 러시아는 어느 대륙과 어느 대륙에 걸쳐 있을까요?",
+      "options": ["유럽과 아시아", "아시아와 아프리카", "유럽과 북아메리카", "아시아와 오세아니아"], "answer": 0,
+      "explanation": "러시아는 영토가 매우 넓어서 '유럽'과 '아시아' 두 대륙에 모두 걸쳐 있어요.",
+      "keywords": ["세계지리", "국가", "러시아"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "식물의 씨앗이 멀리 퍼져나가는 방법이 아닌 것은?",
+      "options": ["바람을 타고", "물에 떠서", "동물에 붙어서", "땅속으로 숨어서"], "answer": 3,
+      "explanation": "식물은 바람, 물, 동물의 도움을 받아 씨앗을 멀리 퍼뜨려요. 땅속으로 숨는 것은 퍼져나가는 방법이 아니에요.",
+      "keywords": ["과학", "식물", "씨앗"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "공룡이 살았던 시대를 무엇이라고 부를까요?",
+      "options": ["고생대", "중생대", "신생대", "선캄브리아대"], "answer": 1,
+      "explanation": "공룡은 약 2억 5천만 년 전부터 6천6백만 년 전까지의 '중생대'에 지구를 지배했어요.",
+      "keywords": ["과학", "역사", "공룡"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "바다 밑바닥의 땅이 갑자기 움직여서 큰 파도가 만들어지는 현상은?",
+      "options": ["지진해일(쓰나미)", "태풍", "해류", "용오름"], "answer": 0,
+      "explanation": "바다 밑에서 큰 지진이 일어나면, 그 충격으로 거대한 파도인 '지진해일(쓰나미)'이 발생할 수 있어요.",
+      "keywords": ["과학", "지구과학", "지진해일"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "'모나리자'라는 유명한 그림을 그린 화가는 누구일까요?",
+      "options": ["레오나르도 다빈치", "빈센트 반 고흐", "파블로 피카소", "클로드 모네"], "answer": 0,
+      "explanation": "신비한 미소로 유명한 '모나리자'는 르네상스 시대의 천재 예술가 '레오나르도 다빈치'가 그렸어요.",
+      "keywords": ["세계사", "예술", "다빈치"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "자동차의 엔진이 뜨거워지는 것을 막기 위해 들어가는 액체는?",
+      "options": ["냉각수", "휘발유", "엔진 오일", "워셔액"], "answer": 0,
+      "explanation": "자동차 엔진은 매우 뜨거워지기 때문에, '냉각수'라는 액체가 엔진 주위를 돌며 열을 식혀줘요.",
+      "keywords": ["과학", "상식", "자동차"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "감자는 식물의 어느 부분일까요?",
+      "options": ["뿌리", "줄기", "잎", "열매"], "answer": 1,
+      "explanation": "감자는 땅속에서 자라지만, 식물학적으로는 뿌리가 아니라 양분을 저장하기 위해 변형된 '줄기'에 해당해요.",
+      "keywords": ["과학", "식물", "감자"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "새끼를 낳아 젖을 먹여 키우는 동물을 무엇이라고 할까요?",
+      "options": ["포유류", "조류", "어류", "파충류"], "answer": 0,
+      "explanation": "사람, 개, 고양이, 고래처럼 새끼를 낳고 젖을 먹이는 동물을 '포유류'라고 분류해요.",
+      "keywords": ["과학", "분류", "포유류"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "세계에서 가장 긴 산맥은 어디일까요?",
+      "options": ["안데스 산맥", "로키 산맥", "히말라야 산맥", "알프스 산맥"], "answer": 0,
+      "explanation": "남아메리카 대륙의 서쪽 해안을 따라 길게 뻗어 있는 '안데스 산맥'이 세계에서 가장 길어요.",
+      "keywords": ["지리", "산맥", "안데스"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "고구려의 영토를 가장 넓게 확장시킨 왕은?",
+      "options": ["광개토대왕", "장수왕", "주몽", "을지문덕"], "answer": 0,
+      "explanation": "이름 그대로 영토를 크게 넓힌 '광개토대왕'은 고구려의 전성기를 이끈 위대한 왕이에요.",
+      "keywords": ["한국사", "고구려", "광개토대왕"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "컴퓨터에서 뇌와 같이 계산과 명령을 처리하는 가장 중요한 부품은?",
+      "options": ["CPU", "모니터", "키보드", "메모리"], "answer": 0,
+      "explanation": "사람의 뇌처럼 컴퓨터의 모든 계산을 처리하는 핵심 부품은 'CPU(중앙 처리 장치)'입니다.",
+      "keywords": ["과학", "컴퓨터", "CPU"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "사과를 깎아두면 색깔이 갈색으로 변하는 이유는?",
+      "options": ["공기 중의 산소와 만나서", "사과가 상해서", "햇빛을 받아서", "벌레가 먹어서"], "answer": 0,
+      "explanation": "사과 속의 성분이 공기 중의 '산소'와 만나 반응(산화)하면서 갈색으로 변하게 돼요.",
+      "keywords": ["과학", "산화", "사과"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "지구상에서 가장 오래 사는 동물 중 하나로, 등껍질이 있는 파충류는?",
+      "options": ["거북", "악어", "뱀", "도마뱀"], "answer": 0,
+      "explanation": "'거북'은 매우 천천히 성장하고 신진대사가 느려서 100년 이상 사는 종류도 있어요.",
+      "keywords": ["과학", "동물", "거북"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "파도가 생기는 가장 주된 이유는 무엇일까요?",
+      "options": ["바람", "지진", "달의 인력", "물고기의 움직임"], "answer": 0,
+      "explanation": "바다 표면에 부는 '바람'의 힘이 물에 전달되어 물결이 만들어지고, 이것이 모여 파도가 돼요.",
+      "keywords": ["과학", "바다", "파도"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "인도의 독립을 위해 '비폭력 저항' 운동을 이끈 지도자는?",
+      "options": ["마하트마 간디", "넬슨 만델라", "마틴 루터 킹", "체 게바라"], "answer": 0,
+      "explanation": "'마하트마 간디'는 폭력을 사용하지 않고 인도의 독립을 이끌어 전 세계 사람들에게 큰 감동을 주었어요.",
+      "keywords": ["세계사", "인도", "간디"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "1년 중 밤의 길이가 가장 긴 날을 무엇이라고 할까요?",
+      "options": ["동지", "하지", "춘분", "추분"], "answer": 0,
+      "explanation": "겨울에 있는 '동지'는 북반구에서 태양이 가장 남쪽에 있어 밤이 가장 길고 낮이 가장 짧아요.",
+      "keywords": ["과학", "절기", "동지"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "곤충의 다리는 모두 몇 개일까요?",
+      "options": ["4개", "6개", "8개", "10개"], "answer": 1,
+      "explanation": "개미, 잠자리, 나비 등 대부분의 곤충은 가슴에 '6개'의 다리가 붙어 있어요.",
+      "keywords": ["과학", "곤충", "특징"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "지구상에 살았던 가장 큰 육식 공룡은?",
+      "options": ["티라노사우루스", "트리케라톱스", "브라키오사우루스", "스테고사우루스"], "answer": 0,
+      "explanation": "'티라노사우루스'는 강력한 턱과 날카로운 이빨을 가진 가장 유명한 육식 공룡이에요.",
+      "keywords": ["과학", "공룡", "티라노사우루스"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "바닷속에서 소리를 이용해 길을 찾거나 친구들과 대화하는 포유동물은?",
+      "options": ["돌고래", "상어", "가오리", "성게"], "answer": 0,
+      "explanation": "'돌고래'나 고래는 '초음파'라는 특별한 소리를 내서 서로 의사소통을 하고 주변을 파악해요.",
+      "keywords": ["과학", "동물", "초음파"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "우리나라의 화폐 단위는 '원'입니다. 미국의 화폐 단위는 무엇일까요?",
+      "options": ["달러", "엔", "유로", "위안"], "answer": 0,
+      "explanation": "미국은 '달러($)'를 화폐 단위로 사용해요.",
+      "keywords": ["상식", "화폐", "미국"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "태양계 행성 중 태양에서 가장 가까운 행성은?",
+      "options": ["수성", "금성", "지구", "화성"], "answer": 0,
+      "explanation": "태양계는 수성-금성-지구-화성 순서로 배열되어 있어요. 따라서 '수성'이 가장 가까워요.",
+      "keywords": ["과학", "태양계", "수성"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "콩과 식물의 뿌리에 살면서 식물이 잘 자라도록 도와주는 박테리아는?",
+      "options": ["뿌리혹박테리아", "유산균", "대장균", "효모"], "answer": 0,
+      "explanation": "'뿌리혹박테리아'는 공기 중의 질소를 식물이 사용할 수 있는 형태로 바꾸어주어 땅을 비옥하게 만들어요.",
+      "keywords": ["과학", "공생", "박테리아"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "다음 중 파충류가 아닌 동물은?",
+      "options": ["도롱뇽", "뱀", "악어", "거북"], "answer": 0,
+      "explanation": "'도롱뇽'은 피부로 숨을 쉬고 물과 육지를 오가는 양서류이고, 나머지는 허파로 숨 쉬는 파충류예요.",
+      "keywords": ["과학", "분류", "파충류"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "전 세계 바다를 연결하는 거대한 바닷물의 흐름을 무엇이라고 할까요?",
+      "options": ["해류", "파도", "조수", "용승"], "answer": 0,
+      "explanation": "바다에는 따뜻한 물과 차가운 물이 일정한 방향으로 계속 흐르는 거대한 강과 같은 '해류'가 있어요.",
+      "keywords": ["과학", "지구과학", "해류"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "조선시대 왕의 무덤을 '왕릉'이라고 합니다. 신라시대 왕의 무덤은 어떤 특징을 가지고 있을까요?",
+      "options": ["커다란 언덕(고분) 모양이다", "피라미드 모양이다", "지하 궁전 모양이다", "돌탑 모양이다"], "answer": 0,
+      "explanation": "경주에 가면 볼 수 있는 신라의 왕릉들은 나무와 돌을 쌓아 만든 커다란 '고분' 형태가 많아요.",
+      "keywords": ["한국사", "신라", "고분"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "비행기가 하늘을 날 수 있게 해주는 가장 중요한 힘은?",
+      "options": ["양력", "중력", "추력", "항력"], "answer": 0,
+      "explanation": "비행기 날개의 위아래 공기 압력 차이로 인해 위로 떠오르는 힘인 '양력' 때문에 무거운 비행기가 하늘을 날 수 있어요.",
+      "keywords": ["과학", "물리", "양력"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "사계절이 뚜렷한 지역의 나무들이 가을에 잎을 떨어뜨리는 이유는?",
+      "options": ["겨울 동안 수분 손실을 막기 위해", "귀찮아서", "열매를 맺기 위해", "키가 크기 위해"], "answer": 0,
+      "explanation": "나무는 춥고 건조한 겨울 동안 잎을 통해 물이 빠져나가는 것을 막기 위해 스스로 잎을 떨어뜨려요.",
+      "keywords": ["과학", "식물", "낙엽"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "알을 낳지만 새끼에게 젖을 먹이는 아주 특별한 포유동물은?",
+      "options": ["오리너구리", "캥거루", "코알라", "고슴도치"], "answer": 0,
+      "explanation": "호주에 사는 '오리너구리'는 알을 낳지만, 알에서 깨어난 새끼에게 젖을 먹이는 신기한 포유동물이에요.",
+      "keywords": ["과학", "동물", "오리너구리"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "바닷속에 잠겨 있는 세계에서 가장 큰 산맥은 어디일까요?",
+      "options": ["중앙 해령", "안데스 산맥", "히말라야 산맥", "로키 산맥"], "answer": 0,
+      "explanation": "바다 밑바닥에는 화산 활동으로 만들어진 '중앙 해령'이라는 거대한 해저 산맥이 길게 이어져 있어요.",
+      "keywords": ["지리", "해저 지형", "해령"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "로마 제국의 전성기를 이끌었던, '주사위는 던져졌다'라는 말을 한 유명한 인물은?",
+      "options": ["율리우스 카이사르", "알렉산더 대왕", "나폴레옹", "칭기즈칸"], "answer": 0,
+      "explanation": "로마의 위대한 장군이자 정치가였던 '율리우스 카이사르(시저)'가 한 유명한 말이에요.",
+      "keywords": ["세계사", "로마", "카이사르"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "자석의 N극과 S극을 서로 가까이 가져가면 어떻게 될까요?",
+      "options": ["서로 끌어당긴다", "서로 밀어낸다", "아무 일도 일어나지 않는다", "뜨거워진다"], "answer": 0,
+      "explanation": "자석은 서로 다른 극(N극과 S극)끼리는 끌어당기고, 같은 극(N극과 N극)끼리는 밀어내는 성질이 있어요.",
+      "keywords": ["과학", "자석", "인력"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "다음 중 민들레와 비슷한 방법으로 씨앗을 퍼뜨리는 식물은?",
+      "options": ["도꼬마리", "소나무", "단풍나무", "봉선화"], "answer": 2,
+      "explanation": "민들레 씨앗처럼 '단풍나무' 씨앗도 바람을 타고 멀리 날아갈 수 있도록 날개 모양을 하고 있어요. 도꼬마리는 동물에 붙어서, 봉선화는 터지면서 퍼져요.",
+      "keywords": ["과학", "식물", "씨앗"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "피를 빨아먹는 모기는 암컷일까요, 수컷일까요?",
+      "options": ["암컷", "수컷", "둘 다", "아무도 안 그런다"], "answer": 0,
+      "explanation": "알을 낳는 데 필요한 영양분을 얻기 위해 '암컷' 모기만 사람이나 동물의 피를 빨아먹어요.",
+      "keywords": ["과학", "곤충", "모기"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "지구상에서 물이 가장 많이 모여있는 곳은 어디일까요?",
+      "options": ["바다", "빙하", "강과 호수", "지하수"], "answer": 0,
+      "explanation": "지구에 있는 물의 약 97%는 '바다'에 짠물 형태로 존재해요.",
+      "keywords": ["과학", "지구과학", "물"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "조선시대의 발명품으로, 빗물의 양을 재는 데 사용된 기구는?",
+      "options": ["측우기", "해시계", "물시계", "혼천의"], "answer": 0,
+      "explanation": "세계 최초로 발명된 강우량 측정기인 '측우기'는 농사에 큰 도움을 주었어요.",
+      "keywords": ["한국사", "조선", "측우기"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "태양계 행성 중 가장 큰 행성은 무엇일까요?",
+      "options": ["목성", "토성", "천왕성", "해왕성"], "answer": 0,
+      "explanation": "태양계의 왕이라고 불리는 '목성'은 지구보다 1,300배 이상 더 커요.",
+      "keywords": ["과학", "태양계", "목성"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "다음 중 땅의 힘을 회복시켜주는 콩과 식물이 아닌 것은?",
+      "options": ["감자", "콩", "팥", "완두"], "answer": 0,
+      "explanation": "콩, 팥, 완두 같은 콩과 식물은 땅을 비옥하게 만들지만, '감자'는 땅의 양분을 많이 사용하는 식물이에요.",
+      "keywords": ["과학", "식물", "질소 고정"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "허물을 벗으며 성장하는 동물이 아닌 것은?",
+      "options": ["매미", "뱀", "가재", "개구리"], "answer": 3,
+      "explanation": "매미, 뱀, 가재는 허물을 벗는 '탈피'를 통해 성장하지만, '개구리'는 올챙이에서 모습이 변하는 '변태'를 해요.",
+      "keywords": ["과학", "탈피", "성장"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "지구의 자기장이 우리에게 해주는 가장 중요한 역할은?",
+      "options": ["태양풍으로부터 지구를 보호한다", "나침반을 움직이게 한다", "중력을 만든다", "오로라를 만든다"], "answer": 0,
+      "explanation": "지구의 자기장은 눈에 보이지 않는 보호막처럼, 태양에서 날아오는 해로운 우주 방사선(태양풍)을 막아줘요.",
+      "keywords": ["과학", "지구과학", "자기장"], "difficulty_score": 6
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "르네상스 시대의 중심지였으며, '냉정과 열정 사이'의 배경이 된 이탈리아의 도시는?",
+      "options": ["피렌체", "로마", "베네치아", "밀라노"], "answer": 0,
+      "explanation": "레오나르도 다빈치, 미켈란젤로가 활동했던 르네상스의 발상지는 '피렌체'입니다.",
+      "keywords": ["세계사", "르네상스", "피렌체"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "소리가 공기 중에서보다 물속에서 더 빨리 전달될까요?",
+      "options": ["네, 더 빨리 전달돼요", "아니요, 더 느리게 전달돼요", "똑같이 전달돼요", "전달되지 않아요"], "answer": 0,
+      "explanation": "소리는 물질을 진동시켜 전달되는데, 공기보다 물이 더 촘촘해서 물속에서 약 4배 더 빨리 전달돼요.",
+      "keywords": ["과학", "물리", "소리"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "꽃이 열매를 맺기 위해 꼭 필요한 과정으로, 벌과 나비가 도와주는 것은?",
+      "options": ["수분", "광합성", "발아", "호흡"], "answer": 0,
+      "explanation": "벌과 나비가 꽃가루를 암술머리로 옮겨주는 '수분(가루받이)' 과정이 이루어져야 씨앗과 열매가 맺혀요.",
+      "keywords": ["과학", "식물", "수분"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "거미줄은 아주 가늘지만 강철보다 강하다. 맞을까요, 틀릴까요?",
+      "options": ["맞다", "틀리다", "비슷하다", "알 수 없다"], "answer": 0,
+      "explanation": "같은 굵기일 때, 거미줄은 강철보다 더 강한 인장 강도를 가지고 있는 놀라운 물질이에요.",
+      "keywords": ["과학", "상식", "거미줄"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "바닷물의 높이가 하루에 두 번씩 높아졌다 낮아졌다 하는 현상은?",
+      "options": ["조석(밀물과 썰물)", "해류", "파도", "해일"], "answer": 0,
+      "explanation": "달과 태양의 인력 때문에 바닷물이 주기적으로 높아지고(밀물) 낮아지는(썰물) '조석' 현상이 일어나요.",
+      "keywords": ["과학", "지구과학", "조석"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "우리나라 최초의 여왕은 어느 나라 사람일까요?",
+      "options": ["신라", "고구려", "백제", "고려"], "answer": 0,
+      "explanation": "우리나라 최초의 여왕은 '신라'의 선덕여왕이에요.",
+      "keywords": ["한국사", "신라", "선덕여왕"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "다음 중 '재생에너지'가 아닌 것은?",
+      "options": ["태양 에너지", "풍력 에너지", "석탄 에너지", "수력 에너지"], "answer": 2,
+      "explanation": "'석탄 에너지'는 한 번 쓰면 사라지는 화석 연료이고, 나머지는 자연에서 계속 얻을 수 있는 재생에너지예요.",
+      "keywords": ["과학", "에너지", "재생에너지"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "farm",
+      "question": "벼, 밀, 보리처럼 우리가 주식으로 먹는 식물을 무엇이라고 할까요?",
+      "options": ["곡물", "채소", "과일", "견과류"], "answer": 0,
+      "explanation": "알곡을 얻기 위해 재배하는 식물을 통틀어 '곡물'이라고 해요.",
+      "keywords": ["상식", "음식", "곡물"], "difficulty_score": 4
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "forest",
+      "question": "척추가 없는 동물을 무엇이라고 부를까요?",
+      "options": ["무척추동물", "척추동물", "절지동물", "연체동물"], "answer": 0,
+      "explanation": "곤충, 거미, 조개, 지렁이처럼 몸에 뼈대(척추)가 없는 동물을 '무척추동물'이라고 해요.",
+      "keywords": ["과학", "분류", "무척추동물"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "ocean",
+      "question": "세계에서 가장 큰 섬은 어디일까요?",
+      "options": ["그린란드", "호주", "보르네오", "마다가스카르"], "answer": 0,
+      "explanation": "북극 가까이에 있는 '그린란드'가 세계에서 가장 큰 섬이에요. (호주는 대륙으로 분류돼요)",
+      "keywords": ["지리", "섬", "그린란드"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "home",
+      "question": "일제강점기에 우리나라의 독립을 위해 중국 하얼빈에서 이토 히로부미를 사살한 의사는?",
+      "options": ["안중근", "윤봉길", "이봉창", "김좌진"], "answer": 0,
+      "explanation": "'안중근' 의사는 우리나라 침략의 원흉인 이토 히로부미를 처단한 위대한 독립운동가예요.",
+      "keywords": ["한국사", "독립운동가", "안중근"], "difficulty_score": 5
+    },
+    {
+      "subject": "general", "level": "intermediate", "habitat": "city",
+      "question": "지진의 강도를 나타내는 단위는 무엇일까요?",
+      "options": ["리히터 규모", "데시벨", "섭씨", "볼트"], "answer": 0,
+      "explanation": "지진이 발생했을 때 방출된 에너지의 양을 '리히터 규모'라는 단위로 나타내요.",
+      "keywords": ["과학", "지진", "규모"], "difficulty_score": 5
+    }
+  ]
+}
