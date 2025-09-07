@@ -14,6 +14,40 @@
         .nav-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; border: none; padding: 12px 15px; border-radius: 20px; cursor: pointer; font-weight: bold; font-size: 0.8rem; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
         .nav-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
         .nav-btn.active { background: linear-gradient(45deg, #32CD32, #228B22); }
+        
+        /* 과목 선택 드롭다운 스타일 */
+        .subject-selector { 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            background: rgba(255, 255, 255, 0.1);
+            padding: 5px;
+            border-radius: 20px;
+        }
+        
+        .subject-dropdown {
+            background: linear-gradient(45deg, #9370DB, #8A2BE2);
+            color: white;
+            border: none;
+            padding: 12px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .subject-dropdown:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+        
+        .subject-dropdown option {
+            background: #8A2BE2;
+            color: white;
+            padding: 10px;
+        }
         .user-info { margin: 15px 0; }
         .current-user { background: linear-gradient(45deg, #FF69B4, #FFB6C1); color: white; padding: 10px 20px; border-radius: 25px; font-weight: bold; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.2); word-break: break-all; }
         .game-stats { display: flex; justify-content: center; gap: 20px; margin-top: 15px; flex-wrap: wrap; }
@@ -371,7 +405,13 @@
             <h1>🐾 동물 수집 학습 게임 🐾</h1>
             
             <div class="nav-buttons">
-                <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기 🇬🇧</button>
+                <div class="subject-selector">
+                    <select id="subject-select" onchange="changeSubject()" class="subject-dropdown">
+                        <option value="english">영어 🇬🇧</option>
+                        <option value="social">사회 🏛️</option>
+                    </select>
+                    <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기</button>
+                </div>
                 <button class="nav-btn" onclick="showPage('learning', this)">학습 통계 📈</button>
                 <button class="nav-btn" onclick="showLearningReport()">개인 분석 🎯</button>
                 <button class="nav-btn" onclick="showPage('synthesis', this)">동물 합성 🧬</button>
@@ -744,7 +784,28 @@
                 consecutiveDays: 0,
                 hasClaimedToday: false,
                 totalDaysLogged: 0
-            }
+            },
+            // 과목별 독립적인 데이터
+            subjects: {
+                english: { 
+                    progress: {}, 
+                    level: 1, 
+                    score: 0, 
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0 
+                },
+                social: { 
+                    progress: {}, 
+                    level: 1, 
+                    score: 0, 
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0 
+                }
+            },
+            // 현재 선택된 과목
+            currentSubject: 'english'
         };
 
         // 플레이 시간 추적 변수들
@@ -1156,6 +1217,118 @@
                     endTime: buffEndTime
                 });
             }
+        }
+
+        // ==================== 과목 관리 시스템 ====================
+        
+        // 과목 변경
+        function changeSubject() {
+            const selectElement = document.getElementById('subject-select');
+            const newSubject = selectElement.value;
+            
+            if (newSubject !== gameState.currentSubject) {
+                // 현재 과목 데이터 저장
+                saveCurrentSubjectProgress();
+                
+                // 새 과목으로 변경
+                gameState.currentSubject = newSubject;
+                
+                // 새 과목 데이터 로드
+                loadCurrentSubjectProgress();
+                
+                // UI 업데이트
+                updateSubjectUI();
+                
+                // 새 문제 생성
+                setTimeout(() => {
+                    generatePersonalizedQuiz();
+                }, 500);
+                
+                console.log(`과목이 ${newSubject}로 변경되었습니다.`);
+            }
+        }
+        
+        // 현재 과목 진행도 저장
+        function saveCurrentSubjectProgress() {
+            const currentSubject = gameState.currentSubject;
+            if (!gameState.subjects[currentSubject]) {
+                gameState.subjects[currentSubject] = {
+                    progress: {},
+                    level: 1,
+                    score: 0,
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0
+                };
+            }
+            
+            // 현재 학습 진행도를 과목별로 저장
+            gameState.subjects[currentSubject].progress = { ...userProgress };
+            gameState.subjects[currentSubject].currentDifficulty = currentDifficulty;
+            
+            console.log(`${currentSubject} 과목 진행도 저장됨:`, gameState.subjects[currentSubject]);
+        }
+        
+        // 현재 과목 진행도 로드
+        function loadCurrentSubjectProgress() {
+            const currentSubject = gameState.currentSubject;
+            
+            // 과목 데이터가 없으면 초기화
+            if (!gameState.subjects[currentSubject]) {
+                gameState.subjects[currentSubject] = {
+                    progress: {},
+                    level: 1,
+                    score: 0,
+                    currentDifficulty: 1,
+                    totalCorrect: 0,
+                    totalIncorrect: 0
+                };
+            }
+            
+            // 과목별 진행도 로드
+            userProgress = { ...gameState.subjects[currentSubject].progress };
+            currentDifficulty = gameState.subjects[currentSubject].currentDifficulty || 1;
+            
+            console.log(`${currentSubject} 과목 진행도 로드됨:`, gameState.subjects[currentSubject]);
+        }
+        
+        // 과목별 UI 업데이트
+        function updateSubjectUI() {
+            const currentSubject = gameState.currentSubject;
+            const subjectData = gameState.subjects[currentSubject];
+            
+            // 과목 이름 표시
+            const gameTitle = document.querySelector('#game-page h2');
+            if (gameTitle) {
+                const subjectNames = {
+                    'english': '영어 학습 🇬🇧',
+                    'social': '사회 학습 🏛️'
+                };
+                gameTitle.textContent = subjectNames[currentSubject] || '학습 게임';
+            }
+            
+            // 과목별 통계 업데이트
+            if (subjectData) {
+                document.getElementById('word-correct').textContent = subjectData.totalCorrect || 0;
+                document.getElementById('word-incorrect').textContent = subjectData.totalIncorrect || 0;
+                
+                const total = (subjectData.totalCorrect || 0) + (subjectData.totalIncorrect || 0);
+                const accuracy = total > 0 ? Math.round(((subjectData.totalCorrect || 0) / total) * 100) : 0;
+                document.getElementById('word-accuracy').textContent = accuracy;
+            }
+        }
+        
+        // 과목별 파일 경로 생성
+        function getSubjectFilePath(level) {
+            const currentSubject = gameState.currentSubject;
+            return `./subjects/${currentSubject}/level${level}.json`;
+        }
+        
+        // 과목별 단어 ID 생성
+        function generateSubjectWordId(korean, english) {
+            const currentSubject = gameState.currentSubject;
+            const cleanKorean = korean.replace(/[^가-힣a-zA-Z]/g, '');
+            return `${currentSubject}_${cleanKorean}-${english.toLowerCase()}`;
         }
 
         // ==================== 랜덤 이벤트 시스템 ====================
@@ -1817,13 +1990,20 @@
         async function findWordById(wordId) {
             for (let level = 1; level <= 3; level++) {
                 try {
-                    const response = await fetch(`./words/level${level}.json`);
+                    const response = await fetch(getSubjectFilePath(level));
                     const data = await response.json();
                     
                     const word = data.words.find(w => {
-                        // wordId는 보통 "korean-english" 형태
-                        const id = `${w.korean.replace(/[^가-힣a-zA-Z]/g, '')}-${w.english}`;
-                        return id === wordId;
+                        // 과목별 ID 생성 방식에 맞춰 검색
+                        let expectedId;
+                        if (gameState.currentSubject === 'social') {
+                            const cleanQuestion = (w.question || '').replace(/[^가-힣a-zA-Z]/g, '');
+                            const answer = w.options ? w.options[w.answer] : '';
+                            expectedId = generateSubjectWordId(w.question, answer);
+                        } else {
+                            expectedId = generateSubjectWordId(w.korean, w.english);
+                        }
+                        return expectedId === wordId;
                     });
                     
                     if (word) return word;
@@ -2227,12 +2407,14 @@
                 const randomWord = words[Math.floor(Math.random() * words.length)];
                 
                 currentWordData = {
-                    id: generateWordId(randomWord.korean, randomWord.english),
-                    korean: randomWord.korean,
-                    english: randomWord.english,
+                    id: generateSubjectWordId(randomWord.korean || randomWord.question, randomWord.english || randomWord.options[randomWord.answer]),
+                    korean: randomWord.korean || randomWord.question,
+                    english: randomWord.english || randomWord.options[randomWord.answer],
                     options: randomWord.options,
                     difficulty: difficulty,
-                    source: 'json'
+                    source: 'json',
+                    answer: randomWord.answer,
+                    explanation: randomWord.explanation
                 };
                 
                 currentEnglishQuiz = {
@@ -2307,9 +2489,15 @@
             const wordSourceElement = document.getElementById('word-source');
             const sourceBadge = document.getElementById('source-badge');
             
-            questionElement.textContent = `"${currentWordData.korean}"`;
-            speakButton.style.display = 'inline';
-            speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            // 질문 표시 (과목에 따라 다름)
+            if (gameState.currentSubject === 'social') {
+                questionElement.textContent = currentWordData.korean; // 사회 과목
+                speakButton.style.display = 'none'; // 사회는 음성 기능 없음
+            } else {
+                questionElement.textContent = `"${currentWordData.korean}"`; // 영어 과목
+                speakButton.style.display = 'inline';
+                speakButton.onclick = () => speakWord(currentEnglishQuiz.answer);
+            }
             
             // 단어 출처 표시
             wordSourceElement.style.display = 'block';
@@ -2378,7 +2566,17 @@
             });
 
             const feedback = document.getElementById('feedback');
-            const isCorrect = selectedOption === currentEnglishQuiz.answer;
+            
+            // 정답 체크 (과목에 따라 다름)
+            let isCorrect = false;
+            if (gameState.currentSubject === 'social') {
+                // 사회 과목: selectedOption이 선택지 텍스트, answer는 인덱스
+                const selectedIndex = currentWordData.options.indexOf(selectedOption);
+                isCorrect = selectedIndex === currentWordData.answer;
+            } else {
+                // 영어 과목: 기존 방식
+                isCorrect = selectedOption === currentEnglishQuiz.answer;
+            }
             
             // 학습 기록 업데이트
             if (currentWordData && currentWordData.id) {
@@ -2388,8 +2586,12 @@
                 
                 if (isCorrect) {
                     userProgress[currentWordData.id].correct++;
+                    // 과목별 통계 업데이트
+                    gameState.subjects[gameState.currentSubject].totalCorrect++;
                 } else {
                     userProgress[currentWordData.id].incorrect++;
+                    // 과목별 통계 업데이트
+                    gameState.subjects[gameState.currentSubject].totalIncorrect++;
                 }
                 userProgress[currentWordData.id].lastSeen = new Date();
                 
@@ -2398,7 +2600,10 @@
             }
             
             if (isCorrect) {
-                speakWord(currentEnglishQuiz.answer);
+                // 영어 과목만 음성 재생
+                if (gameState.currentSubject === 'english') {
+                    speakWord(currentEnglishQuiz.answer);
+                }
                 
                 // 난이도별 점수 계산
                 let baseScore = 10;
@@ -2409,7 +2614,13 @@
                 const earnedScore = baseScore * gameState.level;
                 gameState.score += earnedScore;
                 
-                feedback.textContent = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                // 과목별 피드백 메시지
+                const subjectMessages = {
+                    'english': `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`,
+                    'social': `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`
+                };
+                
+                feedback.textContent = subjectMessages[gameState.currentSubject] || `정답! +${earnedScore}점!`;
                 feedback.className = 'feedback correct';
                 
                 // 정답 시 화려한 효과
@@ -2438,7 +2649,19 @@
                 saveCurrentUserData();
                 setTimeout(() => generatePersonalizedQuiz(), 1500);
             } else {
-                feedback.textContent = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
+                // 과목별 오답 피드백
+                let incorrectMessage = '';
+                if (gameState.currentSubject === 'social') {
+                    const correctAnswer = currentWordData.options[currentWordData.answer];
+                    incorrectMessage = `아! 정답은 "${correctAnswer}"였어요.`;
+                    if (currentWordData.explanation) {
+                        incorrectMessage += ` ${currentWordData.explanation}`;
+                    }
+                } else {
+                    incorrectMessage = `아! 정답은 "${currentEnglishQuiz.answer}"였어요. 다시 도전하세요!`;
+                }
+                
+                feedback.textContent = incorrectMessage;
                 feedback.className = 'feedback incorrect';
                 
                 // 오답 시 피드백 효과
@@ -3730,7 +3953,10 @@
                 lastPlayed: new Date().toISOString(),
                 // 매일 로그인 보상 데이터 저장
                 dailyRewards: gameState.dailyRewards,
-                activeBuffs: gameState.activeBuffs
+                activeBuffs: gameState.activeBuffs,
+                // 과목별 데이터 저장
+                subjects: gameState.subjects,
+                currentSubject: gameState.currentSubject
             };
 
             try {
@@ -3860,7 +4086,28 @@
                     totalDaysLogged: 0
                 },
                 // 활성 버프 시스템
-                activeBuffs: profileData.activeBuffs || []
+                activeBuffs: profileData.activeBuffs || [],
+                // 과목별 독립적인 데이터
+                subjects: profileData.subjects || {
+                    english: { 
+                        progress: {}, 
+                        level: 1, 
+                        score: 0, 
+                        currentDifficulty: 1,
+                        totalCorrect: 0,
+                        totalIncorrect: 0 
+                    },
+                    social: { 
+                        progress: {}, 
+                        level: 1, 
+                        score: 0, 
+                        currentDifficulty: 1,
+                        totalCorrect: 0,
+                        totalIncorrect: 0 
+                    }
+                },
+                // 현재 선택된 과목 (기본값: 영어)
+                currentSubject: profileData.currentSubject || 'english'
             };
 
             document.getElementById('login-overlay').style.display = 'none';
@@ -3874,6 +4121,13 @@
             
             updateUI();
             updateAnimalCollection();
+            
+            // 과목별 데이터 초기화
+            loadCurrentSubjectProgress();
+            updateSubjectUI();
+            
+            // 과목 선택 드롭다운 초기화
+            document.getElementById('subject-select').value = gameState.currentSubject;
             
             // 매일 로그인 보상 체크 (약간의 딜레이 후 실행)
             setTimeout(() => {

@@ -1,0 +1,206 @@
+{
+  "difficulty": 1,
+  "subject": "social",
+  "words": [
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "엄마, 아빠가 매주 주시는 돈을 잘 사용하기 위해 계획을 세우는 것을 무엇이라고 할까요?",
+      "options": [
+        "용돈 계획",
+        "그림 그리기",
+        "음악 감상",
+        "청소하기"
+      ],
+      "answer": 0,
+      "explanation": "용돈을 어떻게 쓸지 미리 생각하는 것을 '용돈 계획'이라고 해요.",
+      "keywords": [
+        "용돈",
+        "계획",
+        "관리"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "갖고 싶은 장난감을 사기 위해 용돈을 쓰지 않고 모으는 통은 무엇일까요?",
+      "options": [
+        "신발장",
+        "돼지 저금통",
+        "필통",
+        "냉장고"
+      ],
+      "answer": 1,
+      "explanation": "돈을 모으기 위해 사용하는 통을 '저금통'이라고 불러요.",
+      "keywords": [
+        "저축",
+        "저금통",
+        "돈"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "방 청소를 도와드리고 엄마에게 용돈을 더 받았어요. 이것은 무엇에 대한 대가일까요?",
+      "options": [
+        "일",
+        "선물",
+        "인사",
+        "장난"
+      ],
+      "answer": 0,
+      "explanation": "어떤 일을 하고 그 대가로 돈을 받는 것을 '일' 또는 '노동'이라고 해요.",
+      "keywords": [
+        "일",
+        "돈",
+        "대가"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "우리가 살기 위해 꼭 필요한 '음식'과, 꼭 필요하지는 않지만 갖고 싶은 '게임기' 중 무엇을 먼저 사야 할까요?",
+      "options": [
+        "음식",
+        "게임기",
+        "둘 다 안 사기",
+        "아무거나"
+      ],
+      "answer": 0,
+      "explanation": "살아가는데 꼭 필요한 '필요'를 먼저 해결해야 해요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "선택"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "가족들과 함께 마트에 가서 필요한 물건을 돈을 내고 사는 행동을 무엇이라고 할까요?",
+      "options": [
+        "소비",
+        "생산",
+        "저축",
+        "기부"
+      ],
+      "answer": 0,
+      "explanation": "돈을 사용해서 물건이나 서비스를 사는 것을 '소비'라고 해요.",
+      "keywords": [
+        "소비",
+        "마트",
+        "구매"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "동생에게 내 장난감을 빌려주고, 동생의 과자를 하나 받았어요. 이것은 무엇과 가장 비슷할까요?",
+      "options": [
+        "물물교환",
+        "선물하기",
+        "버리기",
+        "숨기기"
+      ],
+      "answer": 0,
+      "explanation": "물건과 물건을 서로 바꾸는 것을 '물물교환'이라고 해요.",
+      "keywords": [
+        "물물교환",
+        "교환",
+        "나눔"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "아빠가 회사에서 열심히 일해서 받아오시는 돈을 무엇이라고 부를까요?",
+      "options": [
+        "월급",
+        "용돈",
+        "세금",
+        "벌금"
+      ],
+      "answer": 0,
+      "explanation": "한 달 동안 일한 대가로 받는 돈을 '월급'이라고 해요.",
+      "keywords": [
+        "월급",
+        "소득",
+        "직업"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "전기나 물을 아껴 쓰면 어떤 돈을 절약할 수 있을까요?",
+      "options": [
+        "공과금",
+        "간식비",
+        "준비물 값",
+        "교통비"
+      ],
+      "answer": 0,
+      "explanation": "전기, 수도, 가스 등을 사용하고 내는 돈을 '공과금'이라고 하며, 아껴 쓰면 절약할 수 있어요.",
+      "keywords": [
+        "절약",
+        "공과금",
+        "소비"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "가족이 함께 살고 있는 '집'은 우리에게 꼭 필요한 것일까요, 아니면 갖고 싶은 것일까요?",
+      "options": [
+        "필요",
+        "욕구",
+        "장난",
+        "비밀"
+      ],
+      "answer": 0,
+      "explanation": "안전하게 잠을 자고 생활하는 '집'은 살아가기 위해 꼭 '필요'한 것이에요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "집"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "내가 가진 돈보다 더 비싼 물건은 어떻게 해야 할까요?",
+      "options": [
+        "살 수 없다",
+        "마음대로 가져온다",
+        "빌린다",
+        "숨긴다"
+      ],
+      "answer": 0,
+      "explanation": "물건을 사기 위해서는 그 물건의 값만큼 돈이 필요해요.",
+      "keywords": [
+        "가격",
+        "돈",
+        "구매"
+      ],
+      "difficulty_score": 2
+    }
+  ]
+}
