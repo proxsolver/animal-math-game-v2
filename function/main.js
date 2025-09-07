@@ -3583,6 +3583,21 @@
                 if (typeof window.updateStudyTimerDisplay === 'function') {
                     window.updateStudyTimerDisplay();
                 }
+                
+                // Firebase 로그인 후 사용자 데이터 로드 시도
+                if (window.currentUserId && typeof window.loadCurrentUserData === 'function') {
+                    console.log('[DOMContentLoaded] 사용자 데이터 로드 시도');
+                    window.loadCurrentUserData();
+                } else {
+                    console.log('[DOMContentLoaded] Firebase 아직 미준비, 3초 후 재시도');
+                    // Firebase 로그인이 완료될 때까지 3초 후 재시도
+                    setTimeout(() => {
+                        if (window.currentUserId && typeof window.loadCurrentUserData === 'function') {
+                            console.log('[DOMContentLoaded 재시도] 사용자 데이터 로드 시도');
+                            window.loadCurrentUserData();
+                        }
+                    }, 3000);
+                }
             }, 1000);
         });
 
