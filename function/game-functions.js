@@ -309,6 +309,36 @@ function updateQuizProgressDisplay(subject) {
     }
 }
 
+// 간단한 알림 표시 함수
+function showNotification(message, type = 'info') {
+    console.log(`[알림] ${message}`);
+    
+    // 화면에 간단한 토스트 알림 표시
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : '#2196F3'};
+        color: white;
+        padding: 15px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        z-index: 9999;
+        font-weight: bold;
+        transition: all 0.3s ease;
+    `;
+    toast.textContent = message;
+    
+    document.body.appendChild(toast);
+    
+    // 3초 후 제거
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+    }, 3000);
+}
+
 // 미션 완료 알림
 function showMissionCompleteNotification(subject) {
     const subjectNames = {
@@ -683,6 +713,19 @@ async function saveCurrentUserData() {
         await window.firebase.setDoc(userDataRef, userData, { merge: true });
         console.log('[SUCCESS] 사용자 데이터가 Firebase에 저장되었습니다:', userData.lastSaved);
         
+        // 저장 후 즉시 검증
+        console.log('[VERIFY] 저장 검증 시작...');
+        const verifyDoc = await window.firebase.getDoc(userDataRef);
+        if (verifyDoc.exists()) {
+            const savedData = verifyDoc.data();
+            console.log('[VERIFY SUCCESS] 저장된 데이터 확인됨:', {
+                lastSaved: savedData.lastSaved,
+                englishMission: savedData.gameState?.dailyMissions?.english
+            });
+        } else {
+            console.error('[VERIFY FAILED] 저장된 데이터를 찾을 수 없음!');
+        }
+        
     } catch (error) {
         console.error('[ERROR] Firebase 저장 오류:', error);
         console.error('[ERROR] 오류 상세:', error.message, error.stack);
@@ -851,6 +894,7 @@ window.enableFreeStudyMode = enableFreeStudyMode;
 window.saveCurrentUserData = saveCurrentUserData;
 window.loadCurrentUserData = loadCurrentUserData;
 window.updateQuizProgressDisplay = updateQuizProgressDisplay;
+window.showNotification = showNotification;
 
 // 테스트 함수들 (개발자 도구에서 사용 가능)
 window.testFirebaseSave = async function() {
