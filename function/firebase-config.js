@@ -30,7 +30,12 @@ window.onFirebaseReady = async function(user) {
         
         // 사용자 데이터 로드
         console.log("사용자 데이터 로드 시작...");
-        await window.loadCurrentUserData();
+        if (typeof window.loadCurrentUserData === 'function') {
+            const loaded = await window.loadCurrentUserData();
+            console.log("사용자 데이터 로드 결과:", loaded);
+        } else {
+            console.error("loadCurrentUserData 함수를 찾을 수 없습니다!");
+        }
         
         console.log("초기화 완료");
     } catch (error) {
