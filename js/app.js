@@ -26,6 +26,17 @@ async function initializeApp() {
         window.handleLogin = handleLogin;
         window.handleSignup = handleSignup;
         
+        // 기본 페이지 설정 (로그인 전에도 게임 화면 구조 표시)
+        setTimeout(() => {
+            if (window.showPage && !window.currentUserProfile) {
+                const firstNavBtn = document.querySelector('.nav-btn');
+                if (firstNavBtn) {
+                    window.showPage('game', firstNavBtn);
+                    console.log("🎮 기본 게임 페이지 설정 완료");
+                }
+            }
+        }, 500);
+        
         console.log('앱 초기화 완료');
         
     } catch (error) {

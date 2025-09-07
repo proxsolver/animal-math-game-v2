@@ -138,17 +138,26 @@ export function handleLogin() {
         // 로컬 스토리지에 현재 사용자 저장
         localStorage.setItem('currentUser', playerName);
         
-        // 1초 후 로그인 오버레이 숨기기
+        // 1초 후 로그인 오버레이 숨기고 게임 시작
         setTimeout(() => {
             const overlay = document.getElementById('login-overlay');
             if (overlay) {
                 overlay.style.display = 'none';
             }
             
+            // 기본 게임 페이지로 이동
+            if (window.showPage) {
+                const firstNavBtn = document.querySelector('.nav-btn');
+                window.showPage('game', firstNavBtn);
+                console.log("✅ 게임 페이지로 이동 완료");
+            }
+            
             // UI 업데이트
             if (window.updateUI) {
                 window.updateUI();
             }
+            
+            console.log("🎮 게임 시작 준비 완료!");
         }, 1000);
         
         console.log("로그인 완료:", playerName);
