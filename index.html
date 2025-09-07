@@ -374,6 +374,408 @@
             .encyclopedia-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); }
             .synthesis-card { flex-direction: column; gap: 10px; }
         }
+        
+        /* ==================== 배틀모드 스타일 ==================== */
+        
+        /* 배틀 컨테이너 */
+        .battle-container { background: rgba(0, 0, 0, 0.9); color: white; padding: 30px; border-radius: 25px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .battle-container h2 { color: #FFD700; text-align: center; font-size: 2.5rem; margin-bottom: 30px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        
+        /* 배틀 화면 전환 */
+        .battle-screen { display: none; }
+        .battle-screen.active { display: block; }
+        
+        /* 메인 메뉴 그리드 */
+        .battle-menu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .battle-option { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 30px 20px; 
+            border-radius: 20px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            border: 2px solid #333;
+        }
+        .battle-option:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3); 
+            border-color: #FFD700; 
+        }
+        .battle-icon { font-size: 3rem; margin-bottom: 15px; }
+        .battle-option h3 { color: #FFD700; margin: 15px 0 10px 0; font-size: 1.3rem; }
+        .battle-option p { color: #ccc; font-size: 0.9rem; line-height: 1.4; }
+        
+        /* 폼 스타일 */
+        .room-setup, .join-room-form, .public-rooms-list, .battle-stats { 
+            max-width: 500px; 
+            margin: 0 auto; 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px solid #333;
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; color: #FFD700; font-weight: bold; margin-bottom: 8px; font-size: 1.1rem; }
+        .form-group input, .form-group select { 
+            width: 100%; 
+            padding: 12px 15px; 
+            border: 2px solid #444; 
+            border-radius: 10px; 
+            background: #2a2a3e; 
+            color: white; 
+            font-size: 1rem;
+        }
+        .form-group input:focus, .form-group select:focus { 
+            outline: none; 
+            border-color: #FFD700; 
+            box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); 
+        }
+        
+        .radio-group { display: flex; gap: 20px; }
+        .radio-group label { display: flex; align-items: center; color: white; font-weight: normal; }
+        .radio-group input[type="radio"] { width: auto; margin-right: 8px; }
+        
+        /* 버튼 스타일 */
+        .button-group { display: flex; gap: 15px; justify-content: center; margin-top: 30px; }
+        .btn-primary { 
+            background: linear-gradient(45deg, #FFD700, #FFA500); 
+            color: #000; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 1.1rem;
+        }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(255, 215, 0, 0.4); }
+        
+        .btn-secondary { 
+            background: linear-gradient(45deg, #666, #888); 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 1.1rem;
+        }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        
+        .btn-refresh { 
+            background: linear-gradient(45deg, #4169E1, #1E90FF); 
+            color: white; 
+            border: none; 
+            padding: 15px 30px; 
+            border-radius: 25px; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 1.1rem;
+        }
+        
+        /* 대기실 스타일 */
+        .waiting-room { max-width: 600px; margin: 0 auto; }
+        .room-info { text-align: center; background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 2px solid #333; }
+        .room-info h3 { color: #FFD700; font-size: 1.8rem; margin-bottom: 10px; }
+        .room-details { color: #ccc; font-size: 1rem; }
+        
+        .players-list { background: linear-gradient(135deg, #1a1a2e, #16213e); padding: 20px; border-radius: 15px; margin-bottom: 30px; border: 2px solid #333; }
+        .players-list h4 { color: #FFD700; text-align: center; margin-bottom: 15px; font-size: 1.3rem; }
+        
+        .player-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: #2a2a3e; 
+            padding: 12px 20px; 
+            border-radius: 10px; 
+            margin-bottom: 10px; 
+            border: 2px solid #444;
+        }
+        .player-name { color: white; font-weight: bold; }
+        .player-status { 
+            padding: 5px 15px; 
+            border-radius: 15px; 
+            font-size: 0.9rem; 
+            font-weight: bold;
+        }
+        .player-status.ready { background: #32CD32; color: white; }
+        .player-status.waiting { background: #FFA500; color: white; }
+        
+        .ready-section { text-align: center; margin: 30px 0; }
+        .btn-ready { 
+            background: linear-gradient(45deg, #32CD32, #228B22); 
+            color: white; 
+            border: none; 
+            padding: 20px 40px; 
+            border-radius: 30px; 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+        .btn-ready:hover { transform: scale(1.05); box-shadow: 0 8px 20px rgba(50, 205, 50, 0.4); }
+        .btn-ready.ready { background: linear-gradient(45deg, #FF6347, #DC143C); }
+        
+        /* 카운트다운 */
+        .countdown { margin-top: 20px; }
+        .countdown-number { font-size: 4rem; color: #FFD700; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .countdown-text { font-size: 1.2rem; color: #ccc; }
+        
+        /* 배틀 게임 화면 */
+        .battle-game { position: relative; }
+        .game-header { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            border: 2px solid #333;
+        }
+        
+        .time-left { text-align: center; }
+        .timer-text { display: block; color: #ccc; font-size: 0.9rem; margin-bottom: 5px; }
+        .timer-number { 
+            font-size: 2.5rem; 
+            color: #FFD700; 
+            font-weight: bold; 
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .timer-number.warning { color: #FF6347; animation: pulse 1s infinite; }
+        
+        .current-score { text-align: center; font-size: 2rem; color: #32CD32; font-weight: bold; }
+        
+        .question-section { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            text-align: center; 
+            border: 2px solid #333;
+        }
+        .question-number { color: #FFD700; font-size: 1.1rem; margin-bottom: 15px; font-weight: bold; }
+        .question-text { color: white; font-size: 1.4rem; line-height: 1.6; }
+        
+        .battle-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .battle-option-btn { 
+            background: linear-gradient(135deg, #2a2a3e, #1a1a2e); 
+            color: white; 
+            border: 2px solid #444; 
+            padding: 20px; 
+            border-radius: 15px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-size: 1.1rem; 
+            font-weight: bold;
+        }
+        .battle-option-btn:hover { 
+            border-color: #FFD700; 
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); 
+            transform: translateY(-3px); 
+        }
+        .battle-option-btn.correct { background: linear-gradient(135deg, #32CD32, #228B22); border-color: #32CD32; }
+        .battle-option-btn.incorrect { background: linear-gradient(135deg, #FF6347, #DC143C); border-color: #FF6347; }
+        
+        .battle-progress { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 20px; 
+            border: 2px solid #333;
+        }
+        .progress-bar { 
+            width: 100%; 
+            height: 10px; 
+            background: #444; 
+            border-radius: 5px; 
+            overflow: hidden; 
+            margin-bottom: 10px;
+        }
+        .progress-fill { 
+            height: 100%; 
+            background: linear-gradient(45deg, #32CD32, #228B22); 
+            transition: width 0.3s ease;
+        }
+        .progress-text { text-align: center; color: #ccc; font-size: 1rem; }
+        
+        /* 실시간 순위 */
+        .live-ranking { 
+            position: fixed; 
+            right: 20px; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            border: 2px solid #333; 
+            width: 200px;
+            z-index: 1000;
+        }
+        .live-ranking h4 { color: #FFD700; text-align: center; margin-bottom: 15px; font-size: 1.1rem; }
+        
+        .rank-item { 
+            display: flex; 
+            justify-content: space-between; 
+            padding: 8px 0; 
+            border-bottom: 1px solid #444; 
+            color: white; 
+            font-size: 0.9rem;
+        }
+        .rank-item:last-child { border-bottom: none; }
+        .rank-item.me { background: rgba(255, 215, 0, 0.2); padding: 8px; border-radius: 5px; }
+        
+        /* 결과 화면 */
+        .battle-result { max-width: 600px; margin: 0 auto; }
+        .result-header { text-align: center; margin-bottom: 30px; }
+        
+        .final-ranking { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 30px; 
+            border: 2px solid #333;
+        }
+        .final-ranking h4 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 1.3rem; }
+        
+        .ranking-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 15px; 
+            margin-bottom: 10px; 
+            border-radius: 10px; 
+            background: #2a2a3e;
+        }
+        .ranking-item.first { background: linear-gradient(135deg, #FFD700, #FFA500); color: #000; }
+        .ranking-item.second { background: linear-gradient(135deg, #C0C0C0, #A0A0A0); color: #000; }
+        .ranking-item.third { background: linear-gradient(135deg, #CD7F32, #B8860B); color: white; }
+        
+        .rank-position { font-size: 1.5rem; font-weight: bold; width: 40px; text-align: center; }
+        .rank-player { flex: 1; margin: 0 15px; }
+        .rank-player-name { font-weight: bold; font-size: 1.1rem; }
+        .rank-player-stats { font-size: 0.9rem; opacity: 0.8; }
+        .rank-score { font-size: 1.2rem; font-weight: bold; }
+        
+        .my-result { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 30px; 
+            border: 2px solid #FFD700;
+        }
+        .my-result h4 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 1.3rem; }
+        
+        .result-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 15px; }
+        .result-stats .stat-item { 
+            text-align: center; 
+            background: #2a2a3e; 
+            padding: 15px; 
+            border-radius: 10px;
+        }
+        .result-stats .stat-label { display: block; color: #ccc; font-size: 0.9rem; margin-bottom: 5px; }
+        .result-stats .stat-value { display: block; color: white; font-size: 1.5rem; font-weight: bold; }
+        
+        .rewards { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 30px; 
+            border: 2px solid #32CD32;
+        }
+        .rewards h4 { color: #32CD32; text-align: center; margin-bottom: 20px; font-size: 1.3rem; }
+        
+        .reward-item { 
+            display: flex; 
+            align-items: center; 
+            padding: 10px; 
+            background: #2a2a3e; 
+            border-radius: 10px; 
+            margin-bottom: 10px;
+        }
+        .reward-icon { font-size: 2rem; margin-right: 15px; }
+        .reward-text { color: white; font-weight: bold; }
+        
+        /* 배틀 통계 */
+        .rank-info { text-align: center; margin-bottom: 30px; }
+        .current-rank { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 30px; 
+            border-radius: 20px; 
+            border: 2px solid #333;
+        }
+        .rank-badge { 
+            display: inline-block; 
+            background: linear-gradient(45deg, #FFD700, #FFA500); 
+            color: #000; 
+            padding: 10px 25px; 
+            border-radius: 25px; 
+            font-size: 1.3rem; 
+            font-weight: bold; 
+            margin-bottom: 15px;
+        }
+        .rank-points { color: #ccc; font-size: 1.1rem; margin-bottom: 15px; }
+        .rank-progress { width: 100%; max-width: 300px; margin: 0 auto; }
+        .rank-progress-bar { 
+            width: 100%; 
+            height: 12px; 
+            background: #444; 
+            border-radius: 6px; 
+            overflow: hidden;
+        }
+        .rank-progress-fill { 
+            height: 100%; 
+            background: linear-gradient(45deg, #FFD700, #FFA500); 
+            transition: width 0.3s ease;
+        }
+        
+        .battle-history { 
+            background: linear-gradient(135deg, #1a1a2e, #16213e); 
+            padding: 20px; 
+            border-radius: 15px; 
+            border: 2px solid #333;
+        }
+        .battle-history h4 { color: #FFD700; text-align: center; margin-bottom: 20px; font-size: 1.3rem; }
+        
+        /* 애니메이션 */
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        /* 공개방 목록 */
+        .room-item { 
+            background: #2a2a3e; 
+            padding: 20px; 
+            border-radius: 15px; 
+            margin-bottom: 15px; 
+            border: 2px solid #444; 
+            cursor: pointer; 
+            transition: all 0.3s ease;
+        }
+        .room-item:hover { border-color: #FFD700; box-shadow: 0 5px 15px rgba(255, 215, 0, 0.3); }
+        
+        .room-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .room-name { color: #FFD700; font-size: 1.2rem; font-weight: bold; }
+        .room-players { color: #32CD32; font-weight: bold; }
+        
+        .room-info-line { color: #ccc; font-size: 0.9rem; }
+        
+        /* 모바일 반응형 */
+        @media (max-width: 768px) {
+            .battle-menu-grid { grid-template-columns: 1fr; }
+            .live-ranking { position: relative; right: auto; top: auto; transform: none; margin-top: 20px; width: 100%; }
+            .game-header { flex-direction: column; gap: 15px; }
+            .battle-options { grid-template-columns: 1fr; }
+            .result-stats { grid-template-columns: repeat(2, 1fr); }
+            .button-group { flex-direction: column; }
+        }
+
     </style>
 </head>
 <body>
@@ -414,6 +816,7 @@
                     </select>
                     <button class="nav-btn active" onclick="showPage('game', this)">동물 잡기</button>
                 </div>
+                <button class="nav-btn" onclick="showPage('battle', this)">배틀모드 🥊</button>
                 <button class="nav-btn" onclick="showPage('learning', this)">학습 통계 📈</button>
                 <button class="nav-btn" onclick="showLearningReport()">개인 분석 🎯</button>
                 <button class="nav-btn" onclick="showPage('synthesis', this)">동물 합성 🧬</button>
@@ -490,6 +893,284 @@
                     <h2>🐾 내 동물 컬렉션</h2>
                     <p class="collection-hint">💡 동물을 클릭해서 수학 문제로 레벨업 시켜요!</p>
                     <div class="animal-grid" id="animal-collection"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 배틀모드 페이지 -->
+        <div id="battle-page" class="page">
+            <div class="battle-container">
+                <h2>🥊 배틀모드</h2>
+                
+                <!-- 배틀 상태별 화면 -->
+                
+                <!-- 메인 메뉴 -->
+                <div id="battle-menu" class="battle-screen active">
+                    <div class="battle-menu-grid">
+                        <div class="battle-option" onclick="showCreateRoomModal()">
+                            <div class="battle-icon">🏠</div>
+                            <h3>방 만들기</h3>
+                            <p>새로운 배틀 방을 생성합니다</p>
+                        </div>
+                        <div class="battle-option" onclick="showJoinRoomModal()">
+                            <div class="battle-icon">🚪</div>
+                            <h3>방 참가</h3>
+                            <p>코드를 입력해 방에 참가합니다</p>
+                        </div>
+                        <div class="battle-option" onclick="showPublicRooms()">
+                            <div class="battle-icon">🌐</div>
+                            <h3>공개방 목록</h3>
+                            <p>참가 가능한 공개방을 찾습니다</p>
+                        </div>
+                        <div class="battle-option" onclick="showBattleStats()">
+                            <div class="battle-icon">🏆</div>
+                            <h3>배틀 통계</h3>
+                            <p>나의 배틀 전적을 확인합니다</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 방 생성 화면 -->
+                <div id="create-room-screen" class="battle-screen">
+                    <div class="room-setup">
+                        <h3>🏠 새 배틀방 만들기</h3>
+                        <div class="setup-form">
+                            <div class="form-group">
+                                <label>방 이름</label>
+                                <input type="text" id="room-name-input" placeholder="배틀방 이름을 입력하세요" maxlength="20">
+                            </div>
+                            <div class="form-group">
+                                <label>과목 선택</label>
+                                <select id="battle-subject-select">
+                                    <option value="english">영어 🇬🇧</option>
+                                    <option value="social">사회 🏛️</option>
+                                    <option value="math">수학 🔢</option>
+                                    <option value="general">상식 🧠</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>난이도</label>
+                                <select id="battle-level-select">
+                                    <option value="1">Level 1 (쉬움)</option>
+                                    <option value="2">Level 2 (보통)</option>
+                                    <option value="3">Level 3 (어려움)</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>최대 인원</label>
+                                <select id="max-players-select">
+                                    <option value="2">2명</option>
+                                    <option value="4" selected>4명</option>
+                                    <option value="6">6명</option>
+                                    <option value="8">8명</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>공개 설정</label>
+                                <div class="radio-group">
+                                    <label><input type="radio" name="room-type" value="public" checked> 공개방</label>
+                                    <label><input type="radio" name="room-type" value="private"> 비공개방</label>
+                                </div>
+                            </div>
+                            <div class="button-group">
+                                <button class="btn-secondary" onclick="showBattleMenu()">취소</button>
+                                <button class="btn-primary" onclick="createBattleRoom()">방 만들기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 방 참가 화면 -->
+                <div id="join-room-screen" class="battle-screen">
+                    <div class="join-room-form">
+                        <h3>🚪 방 참가하기</h3>
+                        <div class="code-input-section">
+                            <label>입장 코드 (6자리)</label>
+                            <input type="text" id="room-code-input" placeholder="000000" maxlength="6" pattern="[0-9]{6}">
+                            <div class="button-group">
+                                <button class="btn-secondary" onclick="showBattleMenu()">취소</button>
+                                <button class="btn-primary" onclick="joinBattleRoom()">참가하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 공개방 목록 -->
+                <div id="public-rooms-screen" class="battle-screen">
+                    <div class="public-rooms-list">
+                        <h3>🌐 공개방 목록</h3>
+                        <div class="rooms-container" id="public-rooms-container">
+                            <div class="loading">공개방을 불러오는 중...</div>
+                        </div>
+                        <div class="button-group">
+                            <button class="btn-secondary" onclick="showBattleMenu()">뒤로가기</button>
+                            <button class="btn-refresh" onclick="refreshPublicRooms()">🔄 새로고침</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 대기실 -->
+                <div id="waiting-room-screen" class="battle-screen">
+                    <div class="waiting-room">
+                        <div class="room-info">
+                            <h3 id="current-room-name">배틀방</h3>
+                            <div class="room-details">
+                                <span id="room-subject-info">수학</span> | 
+                                <span id="room-level-info">Level 1</span> | 
+                                <span id="room-code-info">방 코드: 123456</span>
+                            </div>
+                        </div>
+                        
+                        <div class="players-list">
+                            <h4>참가자 목록</h4>
+                            <div id="players-container"></div>
+                        </div>
+                        
+                        <div class="ready-section">
+                            <button id="ready-button" class="btn-ready" onclick="toggleReady()">준비 완료</button>
+                            <div class="countdown" id="game-countdown" style="display:none;">
+                                <div class="countdown-number">3</div>
+                                <div class="countdown-text">게임 시작까지</div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button class="btn-secondary" onclick="leaveBattleRoom()">방 나가기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 배틀 게임 화면 -->
+                <div id="battle-game-screen" class="battle-screen">
+                    <div class="battle-game">
+                        <div class="game-header">
+                            <div class="time-left">
+                                <span class="timer-text">남은 시간</span>
+                                <span class="timer-number" id="battle-timer">60</span>
+                            </div>
+                            <div class="current-score">
+                                <span id="battle-current-score">0</span>점
+                            </div>
+                        </div>
+                        
+                        <div class="question-section">
+                            <div class="question-number">문제 <span id="battle-question-number">1</span></div>
+                            <div class="question-text" id="battle-question-text">문제가 로딩중입니다...</div>
+                        </div>
+                        
+                        <div class="battle-options" id="battle-options-container">
+                            <!-- 선택지들이 동적으로 생성됨 -->
+                        </div>
+                        
+                        <div class="battle-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="battle-progress-fill"></div>
+                            </div>
+                            <div class="progress-text">
+                                <span id="battle-correct-count">0</span>개 정답 / 
+                                <span id="battle-total-attempts">0</span>개 시도
+                            </div>
+                        </div>
+                        
+                        <!-- 실시간 순위 (우측 사이드바) -->
+                        <div class="live-ranking">
+                            <h4>실시간 순위</h4>
+                            <div id="live-ranking-list"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 결과 화면 -->
+                <div id="battle-result-screen" class="battle-screen">
+                    <div class="battle-result">
+                        <div class="result-header">
+                            <h3>🏆 배틀 결과</h3>
+                        </div>
+                        
+                        <div class="final-ranking">
+                            <h4>최종 순위</h4>
+                            <div id="final-ranking-list"></div>
+                        </div>
+                        
+                        <div class="my-result">
+                            <h4>내 성적</h4>
+                            <div class="result-stats">
+                                <div class="stat-item">
+                                    <span class="stat-label">순위</span>
+                                    <span class="stat-value" id="my-rank">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">정답 수</span>
+                                    <span class="stat-value" id="my-correct">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">정답률</span>
+                                    <span class="stat-value" id="my-accuracy">-</span>
+                                </div>
+                                <div class="stat-item">
+                                    <span class="stat-label">획득 점수</span>
+                                    <span class="stat-value" id="my-points">-</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="rewards">
+                            <h4>보상</h4>
+                            <div id="battle-rewards"></div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button class="btn-secondary" onclick="showBattleMenu()">메인으로</button>
+                            <button class="btn-primary" onclick="playAgain()">다시 하기</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 배틀 통계 화면 -->
+                <div id="battle-stats-screen" class="battle-screen">
+                    <div class="battle-stats">
+                        <h3>🏆 내 배틀 통계</h3>
+                        
+                        <div class="rank-info">
+                            <div class="current-rank">
+                                <div class="rank-badge" id="current-rank-badge">브론즈</div>
+                                <div class="rank-points">
+                                    <span id="current-points">0</span> / <span id="next-rank-points">100</span> 승점
+                                </div>
+                                <div class="rank-progress">
+                                    <div class="rank-progress-bar">
+                                        <div class="rank-progress-fill" id="rank-progress-fill"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="battle-history">
+                            <h4>전적</h4>
+                            <div class="stats-grid">
+                                <div class="stat-card">
+                                    <div class="stat-number" id="total-battles">0</div>
+                                    <div class="stat-label">총 게임</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="battle-wins">0</div>
+                                    <div class="stat-label">승리</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="battle-winrate">0%</div>
+                                    <div class="stat-label">승률</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number" id="battle-points">0</div>
+                                    <div class="stat-label">승점</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button class="btn-secondary" onclick="showBattleMenu()">뒤로가기</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -684,6 +1365,782 @@
 
         let auth, db, functions;
         
+        // 동물 데이터를 저장할 전역 변수
+        let animalTypes = [];
+
+        // JSON 파일에서 동물 데이터 로드 함수 (Firebase 준비 전에 정의)
+        window.loadAnimalsFromJSON = async function() {
+            try {
+                console.log('동물 JSON 파일 로딩 시작...');
+                
+                const response = await fetch('./animals.json');
+                
+                if (!response.ok) {
+                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                animalTypes = data.animals;
+                
+                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
+                return true;
+                
+            } catch (error) {
+                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
+                
+                // 폴백: 기본 동물 몇 마리
+                animalTypes = [
+                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
+                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
+                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
+                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
+                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
+                ];
+                
+                return false;
+            }
+        }
+        
+        // getAllProfiles 함수 정의 (updateHallOfFame 보다 먼저)
+        async function getAllProfiles() {
+            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
+            const querySnapshot = await window.firebase.getDocs(profilesColRef);
+            const profiles = [];
+            querySnapshot.forEach((doc) => {
+                profiles.push(doc.data());
+            });
+            return profiles;
+        }
+
+        // updateHallOfFame 함수 정의 (Firebase 준비 전에)
+        window.updateHallOfFame = async function() {
+            try {
+                const profiles = await getAllProfiles();
+                if (profiles.length === 0) {
+                     document.querySelector('#fame-species .player-name').textContent = `아직 플레이어가 없습니다.`;
+                     document.querySelector('#fame-level .player-name').textContent = `새로운 플레이어가 되어보세요!`;
+                    return;
+                }
+
+                let mostSpecies = { name: '-', count: -1 };
+                let highestLevel = { name: '-', animal: '-', level: 0 };
+
+                profiles.forEach(p => {
+                    if ((p.speciesCount || 0) > mostSpecies.count) {
+                        mostSpecies = { name: p.name, count: p.speciesCount };
+                    }
+                    if (p.animals) {
+                        Object.values(p.animals).forEach(a => {
+                            if ((a.animalLevel || 1) > highestLevel.level) {
+                                highestLevel = { name: p.name, animal: a.name, level: a.animalLevel };
+                            }
+                        });
+                    }
+                });
+
+                document.querySelector('#fame-species .player-name').textContent = `${mostSpecies.name} (${mostSpecies.count}종)`;
+                document.querySelector('#fame-level .player-name').textContent = `${highestLevel.name} (Lv.${highestLevel.level} ${highestLevel.animal})`;
+            } catch (error) {
+                console.error('명예의 전당 업데이트 오류:', error);
+            }
+        }
+        
+        // ==================== 배틀모드 시스템 ====================
+        
+        // 배틀 상태 관리
+        let battleState = {
+            currentRoom: null,
+            isInBattle: false,
+            playerReady: false,
+            battleTimer: null,
+            currentQuestion: null,
+            questionCount: 0,
+            correctAnswers: 0,
+            totalAttempts: 0,
+            battleScore: 0,
+            realtimeRanking: [],
+            gameStartTime: null
+        };
+        
+        // 배틀모드 메인 화면 표시
+        function showBattleMenu() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('battle-menu').classList.add('active');
+        }
+        
+        // 방 생성 모달 표시
+        function showCreateRoomModal() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('create-room-screen').classList.add('active');
+            document.getElementById('room-name-input').value = `${currentUserProfile.name}의 배틀방`;
+        }
+        
+        // 방 참가 모달 표시
+        function showJoinRoomModal() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('join-room-screen').classList.add('active');
+            document.getElementById('room-code-input').value = '';
+        }
+        
+        // 공개방 목록 표시
+        function showPublicRooms() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('public-rooms-screen').classList.add('active');
+            refreshPublicRooms();
+        }
+        
+        // 배틀 통계 화면 표시
+        function showBattleStats() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('battle-stats-screen').classList.add('active');
+            updateBattleStats();
+        }
+        
+        // 배틀 방 생성
+        async function createBattleRoom() {
+            const roomName = document.getElementById('room-name-input').value.trim();
+            const subject = document.getElementById('battle-subject-select').value;
+            const level = document.getElementById('battle-level-select').value;
+            const maxPlayers = parseInt(document.getElementById('max-players-select').value);
+            const isPublic = document.querySelector('input[name="room-type"]:checked').value === 'public';
+            
+            if (!roomName) {
+                alert('방 이름을 입력해주세요!');
+                return;
+            }
+            
+            try {
+                // 6자리 랜덤 방 코드 생성
+                const roomCode = Math.floor(100000 + Math.random() * 900000).toString();
+                
+                const roomData = {
+                    id: roomCode,
+                    name: roomName,
+                    host: currentUserProfile.name,
+                    hostId: window.currentUserId,
+                    subject: subject,
+                    level: parseInt(level),
+                    maxPlayers: maxPlayers,
+                    currentPlayers: 1,
+                    isPublic: isPublic,
+                    status: 'waiting',
+                    createdAt: Date.now(),
+                    players: {
+                        [window.currentUserId]: {
+                            name: currentUserProfile.name,
+                            ready: false,
+                            score: 0,
+                            joinedAt: Date.now()
+                        }
+                    }
+                };
+                
+                // Firebase에 방 데이터 저장
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', roomCode);
+                await window.firebase.setDoc(roomRef, roomData);
+                
+                // 방에 입장
+                battleState.currentRoom = roomData;
+                showWaitingRoom();
+                
+                console.log('배틀 방 생성 완료:', roomCode);
+                
+            } catch (error) {
+                console.error('방 생성 오류:', error);
+                alert('방 생성에 실패했습니다. 다시 시도해주세요.');
+            }
+        }
+        
+        // 배틀 방 참가
+        async function joinBattleRoom() {
+            const roomCode = document.getElementById('room-code-input').value.trim();
+            
+            if (roomCode.length !== 6 || !/^\d{6}$/.test(roomCode)) {
+                alert('올바른 6자리 방 코드를 입력해주세요!');
+                return;
+            }
+            
+            try {
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', roomCode);
+                const roomDoc = await window.firebase.getDoc(roomRef);
+                
+                if (!roomDoc.exists()) {
+                    alert('존재하지 않는 방 코드입니다!');
+                    return;
+                }
+                
+                const roomData = roomDoc.data();
+                
+                if (roomData.currentPlayers >= roomData.maxPlayers) {
+                    alert('방이 가득 찼습니다!');
+                    return;
+                }
+                
+                if (roomData.status !== 'waiting') {
+                    alert('이미 시작된 게임입니다!');
+                    return;
+                }
+                
+                // 방에 플레이어 추가
+                const updatedPlayers = {
+                    ...roomData.players,
+                    [window.currentUserId]: {
+                        name: currentUserProfile.name,
+                        ready: false,
+                        score: 0,
+                        joinedAt: Date.now()
+                    }
+                };
+                
+                await window.firebase.setDoc(roomRef, {
+                    ...roomData,
+                    currentPlayers: roomData.currentPlayers + 1,
+                    players: updatedPlayers
+                });
+                
+                battleState.currentRoom = {...roomData, players: updatedPlayers};
+                showWaitingRoom();
+                
+                console.log('방 참가 완료:', roomCode);
+                
+            } catch (error) {
+                console.error('방 참가 오류:', error);
+                alert('방 참가에 실패했습니다. 다시 시도해주세요.');
+            }
+        }
+        
+        // 대기실 화면 표시
+        function showWaitingRoom() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('waiting-room-screen').classList.add('active');
+            
+            const room = battleState.currentRoom;
+            document.getElementById('current-room-name').textContent = room.name;
+            document.getElementById('room-subject-info').textContent = getSubjectName(room.subject);
+            document.getElementById('room-level-info').textContent = `Level ${room.level}`;
+            document.getElementById('room-code-info').textContent = `방 코드: ${room.id}`;
+            
+            updatePlayersDisplay();
+            
+            // 실시간 업데이트 리스너 설정
+            setupRoomListener();
+        }
+        
+        // 플레이어 목록 업데이트
+        function updatePlayersDisplay() {
+            const container = document.getElementById('players-container');
+            const players = Object.values(battleState.currentRoom.players);
+            
+            container.innerHTML = players.map(player => `
+                <div class="player-item ${player.ready ? 'ready' : ''}">
+                    <span class="player-name">${player.name}</span>
+                    <span class="player-status">${player.ready ? '준비완료 ✅' : '대기중 ⏳'}</span>
+                </div>
+            `).join('');
+        }
+        
+        // 준비 상태 토글
+        async function toggleReady() {
+            if (!battleState.currentRoom) return;
+            
+            const newReadyState = !battleState.playerReady;
+            battleState.playerReady = newReadyState;
+            
+            const button = document.getElementById('ready-button');
+            button.textContent = newReadyState ? '준비 취소' : '준비 완료';
+            button.className = newReadyState ? 'btn-cancel' : 'btn-ready';
+            
+            try {
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', battleState.currentRoom.id);
+                const updatedPlayers = {
+                    ...battleState.currentRoom.players,
+                    [window.currentUserId]: {
+                        ...battleState.currentRoom.players[window.currentUserId],
+                        ready: newReadyState
+                    }
+                };
+                
+                await window.firebase.setDoc(roomRef, {
+                    ...battleState.currentRoom,
+                    players: updatedPlayers
+                });
+                
+                battleState.currentRoom.players = updatedPlayers;
+                updatePlayersDisplay();
+                
+                // 모든 플레이어가 준비되었는지 확인
+                checkAllPlayersReady();
+                
+            } catch (error) {
+                console.error('준비 상태 업데이트 오류:', error);
+                battleState.playerReady = !newReadyState;
+                button.textContent = battleState.playerReady ? '준비 취소' : '준비 완료';
+            }
+        }
+        
+        // 모든 플레이어 준비 확인 및 게임 시작
+        function checkAllPlayersReady() {
+            const players = Object.values(battleState.currentRoom.players);
+            const allReady = players.length >= 2 && players.every(p => p.ready);
+            
+            if (allReady && battleState.currentRoom.hostId === window.currentUserId) {
+                startGameCountdown();
+            }
+        }
+        
+        // 게임 시작 카운트다운
+        function startGameCountdown() {
+            const countdownEl = document.getElementById('game-countdown');
+            const numberEl = countdownEl.querySelector('.countdown-number');
+            countdownEl.style.display = 'block';
+            
+            let count = 3;
+            numberEl.textContent = count;
+            
+            const countdownInterval = setInterval(() => {
+                count--;
+                if (count > 0) {
+                    numberEl.textContent = count;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownEl.style.display = 'none';
+                    startBattleGame();
+                }
+            }, 1000);
+        }
+        
+        // 배틀 게임 시작
+        async function startBattleGame() {
+            try {
+                // 방 상태를 'playing'으로 변경
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', battleState.currentRoom.id);
+                await window.firebase.setDoc(roomRef, {
+                    ...battleState.currentRoom,
+                    status: 'playing',
+                    gameStartTime: Date.now()
+                });
+                
+                // 게임 화면 표시
+                document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+                document.getElementById('battle-game-screen').classList.add('active');
+                
+                // 게임 상태 초기화
+                battleState.isInBattle = true;
+                battleState.questionCount = 0;
+                battleState.correctAnswers = 0;
+                battleState.totalAttempts = 0;
+                battleState.battleScore = 0;
+                battleState.gameStartTime = Date.now();
+                
+                // 60초 타이머 시작
+                startBattleTimer();
+                
+                // 첫 번째 문제 로드
+                await loadNextBattleQuestion();
+                
+            } catch (error) {
+                console.error('게임 시작 오류:', error);
+                alert('게임 시작에 실패했습니다.');
+            }
+        }
+        
+        // 배틀 타이머 시작
+        function startBattleTimer() {
+            let timeLeft = 60;
+            const timerEl = document.getElementById('battle-timer');
+            timerEl.textContent = timeLeft;
+            
+            battleState.battleTimer = setInterval(() => {
+                timeLeft--;
+                timerEl.textContent = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(battleState.battleTimer);
+                    endBattleGame();
+                }
+            }, 1000);
+        }
+        
+        // 다음 배틀 문제 로드
+        async function loadNextBattleQuestion() {
+            try {
+                const room = battleState.currentRoom;
+                const subject = room.subject;
+                const level = room.level;
+                
+                // 과목별 문제 로드
+                let questionData;
+                if (subject === 'english') {
+                    questionData = await loadWordForDifficulty(level);
+                } else {
+                    const response = await fetch(`./subjects/${subject}/level${level}.json`);
+                    const data = await response.json();
+                    const randomIndex = Math.floor(Math.random() * data.length);
+                    questionData = data[randomIndex];
+                }
+                
+                battleState.currentQuestion = questionData;
+                battleState.questionCount++;
+                
+                // 화면에 문제 표시
+                displayBattleQuestion(questionData);
+                
+            } catch (error) {
+                console.error('문제 로드 오류:', error);
+            }
+        }
+        
+        // 배틀 문제 화면에 표시
+        function displayBattleQuestion(questionData) {
+            const room = battleState.currentRoom;
+            
+            document.getElementById('battle-question-number').textContent = battleState.questionCount;
+            
+            if (room.subject === 'english') {
+                document.getElementById('battle-question-text').textContent = `"${questionData.word}" 의 뜻은?`;
+                
+                const optionsContainer = document.getElementById('battle-options-container');
+                optionsContainer.innerHTML = questionData.options.map((option, index) => `
+                    <button class="battle-option-btn" onclick="selectBattleAnswer(${index})" data-index="${index}">
+                        ${option}
+                    </button>
+                `).join('');
+            } else {
+                document.getElementById('battle-question-text').textContent = questionData.question;
+                
+                const optionsContainer = document.getElementById('battle-options-container');
+                optionsContainer.innerHTML = questionData.options.map((option, index) => `
+                    <button class="battle-option-btn" onclick="selectBattleAnswer(${index})" data-index="${index}">
+                        ${option}
+                    </button>
+                `).join('');
+            }
+            
+            // 진행률 업데이트
+            updateBattleProgress();
+        }
+        
+        // 배틀 답안 선택
+        async function selectBattleAnswer(selectedIndex) {
+            if (!battleState.isInBattle || !battleState.currentQuestion) return;
+            
+            const question = battleState.currentQuestion;
+            const isCorrect = selectedIndex === question.answer;
+            
+            battleState.totalAttempts++;
+            
+            if (isCorrect) {
+                battleState.correctAnswers++;
+                const timeBonus = Math.max(0, 60 - Math.floor((Date.now() - battleState.gameStartTime) / 1000));
+                battleState.battleScore += 10 + Math.floor(timeBonus / 10);
+            }
+            
+            // 선택한 버튼 표시
+            const buttons = document.querySelectorAll('.battle-option-btn');
+            buttons[selectedIndex].classList.add(isCorrect ? 'correct' : 'incorrect');
+            buttons.forEach(btn => btn.disabled = true);
+            
+            // 실시간 점수 업데이트
+            document.getElementById('battle-current-score').textContent = battleState.battleScore;
+            updateBattleProgress();
+            
+            // Firebase에 점수 업데이트
+            await updatePlayerScore();
+            
+            // 1초 후 다음 문제
+            setTimeout(() => {
+                loadNextBattleQuestion();
+            }, 1000);
+        }
+        
+        // 플레이어 점수 업데이트
+        async function updatePlayerScore() {
+            try {
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', battleState.currentRoom.id);
+                const updatedPlayers = {
+                    ...battleState.currentRoom.players,
+                    [window.currentUserId]: {
+                        ...battleState.currentRoom.players[window.currentUserId],
+                        score: battleState.battleScore,
+                        correct: battleState.correctAnswers,
+                        attempts: battleState.totalAttempts
+                    }
+                };
+                
+                await window.firebase.setDoc(roomRef, {
+                    ...battleState.currentRoom,
+                    players: updatedPlayers
+                });
+                
+            } catch (error) {
+                console.error('점수 업데이트 오류:', error);
+            }
+        }
+        
+        // 배틀 진행률 업데이트
+        function updateBattleProgress() {
+            const accuracy = battleState.totalAttempts > 0 ? Math.round((battleState.correctAnswers / battleState.totalAttempts) * 100) : 0;
+            const progressPercentage = Math.min(100, (battleState.totalAttempts / 20) * 100);
+            
+            document.getElementById('battle-progress-fill').style.width = `${progressPercentage}%`;
+            document.getElementById('battle-correct-count').textContent = battleState.correctAnswers;
+            document.getElementById('battle-total-attempts').textContent = battleState.totalAttempts;
+        }
+        
+        // 배틀 게임 종료
+        function endBattleGame() {
+            battleState.isInBattle = false;
+            clearInterval(battleState.battleTimer);
+            
+            // 결과 화면 표시
+            showBattleResults();
+        }
+        
+        // 배틀 결과 표시
+        function showBattleResults() {
+            document.querySelectorAll('.battle-screen').forEach(screen => screen.classList.remove('active'));
+            document.getElementById('battle-result-screen').classList.add('active');
+            
+            // 최종 순위 계산 및 표시
+            const players = Object.values(battleState.currentRoom.players);
+            const sortedPlayers = players.sort((a, b) => (b.score || 0) - (a.score || 0));
+            
+            const rankingList = document.getElementById('final-ranking-list');
+            rankingList.innerHTML = sortedPlayers.map((player, index) => `
+                <div class="ranking-item ${player.name === currentUserProfile.name ? 'my-result' : ''}">
+                    <span class="rank">${index + 1}위</span>
+                    <span class="player-name">${player.name}</span>
+                    <span class="score">${player.score || 0}점</span>
+                </div>
+            `).join('');
+            
+            // 내 결과 표시
+            const myRank = sortedPlayers.findIndex(p => p.name === currentUserProfile.name) + 1;
+            const accuracy = battleState.totalAttempts > 0 ? Math.round((battleState.correctAnswers / battleState.totalAttempts) * 100) : 0;
+            
+            document.getElementById('my-rank').textContent = `${myRank}위`;
+            document.getElementById('my-correct').textContent = `${battleState.correctAnswers}개`;
+            document.getElementById('my-accuracy').textContent = `${accuracy}%`;
+            document.getElementById('my-points').textContent = `${battleState.battleScore}점`;
+            
+            // 보상 계산 및 표시
+            calculateAndShowRewards(myRank, accuracy);
+        }
+        
+        // 보상 계산 및 표시
+        function calculateAndShowRewards(rank, accuracy) {
+            let coinReward = 0;
+            let battlePointsReward = 0;
+            
+            // 순위별 보상
+            if (rank === 1) {
+                coinReward += 50;
+                battlePointsReward += 25;
+            } else if (rank === 2) {
+                coinReward += 30;
+                battlePointsReward += 15;
+            } else if (rank === 3) {
+                coinReward += 20;
+                battlePointsReward += 10;
+            } else {
+                coinReward += 10;
+                battlePointsReward += 5;
+            }
+            
+            // 정확도 보너스
+            if (accuracy >= 80) {
+                coinReward += 20;
+                battlePointsReward += 10;
+            } else if (accuracy >= 60) {
+                coinReward += 10;
+                battlePointsReward += 5;
+            }
+            
+            // 게임에 보상 적용
+            if (gameState.coins !== undefined) {
+                gameState.coins += coinReward;
+            }
+            if (gameState.battlePoints === undefined) {
+                gameState.battlePoints = 0;
+            }
+            gameState.battlePoints += battlePointsReward;
+            
+            // 보상 화면에 표시
+            document.getElementById('battle-rewards').innerHTML = `
+                <div class="reward-item">
+                    <span class="reward-icon">🪙</span>
+                    <span class="reward-text">코인 +${coinReward}</span>
+                </div>
+                <div class="reward-item">
+                    <span class="reward-icon">⚔️</span>
+                    <span class="reward-text">승점 +${battlePointsReward}</span>
+                </div>
+            `;
+            
+            // 사용자 데이터 저장
+            saveCurrentUserData();
+        }
+        
+        // 방 나가기
+        async function leaveBattleRoom() {
+            if (!battleState.currentRoom) return;
+            
+            try {
+                const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', battleState.currentRoom.id);
+                const updatedPlayers = {...battleState.currentRoom.players};
+                delete updatedPlayers[window.currentUserId];
+                
+                const newPlayerCount = Object.keys(updatedPlayers).length;
+                
+                if (newPlayerCount === 0) {
+                    // 방에 아무도 없으면 방 삭제
+                    await window.firebase.deleteDoc(roomRef);
+                } else {
+                    // 플레이어 제거
+                    await window.firebase.setDoc(roomRef, {
+                        ...battleState.currentRoom,
+                        currentPlayers: newPlayerCount,
+                        players: updatedPlayers
+                    });
+                }
+                
+                battleState.currentRoom = null;
+                battleState.playerReady = false;
+                showBattleMenu();
+                
+            } catch (error) {
+                console.error('방 나가기 오류:', error);
+                showBattleMenu();
+            }
+        }
+        
+        // 공개방 새로고침
+        async function refreshPublicRooms() {
+            try {
+                const roomsCollection = window.firebase.collection(window.firebase.db, 'battleRooms');
+                const querySnapshot = await window.firebase.getDocs(roomsCollection);
+                
+                const publicRooms = [];
+                querySnapshot.forEach(doc => {
+                    const room = doc.data();
+                    if (room.isPublic && room.status === 'waiting' && room.currentPlayers < room.maxPlayers) {
+                        publicRooms.push(room);
+                    }
+                });
+                
+                const container = document.getElementById('public-rooms-container');
+                
+                if (publicRooms.length === 0) {
+                    container.innerHTML = '<div class="no-rooms">참가 가능한 공개방이 없습니다.</div>';
+                } else {
+                    container.innerHTML = publicRooms.map(room => `
+                        <div class="room-item">
+                            <div class="room-info">
+                                <h4>${room.name}</h4>
+                                <div class="room-details">
+                                    ${getSubjectName(room.subject)} | Level ${room.level} | ${room.currentPlayers}/${room.maxPlayers}명
+                                </div>
+                                <div class="room-host">방장: ${room.host}</div>
+                            </div>
+                            <button class="btn-join" onclick="joinPublicRoom('${room.id}')">참가</button>
+                        </div>
+                    `).join('');
+                }
+                
+            } catch (error) {
+                console.error('공개방 로드 오류:', error);
+                document.getElementById('public-rooms-container').innerHTML = '<div class="error">공개방 목록을 불러올 수 없습니다.</div>';
+            }
+        }
+        
+        // 공개방 참가
+        async function joinPublicRoom(roomCode) {
+            document.getElementById('room-code-input').value = roomCode;
+            await joinBattleRoom();
+        }
+        
+        // 다시 하기
+        function playAgain() {
+            showBattleMenu();
+        }
+        
+        // 실시간 방 상태 리스너 설정
+        function setupRoomListener() {
+            if (!battleState.currentRoom) return;
+            
+            const roomRef = window.firebase.doc(window.firebase.db, 'battleRooms', battleState.currentRoom.id);
+            
+            // Firebase 실시간 리스너 설정
+            window.firebase.onSnapshot(roomRef, (doc) => {
+                if (doc.exists()) {
+                    const updatedRoom = doc.data();
+                    battleState.currentRoom = updatedRoom;
+                    
+                    if (document.getElementById('waiting-room-screen').classList.contains('active')) {
+                        updatePlayersDisplay();
+                    }
+                } else {
+                    // 방이 삭제됨
+                    alert('방이 삭제되었습니다.');
+                    showBattleMenu();
+                }
+            });
+        }
+        
+        // 배틀 통계 업데이트
+        function updateBattleStats() {
+            const battles = gameState.battleHistory || [];
+            const wins = battles.filter(b => b.rank === 1).length;
+            const totalBattles = battles.length;
+            const winRate = totalBattles > 0 ? Math.round((wins / totalBattles) * 100) : 0;
+            const battlePoints = gameState.battlePoints || 0;
+            
+            document.getElementById('total-battles').textContent = totalBattles;
+            document.getElementById('battle-wins').textContent = wins;
+            document.getElementById('battle-winrate').textContent = `${winRate}%`;
+            document.getElementById('battle-points').textContent = battlePoints;
+            
+            // 랭크 시스템
+            const currentRank = calculateBattleRank(battlePoints);
+            const nextRankPoints = getNextRankPoints(battlePoints);
+            const progress = ((battlePoints % 100) / 100) * 100;
+            
+            document.getElementById('current-rank-badge').textContent = currentRank;
+            document.getElementById('current-points').textContent = battlePoints;
+            document.getElementById('next-rank-points').textContent = nextRankPoints;
+            document.getElementById('rank-progress-fill').style.width = `${progress}%`;
+        }
+        
+        // 랭크 계산
+        function calculateBattleRank(points) {
+            if (points < 100) return '브론즈';
+            if (points < 300) return '실버';
+            if (points < 600) return '골드';
+            if (points < 1000) return '플래티넘';
+            return '다이아몬드';
+        }
+        
+        // 다음 랭크까지 필요한 승점
+        function getNextRankPoints(points) {
+            if (points < 100) return 100;
+            if (points < 300) return 300;
+            if (points < 600) return 600;
+            if (points < 1000) return 1000;
+            return 2000;
+        }
+        
+        // 과목명 변환 헬퍼
+        function getSubjectName(subject) {
+            const names = {
+                'english': '영어 🇬🇧',
+                'social': '사회 🏛️',
+                'math': '수학 🔢',
+                'general': '상식 🧠'
+            };
+            return names[subject] || subject;
+        }
+        
         // Firebase 준비 함수를 먼저 정의
         window.onFirebaseReady = async function(user) {
             console.log("onFirebaseReady 호출됨, user:", user);
@@ -825,7 +2282,26 @@
             // 현재 선택된 과목
             currentSubject: 'english',
             // 최근 출제된 문제들을 추적하여 중복 방지
-            recentQuestions: []
+            recentQuestions: [],
+            // 배틀모드 데이터
+            battle: {
+                isInBattle: false,
+                currentRoom: null,
+                playerStats: {
+                    totalBattles: 0,
+                    wins: 0,
+                    points: 0,
+                    rank: 'bronze'
+                },
+                currentGame: {
+                    score: 0,
+                    correctCount: 0,
+                    totalAttempts: 0,
+                    startTime: null,
+                    questions: [],
+                    currentQuestionIndex: 0
+                }
+            }
         };
 
         // 플레이 시간 추적 변수들
@@ -844,41 +2320,7 @@
         let isLoadingWord = false;
         let userProgress = {}; // 사용자 학습 진행도
 
-        // 동물 데이터를 저장할 전역 변수
-        let animalTypes = [];
 
-        // JSON 파일에서 동물 데이터 로드
-        window.loadAnimalsFromJSON = async function() {
-            try {
-                console.log('동물 JSON 파일 로딩 시작...');
-                
-                const response = await fetch('./animals.json');
-                
-                if (!response.ok) {
-                    throw new Error(`동물 JSON 파일 로드 실패: ${response.status}`);
-                }
-                
-                const data = await response.json();
-                animalTypes = data.animals;
-                
-                console.log(`동물 데이터 로드 완료: ${animalTypes.length}마리`);
-                return true;
-                
-            } catch (error) {
-                console.error('동물 JSON 로드 실패, 기본 데이터 사용:', error);
-                
-                // 폴백: 기본 동물 몇 마리
-                animalTypes = [
-                    {emoji: '🐶', name: '강아지', specialName: '멍멍왕자', rarity: 1},
-                    {emoji: '🐱', name: '고양이', specialName: '야옹공주', rarity: 1},
-                    {emoji: '🐰', name: '토끼', specialName: '깡총대장', rarity: 1},
-                    {emoji: '🦁', name: '사자', specialName: '황금갈기왕', rarity: 4},
-                    {emoji: '🦄', name: '유니콘', specialName: '순수의 뿔', rarity: 5}
-                ];
-                
-                return false;
-            }
-        }
 
         const shopItems = [
             { name: '빨간 벽', emoji: '🟥', price: 15 }, { name: '파란 벽', emoji: '🟦', price: 15 }, { name: '초록 벽', emoji: '🟩', price: 15 }, { name: '노란 벽', emoji: '🟨', price: 15 }, { name: '하얀 벽', emoji: '⬜', price: 15 }, { name: '검은 벽', emoji: '⬛', price: 15 }, { name: '주황 벽', emoji: '🟧', price: 15 }, { name: '보라 벽', emoji: '🟪', price: 15 }, { name: '갈색 벽', emoji: '🟫', price: 15 },
@@ -4233,48 +5675,7 @@
             window.updateHallOfFame();
         }
 
-        async function getAllProfiles() {
-            const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-            const profilesColRef = window.firebase.collection(window.firebase.db, "artifacts", appId, "public/data/profiles");
-            const querySnapshot = await window.firebase.getDocs(profilesColRef);
-            const profiles = [];
-            querySnapshot.forEach((doc) => {
-                profiles.push(doc.data());
-            });
-            return profiles;
-        }
 
-        window.updateHallOfFame = async function() {
-            try {
-                const profiles = await getAllProfiles();
-                if (profiles.length === 0) {
-                     document.querySelector('#fame-species .player-name').textContent = `아직 플레이어가 없습니다.`;
-                     document.querySelector('#fame-level .player-name').textContent = `새로운 플레이어가 되어보세요!`;
-                    return;
-                }
-
-                let mostSpecies = { name: '-', count: -1 };
-                let highestLevel = { name: '-', animal: '-', level: 0 };
-
-                profiles.forEach(p => {
-                    if ((p.speciesCount || 0) > mostSpecies.count) {
-                        mostSpecies = { name: p.name, count: p.speciesCount };
-                    }
-                    if (p.animals) {
-                        Object.values(p.animals).forEach(a => {
-                            if ((a.animalLevel || 1) > highestLevel.level) {
-                                highestLevel = { name: p.name, animal: a.name, level: a.animalLevel };
-                            }
-                        });
-                    }
-                });
-
-                document.querySelector('#fame-species .player-name').textContent = `${mostSpecies.name} (${mostSpecies.count}종)`;
-                document.querySelector('#fame-level .player-name').textContent = `${highestLevel.name} (Lv.${highestLevel.level} ${highestLevel.animal})`;
-            } catch (error) {
-                console.error('명예의 전당 업데이트 오류:', error);
-            }
-        }
 
         async function updateRankingPage() {
             const profiles = await getAllProfiles();
@@ -4417,7 +5818,785 @@
             }
         }, 5 * 60 * 1000);
 
-        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v9.0 - 시장 자동 만료 & 알림 시스템 추가)');
-    </script>
+        // ==================== 배틀모드 시스템 ====================
+        
+        let battleRoomRef = null;
+        let battleGameTimer = null;
+        let battleCountdownTimer = null;
+        
+        // 배틀 화면 전환
+        function showBattleScreen(screenId) {
+            document.querySelectorAll('.battle-screen').forEach(screen => {
+                screen.classList.remove('active');
+            });
+            document.getElementById(screenId).classList.add('active');
+        }
+        
+        // 배틀 메인 메뉴로 돌아가기
+        function showBattleMenu() {
+            showBattleScreen('battle-menu');
+            // 방에서 나가기
+            if (gameState.battle.currentRoom) {
+                leaveBattleRoom();
+            }
+        }
+        
+        // 방 생성 모달 표시
+        function showCreateRoomModal() {
+            showBattleScreen('create-room-screen');
+            // 기본값 설정
+            document.getElementById('room-name-input').value = `${currentUserProfile.name || '익명'}의 방`;
+            document.getElementById('battle-subject-select').value = gameState.currentSubject;
+        }
+        
+        // 방 참가 모달 표시
+        function showJoinRoomModal() {
+            showBattleScreen('join-room-screen');
+            document.getElementById('room-code-input').focus();
+        }
+        
+        // 공개방 목록 표시
+        function showPublicRooms() {
+            showBattleScreen('public-rooms-screen');
+            refreshPublicRooms();
+        }
+        
+        // 배틀 통계 표시
+        function showBattleStats() {
+            showBattleScreen('battle-stats-screen');
+            updateBattleStats();
+        }
+        
+        // 배틀방 생성
+        async function createBattleRoom() {
+            if (!currentUserProfile.name) {
+                alert('먼저 로그인해주세요!');
+                return;
+            }
+            
+            const roomName = document.getElementById('room-name-input').value.trim();
+            const subject = document.getElementById('battle-subject-select').value;
+            const level = parseInt(document.getElementById('battle-level-select').value);
+            const maxPlayers = parseInt(document.getElementById('max-players-select').value);
+            const isPublic = document.querySelector('input[name="room-type"]:checked').value === 'public';
+            
+            if (!roomName) {
+                alert('방 이름을 입력해주세요!');
+                return;
+            }
+            
+            try {
+                // 6자리 랜덤 코드 생성
+                const roomCode = Math.floor(100000 + Math.random() * 900000).toString();
+                
+                const roomData = {
+                    id: roomCode,
+                    name: roomName,
+                    subject: subject,
+                    level: level,
+                    maxPlayers: maxPlayers,
+                    isPublic: isPublic,
+                    status: 'waiting',
+                    hostId: currentUserId,
+                    createdAt: Date.now(),
+                    players: {
+                        [currentUserId]: {
+                            name: currentUserProfile.name,
+                            ready: false,
+                            isHost: true,
+                            score: 0,
+                            correctCount: 0,
+                            totalAttempts: 0
+                        }
+                    },
+                    gameData: {
+                        questions: [],
+                        startTime: null,
+                        duration: 60000,
+                        currentQuestionIndex: 0
+                    }
+                };
+                
+                // Firebase에 방 생성
+                await database.ref(`battleRooms/${roomCode}`).set(roomData);
+                
+                // 방 참가
+                await joinBattleRoomById(roomCode);
+                
+            } catch (error) {
+                console.error('방 생성 실패:', error);
+                alert('방 생성에 실패했습니다. 다시 시도해주세요.');
+            }
+        }
+        
+        // 방 참가
+        async function joinBattleRoom() {
+            const roomCode = document.getElementById('room-code-input').value.trim();
+            
+            if (!roomCode || roomCode.length !== 6) {
+                alert('6자리 방 코드를 입력해주세요!');
+                return;
+            }
+            
+            await joinBattleRoomById(roomCode);
+        }
+        
+        // ID로 방 참가
+        async function joinBattleRoomById(roomCode) {
+            if (!currentUserProfile.name) {
+                alert('먼저 로그인해주세요!');
+                return;
+            }
+            
+            try {
+                const roomSnapshot = await database.ref(`battleRooms/${roomCode}`).once('value');
+                const roomData = roomSnapshot.val();
+                
+                if (!roomData) {
+                    alert('존재하지 않는 방입니다!');
+                    return;
+                }
+                
+                if (roomData.status !== 'waiting') {
+                    alert('이미 게임이 시작된 방입니다!');
+                    return;
+                }
+                
+                const currentPlayers = Object.keys(roomData.players || {}).length;
+                if (currentPlayers >= roomData.maxPlayers) {
+                    alert('방이 가득 찼습니다!');
+                    return;
+                }
+                
+                if (roomData.players && roomData.players[currentUserId]) {
+                    alert('이미 참가한 방입니다!');
+                    return;
+                }
+                
+                // 방에 플레이어 추가
+                await database.ref(`battleRooms/${roomCode}/players/${currentUserId}`).set({
+                    name: currentUserProfile.name,
+                    ready: false,
+                    isHost: false,
+                    score: 0,
+                    correctCount: 0,
+                    totalAttempts: 0,
+                    joinedAt: Date.now()
+                });
+                
+                // 방 정보 저장
+                gameState.battle.currentRoom = roomCode;
+                gameState.battle.isInBattle = true;
+                
+                // 대기실로 이동
+                showWaitingRoom(roomData);
+                
+                // 실시간 업데이트 리스너 설정
+                setupRoomListener(roomCode);
+                
+            } catch (error) {
+                console.error('방 참가 실패:', error);
+                alert('방 참가에 실패했습니다. 다시 시도해주세요.');
+            }
+        }
+        
+        // 대기실 표시
+        function showWaitingRoom(roomData) {
+            showBattleScreen('waiting-room-screen');
+            
+            // 방 정보 업데이트
+            document.getElementById('current-room-name').textContent = roomData.name;
+            document.getElementById('room-subject-info').textContent = getSubjectDisplayName(roomData.subject);
+            document.getElementById('room-level-info').textContent = `Level ${roomData.level}`;
+            document.getElementById('room-code-info').textContent = `방 코드: ${roomData.id}`;
+            
+            updatePlayersDisplay(roomData.players);
+        }
+        
+        // 과목 표시명 반환
+        function getSubjectDisplayName(subject) {
+            const subjects = {
+                'english': '영어 🇬🇧',
+                'social': '사회 🏛️',
+                'math': '수학 🔢',
+                'general': '상식 🧠'
+            };
+            return subjects[subject] || subject;
+        }
+        
+        // 플레이어 목록 업데이트
+        function updatePlayersDisplay(players) {
+            const container = document.getElementById('players-container');
+            container.innerHTML = '';
+            
+            Object.entries(players).forEach(([playerId, playerData]) => {
+                const playerDiv = document.createElement('div');
+                playerDiv.className = 'player-item';
+                
+                const isMe = playerId === currentUserId;
+                const hostBadge = playerData.isHost ? ' 👑' : '';
+                
+                playerDiv.innerHTML = `
+                    <span class="player-name">${playerData.name}${hostBadge}${isMe ? ' (나)' : ''}</span>
+                    <span class="player-status ${playerData.ready ? 'ready' : 'waiting'}">
+                        ${playerData.ready ? '준비완료' : '대기중'}
+                    </span>
+                `;
+                
+                if (isMe) {
+                    playerDiv.style.background = 'rgba(255, 215, 0, 0.2)';
+                }
+                
+                container.appendChild(playerDiv);
+            });
+        }
+        
+        // 준비 상태 토글
+        async function toggleReady() {
+            if (!gameState.battle.currentRoom) return;
+            
+            try {
+                const playerRef = database.ref(`battleRooms/${gameState.battle.currentRoom}/players/${currentUserId}`);
+                const playerSnapshot = await playerRef.once('value');
+                const playerData = playerSnapshot.val();
+                
+                if (playerData) {
+                    const newReadyState = !playerData.ready;
+                    await playerRef.update({ ready: newReadyState });
+                    
+                    // 버튼 텍스트 업데이트
+                    const readyButton = document.getElementById('ready-button');
+                    readyButton.textContent = newReadyState ? '준비 해제' : '준비 완료';
+                    readyButton.className = newReadyState ? 'btn-ready ready' : 'btn-ready';
+                }
+            } catch (error) {
+                console.error('준비 상태 변경 실패:', error);
+            }
+        }
+        
+        // 방 나가기
+        async function leaveBattleRoom() {
+            if (!gameState.battle.currentRoom) return;
+            
+            try {
+                // 플레이어 제거
+                await database.ref(`battleRooms/${gameState.battle.currentRoom}/players/${currentUserId}`).remove();
+                
+                // 리스너 제거
+                if (battleRoomRef) {
+                    battleRoomRef.off();
+                    battleRoomRef = null;
+                }
+                
+                // 상태 초기화
+                gameState.battle.isInBattle = false;
+                gameState.battle.currentRoom = null;
+                
+                // 메뉴로 돌아가기
+                showBattleMenu();
+                
+            } catch (error) {
+                console.error('방 나가기 실패:', error);
+            }
+        }
+        
+        // 방 실시간 업데이트 리스너
+        function setupRoomListener(roomCode) {
+            battleRoomRef = database.ref(`battleRooms/${roomCode}`);
+            
+            battleRoomRef.on('value', (snapshot) => {
+                const roomData = snapshot.val();
+                
+                if (!roomData) {
+                    // 방이 삭제됨
+                    alert('방이 해체되었습니다.');
+                    showBattleMenu();
+                    return;
+                }
+                
+                // 상태별 처리
+                if (roomData.status === 'waiting') {
+                    updatePlayersDisplay(roomData.players);
+                    checkAllPlayersReady(roomData);
+                } else if (roomData.status === 'countdown') {
+                    startCountdown();
+                } else if (roomData.status === 'playing') {
+                    startBattleGame(roomData);
+                } else if (roomData.status === 'finished') {
+                    showBattleResult(roomData);
+                }
+            });
+        }
+        
+        // 모든 플레이어 준비 상태 확인
+        function checkAllPlayersReady(roomData) {
+            const players = Object.values(roomData.players || {});
+            const readyPlayers = players.filter(p => p.ready);
+            
+            // 최소 2명 이상이고 모든 플레이어가 준비됨
+            if (players.length >= 2 && readyPlayers.length === players.length) {
+                // 호스트만 게임 시작 가능
+                const myPlayer = roomData.players[currentUserId];
+                if (myPlayer && myPlayer.isHost) {
+                    setTimeout(async () => {
+                        try {
+                            await database.ref(`battleRooms/${gameState.battle.currentRoom}/status`).set('countdown');
+                        } catch (error) {
+                            console.error('게임 시작 실패:', error);
+                        }
+                    }, 1000);
+                }
+            }
+        }
+        
+        // 카운트다운 시작
+        function startCountdown() {
+            showBattleScreen('waiting-room-screen');
+            document.getElementById('game-countdown').style.display = 'block';
+            
+            let count = 3;
+            const countdownElement = document.querySelector('.countdown-number');
+            
+            battleCountdownTimer = setInterval(() => {
+                countdownElement.textContent = count;
+                
+                if (count <= 0) {
+                    clearInterval(battleCountdownTimer);
+                    // 호스트가 게임 시작
+                    if (gameState.battle.currentRoom) {
+                        database.ref(`battleRooms/${gameState.battle.currentRoom}`).once('value').then(snapshot => {
+                            const roomData = snapshot.val();
+                            if (roomData && roomData.players[currentUserId]?.isHost) {
+                                startGameAsHost(roomData);
+                            }
+                        });
+                    }
+                }
+                count--;
+            }, 1000);
+        }
+        
+        // 호스트가 게임 시작
+        async function startGameAsHost(roomData) {
+            try {
+                // 문제 준비
+                const questions = await prepareGameQuestions(roomData.subject, roomData.level);
+                
+                const gameData = {
+                    questions: questions,
+                    startTime: Date.now(),
+                    duration: 60000,
+                    currentQuestionIndex: 0
+                };
+                
+                // 게임 상태 업데이트
+                await database.ref(`battleRooms/${gameState.battle.currentRoom}`).update({
+                    status: 'playing',
+                    gameData: gameData
+                });
+                
+            } catch (error) {
+                console.error('게임 시작 실패:', error);
+            }
+        }
+        
+        // 게임 문제 준비
+        async function prepareGameQuestions(subject, level) {
+            try {
+                const response = await fetch(getSubjectFilePath(level));
+                const data = await response.json();
+                const words = data.words || [];
+                
+                // 랜덤하게 20문제 선택
+                const shuffled = words.sort(() => Math.random() - 0.5);
+                return shuffled.slice(0, 20);
+                
+            } catch (error) {
+                console.error('문제 준비 실패:', error);
+                return [];
+            }
+        }
+        
+        // 배틀 게임 시작
+        function startBattleGame(roomData) {
+            showBattleScreen('battle-game-screen');
+            
+            // 게임 상태 초기화
+            gameState.battle.currentGame = {
+                score: 0,
+                correctCount: 0,
+                totalAttempts: 0,
+                startTime: roomData.gameData.startTime,
+                questions: roomData.gameData.questions,
+                currentQuestionIndex: 0
+            };
+            
+            // 첫 문제 표시
+            displayBattleQuestion();
+            
+            // 타이머 시작
+            startBattleTimer();
+            
+            // 실시간 순위 업데이트
+            updateLiveRanking(roomData);
+        }
+        
+        // 배틀 문제 표시
+        function displayBattleQuestion() {
+            const game = gameState.battle.currentGame;
+            if (game.currentQuestionIndex >= game.questions.length) {
+                // 모든 문제 완료
+                return;
+            }
+            
+            const question = game.questions[game.currentQuestionIndex];
+            
+            document.getElementById('battle-question-number').textContent = game.currentQuestionIndex + 1;
+            document.getElementById('battle-question-text').textContent = question.question || question.korean;
+            
+            // 선택지 생성
+            const optionsContainer = document.getElementById('battle-options-container');
+            optionsContainer.innerHTML = '';
+            
+            question.options.forEach((option, index) => {
+                const optionBtn = document.createElement('button');
+                optionBtn.className = 'battle-option-btn';
+                optionBtn.textContent = option;
+                optionBtn.onclick = () => selectBattleAnswer(index, option);
+                optionsContainer.appendChild(optionBtn);
+            });
+            
+            // 진행률 업데이트
+            updateBattleProgress();
+        }
+        
+        // 배틀 답안 선택
+        async function selectBattleAnswer(selectedIndex, selectedOption) {
+            const game = gameState.battle.currentGame;
+            const question = game.questions[game.currentQuestionIndex];
+            
+            // 버튼 비활성화
+            document.querySelectorAll('.battle-option-btn').forEach(btn => btn.disabled = true);
+            
+            const isCorrect = selectedIndex === question.answer;
+            game.totalAttempts++;
+            
+            if (isCorrect) {
+                game.correctCount++;
+                game.score += calculateBattleScore();
+            }
+            
+            // 정답/오답 표시
+            const buttons = document.querySelectorAll('.battle-option-btn');
+            buttons[selectedIndex].className += isCorrect ? ' correct' : ' incorrect';
+            if (!isCorrect) {
+                buttons[question.answer].className += ' correct';
+            }
+            
+            // 점수 업데이트
+            document.getElementById('battle-current-score').textContent = game.score;
+            updateBattleProgress();
+            
+            // Firebase에 점수 업데이트
+            if (gameState.battle.currentRoom) {
+                await database.ref(`battleRooms/${gameState.battle.currentRoom}/players/${currentUserId}`).update({
+                    score: game.score,
+                    correctCount: game.correctCount,
+                    totalAttempts: game.totalAttempts
+                });
+            }
+            
+            // 다음 문제로
+            setTimeout(() => {
+                game.currentQuestionIndex++;
+                displayBattleQuestion();
+            }, 1500);
+        }
+        
+        // 배틀 점수 계산
+        function calculateBattleScore() {
+            const baseScore = 100;
+            const timeBonus = Math.max(0, 50 - (Date.now() - gameState.battle.currentGame.questionStartTime) / 1000);
+            return Math.round(baseScore + timeBonus);
+        }
+        
+        // 배틀 진행률 업데이트
+        function updateBattleProgress() {
+            const game = gameState.battle.currentGame;
+            const progress = (game.currentQuestionIndex / game.questions.length) * 100;
+            
+            document.getElementById('battle-progress-fill').style.width = progress + '%';
+            document.getElementById('battle-correct-count').textContent = game.correctCount;
+            document.getElementById('battle-total-attempts').textContent = game.totalAttempts;
+        }
+        
+        // 배틀 타이머 시작
+        function startBattleTimer() {
+            const duration = 60; // 60초
+            let timeLeft = duration;
+            
+            const timerElement = document.getElementById('battle-timer');
+            
+            battleGameTimer = setInterval(() => {
+                timerElement.textContent = timeLeft;
+                
+                if (timeLeft <= 10) {
+                    timerElement.className = 'timer-number warning';
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(battleGameTimer);
+                    endBattleGame();
+                }
+                
+                timeLeft--;
+            }, 1000);
+        }
+        
+        // 배틀 게임 종료
+        async function endBattleGame() {
+            if (battleGameTimer) {
+                clearInterval(battleGameTimer);
+            }
+            
+            // 호스트가 게임 종료 처리
+            if (gameState.battle.currentRoom) {
+                const roomSnapshot = await database.ref(`battleRooms/${gameState.battle.currentRoom}`).once('value');
+                const roomData = roomSnapshot.val();
+                
+                if (roomData && roomData.players[currentUserId]?.isHost) {
+                    await database.ref(`battleRooms/${gameState.battle.currentRoom}/status`).set('finished');
+                }
+            }
+        }
+        
+        // 실시간 순위 업데이트
+        function updateLiveRanking(roomData) {
+            const rankingList = document.getElementById('live-ranking-list');
+            rankingList.innerHTML = '';
+            
+            const players = Object.entries(roomData.players || {})
+                .sort(([,a], [,b]) => (b.score || 0) - (a.score || 0));
+            
+            players.forEach(([playerId, playerData], index) => {
+                const rankDiv = document.createElement('div');
+                rankDiv.className = `rank-item${playerId === currentUserId ? ' me' : ''}`;
+                rankDiv.innerHTML = `
+                    <span>${index + 1}. ${playerData.name}</span>
+                    <span>${playerData.score || 0}</span>
+                `;
+                rankingList.appendChild(rankDiv);
+            });
+        }
+        
+        // 배틀 결과 표시
+        function showBattleResult(roomData) {
+            showBattleScreen('battle-result-screen');
+            
+            // 최종 순위 계산
+            const players = Object.entries(roomData.players || {})
+                .sort(([,a], [,b]) => {
+                    // 점수 -> 정답률 -> 속도 순으로 정렬
+                    const scoreA = a.score || 0;
+                    const scoreB = b.score || 0;
+                    if (scoreB !== scoreA) return scoreB - scoreA;
+                    
+                    const accuracyA = a.totalAttempts > 0 ? (a.correctCount / a.totalAttempts) : 0;
+                    const accuracyB = b.totalAttempts > 0 ? (b.correctCount / b.totalAttempts) : 0;
+                    return accuracyB - accuracyA;
+                });
+            
+            // 순위 표시
+            const rankingList = document.getElementById('final-ranking-list');
+            rankingList.innerHTML = '';
+            
+            players.forEach(([playerId, playerData], index) => {
+                const rankDiv = document.createElement('div');
+                const rankClass = index === 0 ? 'first' : index === 1 ? 'second' : index === 2 ? 'third' : '';
+                rankDiv.className = `ranking-item ${rankClass}`;
+                
+                const accuracy = playerData.totalAttempts > 0 ? 
+                    Math.round((playerData.correctCount / playerData.totalAttempts) * 100) : 0;
+                
+                rankDiv.innerHTML = `
+                    <div class="rank-position">${index + 1}</div>
+                    <div class="rank-player">
+                        <div class="rank-player-name">${playerData.name}</div>
+                        <div class="rank-player-stats">${playerData.correctCount}/${playerData.totalAttempts} (${accuracy}%)</div>
+                    </div>
+                    <div class="rank-score">${playerData.score || 0}</div>
+                `;
+                
+                rankingList.appendChild(rankDiv);
+            });
+            
+            // 내 결과 표시
+            const myRank = players.findIndex(([playerId]) => playerId === currentUserId) + 1;
+            const myData = roomData.players[currentUserId] || {};
+            const myAccuracy = myData.totalAttempts > 0 ? 
+                Math.round((myData.correctCount / myData.totalAttempts) * 100) : 0;
+            
+            document.getElementById('my-rank').textContent = `${myRank}위`;
+            document.getElementById('my-correct').textContent = `${myData.correctCount}/${myData.totalAttempts}`;
+            document.getElementById('my-accuracy').textContent = `${myAccuracy}%`;
+            document.getElementById('my-points').textContent = myData.score || 0;
+            
+            // 보상 계산 및 표시
+            calculateAndShowRewards(myRank, myData);
+            
+            // 통계 업데이트
+            updatePlayerBattleStats(myRank === 1);
+        }
+        
+        // 보상 계산 및 표시
+        function calculateAndShowRewards(rank, playerData) {
+            const rewardsContainer = document.getElementById('battle-rewards');
+            rewardsContainer.innerHTML = '';
+            
+            let coins = 0;
+            let battlePoints = 0;
+            
+            if (rank === 1) {
+                coins = 200;
+                battlePoints = 15;
+            } else if (rank === 2) {
+                coins = 100;
+                battlePoints = 8;
+            } else if (rank === 3) {
+                coins = 50;
+                battlePoints = 5;
+            } else {
+                coins = 20;
+                battlePoints = 2;
+            }
+            
+            // 참가 보너스
+            coins += 10;
+            battlePoints += 1;
+            
+            // 보상 적용
+            gameState.coins += coins;
+            gameState.battle.playerStats.points += battlePoints;
+            
+            // 보상 표시
+            rewardsContainer.innerHTML = `
+                <div class="reward-item">
+                    <span class="reward-icon">💰</span>
+                    <span class="reward-text">${coins} 코인</span>
+                </div>
+                <div class="reward-item">
+                    <span class="reward-icon">⭐</span>
+                    <span class="reward-text">${battlePoints} 승점</span>
+                </div>
+                ${rank === 1 ? '<div class="reward-item"><span class="reward-icon">🏆</span><span class="reward-text">승리 보너스!</span></div>' : ''}
+            `;
+            
+            // 저장
+            saveCurrentUserData();
+        }
+        
+        // 플레이어 배틀 통계 업데이트
+        function updatePlayerBattleStats(isWinner) {
+            gameState.battle.playerStats.totalBattles++;
+            if (isWinner) {
+                gameState.battle.playerStats.wins++;
+            }
+            
+            // 랭크 계산
+            const points = gameState.battle.playerStats.points;
+            if (points < 100) gameState.battle.playerStats.rank = 'bronze';
+            else if (points < 300) gameState.battle.playerStats.rank = 'silver';
+            else if (points < 600) gameState.battle.playerStats.rank = 'gold';
+            else if (points < 1000) gameState.battle.playerStats.rank = 'platinum';
+            else gameState.battle.playerStats.rank = 'diamond';
+        }
+        
+        // 배틀 통계 업데이트
+        function updateBattleStats() {
+            const stats = gameState.battle.playerStats;
+            
+            document.getElementById('total-battles').textContent = stats.totalBattles;
+            document.getElementById('battle-wins').textContent = stats.wins;
+            document.getElementById('battle-winrate').textContent = 
+                stats.totalBattles > 0 ? Math.round((stats.wins / stats.totalBattles) * 100) + '%' : '0%';
+            document.getElementById('battle-points').textContent = stats.points;
+            
+            // 랭크 표시
+            const rankNames = {
+                'bronze': '브론즈 🥉',
+                'silver': '실버 🥈', 
+                'gold': '골드 🥇',
+                'platinum': '플래티넘 💎',
+                'diamond': '다이아몬드 💠'
+            };
+            
+            document.getElementById('current-rank-badge').textContent = rankNames[stats.rank] || '브론즈 🥉';
+            
+            // 다음 랭크까지 진행률
+            const rankThresholds = { bronze: 100, silver: 300, gold: 600, platinum: 1000 };
+            const currentThreshold = rankThresholds[stats.rank] || 1000;
+            const prevThreshold = stats.rank === 'bronze' ? 0 : 
+                                 stats.rank === 'silver' ? 100 :
+                                 stats.rank === 'gold' ? 300 : 600;
+            
+            const progress = Math.min(100, ((stats.points - prevThreshold) / (currentThreshold - prevThreshold)) * 100);
+            
+            document.getElementById('current-points').textContent = stats.points;
+            document.getElementById('next-rank-points').textContent = currentThreshold;
+            document.getElementById('rank-progress-fill').style.width = progress + '%';
+        }
+        
+        // 공개방 목록 새로고침
+        async function refreshPublicRooms() {
+            const container = document.getElementById('public-rooms-container');
+            container.innerHTML = '<div class="loading">공개방을 불러오는 중...</div>';
+            
+            try {
+                const roomsSnapshot = await database.ref('battleRooms').orderByChild('isPublic').equalTo(true).once('value');
+                const rooms = roomsSnapshot.val() || {};
+                
+                container.innerHTML = '';
+                
+                const publicRooms = Object.entries(rooms)
+                    .filter(([, room]) => room.status === 'waiting')
+                    .sort(([, a], [, b]) => b.createdAt - a.createdAt);
+                
+                if (publicRooms.length === 0) {
+                    container.innerHTML = '<div class="no-rooms">현재 참가 가능한 공개방이 없습니다.</div>';
+                    return;
+                }
+                
+                publicRooms.forEach(([roomId, room]) => {
+                    const roomDiv = document.createElement('div');
+                    roomDiv.className = 'room-item';
+                    roomDiv.onclick = () => joinBattleRoomById(roomId);
+                    
+                    const playerCount = Object.keys(room.players || {}).length;
+                    
+                    roomDiv.innerHTML = `
+                        <div class="room-header">
+                            <span class="room-name">${room.name}</span>
+                            <span class="room-players">${playerCount}/${room.maxPlayers}</span>
+                        </div>
+                        <div class="room-info-line">
+                            ${getSubjectDisplayName(room.subject)} | Level ${room.level} | 방장: ${room.players[room.hostId]?.name || '알 수 없음'}
+                        </div>
+                    `;
+                    
+                    container.appendChild(roomDiv);
+                });
+                
+            } catch (error) {
+                console.error('공개방 목록 로드 실패:', error);
+                container.innerHTML = '<div class="error">공개방 목록을 불러올 수 없습니다.</div>';
+            }
+        }
+        
+        // 다시 하기
+        function playAgain() {
+            showBattleMenu();
+        }
+
+        console.log('🐾 동물 수집 학습 게임이 로드되었습니다! (v10.0 - 배틀모드 추가)');
 </body>
 </html>
