@@ -239,3 +239,6 @@ OSError: [Errno 98] Address already in use
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/general/level1.json HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/math/level1.json HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:40:12] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:40:13] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 04:44:45] "GET / HTTP/1.1" 200 -
