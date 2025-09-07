@@ -6,6 +6,13 @@
 export function showPage(pageName, element) {
     console.log('showPage 호출:', pageName);
     
+    // 게임 컨테이너 표시 (중요!)
+    const gameContainer = document.querySelector('.game-container');
+    if (gameContainer) {
+        gameContainer.style.display = 'block';
+        console.log('✅ 게임 컨테이너 표시됨');
+    }
+    
     // 모든 페이지 비활성화
     document.querySelectorAll('.page').forEach(page => {
         page.classList.remove('active');
@@ -22,7 +29,9 @@ export function showPage(pageName, element) {
     if (targetPage) {
         targetPage.classList.add('active');
         targetPage.style.display = 'block';
+        
         console.log('페이지 활성화:', pageName);
+        
     } else {
         console.error('페이지를 찾을 수 없음:', pageName + '-page');
     }
