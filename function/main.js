@@ -1842,10 +1842,14 @@
                 
                 // 일일 미션 진행도 업데이트 (정답일 때만, 자유 학습 모드가 아닐 때만)
                 if (!window.gameState.freeStudyMode) {
-                    window.updateMissionProgress(gameState.currentSubject);
+                    try {
+                        await window.updateMissionProgress(gameState.currentSubject);
+                    } catch (error) {
+                        console.error('[오류] 미션 진행도 업데이트 실패:', error);
+                    }
                 }
                 
-                saveCurrentUserData();
+                // 매 문제마다 저장하지 않음 - 미션 완료 시에만 저장
                 setTimeout(() => generatePersonalizedQuiz(), 1500);
             } else {
                 // 과목별 오답 피드백
@@ -1997,7 +2001,7 @@
 
                 updateUI();
                 updateAnimalCollection();
-                saveCurrentUserData();
+                // 매 문제마다 저장하지 않음
                 setTimeout(closeMathModal, 1500);
             } else {
                 feedback.textContent = `땡! 다시 생각해보세요.`;
@@ -3564,12 +3568,14 @@
             }
         });
 
-        // 주기적으로 플레이 시간 저장 (5분마다)
-        setInterval(() => {
-            if (currentUserProfile.name && sessionStartTime) {
-                saveCurrentUserData();
+        // 앱 종료 시 데이터 저장
+        window.addEventListener('beforeunload', () => {
+            if (window.currentUserId && typeof window.saveCurrentUserData === 'function') {
+                console.log('[앱 종료] Firebase에 최종 데이터 저장');
+                // 동기적으로 저장 시도
+                window.saveCurrentUserData();
             }
-        }, 5 * 60 * 1000);
+        });
 
         // 일일 미션 및 타이머 초기화
         window.addEventListener('DOMContentLoaded', () => {
@@ -3582,6 +3588,21 @@
                 }
                 if (typeof window.updateStudyTimerDisplay === 'function') {
                     window.updateStudyTimerDisplay();
+                }
+                
+                // Firebase 로그인 후 사용자 데이터 로드 시도
+                if (window.currentUserId && typeof window.loadCurrentUserData === 'function') {
+                    console.log('[DOMContentLoaded] 사용자 데이터 로드 시도');
+                    window.loadCurrentUserData();
+                } else {
+                    console.log('[DOMContentLoaded] Firebase 아직 미준비, 3초 후 재시도');
+                    // Firebase 로그인이 완료될 때까지 3초 후 재시도
+                    setTimeout(() => {
+                        if (window.currentUserId && typeof window.loadCurrentUserData === 'function') {
+                            console.log('[DOMContentLoaded 재시도] 사용자 데이터 로드 시도');
+                            window.loadCurrentUserData();
+                        }
+                    }, 3000);
                 }
             }, 1000);
         });

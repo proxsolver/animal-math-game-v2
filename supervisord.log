@@ -88,3 +88,33 @@
 2025-09-07 10:42:17,409 INFO spawned: 'webserver' with pid 10455
 2025-09-07 10:42:17,507 WARN exited: webserver (exit status 1; not expected)
 2025-09-07 10:42:18,509 INFO gave up: webserver entered FATAL state, too many start retries too quickly
+2025-09-07 11:17:56,856 INFO spawned: 'webserver' with pid 13155
+2025-09-07 11:17:57,944 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 11:29:40,185 INFO waiting for webserver to stop
+2025-09-07 11:29:40,186 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 11:29:40,191 INFO spawned: 'webserver' with pid 14078
+2025-09-07 11:29:41,292 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 11:37:35,938 INFO waiting for webserver to stop
+2025-09-07 11:37:35,939 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 11:37:35,945 INFO spawned: 'webserver' with pid 14665
+2025-09-07 11:37:37,042 INFO success: webserver entered RUNNING state, process has stayed up for > than 1 seconds (startsecs)
+2025-09-07 11:39:33,337 INFO waiting for webserver to stop
+2025-09-07 11:39:33,338 WARN stopped: webserver (terminated by SIGTERM)
+2025-09-07 11:39:33,342 INFO spawned: 'webserver' with pid 15087
+2025-09-07 11:39:33,434 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:34,438 INFO spawned: 'webserver' with pid 15089
+2025-09-07 11:39:34,530 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:36,536 INFO spawned: 'webserver' with pid 15092
+2025-09-07 11:39:36,636 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:40,406 INFO spawned: 'webserver' with pid 15100
+2025-09-07 11:39:40,503 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:41,505 INFO gave up: webserver entered FATAL state, too many start retries too quickly
+2025-09-07 11:39:44,683 INFO spawned: 'webserver' with pid 15109
+2025-09-07 11:39:44,775 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:45,854 INFO spawned: 'webserver' with pid 15111
+2025-09-07 11:39:45,954 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:47,962 INFO spawned: 'webserver' with pid 15114
+2025-09-07 11:39:48,237 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:51,246 INFO spawned: 'webserver' with pid 15119
+2025-09-07 11:39:51,350 WARN exited: webserver (exit status 1; not expected)
+2025-09-07 11:39:52,352 INFO gave up: webserver entered FATAL state, too many start retries too quickly

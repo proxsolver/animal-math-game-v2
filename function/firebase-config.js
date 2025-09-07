@@ -25,11 +25,39 @@ window.onFirebaseReady = async function(user) {
     try {
         console.log("동물 데이터 로딩 시작...");
         await window.loadAnimalsFromJSON();
+        
         console.log("명예의 전당 업데이트 시작...");
-        await window.updateHallOfFame();
+        try {
+            await window.updateHallOfFame();
+            console.log("명예의 전당 업데이트 완료");
+        } catch (hallError) {
+            console.warn("명예의 전당 업데이트 실패 (계속 진행):", hallError);
+        }
+        
+        // 사용자 데이터 로드 (함수가 로드될 때까지 대기)
+        console.log("사용자 데이터 로드 시작...");
+        try {
+            // loadCurrentUserData 함수가 로드될 때까지 최대 5초 대기
+            let attempts = 0;
+            while (typeof window.loadCurrentUserData !== 'function' && attempts < 50) {
+                await new Promise(resolve => setTimeout(resolve, 100));
+                attempts++;
+            }
+            
+            if (typeof window.loadCurrentUserData === 'function') {
+                console.log("loadCurrentUserData 함수 발견, 데이터 로드 시작");
+                const loaded = await window.loadCurrentUserData();
+                console.log("사용자 데이터 로드 결과:", loaded);
+            } else {
+                console.error("loadCurrentUserData 함수를 찾을 수 없습니다! (5초 대기 후)");
+            }
+        } catch (loadError) {
+            console.error("사용자 데이터 로드 중 오류:", loadError);
+        }
+        
         console.log("초기화 완료");
     } catch (error) {
-        console.error('초기화 오류:', error);
+        console.error('Firebase 초기화 전체 오류:', error);
     }
     
     console.log("로그인 오버레이 표시");
