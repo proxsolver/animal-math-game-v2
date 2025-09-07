@@ -726,19 +726,31 @@ async function saveCurrentUserData() {
         const userDataRef = window.firebase.doc(window.firebase.db, "artifacts", appId, "users", window.currentUserId);
         console.log('[DEBUG] Firebase 문서 경로 생성 완료');
         
+        const minimalGameState = {
+            coins: window.gameState.coins,
+            level: window.gameState.level,
+            dailyMissions: window.gameState.dailyMissions,
+            studyTimer: window.gameState.studyTimer,
+            subjects: window.gameState.subjects,
+            animals: window.gameState.animals,
+            farm: window.gameState.farm,
+            // 참고: currentQuestion, recentQuestions 등 일시적인 상태는 제외합니다.
+        };
+
         const userData = {
-            gameState: window.gameState,
+            gameState: minimalGameState, // 최적화된 gameState 객체를 저장
             lastSaved: new Date().toISOString(),
-            userAgent: navigator.userAgent.substring(0, 100) // 디버깅용
+            userAgent: navigator.userAgent.substring(0, 100)
         };
         
-        console.log('[DEBUG] 저장할 데이터:', {
-            gameStateKeys: Object.keys(userData.gameState),
+        console.log('[DEBUG] 저장할 데이터 (최적화됨):', {
             dailyMissions: userData.gameState.dailyMissions,
+            coins: userData.gameState.coins,
             lastSaved: userData.lastSaved
         });
         
         await window.firebase.setDoc(userDataRef, userData, { merge: true });
+
         console.log('[SUCCESS] 사용자 데이터가 Firebase에 저장되었습니다:', userData.lastSaved);
         
         // 저장 후 즉시 검증
