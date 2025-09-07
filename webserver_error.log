@@ -180,3 +180,16 @@ OSError: [Errno 98] Address already in use
 10.12.199.86 - - [07/Sep/2025 02:44:39] "GET / HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 02:44:40] "GET /favicon.ico HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 02:44:40] "GET /animals.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:46:59] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:47:08] "GET /subjects/social/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:47:16] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:47:17] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:47:17] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:47:17] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:47:17] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:47:18] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:47:18] "GET /subjects/social/level2.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:47:18] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:47:18] "GET /subjects/social/level3.json HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:47:20] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:47:20] "GET /subjects/social/level2.json HTTP/1.1" 404 -

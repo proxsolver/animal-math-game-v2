@@ -2615,12 +2615,17 @@
                 gameState.score += earnedScore;
                 
                 // 과목별 피드백 메시지
-                const subjectMessages = {
-                    'english': `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`,
-                    'social': `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`
-                };
+                let correctMessage = '';
+                if (gameState.currentSubject === 'social') {
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                    if (currentWordData.explanation) {
+                        correctMessage += ` ${currentWordData.explanation}`;
+                    }
+                } else {
+                    correctMessage = `정답! +${earnedScore}점! 동물을 잡았어요! 🎉`;
+                }
                 
-                feedback.textContent = subjectMessages[gameState.currentSubject] || `정답! +${earnedScore}점!`;
+                feedback.textContent = correctMessage;
                 feedback.className = 'feedback correct';
                 
                 // 정답 시 화려한 효과
