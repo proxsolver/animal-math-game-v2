@@ -1845,7 +1845,7 @@
                     window.updateMissionProgress(gameState.currentSubject);
                 }
                 
-                saveCurrentUserData();
+                // 매 문제마다 저장하지 않음 - 미션 완료 시에만 저장
                 setTimeout(() => generatePersonalizedQuiz(), 1500);
             } else {
                 // 과목별 오답 피드백
@@ -1997,7 +1997,7 @@
 
                 updateUI();
                 updateAnimalCollection();
-                saveCurrentUserData();
+                // 매 문제마다 저장하지 않음
                 setTimeout(closeMathModal, 1500);
             } else {
                 feedback.textContent = `땡! 다시 생각해보세요.`;
@@ -3564,12 +3564,14 @@
             }
         });
 
-        // 주기적으로 플레이 시간 저장 (5분마다)
-        setInterval(() => {
-            if (currentUserProfile.name && sessionStartTime) {
-                saveCurrentUserData();
+        // 앱 종료 시 데이터 저장
+        window.addEventListener('beforeunload', () => {
+            if (window.currentUserId && typeof window.saveCurrentUserData === 'function') {
+                console.log('[앱 종료] Firebase에 최종 데이터 저장');
+                // 동기적으로 저장 시도
+                window.saveCurrentUserData();
             }
-        }, 5 * 60 * 1000);
+        });
 
         // 일일 미션 및 타이머 초기화
         window.addEventListener('DOMContentLoaded', () => {

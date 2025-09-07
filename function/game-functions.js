@@ -249,6 +249,10 @@ function updateMissionProgress(subject) {
         mission.completed = true;
         showMissionCompleteNotification(subject);
         giveCompletionReward(subject);
+        
+        // 미션 완료 시에만 Firebase에 저장
+        console.log(`[미션 완료] ${subject} 미션 완료로 Firebase 저장 시작`);
+        saveCurrentUserData();
     }
     
     // 대시보드의 미션 UI 업데이트
@@ -256,8 +260,6 @@ function updateMissionProgress(subject) {
     
     // 퀴즈 페이지의 실시간 진행도도 업데이트
     updateQuizProgressDisplay(subject);
-    
-    saveCurrentUserData();
 }
 
 // 퀴즈 페이지의 진행도 실시간 업데이트
@@ -868,4 +870,11 @@ window.testFirebaseLoad = async function() {
 window.testMissionProgress = function() {
     console.log('[테스트] 영어 미션 진행도 1 증가');
     window.updateMissionProgress('english');
+};
+
+window.testMissionComplete = function() {
+    console.log('[테스트] 영어 미션을 완료 상태로 설정');
+    const mission = window.gameState.dailyMissions.english;
+    mission.solvedQuestions = 9; // 9개로 설정
+    window.updateMissionProgress('english'); // 10개로 완료
 };
