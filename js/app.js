@@ -7,6 +7,7 @@ import { initializeFirebase, handleLogin, handleSignup } from './auth/firebase-a
 import { loadAnimalsFromJSON } from './game/animal-data.js';
 import { getAllProfiles, updateHallOfFame } from './game/hall-of-fame.js';
 import { showPage, selectDifficulty, updateUI, updateAnimalCollection } from './ui/navigation.js';
+import './game/game-logic.js'; // 게임 로직 모듈 로드
 
 // 앱 초기화
 async function initializeApp() {
@@ -26,7 +27,7 @@ async function initializeApp() {
         window.handleLogin = handleLogin;
         window.handleSignup = handleSignup;
         
-        // 기본 페이지 설정 (로그인 전에도 게임 화면 구조 표시)
+        // 기본 페이지 설정 및 게임 초기화
         setTimeout(() => {
             if (window.showPage && !window.currentUserProfile) {
                 const firstNavBtn = document.querySelector('.nav-btn');
@@ -35,7 +36,16 @@ async function initializeApp() {
                     console.log("🎮 기본 게임 페이지 설정 완료");
                 }
             }
-        }, 500);
+            
+            // 동물 데이터가 로드된 후 게임 시스템 초기화
+            if (window.animalTypes && window.animalTypes.length > 0) {
+                console.log('🎯 동물 데이터 기반 게임 시스템 초기화');
+                // 게임 로직에서 사용할 수 있도록 데이터 준비 완료 알림
+                if (window.onDifficultyChange) {
+                    window.onDifficultyChange(1); // 기본 난이도로 초기화
+                }
+            }
+        }, 1000);
         
         console.log('앱 초기화 완료');
         
