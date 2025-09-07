@@ -14,3 +14,11 @@ Server running on port 8000
 07/Sep/2025 10:15:01 - "GET /favicon.ico HTTP/1.1" 304 -
 07/Sep/2025 10:15:02 - "GET /animals.json HTTP/1.1" 304 -
 07/Sep/2025 10:15:07 - "GET /subjects/social/level1.json HTTP/1.1" 200 -
+Server running on port 8000
+07/Sep/2025 10:32:12 - "GET / HTTP/1.1" 200 -
+07/Sep/2025 10:32:12 - "GET /style.css HTTP/1.1" 200 -
+07/Sep/2025 10:32:12 - "GET /function/game-functions.js HTTP/1.1" 200 -
+07/Sep/2025 10:32:12 - "GET /function/main.js HTTP/1.1" 200 -
+07/Sep/2025 10:32:12 - "GET /function/game-data.js HTTP/1.1" 200 -
+07/Sep/2025 10:32:12 - "GET /favicon.ico HTTP/1.1" 200 -
+07/Sep/2025 10:32:14 - "GET /animals.json HTTP/1.1" 200 -
