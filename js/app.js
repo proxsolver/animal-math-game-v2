@@ -8,7 +8,7 @@ import { loadAllSubjectData, SUBJECTS, LEVELS } from './game/subject-data.js';
 import { getAllProfiles, updateHallOfFame } from './game/hall-of-fame.js';
 import { showPage, selectDifficulty, updateUI } from './ui/navigation.js';
 import './game/game-logic.js'; // 게임 로직 모듈 로드
-import { testFirebaseConnection, saveUserProfile, loadUserProfile, updateLeaderboardUI } from './game/firebase-data.js';
+import { testFirebaseConnection, saveUserProfile, loadUserProfile, updateLeaderboardUI, updateGameScore, updateAnimalCollection } from './game/firebase-data.js';
 
 // 앱 초기화
 async function initializeApp() {
