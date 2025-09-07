@@ -238,7 +238,7 @@ function resetDailyMissions(today) {
 }
 
 // 미션 진행도 업데이트
-function updateMissionProgress(subject) {
+async function updateMissionProgress(subject) {
     const mission = window.gameState.dailyMissions[subject];
     if (mission.completed) return;
     
@@ -252,7 +252,15 @@ function updateMissionProgress(subject) {
         
         // 미션 완료 시에만 Firebase에 저장
         console.log(`[미션 완료] ${subject} 미션 완료로 Firebase 저장 시작`);
-        saveCurrentUserData();
+        try {
+            if (typeof window.saveCurrentUserData === 'function') {
+                await saveCurrentUserData();
+            } else {
+                console.error('[오류] saveCurrentUserData 함수를 찾을 수 없습니다!');
+            }
+        } catch (error) {
+            console.error('[오류] Firebase 저장 중 오류:', error);
+        }
     }
     
     // 대시보드의 미션 UI 업데이트
@@ -358,6 +366,23 @@ function showMissionCompleteNotification(subject) {
         statusEl.textContent = '완료 ✅';
         statusEl.classList.add('completed');
     }
+}
+
+// 게임 통계 업데이트 함수
+function updateGameStats() {
+    // 코인 표시 업데이트
+    const coinsEl = document.getElementById('coins-display');
+    if (coinsEl) {
+        coinsEl.textContent = window.gameState.coins;
+    }
+    
+    // 레벨 표시 업데이트  
+    const levelEl = document.getElementById('level-display');
+    if (levelEl) {
+        levelEl.textContent = window.gameState.level;
+    }
+    
+    console.log('[게임 통계] 코인:', window.gameState.coins, '레벨:', window.gameState.level);
 }
 
 // 미션 완료 보상
@@ -895,6 +920,7 @@ window.saveCurrentUserData = saveCurrentUserData;
 window.loadCurrentUserData = loadCurrentUserData;
 window.updateQuizProgressDisplay = updateQuizProgressDisplay;
 window.showNotification = showNotification;
+window.updateGameStats = updateGameStats;
 
 // 테스트 함수들 (개발자 도구에서 사용 가능)
 window.testFirebaseSave = async function() {
