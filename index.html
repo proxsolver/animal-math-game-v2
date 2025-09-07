@@ -305,11 +305,122 @@
         </div>
     </div>
 
-    <!-- JavaScript 파일들 -->
+    <!-- JavaScript 파일들 - 순서대로 로드 -->
     <script src="function/game-data.js"></script>
     <script src="function/game-functions.js"></script>
     <script src="function/main.js"></script>
-    <!-- Firebase SDK는 마지막에 로드하여 모든 함수가 준비된 후 초기화 -->
-    <script type="module" src="function/firebase-config.js"></script>
+    
+    <!-- Firebase SDK - DOM 로드 완료 후 초기화 -->
+    <script>
+        // DOM과 모든 스크립트 로드 완료 후 Firebase 초기화
+        document.addEventListener('DOMContentLoaded', function() {
+            // 잠시 대기 후 실행하여 모든 스크립트 함수가 로드되도록 함
+            setTimeout(async function() {
+                try {
+                    console.log("Firebase 초기화 시작...");
+                    
+                    // 필수 함수들이 로드되었는지 확인
+                    let checkCount = 0;
+                    const maxChecks = 50; // 최대 5초 대기
+                    
+                    function checkFunctionsReady() {
+                        return new Promise((resolve) => {
+                            const checkInterval = setInterval(() => {
+                                checkCount++;
+                                console.log(`함수 로딩 확인 중... (${checkCount}/${maxChecks})`);
+                                
+                                if (typeof window.updateHallOfFame === 'function' && 
+                                    typeof window.loadAnimalsFromJSON === 'function') {
+                                    clearInterval(checkInterval);
+                                    console.log("모든 필수 함수 로딩 완료!");
+                                    resolve(true);
+                                } else if (checkCount >= maxChecks) {
+                                    clearInterval(checkInterval);
+                                    console.error("함수 로딩 시간 초과");
+                                    resolve(false);
+                                }
+                            }, 100); // 100ms마다 확인
+                        });
+                    }
+                    
+                    const functionsReady = await checkFunctionsReady();
+                    
+                    if (!functionsReady) {
+                        console.error("필수 함수들이 로드되지 않았습니다.");
+                        return;
+                    }
+                    
+                    // Firebase 모듈들을 동적으로 import
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js");
+                    const { getAuth, signInAnonymously, onAuthStateChanged, signInWithCustomToken } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js");
+                    const { getFirestore, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+                    const { getFunctions, httpsCallable } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js");
+
+                    let auth, db, functions;
+                    
+                    // Firebase 초기화
+                    const firebaseConfig = {
+                      apiKey: "AIzaSyC2JV9KsIZ-M1crdnnxLfxyaRtGS1Brtcc",
+                      authDomain: "animal-math-game-6eec2.firebaseapp.com",
+                      projectId: "animal-math-game-6eec2",
+                      storageBucket: "animal-math-game-6eec2.firebasestorage.app",
+                      messagingSenderId: "104144283045",
+                      appId: "1:104144283045:web:f0a387d83292a0d508744c",
+                      measurementId: "G-M63W08193X"
+                    };
+                    const app = initializeApp(firebaseConfig);
+                    auth = getAuth(app);
+                    db = getFirestore(app);
+                    functions = getFunctions(app);
+
+                    console.log("Firebase 초기화 성공");
+
+                    window.firebase = { auth, db, functions, doc, getDoc, setDoc, collection, getDocs, writeBatch, runTransaction, deleteDoc, onSnapshot, httpsCallable };
+
+                    onAuthStateChanged(auth, async (user) => {
+                        console.log("Auth 상태 변경:", user ? "로그인됨" : "로그아웃됨");
+                        if (user) {
+                            console.log("Firebase Auth User:", user.uid);
+                            console.log("onFirebaseReady 호출됨");
+                            
+                            window.currentUserId = user.uid;
+                            console.log("현재 사용자 ID 설정:", window.currentUserId);
+                            
+                            try {
+                                console.log("동물 데이터 로딩 시작...");
+                                await window.loadAnimalsFromJSON();
+                                console.log("명예의 전당 업데이트 시작...");
+                                await window.updateHallOfFame();
+                                console.log("초기화 완료");
+                            } catch (error) {
+                                console.error('초기화 오류:', error);
+                            }
+                            
+                            console.log("로그인 오버레이 표시");
+                            const overlayEl = document.getElementById('login-overlay');
+                            if (overlayEl) {
+                                overlayEl.style.display = 'flex';
+                            }
+                        } else {
+                             try {
+                                console.log("익명 로그인 시도...");
+                                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                                    await signInWithCustomToken(auth, __initial_auth_token);
+                                } else {
+                                    const result = await signInAnonymously(auth);
+                                    console.log("익명 로그인 성공:", result.user.uid);
+                                }
+                            } catch (error) {
+                                console.error("익명 로그인 실패:", error);
+                                alert("Firebase 인증 실패: " + error.message);
+                            }
+                        }
+                    });
+                } catch (error) {
+                    console.error("Firebase 초기화 실패:", error);
+                }
+            }, 500); // 500ms 대기 후 실행
+        });
+    </script>
 </body>
 </html>

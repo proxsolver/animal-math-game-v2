@@ -239,3 +239,11 @@ OSError: [Errno 98] Address already in use
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/general/level1.json HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /subjects/math/level1.json HTTP/1.1" 200 -
 10.12.199.86 - - [07/Sep/2025 04:05:56] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET / HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /function/game-data.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /function/main.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /function/game-functions.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /function/firebase-config.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /style.css HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:56] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:08:57] "GET /animals.json HTTP/1.1" 200 -

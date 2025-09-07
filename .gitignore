@@ -1,0 +1,16 @@
+# 로그 파일들
+*.log
+supervisord.pid
+supervisor.sock
+
+# 임시 파일들
+*.tmp
+*.temp
+
+# IDE 파일들
+.vscode/
+.idea/
+
+# OS 파일들
+.DS_Store
+Thumbs.db
