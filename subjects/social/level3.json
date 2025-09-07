@@ -1,0 +1,215 @@
+[
+  // ===== 서식지: 도시 (City) - 25개 =====
+  {
+    "subject": "social", "level": "advanced", "habitat": "city",
+    "question": "부엉이 시장님이 도시의 모든 동물들에게 세금을 내라고 했어요. 왜 모든 동물이 세금을 내야 할까요?",
+    "options": ["모두가 함께 사용하는 도로와 공원을 만들기 위해", "시장님 혼자 부자가 되기 위해", "벌을 주기 위해", "규칙이 그냥 그래서"],
+    "answer": 0, "explanation": "세금은 모든 시민이 함께 이용하는 공공시설과 서비스를 위해 내는 중요한 돈이에요.",
+    "keywords": ["세금", "공공 서비스", "의무"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "city",
+    "question": "고양이 빵집 옆에 더 싸고 맛있는 강아지 빵집이 생겼어요. 이것을 무엇이라고 부를까요?",
+    "options": ["경쟁", "협동", "독점", "비밀"],
+    "answer": 0, "explanation": "더 좋은 물건이나 서비스를 제공하기 위해 가게들이 노력하는 것을 '경쟁'이라고 해요.",
+    "keywords": ["경쟁", "시장", "가격"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "city",
+    "question": "은행에 돈을 맡겼더니, 1년 뒤에 돈이 조금 늘어났어요! 이렇게 원래 맡긴 돈보다 더 받는 돈을 무엇이라고 부를까요?",
+    "options": ["이자", "세금", "벌금", "용돈"],
+    "answer": 0, "explanation": "은행은 돈을 맡겨준 것에 대한 보상으로 '이자'를 지급해요.",
+    "keywords": ["은행", "이자", "저축"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "city",
+    "question": "토끼가 당근 농사를 더 잘 짓기 위해 좋은 흙과 비료를 샀어요. 더 큰 이익을 위해 돈을 사용하는 이것을 무엇이라고 할까요?",
+    "options": ["투자", "소비", "낭비", "기부"],
+    "answer": 0, "explanation": "미래에 더 많은 것을 얻기 위해 현재의 자원을 사용하는 것을 '투자'라고 해요.",
+    "keywords": ["투자", "이익", "생산"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "city",
+    "question": "너구리 아저씨가 도시의 모든 과일 가게를 사들여서 혼자만 과일을 팔아요. 이런 상황을 무엇이라고 할까요?",
+    "options": ["독점", "경쟁", "협력", "파산"],
+    "answer": 0, "explanation": "하나의 가게나 회사만 물건을 팔게 되어 가격을 마음대로 정하는 것을 '독점'이라고 해요.",
+    "keywords": ["독점", "시장", "가격"], "difficulty_score": 9
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "city", "question": "펭귄 택배회사가 드론을 이용해 배송을 시작하자, 다른 택배회사들도 드론을 따라 샀어요. 이처럼 기술이 산업 전체에 퍼지는 현상을 무엇이라고 할까요?", "options": ["기술의 확산", "기술의 독점", "경쟁의 포기", "가격 담합"], "answer": 0, "explanation": "하나의 뛰어난 기술이 나타나면 다른 회사들도 배우고 따라 하면서 산업 전체가 발전해요.", "keywords": ["기술", "혁신", "확산"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "도시의 물가가 계속 올라서, 작년에 100원 하던 아이스크림이 올해는 200원이 되었어요. 이 현상은 무엇일까요?", "options": ["인플레이션", "디플레이션", "환율 상승", "경기 침체"], "answer": 0, "explanation": "물건들의 가격이 전체적으로 계속 오르는 현상을 '인플레이션'이라고 해요.", "keywords": ["인플레이션", "물가", "화폐 가치"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "외국에서 인기가 많은 우리나라 자동차를 파는 것은 '수출'입니다. 반대로 외국에서 로봇 장난감을 사 오는 것은 무엇일까요?", "options": ["수입", "국내 생산", "해외 투자", "기술 제휴"], "answer": 0, "explanation": "나라와 나라 사이에 물건을 사고파는 '무역'에는 수출과 수입이 있어요.", "keywords": ["무역", "수출", "수입"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "아빠가 월급을 받으면 일부를 떼어 나라에 돈을 내요. 이 돈을 '소득세'라고 합니다. 소득세는 어떤 세금일까요?", "options": ["개인이 번 돈(소득)에 대한 세금", "물건을 살 때 내는 세금", "집을 가졌을 때 내는 세금", "회사가 내는 세금"], "answer": 0, "explanation": "'소득세'는 개인이 일을 해서 번 소득의 일부를 사회를 위해 내는 세금이에요.", "keywords": ["세금", "소득세", "납세"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "곰 아저씨는 빵을 팔고, 여우 아저씨는 옷을 팔아요. 이렇게 돈이 여러 동물들 사이를 계속 돌고 도는 것을 무엇이라고 할까요?", "options": ["경제 순환", "돈의 흐름", "시장 원리", "자본 축적"], "answer": 0, "explanation": "나의 소비가 다른 사람의 소득이 되고, 그 소득이 또 다른 소비로 이어지는 것을 '경제 순환'이라고 해요.", "keywords": ["경제 순환", "소비", "소득"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "도시의 실업률이 높아졌다는 뉴스가 나왔어요. '실업률'은 무엇을 의미할까요?", "options": ["일하고 싶지만 일자리가 없는 사람의 비율", "도시에서 일하는 사람의 비율", "돈을 많이 버는 사람의 비율", "학생들의 비율"], "answer": 0, "explanation": "'실업률'은 나라의 경제가 얼마나 건강한지를 보여주는 중요한 지표 중 하나예요.", "keywords": ["실업률", "고용", "경기"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "정부에서 경기가 너무 나빠지자, 일부러 큰 다리를 짓는 공사를 시작했어요. 왜 그랬을까요?", "options": ["사람들에게 일자리를 만들어주기 위해", "예쁜 다리가 보고 싶어서", "돈을 쓰기 위해", "자랑하기 위해"], "answer": 0, "explanation": "정부는 일자리를 만들고 소비를 늘리기 위해 일부러 공공사업을 벌여 '경기'를 조절하기도 해요.", "keywords": ["정부 정책", "경기 부양", "공공사업"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "수달이가 만든 앱이 큰 인기를 끌자, 큰 회사가 수달이의 회사를 사들였어요. 이것을 무엇이라고 할까요?", "options": ["인수합병(M&A)", "독점", "담합", "기술 유출"], "answer": 0, "explanation": "회사가 다른 회사를 사거나 합쳐서 더 큰 회사로 성장하는 것을 '인수합병'이라고 해요.", "keywords": ["인수합병", "기업", "성장"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "은행이 돈이 필요한 회사에게 돈을 빌려주고 이자를 받아요. 은행은 어떤 역할을 하는 걸까요?", "options": ["돈이 필요한 곳에 잘 흘러가도록 돕는 역할", "돈을 안전하게 보관만 하는 역할", "돈을 그냥 나눠주는 역할", "돈을 뺏는 역할"], "answer": 0, "explanation": "은행은 돈이 남는 사람과 필요한 사람(회사)을 연결해 경제 전체가 잘 돌아가게 하는 중요한 역할을 해요.", "keywords": ["은행", "금융", "중개"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "어떤 회사가 만든 주식을 사면, 나도 그 회사의 작은 주인이 될 수 있어요. 이 주식의 가격은 어떻게 결정될까요?", "options": ["회사의 미래 가치와 사람들의 기대에 따라", "사장님이 마음대로", "나라에서 정해줌", "주식의 색깔에 따라"], "answer": 0, "explanation": "주식의 가격은 그 회사가 앞으로 돈을 잘 벌 것이라는 기대감에 따라 계속 변해요.", "keywords": ["주식", "투자", "가격 결정"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "변호사 햄스터는 법률 '서비스'를 팔고, 의사 두더지는 의료 '서비스'를 팔아요. 서비스업의 특징은 무엇일까요?", "options": ["눈에 보이지 않는 가치를 판다", "공장에서 만든 물건을 판다", "외국에서 수입한 것을 판다", "농사지은 것을 판다"], "answer": 0, "explanation": "서비스업은 물건이 아닌, 사람의 지식, 기술, 경험 등 보이지 않는 가치를 제공하는 산업이에요.", "keywords": ["서비스업", "산업", "가치"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "도시의 모든 빵집 주인들이 몰래 만나서 빵 가격을 모두 똑같이 올리기로 약속했어요. 이것은 왜 나쁜 행동일까요?", "options": ["공정한 경쟁을 해치는 행동이라서", "약속을 잘 지켜서", "빵을 비싸게 팔아서", "밤에 몰래 만나서"], "answer": 0, "explanation": "가게들끼리 짜고 가격을 마음대로 올리는 '담합'은 소비자의 선택을 막는 불공정한 행동이에요.", "keywords": ["담합", "불공정 거래", "경쟁"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "큰 회사가 환경을 오염시키는 공장을 지으려고 해요. 동네 주민들이 반대하는 이유는 무엇일까요?", "options": ["깨끗한 환경에서 살 권리를 지키기 위해", "회사가 돈 버는 게 싫어서", "공장이 시끄러워서", "공장이 못생겨서"], "answer": 0, "explanation": "기업의 이익 추구 활동이 주민들의 행복이나 환경 같은 사회적 가치와 충돌할 수 있어요.", "keywords": ["사회적 책임", "환경", "기업"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "새로운 지하철역이 생긴다는 소문이 돌자, 그 동네의 집값이 오르기 시작했어요. 왜 그럴까요?", "options": ["살기 편해질 거라는 기대감 때문에", "집이 더 예뻐져서", "사람들이 이사를 가서", "지하철 회사가 돈을 줘서"], "answer": 0, "explanation": "미래의 가치에 대한 '기대 심리'가 현재의 부동산 가격에 큰 영향을 미쳐요.", "keywords": ["부동산", "기대 심리", "가격"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "브랜드가 있는 운동화는 비슷한 다른 운동화보다 훨씬 비싸요. 그 이유는 무엇일까요?", "options": ["브랜드가 주는 믿음과 만족감 때문에", "품질이 항상 더 좋아서", "만들기 더 어려워서", "광고를 많이 해서"], "answer": 0, "explanation": "상품의 품질 외에도, 브랜드가 가진 이미지나 신뢰 같은 보이지 않는 '가치'가 가격에 포함돼요.", "keywords": ["브랜드 가치", "가격", "마케팅"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "환율이 올랐다는 것은, 우리나라 돈의 가치가 다른 나라 돈에 비해 어떻게 되었다는 뜻일까요?", "options": ["가치가 떨어졌다", "가치가 올라갔다", "똑같다", "사라졌다"], "answer": 0, "explanation": "환율이 오르면 해외여행을 갈 때 더 많은 돈이 필요하고, 수입품의 가격이 비싸져요.", "keywords": ["환율", "화폐 가치", "무역"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "정부가 부자들에게 세금을 더 많이 걷고, 그 돈으로 가난한 사람들을 돕는 정책을 무엇이라고 할까요?", "options": ["소득 재분배", "시장 자유화", "무상 복지", "공기업 민영화"], "answer": 0, "explanation": "정부는 세금을 이용해 소득 격차를 줄이고 사회 전체의 안정을 꾀하는 '소득 재분배' 역할을 해요.", "keywords": ["소득 재분배", "세금", "복지"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "자동차가 많아지면 길이 막히고 공기가 나빠져요. 이것처럼 어떤 경제활동이 다른 사람에게 의도치 않은 피해를 주는 것을 무엇이라고 할까요?", "options": ["부정적 외부효과", "긍정적 외부효과", "파급 효과", "전염 효과"], "answer": 0, "explanation": "정부는 환경오염 부담금처럼 세금을 이용해 '부정적 외부효과'를 줄이려고 노력해요.", "keywords": ["외부효과", "환경오염", "비용"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "최저임금 제도는 왜 필요할까요?", "options": ["노동자들이 최소한의 생활을 보장받게 하기 위해", "기업들이 돈을 더 많이 벌게 하기 위해", "물가를 올리기 위해", "일을 못하게 하기 위해"], "answer": 0, "explanation": "'최저임금'은 노동자들이 인간다운 생활을 할 수 있도록 나라에서 법으로 임금의 최저 수준을 정해주는 제도예요.", "keywords": ["최저임금", "노동권", "제도"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "city", "question": "신용카드를 많이 쓰면, 나중에 갚을 돈이 많아져 위험해질 수 있어요. 나의 소득보다 많은 돈을 쓰는 것을 무엇이라고 할까요?", "options": ["과소비", "합리적 소비", "계획 소비", "가치 소비"], "answer": 0, "explanation": "자신의 소득 범위 안에서 계획적으로 소비하는 습관은 매우 중요해요.", "keywords": ["과소비", "신용", "부채"], "difficulty_score": 7 },
+
+  // ===== 서식지: 농장 (Farm) - 20개 =====
+  {
+    "subject": "social", "level": "advanced", "habitat": "farm",
+    "question": "돼지 농장 주인이 내년에 돼지고기 가격이 오를 것이라 예상하고, 돼지 수를 늘렸어요. 이것은 무엇에 기반한 결정일까요?",
+    "options": ["미래 시장 예측", "현재의 기분", "작년의 결과", "이웃의 조언"],
+    "answer": 0, "explanation": "사업가는 시장의 미래를 '예측'하고, 그에 맞춰 현재의 생산량을 조절하는 투자를 해요.",
+    "keywords": ["예측", "투자", "공급 조절"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "farm",
+    "question": "A 농장은 옥수수만, B 농장은 콩만 심어요. 이렇게 한 가지 작물만 전문적으로 키우는 것을 무엇이라고 할까요?",
+    "options": ["특화 농업", "혼합 농업", "자급자족", "취미 농업"],
+    "answer": 0, "explanation": "'특화'는 가장 잘할 수 있는 것에 집중해 생산 효율을 높이는 중요한 경제 원리예요.",
+    "keywords": ["특화", "생산성", "분업"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "farm",
+    "question": "농부가 수확한 옥수수를 팔아 번 돈으로 트랙터를 샀어요. 여기서 트랙터는 무엇에 해당할까요?",
+    "options": ["자본(재)", "소비(재)", "생산(물)", "부채"],
+    "answer": 0, "explanation": "다른 상품을 생산하기 위해 사용되는 기계, 도구, 건물 등을 '자본' 또는 '자본재'라고 해요.",
+    "keywords": ["자본", "생산 수단", "투자"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "farm",
+    "question": "올해 배추 가격이 폭락해서, 농부들이 수확하는 비용이 배추를 파는 값보다 더 비싸졌어요. 농부는 어떻게 할까요?",
+    "options": ["수확을 포기하고 밭을 갈아엎는다", "더 비싼 값에 팔릴 때까지 기다린다", "무료로 나눠준다", "정부에 항의한다"],
+    "answer": 0, "explanation": "생산 비용보다 판매 가격이 낮으면, 손해를 줄이기 위해 생산을 중단하는 선택을 할 수도 있어요.",
+    "keywords": ["손익분기점", "생산 비용", "가격"], "difficulty_score": 9
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "farm",
+    "question": "외국과의 '자유무역협정(FTA)'으로 값싼 외국산 오렌지가 많이 들어오게 되었어요. 우리나라 오렌지 농가는 어떻게 될까요?",
+    "options": ["가격 경쟁으로 어려움을 겪을 수 있다", "더 부자가 된다", "아무 영향이 없다", "오렌지 농사를 그만둔다"],
+    "answer": 0, "explanation": "'자유무역'은 소비자에게는 이익이 될 수 있지만, 국내 생산자에게는 큰 위협이 될 수도 있어요.",
+    "keywords": ["자유무역", "경쟁", "시장 개방"], "difficulty_score": 9
+  },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농부가 생산한 파프리카를 예쁘게 포장하고 '햇살농장'이라는 브랜드를 붙여 팔았어요. 왜 이런 일을 할까요?", "options": ["다른 파프리카와 다르게 보이게 하려고", "더 무겁게 만들려고", "가격을 낮추려고", "보관을 쉽게 하려고"], "answer": 0, "explanation": "좋은 품질에 '브랜드' 이미지를 더해, 다른 상품과 차별화하고 더 높은 가치를 인정받으려 해요.", "keywords": ["브랜드", "차별화", "마케팅"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "닭 농장에서 나온 닭의 배설물을 거름으로 만들어 채소밭에 사용해요. 이것은 경제적으로 어떤 활동일까요?", "options": ["자원의 재활용", "환경오염", "불필요한 노동", "위험한 행동"], "answer": 0, "explanation": "생산 과정에서 나오는 부산물을 다른 생산에 재활용하여 비용을 줄이고 효율을 높일 수 있어요.", "keywords": ["재활용", "순환 경제", "비용 절감"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농산물 가격이 너무 자주 바뀌자, 농부가 내년의 수입을 미리 약속받고 대기업에 작물을 팔기로 계약했어요. 이것을 무엇이라고 할까요?", "options": ["선물 거래 또는 계약 재배", "현물 거래", "밀수", "기부"], "answer": 0, "explanation": "미래의 가격 변동 위험을 줄이기 위해, 현재 시점에서 미래의 가격과 수량을 미리 약속하는 '선물 거래' 방식이 있어요.", "keywords": ["선물 거래", "위험 관리", "계약 재배"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "지구 온난화로 날씨가 변해서, 예전에는 키우지 못했던 새로운 과일을 키우게 되었어요. 이것은 농업에 어떤 변화를 가져올까요?", "options": ["새로운 소득 기회가 될 수 있다", "모든 농가가 망하게 된다", "땅이 오염된다", "과일 가격이 폭락한다"], "answer": 0, "explanation": "환경 변화라는 위기 속에서도, 변화에 잘 적응하면 새로운 시장을 만들어낼 '기회'가 생길 수 있어요.", "keywords": ["기회", "변화 적응", "위기"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "도시의 소비자들이 인터넷으로 주문하면, 농장에서 바로 다음 날 집으로 배송해주는 시스템은 무엇을 줄인 걸까요?", "options": ["복잡한 유통 단계", "생산 비용", "농부의 노동 시간", "상품의 무게"], "answer": 0, "explanation": "생산자와 소비자를 직접 연결하는 '직거래'는 유통 비용을 줄여 모두에게 이익을 줄 수 있어요.", "keywords": ["유통 혁신", "직거래", "비용 절감"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "정부에서 '농업 직불금'을 농부에게 직접 주는 이유는 무엇일까요?", "options": ["농가의 소득을 보장하고 식량 안보를 지키기 위해", "농부들이 고마워서", "도시로 이사 가게 하려고", "농사를 그만두게 하려고"], "answer": 0, "explanation": "쌀처럼 국가에 꼭 필요한 식량을 안정적으로 생산하도록, 정부가 농가의 소득을 직접 보전해주는 제도예요.", "keywords": ["정부 정책", "직불금", "식량 안보"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "소를 키우는 농부가 소의 출생부터 판매까지 모든 정보를 기록하고 관리하는 '이력 추적제'는 소비자에게 어떤 도움을 줄까요?", "options": ["안심하고 안전한 소고기를 고를 수 있게 한다", "소고기 가격을 낮춘다", "소고기를 더 맛있게 만든다", "소를 더 빨리 자라게 한다"], "answer": 0, "explanation": "생산 과정의 정보를 투명하게 공개하면, 소비자는 상품을 더 '신뢰'하고 구매할 수 있게 돼요.", "keywords": ["신뢰", "정보 공개", "소비자 안전"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농부가 밭의 일부에는 콩을 심고, 다른 일부에는 배추를 심었어요. 왜 한 가지만 심지 않았을까요?", "options": ["한 작물 가격이 폭락할 위험을 줄이기 위해", "여러 가지를 키우는 게 재밌어서", "씨앗이 남아서", "땅이 달라서"], "answer": 0, "explanation": "한 곳에 모든 것을 투자하지 않고 여러 곳에 나누어 투자하는 것을 '위험 분산'이라고 해요.", "keywords": ["위험 분산", "포트폴리오", "투자"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "인공지능 로봇이 밭을 돌아다니며 잡초만 쏙쏙 뽑아줘요. 이것은 농업 생산에 어떤 영향을 미칠까요?", "options": ["생산 비용을 줄이고 효율을 높인다", "농부의 일자리를 모두 빼앗는다", "농작물의 품질을 떨어뜨린다", "땅을 오염시킨다"], "answer": 0, "explanation": "새로운 기술의 도입은 노동력을 절감하고 생산성을 획기적으로 높여 농업을 발전시켜요.", "keywords": ["기술 혁신", "자동화", "생산성"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농부가 자신이 키운 농작물로 잼이나 주스를 만들어 팔아요. 이것을 '농산물 가공'이라고 합니다. 왜 이런 일을 할까요?", "options": ["더 높은 가격을 받고 팔기 위해", "농작물이 남아서", "만드는 게 즐거워서", "보관하기 어려워서"], "answer": 0, "explanation": "단순한 농산물에 가공 기술을 더해 새로운 가치, 즉 '부가가치'를 만들어 더 높은 소득을 올려요.", "keywords": ["부가가치", "가공", "6차 산업"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "같은 품질의 사과인데, A상점은 1000원, B상점은 1200원에 팔아요. 대부분의 사람들은 어디로 갈까요? 이 원리를 무엇이라고 할까요?", "options": ["일물일가의 법칙", "수요의 법칙", "공급의 법칙", "가격차별의 원리"], "answer": 0, "explanation": "자유로운 시장에서는 같은 물건의 가격은 하나로 모이려는 경향이 있어요. 이를 '일물일가의 법칙'이라고 해요.", "keywords": ["시장 원리", "가격", "일물일가의 법칙"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "외국에서 발생한 가축 전염병 때문에 소고기 수입이 금지되었어요. 우리나라 한우 가격은 어떻게 될까요?", "options": ["올라간다", "내려간다", "변함없다", "알 수 없다"], "answer": 0, "explanation": "대체할 수 있는 상품(수입 소고기)의 공급이 줄어들면, 원래 있던 상품(한우)을 찾는 사람이 많아져 가격이 올라요.", "keywords": ["대체재", "수요와 공급", "가격"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "마을 청년들이 힘을 합쳐 '영농조합법인'을 만들었어요. 왜 개인으로 농사짓지 않고 법인을 만들었을까요?", "options": ["함께 기계를 사고, 함께 팔아서 이익을 높이기 위해", "책임을 회피하기 위해", "세금을 덜 내기 위해", "마을에서 시켜서"], "answer": 0, "explanation": "개인이 하기 힘든 일을 법인 형태로 뭉쳐 '규모의 경제'를 실현하고 경쟁력을 높일 수 있어요.", "keywords": ["법인", "규모의 경제", "협동"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농부가 생산한 농산물의 가격은 농부의 소득이 됩니다. 그런데 그 가격에는 유통 비용, 포장 비용 등이 포함되어 있어요. 농부의 실제 이익은 무엇이라고 할까요?", "options": ["순수익", "매출", "생산량", "시장가격"], "answer": 0, "explanation": "총 판매금액(매출)에서 모든 비용을 뺀 금액이 농부에게 실제로 남는 돈, 즉 '순수익'이에요.", "keywords": ["순수익", "매출", "비용"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "farm", "question": "도시 아이들이 주말에 농장에 와서 직접 농사 체험을 하고 돈을 내요. 농부는 농사 외에 무엇을 판 것일까요?", "options": ["교육과 즐거움이라는 서비스", "흙과 씨앗", "농기구", "시간"], "answer": 0, "explanation": "농업(1차산업)과 서비스(3차산업)를 결합해 새로운 소득을 만드는 것을 '6차 산업'이라고 해요.", "keywords": ["6차 산업", "서비스", "부가가치"], "difficulty_score": 8 },
+
+  // ===== 서식지: 숲 & 바다 (Forest & Ocean) - 25개 =====
+  {
+    "subject": "social", "level": "advanced", "habitat": "forest",
+    "question": "다람쥐가 도토리 1개를 바로 먹지 않고 땅에 심었어요. 이 행동을 경제학적으로 무엇이라고 볼 수 있을까요?",
+    "options": ["소비를 미루고 미래를 위한 투자를 했다", "음식을 낭비했다", "재산을 숨겼다", "친구에게 선물했다"],
+    "answer": 0, "explanation": "현재의 만족(소비)을 포기하고 미래에 더 큰 보상(더 많은 도토리)을 기대하는 행위가 바로 '투자'의 기본 원리예요.",
+    "keywords": ["투자", "기회비용", "미래 가치"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "ocean",
+    "question": "모든 어부들이 자기만 생각해서 어린 물고기까지 다 잡아버리면, 나중에는 바다에 물고기가 없어질 거예요. 이 상황을 무엇이라고 할까요?",
+    "options": ["공유지의 비극", "규모의 경제", "외부 효과", "정보의 비대칭"],
+    "answer": 0, "explanation": "주인이 없는 공동의 자원을 각자의 이익만 생각해서 마구 사용하면 결국 모두가 피해를 입게 되는 것을 '공유지의 비극'이라고 해요.",
+    "keywords": ["공유지의 비극", "공유 자원", "지속 가능성"], "difficulty_score": 9
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "forest",
+    "question": "토끼는 당근을 뽑는 데 하루가 걸리고, 거북이는 당근을 옮기는 데 하루가 걸려요. 둘이 힘을 합치면 하루 만에 모든 일을 끝낼 수 있어요. 이것은 무엇의 효과일까요?",
+    "options": ["분업을 통한 효율성 증대", "경쟁을 통한 발전", "투자를 통한 이익 창출", "저축을 통한 안정"],
+    "answer": 0, "explanation": "각자 잘하는 일에 집중하여 일을 나누어(분업) 하면 전체의 생산 효율이 크게 올라가요.",
+    "keywords": ["분업", "효율성", "협업"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "ocean",
+    "question": "고래는 힘이 세고, 새우는 몸이 작아 바위틈을 잘 다녀요. 둘이 서로에게 필요한 것을 도와주며 함께 살 때, 이를 무엇이라고 할까요?",
+    "options": ["공생", "경쟁", "기생", "독점"],
+    "answer": 0, "explanation": "서로 다른 능력을 가진 주체들이 협력하여 양쪽 모두에게 이익이 되는 관계를 맺는 것을 '공생'이라고 해요.",
+    "keywords": ["공생", "협력", "상호 이익"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "forest",
+    "question": "사자가 숲의 모든 동물을 다스리며, 먹이를 나누어주는 방식과 세금을 정해요. 이것은 어떤 경제 체제와 가장 비슷할까요?",
+    "options": ["계획 경제", "시장 경제", "혼합 경제", "자급자족 경제"],
+    "answer": 0, "explanation": "중앙의 권력자가 모든 자원의 분배와 생산을 계획하고 명령하는 경제 체제를 '계획 경제'라고 해요.",
+    "keywords": ["경제 체제", "계획 경제", "통제"], "difficulty_score": 9
+  },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "깊은 바닷속에서만 발견되는 희귀한 보석은 왜 비쌀까요?", "options": ["원하는 사람은 많은데 양이 적어서(희소성)", "아무도 원하지 않아서", "너무 흔해서", "만들기 쉬워서"], "answer": 0, "explanation": "수요에 비해 공급이 부족한 '희소성'이 있는 재화는 높은 가치를 가지게 돼요.", "keywords": ["희소성", "수요와 공급", "가치"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "곰이 낮잠을 자는 대신 꿀을 따러 갔어요. 이때 곰이 포기한 '달콤한 낮잠'을 경제학적으로 무엇이라고 할까요?", "options": ["기회비용", "매몰비용", "고정비용", "변동비용"], "answer": 0, "explanation": "어떤 것을 선택했을 때, 그로 인해 포기해야만 하는 다른 선택의 가치를 '기회비용'이라고 해요.", "keywords": ["기회비용", "선택", "포기"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "어떤 어부는 항상 다니던 길로만 다니고, 어떤 어부는 아무도 가보지 않은 먼바다로 떠났어요. 먼바다로 떠난 어부가 감수해야 하는 것은 무엇일까요?", "options": ["더 큰 위험(리스크)", "더 적은 물고기", "더 많은 경쟁자", "더 짧은 조업 시간"], "answer": 0, "explanation": "더 큰 이익(하이 리턴)을 얻기 위해서는, 그만큼 더 큰 위험(하이 리스크)을 감수해야 할 때가 많아요.", "keywords": ["위험(리스크)", "수익", "투자"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "여우가 숲속 동물들에게 '곧 큰 비가 와서 열매가 다 떨어질 것'이라고 거짓 소문을 냈어요. 열매 시장은 어떻게 될까요?", "options": ["동물들이 불안해서 열매를 미리 사재기한다", "열매 가격이 떨어진다", "아무도 열매를 사지 않는다", "여우가 존경을 받는다"], "answer": 0, "explanation": "불확실하고 잘못된 '정보'는 시장을 혼란스럽게 만들고 비합리적인 행동을 유발할 수 있어요.", "keywords": ["정보의 비대칭", "시장 실패", "루머"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "바다거북이 알을 낳는 해변에 쓰레기장이 생겼어요. 거북이에게는 피해가 가지만 쓰레기를 버린 공장은 아무런 대가를 치르지 않아요. 이것은 무엇의 예시일까요?", "options": ["시장 실패 (외부 효과)", "완전 경쟁 시장", "정부의 성공", "합리적 선택"], "answer": 0, "explanation": "어떤 경제 활동의 비용을 그 활동과 관계없는 제3자가 부담하게 되는 '외부 효과'는 '시장 실패'의 원인이 돼요.", "keywords": ["시장 실패", "외부 효과", "환경오염"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "까마귀는 반짝이는 것을 모으는 습성이 있어요. 까마귀에게 조약돌은 '사용가치'가 높을까요, '교환가치'가 높을까요?", "options": ["사용가치", "교환가치", "둘 다 높다", "둘 다 낮다"], "answer": 0, "explanation": "'사용가치'는 내가 사용하면서 느끼는 만족감이고, '교환가치'는 다른 것과 바꿀 때의 가치예요. 까마귀에게는 그저 만족감이 중요해요.", "keywords": ["가치", "사용가치", "교환가치"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "태풍이 지나간 후, 조개껍데기가 해변에 엄청나게 많이 밀려왔어요. 조개껍데기의 가치는 어떻게 될까요?", "options": ["떨어진다", "올라간다", "그대로다", "사라진다"], "answer": 0, "explanation": "공급이 갑자기 크게 늘어나면, 물건의 희소성이 떨어져 가치와 가격이 하락하게 돼요.", "keywords": ["공급", "희소성", "가격"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "원숭이 사회에서는 바나나를 돈처럼 사용해요. 그런데 어떤 원숭이가 바나나를 아주 많이 따서 혼자 다 가지게 되었어요. 어떤 문제가 생길까요?", "options": ["부의 불평등이 심해진다", "모두가 행복해진다", "바나나 가치가 올라간다", "원숭이들이 단결한다"], "answer": 0, "explanation": "자원(부)이 소수에게만 집중되면, 사회 전체의 불만과 갈등이 커지는 '부의 불평등' 문제가 발생해요.", "keywords": ["부의 불평등", "분배", "사회 문제"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "돌고래는 초음파로 물고기 떼를 찾고, 상어는 냄새로 먹이를 찾아요. 각자 다른 방식으로 정보를 얻는 것을 무엇이라고 할까요?", "options": ["정보 탐색", "자원 낭비", "우연한 발견", "위험한 행동"], "answer": 0, "explanation": "경제 주체들은 저마다의 방법으로 '정보'를 탐색하고, 더 정확한 정보를 가진 쪽이 유리한 결정을 내릴 수 있어요.", "keywords": ["정보 탐색", "의사결정", "경쟁 우위"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "불이 났을 때 모든 동물이 힘을 합쳐 불을 껐어요. 하지만 아무도 나서지 않고 '다른 동물이 끄겠지'라고 생각했다면 어떻게 됐을까요? 이 현상을 무엇이라고 할까요?", "options": ["무임승차 문제", "정보의 비대칭", "도덕적 해이", "공유지의 비극"], "answer": 0, "explanation": "대가 없이 이익만 얻으려는 '무임승차' 문제가 발생하면, 모두에게 꼭 필요한 공공재가 생산되지 않을 수 있어요.", "keywords": ["무임승차", "공공재", "책임"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "해적 물고기들이 나타나 다른 물고기들의 먹이를 빼앗아 가요. 이 바다의 경제는 어떻게 될까요?", "options": ["위축된다", "발전한다", "안정된다", "상관없다"], "answer": 0, "explanation": "재산권이 보호되지 않고 약탈이 일어나는 사회에서는 아무도 열심히 생산 활동을 하려 하지 않아 경제가 '위축'돼요.", "keywords": ["재산권", "법과 질서", "경제 성장"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "가뭄이 들어 숲의 모든 물이 마르자, 동물들은 물을 찾아 다른 곳으로 떠나기 시작했어요. 이것은 자원의 이동일까요, 노동력의 이동일까요?", "options": ["노동력의 이동", "자원의 이동", "자본의 이동", "기술의 이동"], "answer": 0, "explanation": "생산의 주체인 동물(사람)들이 더 나은 환경을 찾아 움직이는 것을 '노동력의 이동'이라고 볼 수 있어요.", "keywords": ["노동력 이동", "이주", "생산 요소"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "산호초는 아름다운 풍경으로 관광객(물고기)을 모으고, 다른 물고기들에게는 안전한 집이 되어줘요. 이처럼 하나가 여러 가지 역할을 하는 것을 무엇이라고 할까요?", "options": ["플랫폼", "공장", "시장", "정부"], "answer": 0, "explanation": "여러 생산자와 소비자가 모여 다양한 가치를 만들어내는 기반을 '플랫폼'이라고 할 수 있어요.", "keywords": ["플랫폼", "생태계", "다중 효과"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "가장 힘센 호랑이가 '내일부터 모든 고기는 나에게 먼저 바치고, 내가 나눠주겠다'고 선언했어요. 동물들의 경제적 자유는 어떻게 될까요?", "options": ["사라진다", "늘어난다", "상관없다", "보호받는다"], "answer": 0, "explanation": "개인이 자유롭게 물건을 만들고 파는 '경제적 자유'가 보장되지 않으면 시장 경제는 발전하기 어려워요.", "keywords": ["경제적 자유", "시장 경제", "통제"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "물고기를 잡는 그물을 아주 촘촘하게 만들면 당장은 많이 잡겠지만, 어린 물고기 씨가 말라요. 이것은 무엇과 무엇의 충돌일까요?", "options": ["단기적 이익과 장기적 지속가능성", "생산자와 소비자", "부자와 가난한 자", "수출과 수입"], "answer": 0, "explanation": "눈앞의 이익만 쫓다 보면, 미래의 더 큰 가치(지속가능성)를 해칠 수 있다는 점을 항상 생각해야 해요.", "keywords": ["지속 가능성", "단기 이익", "선택"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "늑대가 양을 잡아먹는 것은 자연의 섭리이지만, 양 주인에게는 '손실'입니다. 이처럼 보는 관점에 따라 경제적 의미가 달라지는 것을 무엇이라고 할까요?", "options": ["관점의 차이", "절대적 진리", "수학적 계산", "우연의 일치"], "answer": 0, "explanation": "경제 현상은 누가, 어떤 입장에서 보느냐에 따라 해석이 달라질 수 있는 사회과학의 특징을 가져요.", "keywords": ["관점", "해석", "사회과학"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "조류의 흐름을 잘 아는 늙은 거북이는, 젊은 거북이보다 더 쉽게 먹이가 있는 곳으로 갈 수 있어요. 늙은 거북이의 '지식과 경험'은 무엇에 해당할까요?", "options": ["무형자산", "유형자산", "부채", "소비재"], "answer": 0, "explanation": "눈에 보이지 않지만 경제적 가치를 만들어내는 지식, 기술, 브랜드 등을 '무형자산'이라고 해요.", "keywords": ["무형자산", "지식", "경험"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "버섯 전문가인 멧돼지가 독버섯과 식용버섯을 구분하는 방법을 다른 동물들에게 알려주었어요. 숲 전체의 경제에 어떤 영향을 미칠까요?", "options": ["생산성이 향상된다", "생산성이 하락한다", "위험이 증가한다", "아무 영향이 없다"], "answer": 0, "explanation": "지식과 정보가 널리 공유되면, 전체 사회의 위험은 줄어들고 생산성은 향상될 수 있어요.", "keywords": ["지식 공유", "생산성", "안전"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "ocean", "question": "정어리 떼는 포식자를 피하기 위해 뭉쳐 다녀요. 혼자일 때보다 뭉쳐있을 때 생존 확률이 높아지는 것을 경제학적으로 무엇이라고 할 수 있을까요?", "options": ["규모의 경제(안전)", "규모의 불경제", "독점적 지위", "경쟁의 심화"], "answer": 0, "explanation": "'규모의 경제'는 생산뿐만 아니라, 함께 뭉쳐서 위험을 줄이고 안전을 확보하는 데서도 나타날 수 있어요.", "keywords": ["규모의 경제", "안전", "협력"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "forest", "question": "매년 똑같은 나무 열매만 먹던 원숭이들이, 어느 날 새로운 과일을 발견하고 먹기 시작했어요. 원숭이들의 '이것'이 변한 것입니다.", "options": ["소비 패턴(기호)", "생산 능력", "저축 습관", "투자 전략"], "answer": 0, "explanation": "소비자들의 취향이나 유행이 변하면, 시장에서 잘 팔리는 상품의 종류도 바뀌게 돼요.", "keywords": ["기호 변화", "소비 패턴", "수요"], "difficulty_score": 7 },
+
+  // ===== 서식지: 집 (Home) - 25개 =====
+  {
+    "subject": "social", "level": "advanced", "habitat": "home",
+    "question": "아빠의 월급은 그대로인데, 아파트 관리비와 식비가 모두 올랐어요. 우리 가족이 쓸 수 있는 돈은 어떻게 될까요?",
+    "options": ["실질적으로 줄어든다", "실질적으로 늘어난다", "변화 없다", "알 수 없다"],
+    "answer": 0, "explanation": "월급(명목 소득)이 같아도 물가가 오르면, 실제로 살 수 있는 물건의 양(실질 소득)은 줄어들어요.",
+    "keywords": ["실질 소득", "물가", "인플레이션"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "home",
+    "question": "엄마가 용돈 1만 원으로 과자(5천 원)를 사거나, 저축(5천 원)을 할 수 있다고 했어요. 과자를 선택할 경우 '기회비용'은 무엇일까요?",
+    "options": ["저축했을 때 얻을 수 있었던 미래의 이익", "과자의 맛", "용돈 1만 원", "과자 값 5천 원"],
+    "answer": 0, "explanation": "기회비용은 단순히 포기한 돈이 아니라, 그 돈으로 할 수 있었던 가장 좋은 다른 선택의 가치를 의미해요.",
+    "keywords": ["기회비용", "선택", "가치"], "difficulty_score": 9
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "home",
+    "question": "우리 가족이 갑자기 아프거나 다칠 때를 대비해 매달 조금씩 돈을 내는 것을 무엇이라고 할까요?",
+    "options": ["보험", "저축", "투자", "기부"],
+    "answer": 0, "explanation": "'보험'은 예측 불가능한 미래의 위험에 대비하기 위해, 여러 사람이 함께 돈을 모아 공동으로 대처하는 제도예요.",
+    "keywords": ["보험", "위험 관리", "대비"], "difficulty_score": 7
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "home",
+    "question": "아빠가 '주택담보대출'을 받아서 아파트를 샀어요. '대출'이란 무엇을 의미할까요?",
+    "options": ["미래의 소득을 당겨서 현재에 쓰는 것", "은행에 돈을 기부하는 것", "나라에서 공짜로 돈을 받는 것", "현재의 소득을 미래에 쓰는 것"],
+    "answer": 0, "explanation": "대출(빚)은 미래의 내가 갚아야 할 돈을 미리 쓰는 것이므로, 신중한 계획이 필요해요.",
+    "keywords": ["대출", "부채", "신용"], "difficulty_score": 8
+  },
+  {
+    "subject": "social", "level": "advanced", "habitat": "home",
+    "question": "내가 용돈을 아껴 저축하면 은행은 그 돈으로 무엇을 할까요?",
+    "options": ["돈이 필요한 다른 사람이나 회사에 빌려준다", "금고에 안전하게 보관만 한다", "은행원들이 나누어 가진다", "모두 기부한다"],
+    "answer": 0, "explanation": "나의 작은 저축이 모여, 다른 사람의 투자 자금이 되고 나라 경제 전체를 움직이는 힘이 돼요.",
+    "keywords": ["금융 중개", "저축", "투자"], "difficulty_score": 8
+  },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "부모님께서 물건을 사실 때마다 '부가가치세'라는 세금을 함께 내고 있어요. 이 세금의 특징은 무엇일까요?", "options": ["물건값에 미리 포함되어 있다", "월급에서 직접 떼어간다", "연말에 한꺼번에 낸다", "부자들만 낸다"], "answer": 0, "explanation": "부가가치세는 모든 소비자가 물건을 살 때마다 자신도 모르게 내고 있는 간접적인 세금(간접세)이에요.", "keywords": ["세금", "부가가치세", "간접세"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "동생에게 용돈 1천 원을 주면서 '일주일 동안 방 청소를 매일 하면 돼'라고 조건을 걸었어요. 이것은 무엇에 해당할까요?", "options": ["계약", "선물", "명령", "협박"], "answer": 0, "explanation": "두 사람 이상이 서로의 의무와 권리를 약속하는 것을 '계약'이라고 하며, 우리 생활 곳곳에 존재해요.", "keywords": ["계약", "약속", "거래"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "우리 집 강아지를 돌봐주는 '펫시터'에게 돈을 지불했어요. 이것은 어떤 종류의 지출일까요?", "options": ["서비스에 대한 지출", "물건에 대한 지출", "교육에 대한 지출", "식사에 대한 지출"], "answer": 0, "explanation": "과거에는 없었던 새로운 종류의 '서비스'가 계속 생겨나고, 우리의 소비 생활도 다양해져요.", "keywords": ["서비스", "신종 직업", "소비"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "아빠가 회사에서 능력을 인정받아 월급이 올랐어요. 아빠의 어떤 '자산' 가치가 높아진 걸까요?", "options": ["인적 자산(인적 자본)", "부동산 자산", "금융 자산", "실물 자산"], "answer": 0, "explanation": "개인의 지식, 기술, 건강, 성실함 등은 돈을 버는 능력의 원천이 되는 중요한 '인적 자산'이에요.", "keywords": ["인적 자산", "능력", "소득"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "스마트폰이 처음 나왔을 때는 아주 비쌌지만, 지금은 훨씬 싸졌어요. 왜 그럴까요?", "options": ["만드는 기술이 발전해서 생산 비용이 줄었기 때문", "인기가 없어져서", "고장이 잘 나서", "크기가 작아져서"], "answer": 0, "explanation": "'기술 혁신'은 생산 비용을 낮추고, 그 혜택은 더 싼 가격으로 소비자에게 돌아가게 돼요.", "keywords": ["기술 혁신", "생산 비용", "가격"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "10년 뒤 대학 등록금을 마련하기 위해, 부모님은 지금 어떤 금융 상품에 가입하는 것이 가장 좋을까요?", "options": ["안전하면서 이자가 높은 장기 적금", "언제든 뺄 수 있는 보통 예금", "위험이 큰 주식", "현금으로 보관"], "answer": 0, "explanation": "돈의 사용 목적과 기간에 따라 위험성, 수익성, 안전성을 고려해 가장 알맞은 금융 상품을 선택해야 해요.", "keywords": ["재무 설계", "금융 상품", "목적"], "difficulty_score": 9 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "할아버지가 돌아가시면서 가족들에게 집과 땅을 남겨주셨어요. 이것을 무엇이라고 할까요?", "options": ["상속", "증여", "매매", "임대"], "answer": 0, "explanation": "재산을 가진 사람이 사망했을 때, 그 재산이 법에 따라 가족에게 넘어가는 것을 '상속'이라고 해요.", "keywords": ["상속", "재산", "이전"], "difficulty_score": 7 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "'세뱃돈 받은 걸로 주식 사줄게'라고 부모님이 말씀하셨어요. 이것은 저축과 어떻게 다를까요?", "options": ["원금을 잃을 수도 있는 투자 활동이다", "원금이 보장되는 안전한 활동이다", "은행에 돈을 맡기는 것이다", "돈을 바로 쓰는 것이다"], "answer": 0, "explanation": "저축은 원금의 안전성이 높지만, 투자는 원금 손실의 '위험'이 있는 대신 더 높은 수익을 기대할 수 있어요.", "keywords": ["투자", "저축", "위험"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "우리 집은 소득의 10%는 무조건 저축하고, 30%는 생활비로, 20%는 교육비로 쓰기로 규칙을 정했어요. 이것은 무엇을 하는 활동일까요?", "options": ["예산 수립 및 자산 배분", "가계부 정리", "소득 신고", "소비 평가"], "answer": 0, "explanation": "정해진 소득을 목적에 맞게 나누어 계획적으로 관리하는 것을 '자산 배분' 또는 '포트폴리오' 구성이라고 해요.", "keywords": ["자산 배분", "예산", "계획"], "difficulty_score": 8 },
+  { "subject": "social", "level": "advanced", "habitat": "home", "question": "똑같은 1만 원이라도, 부자에게보다 가난한 사람에게 훨씬 더 큰 만족감을 줘요. 이 현상을 무엇이라고 할까요?", "options": ["한계효용 체감의 법칙", "수요의 법칙", "공급의 법칙", "규모의 경제"], "answer": 0, "explanation": "재산이 늘어날수록, 추가로 얻는 1단위의 재화에서 느끼는 만족감은 점점 줄어드는 경향이 있어요.", "keywords": ["한계효용", "만족도", "법칙"], "difficulty_score": 9 }
+]+
