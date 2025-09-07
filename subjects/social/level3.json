@@ -1,5 +1,3 @@
-[
-  // ===== 서식지: 도시 (City) - 25개 =====
   {
     "subject": "social", "level": "advanced", "habitat": "city",
     "question": "부엉이 시장님이 도시의 모든 동물들에게 세금을 내라고 했어요. 왜 모든 동물이 세금을 내야 할까요?",
@@ -57,7 +55,6 @@
   { "subject": "social", "level": "advanced", "habitat": "city", "question": "최저임금 제도는 왜 필요할까요?", "options": ["노동자들이 최소한의 생활을 보장받게 하기 위해", "기업들이 돈을 더 많이 벌게 하기 위해", "물가를 올리기 위해", "일을 못하게 하기 위해"], "answer": 0, "explanation": "'최저임금'은 노동자들이 인간다운 생활을 할 수 있도록 나라에서 법으로 임금의 최저 수준을 정해주는 제도예요.", "keywords": ["최저임금", "노동권", "제도"], "difficulty_score": 8 },
   { "subject": "social", "level": "advanced", "habitat": "city", "question": "신용카드를 많이 쓰면, 나중에 갚을 돈이 많아져 위험해질 수 있어요. 나의 소득보다 많은 돈을 쓰는 것을 무엇이라고 할까요?", "options": ["과소비", "합리적 소비", "계획 소비", "가치 소비"], "answer": 0, "explanation": "자신의 소득 범위 안에서 계획적으로 소비하는 습관은 매우 중요해요.", "keywords": ["과소비", "신용", "부채"], "difficulty_score": 7 },
 
-  // ===== 서식지: 농장 (Farm) - 20개 =====
   {
     "subject": "social", "level": "advanced", "habitat": "farm",
     "question": "돼지 농장 주인이 내년에 돼지고기 가격이 오를 것이라 예상하고, 돼지 수를 늘렸어요. 이것은 무엇에 기반한 결정일까요?",
@@ -109,7 +106,6 @@
   { "subject": "social", "level": "advanced", "habitat": "farm", "question": "농부가 생산한 농산물의 가격은 농부의 소득이 됩니다. 그런데 그 가격에는 유통 비용, 포장 비용 등이 포함되어 있어요. 농부의 실제 이익은 무엇이라고 할까요?", "options": ["순수익", "매출", "생산량", "시장가격"], "answer": 0, "explanation": "총 판매금액(매출)에서 모든 비용을 뺀 금액이 농부에게 실제로 남는 돈, 즉 '순수익'이에요.", "keywords": ["순수익", "매출", "비용"], "difficulty_score": 7 },
   { "subject": "social", "level": "advanced", "habitat": "farm", "question": "도시 아이들이 주말에 농장에 와서 직접 농사 체험을 하고 돈을 내요. 농부는 농사 외에 무엇을 판 것일까요?", "options": ["교육과 즐거움이라는 서비스", "흙과 씨앗", "농기구", "시간"], "answer": 0, "explanation": "농업(1차산업)과 서비스(3차산업)를 결합해 새로운 소득을 만드는 것을 '6차 산업'이라고 해요.", "keywords": ["6차 산업", "서비스", "부가가치"], "difficulty_score": 8 },
 
-  // ===== 서식지: 숲 & 바다 (Forest & Ocean) - 25개 =====
   {
     "subject": "social", "level": "advanced", "habitat": "forest",
     "question": "다람쥐가 도토리 1개를 바로 먹지 않고 땅에 심었어요. 이 행동을 경제학적으로 무엇이라고 볼 수 있을까요?",
@@ -212,4 +208,4 @@
   { "subject": "social", "level": "advanced", "habitat": "home", "question": "'세뱃돈 받은 걸로 주식 사줄게'라고 부모님이 말씀하셨어요. 이것은 저축과 어떻게 다를까요?", "options": ["원금을 잃을 수도 있는 투자 활동이다", "원금이 보장되는 안전한 활동이다", "은행에 돈을 맡기는 것이다", "돈을 바로 쓰는 것이다"], "answer": 0, "explanation": "저축은 원금의 안전성이 높지만, 투자는 원금 손실의 '위험'이 있는 대신 더 높은 수익을 기대할 수 있어요.", "keywords": ["투자", "저축", "위험"], "difficulty_score": 8 },
   { "subject": "social", "level": "advanced", "habitat": "home", "question": "우리 집은 소득의 10%는 무조건 저축하고, 30%는 생활비로, 20%는 교육비로 쓰기로 규칙을 정했어요. 이것은 무엇을 하는 활동일까요?", "options": ["예산 수립 및 자산 배분", "가계부 정리", "소득 신고", "소비 평가"], "answer": 0, "explanation": "정해진 소득을 목적에 맞게 나누어 계획적으로 관리하는 것을 '자산 배분' 또는 '포트폴리오' 구성이라고 해요.", "keywords": ["자산 배분", "예산", "계획"], "difficulty_score": 8 },
   { "subject": "social", "level": "advanced", "habitat": "home", "question": "똑같은 1만 원이라도, 부자에게보다 가난한 사람에게 훨씬 더 큰 만족감을 줘요. 이 현상을 무엇이라고 할까요?", "options": ["한계효용 체감의 법칙", "수요의 법칙", "공급의 법칙", "규모의 경제"], "answer": 0, "explanation": "재산이 늘어날수록, 추가로 얻는 1단위의 재화에서 느끼는 만족감은 점점 줄어드는 경향이 있어요.", "keywords": ["한계효용", "만족도", "법칙"], "difficulty_score": 9 }
-]+
+
