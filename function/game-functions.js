@@ -240,38 +240,35 @@ function resetDailyMissions(today) {
 // 미션 진행도 업데이트
 async function updateMissionProgress(subject) {
     const mission = window.gameState.dailyMissions[subject];
-    if (mission.completed) return;
-    
+    if (mission.completed) return; // 이미 완료된 미션이면 실행하지 않음
+
     mission.solvedQuestions++;
     mission.stamps[mission.solvedQuestions - 1] = true;
-    
-    if (mission.solvedQuestions >= mission.targetQuestions) {
-        mission.completed = true;
-        showMissionCompleteNotification(subject);
-        giveCompletionReward(subject);
-        
-        // 미션 완료 시에만 Firebase에 저장
-        console.log(`[미션 완료] ${subject} 미션 완료로 Firebase 저장 시작`);
-        console.log(`[DEBUG] saveCurrentUserData 함수 타입:`, typeof window.saveCurrentUserData);
-        try {
-            if (typeof window.saveCurrentUserData === 'function') {
-                console.log(`[DEBUG] Firebase 저장 함수 호출 시작`);
-                await window.saveCurrentUserData();
-                console.log(`[DEBUG] Firebase 저장 함수 호출 완료`);
-            } else {
-                console.error('[오류] saveCurrentUserData 함수를 찾을 수 없습니다!');
-            }
-        } catch (error) {
-            console.error('[오류] Firebase 저장 중 오류:', error);
-        }
-    }
-    
-    // 대시보드의 미션 UI 업데이트
+
+    // 대시보드의 미션 UI를 실시간으로 업데이트
     updateMissionUI();
     
     // 퀴즈 페이지의 실시간 진행도도 업데이트
     updateQuizProgressDisplay(subject);
+
+    // 미션 완료 조건 체크
+    if (mission.solvedQuestions >= mission.targetQuestions) {
+        mission.completed = true;
+        
+        console.log(`%c[MISSION] ${subject} 미션 완료!`, 'color: #2a9d8f; font-weight: bold;');
+        
+        // 1. 미션 완료 시각적 알림 표시
+        showMissionCompleteNotification(subject);
+        
+        // 2. 보상 지급 및 UI 업데이트 (수정된 함수 호출)
+        giveCompletionReward(subject);
+        
+        // 3. 모든 상태 변경이 끝난 후, 최종 데이터를 Firebase에 저장
+        console.log('[MISSION] 모든 상태 업데이트 완료, Firebase 저장을 시작합니다.');
+        await saveCurrentUserData(); // 이전 답변에서 제안한 강화된 저장 함수
+    }
 }
+
 
 // 퀴즈 페이지의 진행도 실시간 업데이트
 function updateQuizProgressDisplay(subject) {
@@ -390,10 +387,16 @@ function updateGameStats() {
 
 // 미션 완료 보상
 function giveCompletionReward(subject) {
-    const rewardCoins = 100;
+    const rewardCoins = 100; // 미션 완료 보상 코인
     window.gameState.coins += rewardCoins;
+    
+    console.log(`%c[REWARD] 미션 완료 보상! +${rewardCoins} 코인 🪙`, 'color: #fca311; font-weight: bold;');
+    
+    // 알림 표시
     showNotification(`미션 완료 보상: ${rewardCoins} 코인! 🪙`, 'success');
-    updateGameStats();
+    
+    // 중요: 코인 상태가 변경되었으므로 즉시 UI를 업데이트합니다.
+    updateGameStats(); 
 }
 
 // 미션 UI 업데이트
