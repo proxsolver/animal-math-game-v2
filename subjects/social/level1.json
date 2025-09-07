@@ -201,6 +201,1806 @@
         "구매"
       ],
       "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "용돈을 받은 뒤 어디에 썼는지 기록하는 노트를 무엇이라고 할까요?",
+      "options": [
+        "그림일기장",
+        "용돈 기입장",
+        "알림장",
+        "숙제 공책"
+      ],
+      "answer": 1,
+      "explanation": "돈을 어디에 썼는지 기록하면 계획적인 소비를 할 수 있어요.",
+      "keywords": [
+        "용돈 기입장",
+        "계획",
+        "소비"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "옷이 작아져서 새로 사야 하는 것은 무엇에 해당할까요?",
+      "options": [
+        "필요",
+        "욕구",
+        "저축",
+        "투자"
+      ],
+      "answer": 0,
+      "explanation": "몸에 맞는 옷은 생활하는 데 꼭 '필요'한 것이에요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "의복"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "어려운 이웃을 돕기 위해 내 용돈의 일부를 내는 것을 무엇이라고 할까요?",
+      "options": [
+        "기부",
+        "소풍",
+        "숙제",
+        "게임"
+      ],
+      "answer": 0,
+      "explanation": "좋은 일에 대가 없이 돈이나 물건을 내놓는 것을 '기부'라고 해요.",
+      "keywords": [
+        "기부",
+        "나눔",
+        "이웃"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "새 학년에 올라가서 꼭 사야 하는 공책과 연필은 '필요'일까요, '욕구'일까요?",
+      "options": [
+        "필요",
+        "욕구",
+        "선물",
+        "상상"
+      ],
+      "answer": 0,
+      "explanation": "공부를 하기 위해 꼭 있어야 하는 학용품은 '필요'에 해당해요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "학용품"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "가족을 위해 맛있는 저녁 식사를 준비해주시는 부모님의 행동은 어떤 것일까요?",
+      "options": [
+        "사랑",
+        "경제 활동",
+        "돈",
+        "시장"
+      ],
+      "answer": 0,
+      "explanation": "가족을 위한 행동은 돈으로 계산할 수 없는 '사랑'과 '보살핌'이에요.",
+      "keywords": [
+        "가족",
+        "사랑",
+        "가사노동"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "가지고 있는 돈으로 무엇을 살지 즐겁게 고민하는 것을 무엇이라고 할까요?",
+      "options": [
+        "쇼핑",
+        "잠자기",
+        "울기",
+        "싸우기"
+      ],
+      "answer": 0,
+      "explanation": "가게에서 물건을 구경하고 사는 것을 '쇼핑'이라고 해요.",
+      "keywords": [
+        "쇼핑",
+        "소비",
+        "선택"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "동생의 심부름을 대신 해주고 용돈을 받기로 했어요. 이것을 무엇이라고 할까요?",
+      "options": [
+        "약속",
+        "거짓말",
+        "비밀",
+        "꿈"
+      ],
+      "answer": 0,
+      "explanation": "다른 사람과 어떤 일을 하기로 정하는 것을 '약속'이라고 해요.",
+      "keywords": [
+        "약속",
+        "거래",
+        "용돈"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "집에서 쓰는 물건이 고장 났을 때, 돈을 내고 고치는 사람을 불러요. 이것은 물건을 사는 것과 무엇이 다를까요?",
+      "options": [
+        "기술(서비스)을 산다",
+        "물건을 산다",
+        "선물을 받는다",
+        "기부를 한다"
+      ],
+      "answer": 0,
+      "explanation": "물건이 아닌, 다른 사람의 도움이나 기술을 돈으로 사는 것을 '서비스' 구매라고 해요.",
+      "keywords": [
+        "서비스",
+        "수리",
+        "소비"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "아빠가 월급을 받아서 가장 먼저 내는 돈 중에는 우리가 사는 집을 위해 내는 돈도 있어요. 이 돈은 무엇일까요?",
+      "options": [
+        "집세(관리비)",
+        "장난감 값",
+        "과자 값",
+        "여행비"
+      ],
+      "answer": 0,
+      "explanation": "우리가 사는 집에 대해 매달 내는 돈을 '집세' 또는 '관리비'라고 해요.",
+      "keywords": [
+        "집세",
+        "비용",
+        "생활비"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "home",
+      "question": "한 달 동안 들어올 돈(용돈)과 나갈 돈을 미리 계산해보는 것을 무엇이라고 할까요?",
+      "options": [
+        "예산 세우기",
+        "일기 쓰기",
+        "줄넘기",
+        "숨바꼭질"
+      ],
+      "answer": 0,
+      "explanation": "돈을 계획적으로 사용하기 위해 미리 계산하는 것을 '예산'이라고 해요.",
+      "keywords": [
+        "예산",
+        "계획",
+        "용돈"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부 아저씨가 정성껏 키운 배추를 팔아서 얻는 것은 무엇일까요?",
+      "options": [
+        "흙",
+        "물",
+        "돈",
+        "씨앗"
+      ],
+      "answer": 2,
+      "explanation": "농작물을 팔면 그 대가로 '돈'을 받아요.",
+      "keywords": [
+        "판매",
+        "소득",
+        "농작물"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "닭이 매일 낳는 달걀처럼, 농장에서 얻을 수 있는 것을 무엇이라고 할까요?",
+      "options": [
+        "생산물",
+        "쓰레기",
+        "바위",
+        "구름"
+      ],
+      "answer": 0,
+      "explanation": "농장에서 만들어지거나 얻어지는 것들을 '생산물'이라고 해요.",
+      "keywords": [
+        "생산",
+        "농장",
+        "상품"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "내년에 또 농사를 짓기 위해, 수확한 감자 중 일부를 남겨두는 것은 무엇과 비슷할까요?",
+      "options": [
+        "저축",
+        "소비",
+        "낭비",
+        "선물"
+      ],
+      "answer": 0,
+      "explanation": "미래를 위해 생산물의 일부를 남겨두는 것은 돈을 모으는 '저축'과 같아요.",
+      "keywords": [
+        "저축",
+        "씨앗",
+        "대비"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부들이 직접 키운 채소와 과일을 가지고 와서 파는 곳은 어디일까요?",
+      "options": [
+        "직거래 장터",
+        "학교",
+        "병원",
+        "우체국"
+      ],
+      "answer": 0,
+      "explanation": "생산한 사람이 직접 물건을 파는 시장을 '직거래 장터'라고 해요.",
+      "keywords": [
+        "시장",
+        "직거래",
+        "판매"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "트랙터는 농부가 일을 더 쉽고 빠르게 하도록 도와줘요. 이런 기계를 무엇이라고 할까요?",
+      "options": [
+        "생산 도구",
+        "장난감",
+        "음식",
+        "애완동물"
+      ],
+      "answer": 0,
+      "explanation": "물건을 만드는 데 도움을 주는 기계나 도구를 '생산 도구'라고 해요.",
+      "keywords": [
+        "생산",
+        "도구",
+        "농업"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "양의 털을 깎아 스웨터를 만들고, 소의 우유로 치즈를 만드는 활동을 무엇이라고 할까요?",
+      "options": [
+        "생산",
+        "소비",
+        "휴식",
+        "운동"
+      ],
+      "answer": 0,
+      "explanation": "자연에서 얻은 것으로 새로운 물건을 만들어 내는 것을 '생산'이라고 해요.",
+      "keywords": [
+        "생산",
+        "가공",
+        "상품"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부가 키운 쌀이 우리 밥상에 오르기까지, 가게를 거치는 과정을 무엇이라고 할까요?",
+      "options": [
+        "유통",
+        "요리",
+        "재배",
+        "수확"
+      ],
+      "answer": 0,
+      "explanation": "생산된 물건이 우리에게 오기까지의 과정을 '유통'이라고 해요.",
+      "keywords": [
+        "유통",
+        "과정",
+        "상품"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "이웃 농장의 옥수수와 우리 농장의 감자를 바꾸기로 했어요. 이것은 무엇일까요?",
+      "options": [
+        "물물교환",
+        "돈 내기",
+        "선물 주기",
+        "버리기"
+      ],
+      "answer": 0,
+      "explanation": "돈이 없을 때, 필요한 물건끼리 서로 바꾸는 것을 '물물교환'이라고 해요.",
+      "keywords": [
+        "물물교환",
+        "교환",
+        "농장"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "열심히 일한 농부가 가을에 곡식과 열매를 거두는 것을 무엇이라고 할까요?",
+      "options": [
+        "수확",
+        "파종",
+        "여행",
+        "공부"
+      ],
+      "answer": 0,
+      "explanation": "다 자란 농작물을 거두어들이는 기쁨을 '수확'이라고 해요.",
+      "keywords": [
+        "수확",
+        "결실",
+        "노동"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부가 정성껏 키운 유기농 당근은 다른 당근보다 조금 더 비싸요. 그 이유는 무엇일까요?",
+      "options": [
+        "더 많은 노력과 정성이 들어가서",
+        "맛이 없어서",
+        "크기가 작아서",
+        "색깔이 달라서"
+      ],
+      "answer": 0,
+      "explanation": "더 많은 노력과 정성이 들어간 물건은 더 높은 '가치'를 가질 수 있어요.",
+      "keywords": [
+        "가치",
+        "가격",
+        "정성"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "돼지가 새끼를 많이 낳으면 돼지 농장 아저씨는 어떻게 될까요?",
+      "options": [
+        "부자가 될 수 있다",
+        "가난해진다",
+        "슬퍼진다",
+        "화가 난다"
+      ],
+      "answer": 0,
+      "explanation": "생산물이 늘어나면 팔 수 있는 것이 많아져 소득이 늘 수 있어요.",
+      "keywords": [
+        "생산",
+        "소득",
+        "재산"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농장에서 말을 탈 수 있게 해주고 돈을 받는 것을 '체험 활동'이라고 해요. 이것은 물건을 파는 것일까요, 서비스를 파는 것일까요?",
+      "options": [
+        "서비스",
+        "물건",
+        "음식",
+        "선물"
+      ],
+      "answer": 0,
+      "explanation": "특별한 경험이나 즐거움을 제공하고 돈을 받는 것을 '서비스'라고 해요.",
+      "keywords": [
+        "서비스",
+        "체험",
+        "농장"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "봄에 씨앗을 뿌리고 여름에 정성껏 돌보는 농부의 '이것'이 없다면 가을에 수확할 수 없어요. '이것'은 무엇일까요?",
+      "options": [
+        "노력",
+        "돈",
+        "장난감",
+        "컴퓨터"
+      ],
+      "answer": 0,
+      "explanation": "좋은 결과를 얻기 위해서는 반드시 '노력'과 '수고'가 필요해요.",
+      "keywords": [
+        "노력",
+        "노동",
+        "생산"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부가 시장에 내다 팔기 위해 기르는 소, 돼지, 닭을 무엇이라고 부를까요?",
+      "options": [
+        "가축",
+        "애완동물",
+        "야생동물",
+        "친구"
+      ],
+      "answer": 0,
+      "explanation": "집에서 기르며 사람에게 도움을 주는 동물을 '가축'이라고 해요.",
+      "keywords": [
+        "가축",
+        "생산",
+        "자원"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농작물을 키우기 위해 꼭 필요한 햇빛과 물은 돈을 내고 살까요?",
+      "options": [
+        "아니요, 자연에서 얻어요",
+        "네, 돈을 내야 해요",
+        "빌려야 해요",
+        "훔쳐야 해요"
+      ],
+      "answer": 0,
+      "explanation": "햇빛, 물, 공기처럼 돈을 내지 않고 자연에서 얻을 수 있는 것도 있어요.",
+      "keywords": [
+        "자원",
+        "자연",
+        "무료"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "트랙터를 사기 위해 돈을 모으는 농부는 무엇을 하고 있는 걸까요?",
+      "options": [
+        "저축",
+        "파티",
+        "낮잠",
+        "노래"
+      ],
+      "answer": 0,
+      "explanation": "필요한 것을 사기 위해 돈을 모으는 것은 '저축'이에요.",
+      "keywords": [
+        "저축",
+        "목표",
+        "도구"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부 아저씨가 우리에게 맛있는 과일을 제공하는 중요한 '이것'을 하고 있어요. 무엇일까요?",
+      "options": [
+        "일",
+        "놀이",
+        "취미",
+        "여행"
+      ],
+      "answer": 0,
+      "explanation": "다른 사람에게 필요한 것을 제공하고 돈을 버는 활동을 '일' 또는 '직업'이라고 해요.",
+      "keywords": [
+        "직업",
+        "일",
+        "농부"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "소가 우유를 만들고, 닭이 달걀을 낳는 것은 농장의 중요한 '이것'입니다. 무엇일까요?",
+      "options": [
+        "생산 활동",
+        "소비 활동",
+        "놀이 활동",
+        "청소 활동"
+      ],
+      "answer": 0,
+      "explanation": "새로운 가치를 만들어내는 활동을 '생산 활동'이라고 불러요.",
+      "keywords": [
+        "생산",
+        "활동",
+        "농장"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "농부가 수확한 사과 한 상자의 '가격'은 어떻게 정해질까요?",
+      "options": [
+        "사는 사람과 파는 사람이 정해요",
+        "농부가 마음대로 정해요",
+        "나라에서 정해줘요",
+        "사과가 직접 정해요"
+      ],
+      "answer": 0,
+      "explanation": "물건의 '가격'은 보통 물건을 파는 사람과 사는 사람 사이에서 정해져요.",
+      "keywords": [
+        "가격",
+        "시장",
+        "결정"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "farm",
+      "question": "올해 비가 많이 와서 배추 농사가 잘 안됐어요. 시장에서 배추 가격은 어떻게 될까요?",
+      "options": [
+        "비싸져요",
+        "싸져요",
+        "똑같아요",
+        "없어져요"
+      ],
+      "answer": 0,
+      "explanation": "물건의 양이 적어지면 구하기 어려워져서 가격이 '비싸져요'.",
+      "keywords": [
+        "가격",
+        "수요",
+        "공급"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "겨울잠을 자기 전, 곰은 도토리를 많이 모아 굴에 저장해요. 이것은 무엇을 위한 준비일까요?",
+      "options": [
+        "미래 대비",
+        "친구 자랑",
+        "집 꾸미기",
+        "장난치기"
+      ],
+      "answer": 0,
+      "explanation": "미리 준비하고 모아두는 것은 미래를 안전하게 대비하기 위함이에요.",
+      "keywords": [
+        "저축",
+        "대비",
+        "미래"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "다람쥐가 가진 도토리와 토끼가 가진 당근을 서로 바꾸는 것을 무엇이라고 할까요?",
+      "options": [
+        "물물교환",
+        "선물",
+        "전쟁",
+        "경주"
+      ],
+      "answer": 0,
+      "explanation": "서로에게 필요한 물건을 돈 없이 맞바꾸는 것을 '물물교환'이라고 해요.",
+      "keywords": [
+        "물물교환",
+        "교환",
+        "숲"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "숲속 동물들이 다 함께 힘을 합쳐 무거운 나무를 옮겼어요. 이것을 무엇이라고 할까요?",
+      "options": [
+        "협동",
+        "싸움",
+        "경쟁",
+        "혼자 하기"
+      ],
+      "answer": 0,
+      "explanation": "여러 명이 힘을 합쳐 함께 일하는 것을 '협동'이라고 해요.",
+      "keywords": [
+        "협동",
+        "함께",
+        "일"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "꿀벌들이 열심히 꿀을 모으는 것은 꿀벌들에게 어떤 활동일까요?",
+      "options": [
+        "일",
+        "놀이",
+        "잠",
+        "목욕"
+      ],
+      "answer": 0,
+      "explanation": "살아가기 위해 필요한 것을 얻는 활동은 중요한 '일'이에요.",
+      "keywords": [
+        "일",
+        "노동",
+        "꿀벌"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "나무 열매가 많이 열리는 곳을 아는 원숭이는 다른 동물들보다 배고프지 않아요. 이 '정보'는 원숭이에게 어떤 것일까요?",
+      "options": [
+        "소중한 자산",
+        "필요 없는 것",
+        "위험한 것",
+        "재미없는 것"
+      ],
+      "answer": 0,
+      "explanation": "어디에 무엇이 있는지 아는 '정보'도 나에게 도움이 되는 소중한 자산이 될 수 있어요.",
+      "keywords": [
+        "정보",
+        "자산",
+        "가치"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "사슴은 튼튼한 뿔을 가지고 있고, 토끼는 빠른 발을 가지고 있어요. 각자 잘하는 것이 다른 것을 무엇이라고 할까요?",
+      "options": [
+        "재능",
+        "잘못",
+        "비밀",
+        "습관"
+      ],
+      "answer": 0,
+      "explanation": "각자 특별히 잘하는 것을 '재능'이라고 하며, 서로 도울 수 있어요.",
+      "keywords": [
+        "재능",
+        "협동",
+        "분업"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "겨울이 되면 숲에 먹을 것이 부족해져요. 이처럼 원하는 만큼 자원이 없는 상태를 무엇이라고 할까요?",
+      "options": [
+        "부족함(희소성)",
+        "풍족함",
+        "행복함",
+        "슬픔"
+      ],
+      "answer": 0,
+      "explanation": "원하는 것에 비해 가진 것이 모자라는 것을 '부족하다' 또는 '희소하다'고 해요.",
+      "keywords": [
+        "희소성",
+        "자원",
+        "부족"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "거미가 열심히 거미줄을 쳐서 집을 만드는 것은 어떤 활동일까요?",
+      "options": [
+        "생산",
+        "소비",
+        "나눔",
+        "파괴"
+      ],
+      "answer": 0,
+      "explanation": "자신에게 필요한 것을 직접 만들어내는 활동을 '생산'이라고 볼 수 있어요.",
+      "keywords": [
+        "생산",
+        "집",
+        "노동"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "새들이 나뭇가지를 모아 둥지를 만들어요. 둥지를 만들기 위해 꼭 필요한 나뭇가지를 무엇이라고 할 수 있을까요?",
+      "options": [
+        "자원",
+        "음식",
+        "친구",
+        "장난감"
+      ],
+      "answer": 0,
+      "explanation": "무언가를 만드는 데 필요한 재료를 '자원'이라고 해요.",
+      "keywords": [
+        "자원",
+        "재료",
+        "생산"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "여우가 맛있는 산딸기를 혼자 다 먹지 않고 친구들과 나눠 먹었어요. 이것은 무엇일까요?",
+      "options": [
+        "나눔",
+        "저축",
+        "판매",
+        "자랑"
+      ],
+      "answer": 0,
+      "explanation": "자신이 가진 것을 다른 사람과 함께하는 것을 '나눔'이라고 해요.",
+      "keywords": [
+        "나눔",
+        "친구",
+        "공유"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "버섯을 아주 잘 찾는 돼지와, 나무를 잘 타는 원숭이가 각자 잘하는 일을 해서 열매와 버섯을 바꾸었어요. 이것을 무엇이라고 할까요?",
+      "options": [
+        "분업과 교환",
+        "싸움과 경쟁",
+        "놀이와 휴식",
+        "명령과 복종"
+      ],
+      "answer": 0,
+      "explanation": "서로 잘하는 일을 나눠서 하고, 얻은 것을 바꾸는 것을 '분업과 교환'이라고 해요.",
+      "keywords": [
+        "분업",
+        "교환",
+        "협동"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "비버가 튼튼한 댐을 만들어 숲속 친구들이 홍수를 피할 수 있게 도와주었어요. 비버의 댐은 모두에게 어떤 것일까요?",
+      "options": [
+        "도움이 되는 것(공공재)",
+        "위험한 것",
+        "비버 혼자만의 것",
+        "아무도 못 쓰는 것"
+      ],
+      "answer": 0,
+      "explanation": "모두에게 도움이 되는 것을 '공공재'라고 부를 수 있어요.",
+      "keywords": [
+        "공공재",
+        "협동",
+        "혜택"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "숲속에서 가장 찾기 힘든 반짝이는 돌멩이는 왜 인기가 많을까요?",
+      "options": [
+        "귀해서",
+        "무거워서",
+        "흔해서",
+        "예쁘지 않아서"
+      ],
+      "answer": 0,
+      "explanation": "구하기 어렵고 귀한 것(희소한 것)은 더 높은 가치를 가질 수 있어요.",
+      "keywords": [
+        "희소성",
+        "가치",
+        "자원"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "모든 동물들이 함께 마시는 옹달샘 물은 누가 주인이 될 수 있을까요?",
+      "options": [
+        "주인이 없다 (모두의 것)",
+        "사자",
+        "코끼리",
+        "호랑이"
+      ],
+      "answer": 0,
+      "explanation": "숲속의 물이나 공기처럼 모두가 함께 사용하는 것은 주인이 따로 없어요.",
+      "keywords": [
+        "공유 자원",
+        "자연",
+        "주인"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "배고픈 아기 새에게 어미 새가 벌레를 잡아다 주는 것은 어떤 마음일까요?",
+      "options": [
+        "보살핌과 사랑",
+        "거래와 약속",
+        "경쟁과 질투",
+        "미움과 분노"
+      ],
+      "answer": 0,
+      "explanation": "경제 활동이 아닌, 가족의 사랑과 보살핌도 매우 중요해요.",
+      "keywords": [
+        "가족",
+        "사랑",
+        "보살핌"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "부지런한 개미는 여름 내내 열심히 먹이를 모아요. 왜 그럴까요?",
+      "options": [
+        "추운 겨울을 준비하기 위해",
+        "심심해서",
+        "자랑하고 싶어서",
+        "놀기 싫어서"
+      ],
+      "answer": 0,
+      "explanation": "미래에 닥칠 어려움을 미리 준비하는 것은 매우 지혜로운 행동이에요.",
+      "keywords": [
+        "준비",
+        "미래",
+        "저축"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "나무늘보는 하루 종일 쉬고, 부엉이는 밤에 활동해요. 동물마다 생활 방식이 다른 것처럼 사람마다 잘하는 일이 다른 것을 무엇이라고 할까요?",
+      "options": [
+        "다양성",
+        "잘못",
+        "나쁜 것",
+        "이상한 것"
+      ],
+      "answer": 0,
+      "explanation": "서로 다른 점을 인정하고 존중하는 것을 '다양성'이라고 해요.",
+      "keywords": [
+        "다양성",
+        "재능",
+        "존중"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "두더지가 땅속에 파놓은 길이 다른 동물들에게도 안전한 통로가 되어주었어요. 이것은 의도하지 않은 어떤 결과일까요?",
+      "options": [
+        "이로운 결과",
+        "해로운 결과",
+        "슬픈 결과",
+        "무서운 결과"
+      ],
+      "answer": 0,
+      "explanation": "나의 행동이 생각지도 않게 다른 사람(동물)에게 이로움을 줄 수도 있어요.",
+      "keywords": [
+        "긍정적 효과",
+        "협력",
+        "사회"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "숲속에 열매가 아주 많이 열렸어요. 동물들은 어떻게 될까요?",
+      "options": [
+        "모두 배부르게 먹을 수 있다",
+        "굶주리게 된다",
+        "슬퍼한다",
+        "모두 이사 간다"
+      ],
+      "answer": 0,
+      "explanation": "생산물이 많아지면 모두가 풍족하고 행복해질 수 있어요.",
+      "keywords": [
+        "풍요",
+        "생산",
+        "자원"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "forest",
+      "question": "딱따구리가 나무의 아픈 곳을 쪼아 벌레를 잡아먹으면 나무도 건강해져요. 이것은 서로에게 어떤 관계일까요?",
+      "options": [
+        "서로 돕는 관계",
+        "서로 괴롭히는 관계",
+        "아무 관계 아님",
+        "싸우는 관계"
+      ],
+      "answer": 0,
+      "explanation": "서로에게 도움을 주며 함께 살아가는 관계를 '공생'이라고 해요.",
+      "keywords": [
+        "공생",
+        "협력",
+        "도움"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "진주조개가 만든 반짝이는 진주는 바닷속에서 어떤 물건일까요?",
+      "options": [
+        "귀한 물건",
+        "흔한 돌멩이",
+        "먹을 수 없는 것",
+        "더러운 것"
+      ],
+      "answer": 0,
+      "explanation": "만들기 어렵고 아름다운 진주는 바닷속에서 가치가 높은 귀한 물건이에요.",
+      "keywords": [
+        "가치",
+        "희소성",
+        "보물"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "물고기 떼가 함께 몰려다니며 큰 물고기로부터 서로를 보호해요. 이것은 무엇의 힘일까요?",
+      "options": [
+        "협동",
+        "개인기",
+        "욕심",
+        "우연"
+      ],
+      "answer": 0,
+      "explanation": "함께 힘을 합치면 혼자서는 할 수 없는 큰일을 해낼 수 있어요.",
+      "keywords": [
+        "협동",
+        "보호",
+        "사회"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "청소 물고기가 큰 물고기의 몸을 청소해주고, 그 대가로 몸에 붙은 것을 먹고 살아요. 둘은 어떤 관계일까요?",
+      "options": [
+        "서로 돕는 관계",
+        "싸우는 관계",
+        "주인과 하인 관계",
+        "아무 관계 아님"
+      ],
+      "answer": 0,
+      "explanation": "서로에게 필요한 것을 주고받으며 도움을 주는 관계에요.",
+      "keywords": [
+        "서비스",
+        "교환",
+        "공생"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "소라게는 빈 소라 껍데기를 찾아 자신의 집으로 사용해요. 이 껍데기는 소라게에게 어떤 것일까요?",
+      "options": [
+        "꼭 필요한 것",
+        "있으면 좋은 것",
+        "먹이",
+        "친구"
+      ],
+      "answer": 0,
+      "explanation": "몸을 보호할 집은 살아가기 위해 꼭 '필요'한 것이에요.",
+      "keywords": [
+        "필요",
+        "자원",
+        "집"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "아기 물고기가 반짝이는 돌멩이를 갖고 싶어 하지만, 엄마는 영양가 있는 해초를 먹으라고 해요. 아기 물고기에게 더 필요한 것은 무엇일까요?",
+      "options": [
+        "해초",
+        "돌멩이",
+        "모래",
+        "거품"
+      ],
+      "answer": 0,
+      "explanation": "성장하는 데 꼭 필요한 영양분이 있는 음식이 더 '필요'한 것이에요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "선택"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "돌고래들이 힘을 합쳐 물고기를 한곳으로 모아서 사냥해요. 이것은 어떤 점이 좋을까요?",
+      "options": [
+        "더 쉽고 많이 잡을 수 있다",
+        "재미있다",
+        "위험하다",
+        "시간이 오래 걸린다"
+      ],
+      "answer": 0,
+      "explanation": "함께 일(분업과 협동)하면 더 좋은 결과를 얻을 수 있어요.",
+      "keywords": [
+        "분업",
+        "협동",
+        "효율"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바닷가에 사는 어부가 물고기를 잡아 시장에 팔아요. 어부에게 '물고기'는 무엇일까요?",
+      "options": [
+        "상품",
+        "장난감",
+        "애완동물",
+        "쓰레기"
+      ],
+      "answer": 0,
+      "explanation": "팔기 위해 잡거나 만든 물건을 '상품'이라고 해요.",
+      "keywords": [
+        "상품",
+        "판매",
+        "직업"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "집게가 예쁜 조개껍데기 3개와 오징어의 먹물 1통을 바꿨어요. 이것은 무엇일까요?",
+      "options": [
+        "물물교환",
+        "돈 거래",
+        "선물",
+        "명령"
+      ],
+      "answer": 0,
+      "explanation": "물건의 가치를 따져 서로 필요한 것과 바꾸는 것을 '물물교환'이라고 해요.",
+      "keywords": [
+        "물물교환",
+        "가치",
+        "교환"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바다에 떠다니는 쓰레기를 보고 해양 경찰관이 치워주었어요. 이 행동의 대가는 누가 치를까요?",
+      "options": [
+        "우리 모두의 세금",
+        "바다거북",
+        "고래",
+        "문어"
+      ],
+      "answer": 0,
+      "explanation": "모두를 위한 좋은 일은 우리가 낸 '세금'으로 이루어져요.",
+      "keywords": [
+        "세금",
+        "공공 서비스",
+        "환경"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "산호초는 많은 물고기들에게 안전한 집과 먹이를 제공해요. 산호초는 바다 생태계에 어떤 존재일까요?",
+      "options": [
+        "매우 중요한 존재",
+        "아무 쓸모없는 존재",
+        "위험한 존재",
+        "사라져야 할 존재"
+      ],
+      "answer": 0,
+      "explanation": "모두에게 이로움을 주는 중요한 자원은 다 함께 아끼고 보호해야 해요.",
+      "keywords": [
+        "자원",
+        "환경",
+        "보호"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "고래는 아주 먼 곳까지 헤엄쳐 다녀요. 어디에 가면 먹이가 많은지 아는 것은 고래에게 어떤 힘이 될까요?",
+      "options": [
+        "굶지 않고 살 수 있는 힘",
+        "싸움을 잘하게 되는 힘",
+        "친구를 사귀는 힘",
+        "예뻐지는 힘"
+      ],
+      "answer": 0,
+      "explanation": "어디에 무엇이 있는지 아는 '정보'는 생존에 큰 도움이 되는 자산이에요.",
+      "keywords": [
+        "정보",
+        "가치",
+        "생존"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바닷속 깊은 곳에 사는 희귀한 물고기는 왜 비싼 값에 팔릴까요?",
+      "options": [
+        "잡기 어려워서",
+        "맛이 없어서",
+        "아무나 잡을 수 있어서",
+        "못생겨서"
+      ],
+      "answer": 0,
+      "explanation": "구하기 어려운 것(희소성)은 가치가 높아져 비싸게 거래될 수 있어요.",
+      "keywords": [
+        "희소성",
+        "가격",
+        "가치"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바닷속 친구들이 모두 함께 쓰는 깨끗한 '바닷물'은 누가 만들어낼까요?",
+      "options": [
+        "자연",
+        "물고기",
+        "문어",
+        "사람"
+      ],
+      "answer": 0,
+      "explanation": "바닷물이나 공기처럼 우리가 살기 위해 꼭 필요한 것들은 '자연'이 주는 소중한 선물이에요.",
+      "keywords": [
+        "자연",
+        "자원",
+        "환경"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "어부가 더 많은 물고기를 잡기 위해 튼튼한 그물을 사는 것은 무엇일까요?",
+      "options": [
+        "도구에 대한 투자",
+        "쓸데없는 소비",
+        "위험한 장난",
+        "나쁜 행동"
+      ],
+      "answer": 0,
+      "explanation": "더 좋은 결과를 얻기 위해 도구에 돈을 쓰는 것을 '투자'라고도 할 수 있어요.",
+      "keywords": [
+        "투자",
+        "도구",
+        "생산"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바닷가에서 주운 예쁜 소라 껍데기를 친구에게 선물했어요. 이 행동은 무엇일까요?",
+      "options": [
+        "나눔",
+        "판매",
+        "교환",
+        "저축"
+      ],
+      "answer": 0,
+      "explanation": "대가 없이 기쁜 마음으로 무언가를 주는 것을 '나눔' 또는 '선물'이라고 해요.",
+      "keywords": [
+        "나눔",
+        "선물",
+        "친구"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "거북이가 알을 낳기 위해 안전한 모래사장을 찾아 오랜 시간 여행을 해요. 이것은 무엇을 위한 행동일까요?",
+      "options": [
+        "미래 세대를 위한 행동",
+        "재미있는 놀이",
+        "친구를 만나러 가는 길",
+        "먹이를 찾는 행동"
+      ],
+      "answer": 0,
+      "explanation": "다음 세대가 잘 살아갈 수 있도록 준비하고 노력하는 것은 매우 중요한 일이에요.",
+      "keywords": [
+        "미래",
+        "준비",
+        "가족"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "우리가 바다에 버린 쓰레기는 누가 치워야 할까요?",
+      "options": [
+        "버린 사람(우리)",
+        "물고기",
+        "고래",
+        "상어"
+      ],
+      "answer": 0,
+      "explanation": "자신이 한 행동에 대해서는 스스로 '책임'을 져야 해요.",
+      "keywords": [
+        "책임",
+        "환경",
+        "쓰레기"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "잠수부가 멋진 바닷속 풍경을 구경시켜 주고 돈을 받아요. 잠수부가 판 것은 무엇일까요?",
+      "options": [
+        "서비스(경험)",
+        "물고기",
+        "공기",
+        "바닷물"
+      ],
+      "answer": 0,
+      "explanation": "물건이 아닌 특별한 경험이나 즐거움을 제공하는 것을 '서비스'라고 해요.",
+      "keywords": [
+        "서비스",
+        "관광",
+        "직업"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "작은 물고기는 플랑크톤을 먹고, 큰 물고기는 작은 물고기를 먹어요. 이렇게 서로 연결된 관계를 무엇이라고 할까요?",
+      "options": [
+        "먹이 사슬",
+        "친구 관계",
+        "가족 관계",
+        "경쟁 관계"
+      ],
+      "answer": 0,
+      "explanation": "세상의 모든 것들은 서로 연결되어 영향을 주고받아요. 경제도 마찬가지예요.",
+      "keywords": [
+        "관계",
+        "연결",
+        "생태계"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "ocean",
+      "question": "바다에 새로운 물고기가 나타나 다른 물고기들의 먹이를 다 먹어버리면 어떤 일이 생길까요?",
+      "options": [
+        "원래 살던 물고기들이 살기 힘들어진다",
+        "모두 행복해진다",
+        "바다가 깨끗해진다",
+        "아무 일도 일어나지 않는다"
+      ],
+      "answer": 0,
+      "explanation": "새로운 경쟁자가 나타나면 기존의 규칙이나 질서가 바뀔 수 있어요.",
+      "keywords": [
+        "경쟁",
+        "변화",
+        "생태계"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "빵을 사고 싶을 때, 우리는 어디로 가야 할까요?",
+      "options": [
+        "경찰서",
+        "병원",
+        "빵집",
+        "소방서"
+      ],
+      "answer": 2,
+      "explanation": "물건을 파는 장소를 '가게' 또는 '상점'이라고 해요.",
+      "keywords": [
+        "가게",
+        "소비",
+        "도시"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "사람들이 돈을 안전하게 맡기거나, 돈이 필요할 때 빌릴 수 있는 곳은 어디일까요?",
+      "options": [
+        "은행",
+        "학교",
+        "공원",
+        "미용실"
+      ],
+      "answer": 0,
+      "explanation": "돈을 다루는 일을 전문적으로 하는 곳을 '은행'이라고 해요.",
+      "keywords": [
+        "은행",
+        "저축",
+        "돈"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "소방관 아저씨는 불을 꺼주고, 의사 선생님은 아픈 사람을 치료해줘요. 이처럼 돈을 벌기 위해 각자 하는 일을 무엇이라고 할까요?",
+      "options": [
+        "직업",
+        "취미",
+        "숙제",
+        "심부름"
+      ],
+      "answer": 0,
+      "explanation": "사람들은 각자 다른 '직업'을 가지고 돈을 벌며 살아가요.",
+      "keywords": [
+        "직업",
+        "소득",
+        "일"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "버스를 타거나 지하철을 탈 때 돈을 내요. 우리는 무엇을 사기 위해 돈을 내는 걸까요?",
+      "options": [
+        "편리한 이동 서비스",
+        "버스 의자",
+        "지하철 장난감",
+        "운전기사 아저씨"
+      ],
+      "answer": 0,
+      "explanation": "편리하게 이동할 수 있도록 도와주는 '서비스'를 돈으로 사는 것이에요.",
+      "keywords": [
+        "서비스",
+        "소비",
+        "교통"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "도시의 모든 사람들이 함께 이용하는 공원이나 도서관은 누가 만들었을까요?",
+      "options": [
+        "우리가 낸 세금으로",
+        "한 명의 부자가",
+        "대통령이 혼자서",
+        "저절로 생겨났어요"
+      ],
+      "answer": 0,
+      "explanation": "모두가 함께 쓰는 시설은 우리가 낸 '세금'을 모아 만들어요.",
+      "keywords": [
+        "세금",
+        "공공시설",
+        "도시"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "옷 가게에 걸려있는 옷에 붙어있는 숫자가 적힌 종이를 무엇이라고 할까요?",
+      "options": [
+        "가격표",
+        "이름표",
+        "편지",
+        "그림"
+      ],
+      "answer": 0,
+      "explanation": "물건을 사기 위해 얼마를 내야 하는지 알려주는 것을 '가격표'라고 해요.",
+      "keywords": [
+        "가격",
+        "돈",
+        "가게"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "장난감 가게에서 로봇을 사기 위해 돈을 내는 행동을 무엇이라고 할까요?",
+      "options": [
+        "구매",
+        "판매",
+        "저축",
+        "생산"
+      ],
+      "answer": 0,
+      "explanation": "돈을 주고 물건의 주인이 되는 것을 '구매'라고 해요.",
+      "keywords": [
+        "구매",
+        "소비",
+        "돈"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "아빠가 신용카드로 물건을 샀어요. 이 돈은 나중에 어떻게 해야 할까요?",
+      "options": [
+        "반드시 갚아야 해요",
+        "갚지 않아도 돼요",
+        "선물 받은 것이에요",
+        "나라에서 내줘요"
+      ],
+      "answer": 0,
+      "explanation": "신용카드는 돈을 잠시 빌려 쓰는 것이므로, 사용한 만큼 꼭 갚아야 해요.",
+      "keywords": [
+        "신용",
+        "카드",
+        "빚"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "배가 고픈데 돈이 없다면, 식당에서 밥을 먹을 수 있을까요?",
+      "options": [
+        "먹을 수 없어요",
+        "마음대로 먹어도 돼요",
+        "몰래 먹고 도망가요",
+        "울면 공짜로 줘요"
+      ],
+      "answer": 0,
+      "explanation": "물건이나 서비스를 이용하려면 정해진 '돈'을 내는 것이 규칙이자 약속이에요.",
+      "keywords": [
+        "규칙",
+        "약속",
+        "돈"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "도시에서 물건을 만들어서 파는 곳을 '공장'이라고 해요. 공장은 어떤 활동을 하는 곳일까요?",
+      "options": [
+        "생산",
+        "소비",
+        "저축",
+        "분배"
+      ],
+      "answer": 0,
+      "explanation": "우리가 쓰는 물건들을 대량으로 만들어 내는 '생산' 활동을 하는 곳이에요.",
+      "keywords": [
+        "생산",
+        "공장",
+        "물건"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "길을 건널 때 신호등이 고장 나지 않게 고쳐주고, 거리를 깨끗하게 청소하는 분들은 우리에게 무엇을 제공할까요?",
+      "options": [
+        "공공 서비스",
+        "비싼 선물",
+        "개인적인 부탁",
+        "재미있는 구경"
+      ],
+      "answer": 0,
+      "explanation": "모두가 안전하고 쾌적하게 살 수 있도록 제공되는 것을 '공공 서비스'라고 해요.",
+      "keywords": [
+        "공공 서비스",
+        "세금",
+        "직업"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "피자 가게 아저씨가 맛있는 피자를 만드는 '기술'은 아저씨에게 무엇이 될까요?",
+      "options": [
+        "돈을 버는 능력",
+        "아무 쓸모없는 것",
+        "숨겨야 하는 비밀",
+        "귀찮은 일"
+      ],
+      "answer": 0,
+      "explanation": "자신이 가진 특별한 기술이나 능력으로 돈을 벌 수 있어요.",
+      "keywords": [
+        "기술",
+        "직업",
+        "소득"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "영화관에서 돈을 내고 재미있는 영화를 보는 것은 물건을 사는 것과 어떻게 다를까요?",
+      "options": [
+        "즐거운 시간을 산다",
+        "의자를 산다",
+        "영화를 산다",
+        "과자를 산다"
+      ],
+      "answer": 0,
+      "explanation": "영화 관람처럼, 즐거운 경험이나 시간을 돈으로 사는 것을 '서비스 소비'라고 해요.",
+      "keywords": [
+        "서비스",
+        "소비",
+        "경험"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "많은 가게들이 모여 있어 쇼핑하기 편한 큰 건물을 무엇이라고 부를까요?",
+      "options": [
+        "백화점 또는 쇼핑몰",
+        "아파트",
+        "학교",
+        "경찰서"
+      ],
+      "answer": 0,
+      "explanation": "다양한 물건과 서비스를 한곳에서 편리하게 이용할 수 있는 곳이에요.",
+      "keywords": [
+        "백화점",
+        "쇼핑",
+        "소비"
+      ],
+      "difficulty_score": 1
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "내가 만든 장난감을 친구에게 팔고 100원을 받았어요. 나에게 100원은 무엇일까요?",
+      "options": [
+        "소득",
+        "비용",
+        "저축",
+        "선물"
+      ],
+      "answer": 0,
+      "explanation": "내가 무언가를 팔거나 일을 해서 번 돈을 '소득'이라고 해요.",
+      "keywords": [
+        "소득",
+        "판매",
+        "돈"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "도시의 쓰레기를 치우는 데 돈이 필요할까요?",
+      "options": [
+        "네, 필요해요",
+        "아니요, 필요 없어요",
+        "저절로 치워져요",
+        "바람이 치워줘요"
+      ],
+      "answer": 0,
+      "explanation": "깨끗한 도시를 유지하기 위해서는 청소하는 분들의 월급과 장비 등 돈이 필요하며, 이 돈은 세금으로 마련돼요.",
+      "keywords": [
+        "비용",
+        "세금",
+        "환경"
+      ],
+      "difficulty_score": 2
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "미용실에 가서 머리를 자르는 것은 '필요'일까요, 아니면 '욕구'일까요?",
+      "options": [
+        "둘 다 될 수 있어요",
+        "필요",
+        "욕구",
+        "잘못된 행동"
+      ],
+      "answer": 0,
+      "explanation": "머리가 너무 길어 불편하면 '필요'이고, 그냥 예쁘게 바꾸고 싶으면 '욕구'일 수 있어요.",
+      "keywords": [
+        "필요",
+        "욕구",
+        "서비스"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "왜 모든 물건에는 다른 가격이 붙어 있을까요?",
+      "options": [
+        "만드는 데 드는 노력이 달라서",
+        "주인이 마음대로 붙여서",
+        "모양이 달라서",
+        "색깔이 달라서"
+      ],
+      "answer": 0,
+      "explanation": "만들기 어렵거나, 귀한 재료가 들어가거나, 노력이 많이 들수록 비싸지는 경향이 있어요.",
+      "keywords": [
+        "가격",
+        "가치",
+        "노력"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "새로운 장난감이 나왔을 때, 많은 친구들이 그것을 사고 싶어 하면 어떤 일이 생길까요?",
+      "options": [
+        "빨리 다 팔리거나, 가격이 오를 수 있다",
+        "아무도 안 산다",
+        "가격이 싸진다",
+        "가게가 문을 닫는다"
+      ],
+      "answer": 0,
+      "explanation": "사고 싶은 사람(수요)이 많아지면 물건의 인기가 높아져요.",
+      "keywords": [
+        "수요",
+        "공급",
+        "인기"
+      ],
+      "difficulty_score": 3
+    },
+    {
+      "subject": "social",
+      "level": "beginner",
+      "habitat": "city",
+      "question": "도시에서 사는 우리가 농촌에 사는 농부들에게 고마워해야 하는 이유는 무엇일까요?",
+      "options": [
+        "우리가 먹을 음식을 만들어주셔서",
+        "돈을 많이 벌어서",
+        "도시에 살지 않아서",
+        "키가 커서"
+      ],
+      "answer": 0,
+      "explanation": "우리는 서로 다른 일을 하며 필요한 것을 주고받는, 서로 돕는 관계 속에 살고 있어요.",
+      "keywords": [
+        "관계",
+        "감사",
+        "분업"
+      ],
+      "difficulty_score": 2
     }
   ]
 }
