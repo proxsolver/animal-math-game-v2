@@ -166,3 +166,17 @@ OSError: [Errno 98] Address already in use
 10.12.199.86 - - [07/Sep/2025 02:40:45] code 404, message File not found
 10.12.199.86 - - [07/Sep/2025 02:40:45] "GET /favicon.ico HTTP/1.1" 404 -
 10.12.199.86 - - [07/Sep/2025 02:40:45] "GET /animals.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:42:46] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:42:46] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:42:46] "GET /favicon.ico HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:42:47] "GET /animals.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:43:52] "GET /subjects/social/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:43:55] "GET /subjects/english/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:09] "GET /subjects/social/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:22] "GET /test-social.html HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:22] "GET /subjects/social/level1.json HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:22] code 404, message File not found
+10.12.199.86 - - [07/Sep/2025 02:44:22] "GET /favicon.ico HTTP/1.1" 404 -
+10.12.199.86 - - [07/Sep/2025 02:44:39] "GET / HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:40] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.199.86 - - [07/Sep/2025 02:44:40] "GET /animals.json HTTP/1.1" 200 -
