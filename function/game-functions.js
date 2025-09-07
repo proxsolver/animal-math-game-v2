@@ -536,6 +536,8 @@ function resetDailyTimer(today) {
 
 // 미션 시작 함수
 function startMission(subject) {
+    console.log(`미션 시작: ${subject}`);
+    
     // 퀴즈 페이지로 이동하고 해당 과목 설정
     window.gameState.currentSubject = subject;
     
@@ -569,6 +571,27 @@ function startMission(subject) {
     if (!studyTimerInterval && !window.gameState.studyTimer.sessionStartTime) {
         startStudyTimer();
     }
+    
+    // 첫 번째 문제 생성
+    console.log(`${subject} 과목의 첫 문제 생성 시작`);
+    setTimeout(() => {
+        try {
+            // 현재 난이도를 1로 설정
+            window.currentDifficulty = 1;
+            
+            // 과목별 선택 UI 업데이트
+            window.changeSubject();
+            
+            // 첫 번째 문제 생성
+            if (typeof window.generatePersonalizedQuiz === 'function') {
+                window.generatePersonalizedQuiz();
+            } else {
+                console.error('generatePersonalizedQuiz 함수를 찾을 수 없습니다');
+            }
+        } catch (error) {
+            console.error('문제 생성 중 오류:', error);
+        }
+    }, 500);
 }
 
 // 전역에서 접근 가능하도록 함수들을 window에 등록

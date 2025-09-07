@@ -1,0 +1,8 @@
+10.12.122.160 - - [07/Sep/2025 10:47:40] "HEAD / HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET / HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET /style.css HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET /function/main.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET /function/game-data.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET /function/game-functions.js HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:45] "GET /favicon.ico HTTP/1.1" 200 -
+10.12.122.160 - - [07/Sep/2025 10:47:47] "GET /animals.json HTTP/1.1" 200 -

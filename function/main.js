@@ -1456,6 +1456,8 @@
 
         // 영어 퀴즈 생성 (새로운 시스템)
         async function generateEnglishQuiz() {
+            console.log('generateEnglishQuiz 호출됨, 현재 과목:', window.gameState.currentSubject);
+            
             if (isLoadingWord) return;
             
             isLoadingWord = true;
@@ -1518,9 +1520,10 @@
         // 난이도별 단어 로드
         async function loadWordForDifficulty(difficulty) {
             try {
-                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작...`);
+                const filePath = getSubjectFilePath(difficulty);
+                console.log(`레벨 ${difficulty} 단어 JSON 파일 로딩 시작... 파일 경로: ${filePath}`);
                 
-                const response = await fetch(getSubjectFilePath(difficulty));
+                const response = await fetch(filePath);
                 
                 if (!response.ok) {
                     throw new Error(`JSON 파일 로드 실패: ${response.status}`);
@@ -1646,8 +1649,8 @@
         function displayCurrentWord() {
             if (!currentWordData) return;
             
-            const questionElement = document.getElementById('english-question');
-            const optionsContainer = document.getElementById('english-options');
+            const questionElement = document.getElementById('quiz-question') || document.getElementById('english-question');
+            const optionsContainer = document.getElementById('quiz-options') || document.getElementById('english-options');
             const speakButton = document.getElementById('speak-button');
             const wordSourceElement = document.getElementById('word-source');
             const sourceBadge = document.getElementById('source-badge');
