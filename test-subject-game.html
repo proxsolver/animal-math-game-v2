@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔢 과목별 게임 테스트</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            color: #2C5530; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        .test-section { 
+            margin: 20px 0; 
+            padding: 20px; 
+            border-radius: 10px; 
+            background: rgba(255,255,255,0.7); 
+            border-left: 5px solid #4169E1; 
+        }
+        button { 
+            background: linear-gradient(45deg, #28a745, #20c997); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin: 5px; 
+            transition: all 0.3s ease; 
+        }
+        button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+        }
+        .subject-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); }
+        .level-btn { background: linear-gradient(45deg, #9370DB, #8A2BE2); }
+        .test-result { 
+            margin: 15px 0; 
+            padding: 15px; 
+            border-radius: 8px; 
+            background: #f8f9fa; 
+            border: 1px solid #dee2e6; 
+        }
+        .success { background: #d4edda; color: #155724; border-color: #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border-color: #f5c6cb; }
+        
+        .auto-login { 
+            background: linear-gradient(45deg, #FF6347, #FF7F50); 
+            margin-bottom: 20px; 
+        }
+        
+        .question-display { 
+            background: #fff; 
+            padding: 20px; 
+            border-radius: 10px; 
+            margin: 15px 0; 
+            border: 2px solid #4169E1; 
+        }
+        
+        .question-text { 
+            font-size: 1.2rem; 
+            font-weight: bold; 
+            color: #2C5530; 
+            margin-bottom: 15px; 
+        }
+        
+        .options { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 10px; 
+        }
+        
+        .option-btn { 
+            background: linear-gradient(45deg, #89CFF0, #4682B4); 
+            font-size: 1rem; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔢 과목별 게임 테스트</h1>
+        
+        <div class="test-section">
+            <h3>🎮 자동 로그인 및 게임 시작</h3>
+            <button class="auto-login" onclick="autoLoginAndStart()">📱 자동 로그인 후 게임 시작</button>
+            <div id="login-status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📚 과목 선택 테스트</h3>
+            <button class="subject-btn" onclick="testSubject('math')">🔢 수학</button>
+            <button class="subject-btn" onclick="testSubject('english')">🇬🇧 영어</button>
+            <button class="subject-btn" onclick="testSubject('social')">🏛️ 사회</button>
+            <button class="subject-btn" onclick="testSubject('general')">🧠 일반상식</button>
+            <div id="subject-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 레벨 선택 테스트</h3>
+            <button class="level-btn" onclick="testLevel(1)">⭐ Level 1</button>
+            <button class="level-btn" onclick="testLevel(2)">⭐⭐ Level 2</button>
+            <button class="level-btn" onclick="testLevel(3)">⭐⭐⭐ Level 3</button>
+            <div id="level-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎯 게임 시작 테스트</h3>
+            <button onclick="startTestGame()">🚀 현재 설정으로 게임 시작</button>
+            <div id="game-result"></div>
+            
+            <div class="question-display" id="question-display" style="display: none;">
+                <div class="question-text" id="question-text"></div>
+                <div class="options" id="question-options"></div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <button onclick="nextQuestion()">⏭️ 다음 문제</button>
+                    <button onclick="endTestGame()">🏁 게임 종료</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔥 Firebase 테스트</h3>
+            <button onclick="testFirebaseSync()">🌐 Firebase 동기화 테스트</button>
+            <div id="firebase-result"></div>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 현재 상태</h3>
+            <div id="current-status">
+                <p><strong>현재 과목:</strong> <span id="current-subject">-</span></p>
+                <p><strong>현재 레벨:</strong> <span id="current-level">-</span></p>
+                <p><strong>로그인 상태:</strong> <span id="login-state">-</span></p>
+                <p><strong>Firebase 상태:</strong> <span id="firebase-state">-</span></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        // 필요한 모듈 import
+        import { initializeFirebase, handleLogin } from './js/auth/firebase-auth.js';
+        import { loadAllSubjectData, SUBJECTS, LEVELS } from './js/game/subject-data.js';
+        import { updateGameScore, updateAnimalCollection, testFirebaseConnection } from './js/game/firebase-data.js';
+        import './js/game/game-logic.js';
+        
+        let testGameData = {
+            questions: [],
+            currentIndex: 0,
+            score: 0,
+            isPlaying: false
+        };
+        
+        // Firebase 초기화
+        async function initializeTest() {
+            console.log('🔥 테스트 환경 초기화...');
+            
+            try {
+                // Firebase 초기화
+                const firebaseInitialized = await initializeFirebase();
+                updateStatus('firebase-state', firebaseInitialized ? '연결됨' : '연결 실패');
+                
+                // 과목 데이터 로드
+                const dataLoaded = await loadAllSubjectData();
+                console.log('📚 과목 데이터 로드 완료:', dataLoaded);
+                
+                updateStatus('current-subject', window.getCurrentSubject ? window.getCurrentSubject() : 'math');
+                updateStatus('current-level', window.getCurrentLevel ? window.getCurrentLevel() : '1');
+                
+            } catch (error) {
+                console.error('❌ 테스트 초기화 실패:', error);
+            }
+        }
+        
+        // 상태 업데이트 함수
+        function updateStatus(elementId, value) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = value;
+            }
+        }
+        
+        // 자동 로그인 및 게임 시작
+        window.autoLoginAndStart = async function() {
+            const statusEl = document.getElementById('login-status');
+            statusEl.innerHTML = '<div class="test-result">🔄 자동 로그인 중...</div>';
+            
+            try {
+                // 임시 DOM 요소 생성
+                const nameInput = document.createElement('input');
+                nameInput.id = 'player-name-input';
+                nameInput.value = '아빠';
+                document.body.appendChild(nameInput);
+                
+                const pinInput = document.createElement('input');
+                pinInput.id = 'player-pin-input';
+                pinInput.value = '9329';
+                document.body.appendChild(pinInput);
+                
+                const feedback = document.createElement('div');
+                feedback.id = 'login-feedback';
+                document.body.appendChild(feedback);
+                
+                // 로그인 실행
+                await handleLogin();
+                
+                // 결과 확인
+                if (window.currentUserProfile) {
+                    statusEl.innerHTML = `
+                        <div class="test-result success">
+                            ✅ 로그인 성공: ${window.currentUserProfile.name}
+                            <br>총점: ${window.currentUserProfile.totalScore || 0}점
+                        </div>
+                    `;
+                    updateStatus('login-state', '로그인됨');
+                } else {
+                    statusEl.innerHTML = '<div class="test-result error">❌ 로그인 실패</div>';
+                }
+                
+                // DOM 정리
+                document.body.removeChild(nameInput);
+                document.body.removeChild(pinInput);
+                document.body.removeChild(feedback);
+                
+            } catch (error) {
+                statusEl.innerHTML = `<div class="test-result error">❌ 로그인 오류: ${error.message}</div>`;
+            }
+        };
+        
+        // 과목 테스트
+        window.testSubject = function(subject) {
+            const resultEl = document.getElementById('subject-result');
+            
+            console.log(`📚 과목 테스트: ${subject}`);
+            
+            if (window.changeSubject) {
+                window.changeSubject(subject);
+                updateStatus('current-subject', SUBJECTS[subject]?.name || subject);
+                
+                resultEl.innerHTML = `
+                    <div class="test-result success">
+                        ✅ ${SUBJECTS[subject]?.icon} ${SUBJECTS[subject]?.name} 선택됨
+                        <br>${SUBJECTS[subject]?.description}
+                    </div>
+                `;
+            } else {
+                resultEl.innerHTML = '<div class="test-result error">❌ changeSubject 함수를 찾을 수 없음</div>';
+            }
+        };
+        
+        // 레벨 테스트
+        window.testLevel = function(level) {
+            const resultEl = document.getElementById('level-result');
+            
+            console.log(`📊 레벨 테스트: ${level}`);
+            
+            if (window.onDifficultyChange) {
+                window.onDifficultyChange(level);
+                updateStatus('current-level', level);
+                
+                resultEl.innerHTML = `
+                    <div class="test-result success">
+                        ✅ Level ${level} 선택됨 (${LEVELS[level]?.name})
+                        <br>${LEVELS[level]?.description}
+                    </div>
+                `;
+            } else {
+                resultEl.innerHTML = '<div class="test-result error">❌ onDifficultyChange 함수를 찾을 수 없음</div>';
+            }
+        };
+        
+        // 게임 시작 테스트
+        window.startTestGame = async function() {
+            const resultEl = document.getElementById('game-result');
+            
+            console.log('🎯 게임 시작 테스트...');
+            
+            if (!window.startGame) {
+                resultEl.innerHTML = '<div class="test-result error">❌ startGame 함수를 찾을 수 없음</div>';
+                return;
+            }
+            
+            const currentSubject = window.getCurrentSubject ? window.getCurrentSubject() : 'math';
+            const currentLevel = window.getCurrentLevel ? window.getCurrentLevel() : 1;
+            
+            try {
+                const started = await window.startGame(currentSubject, currentLevel);
+                
+                if (started) {
+                    // 현재 게임 상태 가져오기
+                    const gameState = window.getCurrentGameState ? window.getCurrentGameState() : {};
+                    
+                    if (gameState.questions && gameState.questions.length > 0) {
+                        testGameData = {
+                            questions: gameState.questions,
+                            currentIndex: 0,
+                            score: 0,
+                            isPlaying: true
+                        };
+                        
+                        resultEl.innerHTML = `
+                            <div class="test-result success">
+                                ✅ 게임 시작 성공!
+                                <br>과목: ${SUBJECTS[currentSubject]?.name}
+                                <br>레벨: Level ${currentLevel}
+                                <br>문제 수: ${gameState.questions.length}개
+                            </div>
+                        `;
+                        
+                        showCurrentQuestion();
+                    } else {
+                        resultEl.innerHTML = '<div class="test-result error">❌ 문제 데이터를 로드할 수 없음</div>';
+                    }
+                } else {
+                    resultEl.innerHTML = '<div class="test-result error">❌ 게임 시작 실패</div>';
+                }
+            } catch (error) {
+                resultEl.innerHTML = `<div class="test-result error">❌ 게임 시작 오류: ${error.message}</div>`;
+            }
+        };
+        
+        // 현재 문제 표시
+        function showCurrentQuestion() {
+            if (!testGameData.isPlaying || testGameData.currentIndex >= testGameData.questions.length) {
+                return;
+            }
+            
+            const question = testGameData.questions[testGameData.currentIndex];
+            const questionDisplay = document.getElementById('question-display');
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('question-options');
+            
+            // 질문 텍스트 설정
+            if (question.korean) {
+                questionText.textContent = `[영어] ${question.korean}`;
+            } else if (question.question) {
+                questionText.textContent = question.question;
+            } else {
+                questionText.textContent = question.questionText || '문제를 표시할 수 없습니다';
+            }
+            
+            // 선택지 생성
+            optionsContainer.innerHTML = '';
+            if (question.options && Array.isArray(question.options)) {
+                question.options.forEach((option, index) => {
+                    const btn = document.createElement('button');
+                    btn.className = 'option-btn';
+                    btn.textContent = option;
+                    btn.onclick = () => selectTestAnswer(option, question);
+                    optionsContainer.appendChild(btn);
+                });
+            }
+            
+            questionDisplay.style.display = 'block';
+        }
+        
+        // 테스트용 답변 선택
+        window.selectTestAnswer = function(selected, question) {
+            const currentSubject = window.getCurrentSubject ? window.getCurrentSubject() : 'math';
+            let isCorrect = false;
+            
+            if (currentSubject === 'english') {
+                isCorrect = selected === question.english;
+            } else {
+                isCorrect = selected === question.options[question.answer];
+            }
+            
+            if (isCorrect) {
+                testGameData.score += 10;
+                alert(`✅ 정답! 현재 점수: ${testGameData.score}점`);
+            } else {
+                const correct = currentSubject === 'english' ? question.english : question.options[question.answer];
+                alert(`❌ 틀렸습니다. 정답: ${correct}`);
+            }
+        };
+        
+        // 다음 문제
+        window.nextQuestion = function() {
+            testGameData.currentIndex++;
+            if (testGameData.currentIndex < testGameData.questions.length) {
+                showCurrentQuestion();
+            } else {
+                alert(`🎉 게임 완료! 최종 점수: ${testGameData.score}점`);
+                endTestGame();
+            }
+        };
+        
+        // 게임 종료
+        window.endTestGame = function() {
+            testGameData.isPlaying = false;
+            document.getElementById('question-display').style.display = 'none';
+        };
+        
+        // Firebase 동기화 테스트
+        window.testFirebaseSync = async function() {
+            const resultEl = document.getElementById('firebase-result');
+            
+            if (!window.currentUserProfile) {
+                resultEl.innerHTML = '<div class="test-result error">❌ 먼저 로그인해주세요!</div>';
+                return;
+            }
+            
+            try {
+                // 점수 업데이트 테스트
+                if (window.updateGameScore) {
+                    await window.updateGameScore(testGameData.score + 100);
+                    resultEl.innerHTML = '<div class="test-result success">✅ Firebase 동기화 완료!</div>';
+                } else {
+                    resultEl.innerHTML = '<div class="test-result error">❌ updateGameScore 함수를 찾을 수 없음</div>';
+                }
+            } catch (error) {
+                resultEl.innerHTML = `<div class="test-result error">❌ Firebase 동기화 실패: ${error.message}</div>`;
+            }
+        };
+        
+        // Firebase 인증 완료 콜백
+        window.onFirebaseReady = function(user) {
+            if (user) {
+                window.currentUserId = user.uid;
+                updateStatus('firebase-state', '인증됨');
+                console.log('🔑 Firebase 인증 완료:', user.uid);
+            }
+        };
+        
+        // 초기화 실행
+        initializeTest();
+    </script>
+</body>
+</html>

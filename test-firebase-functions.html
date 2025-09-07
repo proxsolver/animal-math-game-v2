@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Firebase 함수 테스트</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 600px; 
+            margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 30px; 
+            border-radius: 20px; 
+        }
+        button { 
+            background: linear-gradient(45deg, #28a745, #20c997); 
+            color: white; 
+            border: none; 
+            padding: 12px 20px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            margin: 10px; 
+        }
+        .result { 
+            margin: 15px 0; 
+            padding: 15px; 
+            border-radius: 8px; 
+            background: #f8f9fa; 
+        }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase 함수 테스트</h1>
+        
+        <button onclick="testUpdateGameScore()">📊 updateGameScore 테스트</button>
+        <button onclick="testFunctionAvailability()">🔍 함수 가용성 확인</button>
+        <button onclick="autoLoginAndTest()">🚀 자동 로그인 후 테스트</button>
+        
+        <div id="results"></div>
+    </div>
+
+    <script type="module">
+        // Firebase 및 필요 모듈 import
+        import { initializeFirebase, handleLogin } from './js/auth/firebase-auth.js';
+        import { updateGameScore, testFirebaseConnection } from './js/game/firebase-data.js';
+        
+        // Firebase 초기화
+        await initializeFirebase();
+        
+        // 전역 함수들
+        window.testUpdateGameScore = async function() {
+            const resultsEl = document.getElementById('results');
+            
+            try {
+                if (!window.currentUserProfile) {
+                    resultsEl.innerHTML += '<div class="result error">❌ 먼저 로그인이 필요합니다</div>';
+                    return;
+                }
+                
+                console.log('📊 updateGameScore 테스트 시작...');
+                await updateGameScore(999);
+                resultsEl.innerHTML += '<div class="result success">✅ updateGameScore 성공! 점수: 999</div>';
+                
+            } catch (error) {
+                resultsEl.innerHTML += `<div class="result error">❌ updateGameScore 실패: ${error.message}</div>`;
+            }
+        };
+        
+        window.testFunctionAvailability = function() {
+            const resultsEl = document.getElementById('results');
+            
+            const checks = [
+                { name: 'window.updateGameScore', exists: typeof window.updateGameScore === 'function' },
+                { name: 'updateGameScore (imported)', exists: typeof updateGameScore === 'function' },
+                { name: 'window.currentUserProfile', exists: !!window.currentUserProfile },
+                { name: 'window.firebase', exists: !!window.firebase },
+            ];
+            
+            let html = '<div class="result"><h4>🔍 함수 가용성 체크:</h4>';
+            checks.forEach(check => {
+                html += `<div style="margin: 5px 0;">
+                    ${check.exists ? '✅' : '❌'} ${check.name}: ${check.exists ? '사용 가능' : '사용 불가'}
+                </div>`;
+            });
+            html += '</div>';
+            
+            resultsEl.innerHTML += html;
+        };
+        
+        window.autoLoginAndTest = async function() {
+            const resultsEl = document.getElementById('results');
+            resultsEl.innerHTML += '<div class="result">🔄 자동 로그인 중...</div>';
+            
+            try {
+                // 임시 DOM 요소 생성
+                const nameInput = document.createElement('input');
+                nameInput.id = 'player-name-input';
+                nameInput.value = '테스터';
+                document.body.appendChild(nameInput);
+                
+                const pinInput = document.createElement('input');
+                pinInput.id = 'player-pin-input';
+                pinInput.value = '1234';
+                document.body.appendChild(pinInput);
+                
+                const feedback = document.createElement('div');
+                feedback.id = 'login-feedback';
+                document.body.appendChild(feedback);
+                
+                // 로그인 실행
+                await handleLogin();
+                
+                // DOM 정리
+                document.body.removeChild(nameInput);
+                document.body.removeChild(pinInput);
+                document.body.removeChild(feedback);
+                
+                if (window.currentUserProfile) {
+                    resultsEl.innerHTML += `<div class="result success">✅ 로그인 성공: ${window.currentUserProfile.name}</div>`;
+                    
+                    // 이제 updateGameScore 테스트
+                    await window.testUpdateGameScore();
+                } else {
+                    resultsEl.innerHTML += '<div class="result error">❌ 로그인 실패</div>';
+                }
+                
+            } catch (error) {
+                resultsEl.innerHTML += `<div class="result error">❌ 로그인 오류: ${error.message}</div>`;
+            }
+        };
+        
+        // 초기 함수 가용성 체크
+        setTimeout(() => {
+            window.testFunctionAvailability();
+        }, 2000);
+        
+    </script>
+</body>
+</html>

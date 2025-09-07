@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔥 Firebase Integration Test</title>
+    <style>
+        body { 
+            font-family: 'Arial', sans-serif; 
+            background: linear-gradient(135deg, #87CEEB 0%, #98FB98 50%, #FFB6C1 100%); 
+            min-height: 100vh; 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: rgba(255, 255, 255, 0.95); 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1); 
+        }
+        h1 { 
+            color: #2C5530; 
+            text-align: center; 
+            margin-bottom: 30px; 
+        }
+        .test-section { 
+            margin: 20px 0; 
+            padding: 20px; 
+            border-radius: 10px; 
+            background: rgba(255,255,255,0.7); 
+            border-left: 5px solid #4169E1; 
+        }
+        .status { 
+            padding: 15px; 
+            border-radius: 8px; 
+            margin: 10px 0; 
+            font-weight: bold; 
+        }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .warning { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+        .info { background: #d1ecf1; color: #0c5460; border: 1px solid #bee5eb; }
+        
+        button { 
+            background: linear-gradient(45deg, #28a745, #20c997); 
+            color: white; 
+            border: none; 
+            padding: 12px 24px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-weight: bold; 
+            margin: 10px 5px; 
+            transition: all 0.3s ease; 
+        }
+        button:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .log-output {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            padding: 15px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔥 Firebase Integration Test</h1>
+        <div class="info status">
+            <strong>📋 테스트 목적:</strong> Firebase 멀티플레이어 기능 및 실시간 데이터 동기화 검증
+        </div>
+        
+        <div class="test-section">
+            <h3>🎯 테스트 진행 상황</h3>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div id="progress-text">테스트 대기 중...</div>
+            <button onclick="runManualTests()">🚀 수동 테스트 시작</button>
+            <button onclick="clearResults()">🧹 결과 지우기</button>
+        </div>
+        
+        <div class="test-section">
+            <h3>📊 테스트 결과</h3>
+            <div id="test-results">
+                <div class="warning status">테스트가 아직 실행되지 않았습니다.</div>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🔍 상세 로그</h3>
+            <div class="log-output" id="log-output">
+                테스트 로그가 여기에 표시됩니다...
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h3>🎮 실제 게임 연결</h3>
+            <div class="info status">
+                Firebase 테스트가 성공하면 실제 게임으로 이동할 수 있습니다.
+            </div>
+            <button onclick="window.open('./', '_blank')">🎯 게임 열기</button>
+        </div>
+    </div>
+
+    <!-- Firebase 모듈 import -->
+    <script type="module">
+        // Firebase 및 게임 모듈 import
+        import { initializeFirebase, handleLogin } from './js/auth/firebase-auth.js';
+        import { testFirebaseConnection, saveUserProfile, loadUserProfile, 
+                 getGlobalLeaderboard, updateGameScore, updateAnimalCollection } from './js/game/firebase-data.js';
+
+        // 전역 변수 초기화
+        window.currentUserProfile = null;
+        window.currentUserId = null;
+        
+        // 테스트 결과 추적
+        let testProgress = 0;
+        const totalTests = 5;
+        const testResults = {};
+        
+        // 로그 함수
+        function log(message, type = 'info') {
+            const logEl = document.getElementById('log-output');
+            const timestamp = new Date().toLocaleTimeString();
+            logEl.textContent += `[${timestamp}] ${message}\n`;
+            logEl.scrollTop = logEl.scrollHeight;
+            console.log(`[${type.toUpperCase()}] ${message}`);
+        }
+        
+        // 진행률 업데이트
+        function updateProgress(step, testName, success) {
+            testProgress = step;
+            const percent = (step / totalTests) * 100;
+            
+            document.getElementById('progress-fill').style.width = `${percent}%`;
+            document.getElementById('progress-text').textContent = 
+                `테스트 진행: ${step}/${totalTests} - ${testName}`;
+            
+            testResults[testName] = success;
+        }
+        
+        // 테스트 결과 표시
+        function displayResults() {
+            const resultsEl = document.getElementById('test-results');
+            const passedTests = Object.values(testResults).filter(Boolean).length;
+            const totalTestCount = Object.keys(testResults).length;
+            
+            let html = '';
+            
+            // 전체 결과
+            if (passedTests === totalTestCount) {
+                html += '<div class="success status">🎉 모든 테스트 통과! Firebase 멀티플레이어 기능이 완전히 작동합니다.</div>';
+            } else {
+                html += `<div class="error status">⚠️ ${totalTestCount - passedTests}개 테스트 실패. 일부 기능에 문제가 있습니다.</div>`;
+            }
+            
+            // 개별 테스트 결과
+            html += '<h4>📋 상세 결과:</h4>';
+            for (const [testName, success] of Object.entries(testResults)) {
+                const statusClass = success ? 'success' : 'error';
+                const icon = success ? '✅' : '❌';
+                html += `<div class="${statusClass} status">${icon} ${testName}</div>`;
+            }
+            
+            resultsEl.innerHTML = html;
+        }
+        
+        // Firebase 초기화 대기
+        async function waitForFirebase(maxWait = 15000) {
+            log('🔥 Firebase 초기화 대기 중...');
+            const startTime = Date.now();
+            
+            while (Date.now() - startTime < maxWait) {
+                if (window.firebase && window.currentUserId) {
+                    log(`✅ Firebase 준비 완료 (사용자 ID: ${window.currentUserId})`);
+                    return true;
+                }
+                await new Promise(resolve => setTimeout(resolve, 200));
+            }
+            
+            log('❌ Firebase 초기화 타임아웃');
+            return false;
+        }
+        
+        // 테스트 1: Firebase 연결
+        async function test1_FirebaseConnection() {
+            log('🧪 테스트 1: Firebase 연결 테스트...');
+            updateProgress(1, 'Firebase 연결', false);
+            
+            try {
+                const isConnected = await testFirebaseConnection();
+                if (isConnected) {
+                    log('✅ Firebase 연결 테스트 성공');
+                    updateProgress(1, 'Firebase 연결', true);
+                    return true;
+                } else {
+                    log('❌ Firebase 연결 테스트 실패');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ Firebase 연결 오류: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 테스트 2: 사용자 인증
+        async function test2_Authentication() {
+            log('🧪 테스트 2: 사용자 인증 테스트...');
+            updateProgress(2, '사용자 인증', false);
+            
+            try {
+                // 임시 DOM 요소 생성
+                const nameInput = document.createElement('input');
+                nameInput.id = 'player-name-input';
+                nameInput.value = '아빠';
+                document.body.appendChild(nameInput);
+                
+                const pinInput = document.createElement('input');
+                pinInput.id = 'player-pin-input';
+                pinInput.value = '9329';
+                document.body.appendChild(pinInput);
+                
+                const feedback = document.createElement('div');
+                feedback.id = 'login-feedback';
+                document.body.appendChild(feedback);
+                
+                // 로그인 시도
+                await handleLogin();
+                
+                // 결과 확인
+                if (window.currentUserProfile && window.currentUserProfile.name === '아빠') {
+                    log('✅ 사용자 인증 테스트 성공');
+                    updateProgress(2, '사용자 인증', true);
+                    
+                    // DOM 정리
+                    document.body.removeChild(nameInput);
+                    document.body.removeChild(pinInput);
+                    document.body.removeChild(feedback);
+                    
+                    return true;
+                } else {
+                    log('❌ 사용자 인증 실패: 프로필이 생성되지 않음');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ 사용자 인증 오류: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 테스트 3: 프로필 동기화
+        async function test3_ProfileSync() {
+            log('🧪 테스트 3: 프로필 동기화 테스트...');
+            updateProgress(3, '프로필 동기화', false);
+            
+            try {
+                if (!window.currentUserProfile) {
+                    throw new Error('로그인된 사용자가 없습니다');
+                }
+                
+                const success = await saveUserProfile(window.currentUserProfile);
+                if (success) {
+                    log('✅ 프로필 동기화 테스트 성공');
+                    updateProgress(3, '프로필 동기화', true);
+                    return true;
+                } else {
+                    log('❌ 프로필 동기화 실패');
+                    return false;
+                }
+            } catch (error) {
+                log(`❌ 프로필 동기화 오류: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 테스트 4: 글로벌 리더보드
+        async function test4_Leaderboard() {
+            log('🧪 테스트 4: 글로벌 리더보드 테스트...');
+            updateProgress(4, '글로벌 리더보드', false);
+            
+            try {
+                const players = await getGlobalLeaderboard();
+                log(`✅ 글로벌 리더보드 테스트 성공: ${players.length}명 로드됨`);
+                updateProgress(4, '글로벌 리더보드', true);
+                return true;
+            } catch (error) {
+                log(`❌ 글로벌 리더보드 오류: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 테스트 5: 실시간 게임 데이터 동기화
+        async function test5_GameplaySync() {
+            log('🧪 테스트 5: 실시간 게임 데이터 동기화 테스트...');
+            updateProgress(5, '실시간 데이터 동기화', false);
+            
+            try {
+                if (!window.currentUserProfile) {
+                    throw new Error('로그인된 사용자가 없습니다');
+                }
+                
+                const originalScore = window.currentUserProfile.totalScore || 0;
+                const newScore = originalScore + 150;
+                
+                // 점수 업데이트 테스트
+                await updateGameScore(newScore);
+                log(`📊 점수 동기화 완료: ${newScore}점`);
+                
+                // 동물 수집 동기화 테스트
+                const newAnimal = `Firebase테스트동물_${Date.now()}`;
+                await updateAnimalCollection(newAnimal);
+                log(`🐾 동물 수집 동기화 완료: ${newAnimal}`);
+                
+                log('✅ 실시간 게임 데이터 동기화 테스트 성공');
+                updateProgress(5, '실시간 데이터 동기화', true);
+                return true;
+            } catch (error) {
+                log(`❌ 실시간 게임 데이터 동기화 오류: ${error.message}`);
+                return false;
+            }
+        }
+        
+        // 모든 테스트 실행
+        async function runAllTests() {
+            log('🚀 Firebase 통합 테스트 시작...');
+            
+            // Firebase 초기화 대기
+            const firebaseReady = await waitForFirebase();
+            if (!firebaseReady) {
+                log('❌ Firebase 초기화 실패로 테스트 중단');
+                displayResults();
+                return;
+            }
+            
+            // 테스트 실행
+            await test1_FirebaseConnection();
+            await test2_Authentication();
+            await test3_ProfileSync();
+            await test4_Leaderboard();
+            await test5_GameplaySync();
+            
+            // 최종 결과 표시
+            displayResults();
+            
+            const passedTests = Object.values(testResults).filter(Boolean).length;
+            log(`🎯 테스트 완료: ${passedTests}/${totalTests} 성공`);
+        }
+        
+        // 수동 테스트 시작
+        window.runManualTests = function() {
+            log('🎮 수동 테스트 시작...');
+            runAllTests();
+        };
+        
+        // 결과 지우기
+        window.clearResults = function() {
+            document.getElementById('log-output').textContent = '테스트 로그가 여기에 표시됩니다...\n';
+            document.getElementById('test-results').innerHTML = '<div class="warning status">테스트가 아직 실행되지 않았습니다.</div>';
+            document.getElementById('progress-fill').style.width = '0%';
+            document.getElementById('progress-text').textContent = '테스트 대기 중...';
+            
+            // 테스트 결과 초기화
+            for (const key in testResults) {
+                delete testResults[key];
+            }
+            testProgress = 0;
+            
+            log('🧹 테스트 결과가 초기화되었습니다.');
+        };
+        
+        // Firebase 준비 콜백
+        window.onFirebaseReady = function(user) {
+            if (user) {
+                window.currentUserId = user.uid;
+                log(`🔑 Firebase 인증 완료: ${user.uid}`);
+            } else {
+                log('❌ Firebase 인증 실패');
+            }
+        };
+        
+        // Firebase 초기화
+        async function initialize() {
+            log('🔥 Firebase 초기화 중...');
+            try {
+                const initialized = await initializeFirebase();
+                if (initialized) {
+                    log('✅ Firebase 초기화 성공');
+                    
+                    // 자동 테스트 시작 (3초 후)
+                    setTimeout(() => {
+                        log('⏰ 자동 테스트 시작...');
+                        runAllTests();
+                    }, 3000);
+                } else {
+                    log('❌ Firebase 초기화 실패');
+                }
+            } catch (error) {
+                log(`❌ Firebase 초기화 오류: ${error.message}`);
+            }
+        }
+        
+        // 페이지 로드 시 초기화
+        initialize();
+    </script>
+</body>
+</html>

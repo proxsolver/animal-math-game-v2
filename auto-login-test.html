@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>자동 로그인 테스트</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f0f8ff; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
+        .test-btn { background: linear-gradient(45deg, #4169E1, #1E90FF); color: white; padding: 15px 30px; border: none; border-radius: 10px; font-size: 1.1rem; cursor: pointer; margin: 10px; min-width: 200px; }
+        .test-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(65, 105, 225, 0.3); }
+        .result { margin: 20px 0; padding: 15px; border-radius: 8px; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .info { background: #d1ecf1; border: 1px solid #bee5eb; color: #0c5460; }
+        .step { background: #fff3cd; border: 1px solid #ffeaa7; color: #856404; margin: 5px 0; padding: 10px; border-radius: 5px; }
+        iframe { width: 100%; height: 600px; border: 2px solid #ddd; border-radius: 10px; margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 자동 로그인 테스트</h1>
+        
+        <div class="test-section">
+            <h2>📋 테스트 시나리오</h2>
+            <div class="info result">
+                <strong>테스트 계정:</strong> 아빠 / PIN: 9329<br>
+                <strong>목적:</strong> 로그인 후 게임 페이지가 정상 표시되는지 확인
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>🎮 자동 테스트 실행</h2>
+            <button class="test-btn" onclick="startAutoTest()">🚀 자동 로그인 테스트 시작</button>
+            <button class="test-btn" onclick="loadGameFrame()">📱 게임 프레임 로드</button>
+            <div id="test-results"></div>
+        </div>
+        
+        <div id="game-frame-container">
+            <!-- 게임 iframe이 여기에 로드됩니다 -->
+        </div>
+    </div>
+    
+    <script>
+        let gameFrame = null;
+        
+        function addResult(message, type = 'info') {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = `result ${type}`;
+            div.innerHTML = message;
+            results.appendChild(div);
+        }
+        
+        function addStep(message) {
+            const results = document.getElementById('test-results');
+            const div = document.createElement('div');
+            div.className = 'step';
+            div.innerHTML = '⏳ ' + message;
+            results.appendChild(div);
+        }
+        
+        function loadGameFrame() {
+            const container = document.getElementById('game-frame-container');
+            container.innerHTML = '<iframe id="game-iframe" src="/"></iframe>';
+            gameFrame = document.getElementById('game-iframe');
+            addResult('🎮 게임 프레임이 로드되었습니다', 'info');
+        }
+        
+        function startAutoTest() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '';
+            
+            addStep('게임 프레임 로드 중...');
+            loadGameFrame();
+            
+            // 게임 로드 대기
+            setTimeout(() => {
+                addStep('로그인 폼 확인 중...');
+                performLogin();
+            }, 3000);
+        }
+        
+        function performLogin() {
+            try {
+                const iframe = document.getElementById('game-iframe');
+                if (!iframe || !iframe.contentDocument) {
+                    addResult('❌ 게임 프레임에 접근할 수 없습니다', 'error');
+                    return;
+                }
+                
+                const doc = iframe.contentDocument;
+                const nameInput = doc.getElementById('player-name-input');
+                const pinInput = doc.getElementById('player-pin-input');
+                const loginBtn = doc.getElementById('login-btn');
+                
+                if (!nameInput || !pinInput || !loginBtn) {
+                    addResult('❌ 로그인 폼 요소를 찾을 수 없습니다', 'error');
+                    setTimeout(() => performLogin(), 2000);
+                    return;
+                }
+                
+                addStep('로그인 정보 입력 중...');
+                
+                // 로그인 정보 입력
+                nameInput.value = '아빠';
+                pinInput.value = '9329';
+                
+                addResult('✅ 로그인 정보 입력 완료 (아빠 / 9329)', 'success');
+                
+                // 로그인 버튼 클릭
+                setTimeout(() => {
+                    addStep('로그인 버튼 클릭 중...');
+                    loginBtn.click();
+                    
+                    // 로그인 결과 확인
+                    setTimeout(() => {
+                        checkLoginResult(doc);
+                    }, 2000);
+                    
+                }, 1000);
+                
+            } catch (error) {
+                addResult(`❌ 로그인 실행 오류: ${error.message}`, 'error');
+            }
+        }
+        
+        function checkLoginResult(doc) {
+            try {
+                const overlay = doc.getElementById('login-overlay');
+                const gamePages = doc.querySelectorAll('.page');
+                const activePages = doc.querySelectorAll('.page.active');
+                
+                if (overlay && overlay.style.display === 'none') {
+                    addResult('✅ 로그인 오버레이가 성공적으로 숨겨졌습니다', 'success');
+                } else {
+                    addResult('❌ 로그인 오버레이가 아직 표시되고 있습니다', 'error');
+                }
+                
+                if (activePages.length > 0) {
+                    const activePage = activePages[0];
+                    const pageId = activePage.id;
+                    addResult(`✅ 활성 페이지 발견: ${pageId}`, 'success');
+                } else {
+                    addResult('❌ 활성화된 페이지가 없습니다', 'error');
+                }
+                
+                // 네비게이션 버튼 확인
+                const navBtns = doc.querySelectorAll('.nav-btn');
+                const activeNavBtns = doc.querySelectorAll('.nav-btn.active');
+                
+                if (activeNavBtns.length > 0) {
+                    addResult(`✅ 활성 네비게이션 버튼: ${activeNavBtns.length}개`, 'success');
+                } else {
+                    addResult('❌ 활성화된 네비게이션 버튼이 없습니다', 'error');
+                }
+                
+                // 최종 결과
+                if (overlay && overlay.style.display === 'none' && activePages.length > 0) {
+                    addResult('🎉 로그인 테스트 성공! 게임 페이지가 정상적으로 표시됩니다!', 'success');
+                } else {
+                    addResult('⚠️ 로그인은 되었지만 일부 문제가 있습니다', 'error');
+                }
+                
+            } catch (error) {
+                addResult(`❌ 로그인 결과 확인 오류: ${error.message}`, 'error');
+            }
+        }
+    </script>
+</body>
+</html>
