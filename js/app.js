@@ -3,7 +3,7 @@
  */
 
 // 모든 필요한 모듈 import
-import { initializeFirebase, handleLogin } from './auth/firebase-auth.js';
+import { initializeFirebase, handleLogin, handleSignup } from './auth/firebase-auth.js';
 import { loadAnimalsFromJSON } from './game/animal-data.js';
 import { getAllProfiles, updateHallOfFame } from './game/hall-of-fame.js';
 import { showPage, selectDifficulty, updateUI, updateAnimalCollection } from './ui/navigation.js';
@@ -24,6 +24,7 @@ async function initializeApp() {
         
         // 전역 함수들 설정 (기존 코드와 호환성을 위해)
         window.handleLogin = handleLogin;
+        window.handleSignup = handleSignup;
         
         console.log('앱 초기화 완료');
         

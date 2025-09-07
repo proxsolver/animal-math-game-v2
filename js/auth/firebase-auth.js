@@ -84,39 +84,139 @@ async function attemptAnonymousLogin() {
     }
 }
 
+// 사용자 데이터베이스 (실제 서비스에서는 서버나 암호화된 저장소 사용)
+const USER_DATABASE = {
+    "아빠": "9329",
+    "admin": "1234",
+    "test": "0000"
+};
+
 // 로그인 처리 함수 (handleLogin 오류 해결)
 export function handleLogin() {
     console.log("로그인 처리 시작");
     
-    const nameInput = document.getElementById('player-name');
-    const playerName = nameInput ? nameInput.value.trim() : '';
+    const nameInput = document.getElementById('player-name-input');
+    const pinInput = document.getElementById('player-pin-input');
+    const feedbackEl = document.getElementById('login-feedback');
     
+    const playerName = nameInput ? nameInput.value.trim() : '';
+    const playerPin = pinInput ? pinInput.value.trim() : '';
+    
+    // 입력 검증
     if (!playerName) {
-        alert('이름을 입력해주세요!');
+        showLoginFeedback('플레이어 이름을 입력해주세요!', 'error');
+        nameInput.focus();
         return;
     }
     
-    // 사용자 프로필 설정
-    window.currentUserProfile = {
-        name: playerName,
-        totalScore: 0,
-        collectedAnimals: [],
-        speciesCount: 0,
-        lastLogin: new Date().toISOString()
-    };
-    
-    // 로그인 오버레이 숨기기
-    const overlay = document.getElementById('login-overlay');
-    if (overlay) {
-        overlay.style.display = 'none';
+    if (!playerPin) {
+        showLoginFeedback('4자리 PIN을 입력해주세요!', 'error');
+        pinInput.focus();
+        return;
     }
     
-    // UI 업데이트
-    if (window.updateUI) {
-        window.updateUI();
+    if (playerPin.length !== 4 || !/^\d{4}$/.test(playerPin)) {
+        showLoginFeedback('PIN은 정확히 4자리 숫자여야 합니다!', 'error');
+        pinInput.focus();
+        return;
     }
     
-    console.log("로그인 완료:", playerName);
+    // 로그인 검증
+    if (USER_DATABASE[playerName] && USER_DATABASE[playerName] === playerPin) {
+        // 로그인 성공
+        showLoginFeedback('로그인 성공! 게임을 시작합니다...', 'success');
+        
+        // 사용자 프로필 설정
+        window.currentUserProfile = {
+            name: playerName,
+            totalScore: parseInt(localStorage.getItem(`${playerName}_totalScore`)) || 0,
+            collectedAnimals: JSON.parse(localStorage.getItem(`${playerName}_collectedAnimals`)) || [],
+            speciesCount: JSON.parse(localStorage.getItem(`${playerName}_collectedAnimals`))?.length || 0,
+            lastLogin: new Date().toISOString()
+        };
+        
+        // 로컬 스토리지에 현재 사용자 저장
+        localStorage.setItem('currentUser', playerName);
+        
+        // 1초 후 로그인 오버레이 숨기기
+        setTimeout(() => {
+            const overlay = document.getElementById('login-overlay');
+            if (overlay) {
+                overlay.style.display = 'none';
+            }
+            
+            // UI 업데이트
+            if (window.updateUI) {
+                window.updateUI();
+            }
+        }, 1000);
+        
+        console.log("로그인 완료:", playerName);
+        
+    } else {
+        // 로그인 실패
+        showLoginFeedback('아이디 또는 PIN이 일치하지 않습니다!', 'error');
+        pinInput.value = '';
+        pinInput.focus();
+    }
+}
+
+// 회원가입 처리 함수
+export function handleSignup() {
+    console.log("회원가입 처리 시작");
+    
+    const nameInput = document.getElementById('player-name-input');
+    const pinInput = document.getElementById('player-pin-input');
+    
+    const playerName = nameInput ? nameInput.value.trim() : '';
+    const playerPin = pinInput ? pinInput.value.trim() : '';
+    
+    // 입력 검증
+    if (!playerName) {
+        showLoginFeedback('플레이어 이름을 입력해주세요!', 'error');
+        nameInput.focus();
+        return;
+    }
+    
+    if (!playerPin) {
+        showLoginFeedback('4자리 PIN을 입력해주세요!', 'error');
+        pinInput.focus();
+        return;
+    }
+    
+    if (playerPin.length !== 4 || !/^\d{4}$/.test(playerPin)) {
+        showLoginFeedback('PIN은 정확히 4자리 숫자여야 합니다!', 'error');
+        pinInput.focus();
+        return;
+    }
+    
+    // 기존 사용자 확인
+    if (USER_DATABASE[playerName]) {
+        showLoginFeedback('이미 존재하는 플레이어 이름입니다!', 'error');
+        nameInput.focus();
+        return;
+    }
+    
+    // 회원가입 성공 (실제 서비스에서는 서버에 저장)
+    showLoginFeedback(`환영합니다, ${playerName}님! 새 계정이 생성되었습니다.`, 'success');
+    
+    // 임시로 로컬 데이터베이스에 추가 (실제로는 서버 API 호출)
+    USER_DATABASE[playerName] = playerPin;
+    
+    // 자동 로그인
+    setTimeout(() => {
+        handleLogin();
+    }, 1500);
+}
+
+// 로그인 피드백 메시지 표시 함수
+function showLoginFeedback(message, type = 'error') {
+    const feedbackEl = document.getElementById('login-feedback');
+    if (feedbackEl) {
+        feedbackEl.textContent = message;
+        feedbackEl.style.color = type === 'success' ? '#28a745' : '#dc3545';
+        feedbackEl.style.fontWeight = 'bold';
+    }
 }
 
 // Firebase가 준비되었을 때 호출되는 함수
